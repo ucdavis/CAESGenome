@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAESGenome", "CAESGenome\CAESGenome.csproj", "{338A3589-5583-44CD-9F55-A2D5ED35DE44}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAESGenome.Core", "CAESGenome.Core\CAESGenome.Core.csproj", "{A7C9E4D0-3AB0-40CE-A28C-0DDC69B0B78A}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "CAESGenome.Db", "CAESGenome.Db\CAESGenome.Db.sqlproj", "{37DB2570-E229-421D-9952-D29FAC8888B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +17,16 @@ Global
 		{338A3589-5583-44CD-9F55-A2D5ED35DE44}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{338A3589-5583-44CD-9F55-A2D5ED35DE44}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{338A3589-5583-44CD-9F55-A2D5ED35DE44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7C9E4D0-3AB0-40CE-A28C-0DDC69B0B78A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7C9E4D0-3AB0-40CE-A28C-0DDC69B0B78A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7C9E4D0-3AB0-40CE-A28C-0DDC69B0B78A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7C9E4D0-3AB0-40CE-A28C-0DDC69B0B78A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37DB2570-E229-421D-9952-D29FAC8888B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37DB2570-E229-421D-9952-D29FAC8888B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37DB2570-E229-421D-9952-D29FAC8888B8}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{37DB2570-E229-421D-9952-D29FAC8888B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37DB2570-E229-421D-9952-D29FAC8888B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37DB2570-E229-421D-9952-D29FAC8888B8}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

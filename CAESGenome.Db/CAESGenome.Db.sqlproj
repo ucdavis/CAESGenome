@@ -14,7 +14,7 @@
     </RootPath>
     <RootNamespace>CAESGenome.Db</RootNamespace>
     <AssemblyName>CAESGenome.Db</AssemblyName>
-    <ModelCollation>1033, CI</ModelCollation>
+    <ModelCollation>1033,CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -22,6 +22,8 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <SqlServerVerification>False</SqlServerVerification>
     <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -53,5 +55,25 @@
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="Scripts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\Bacteria.sql" />
+    <Build Include="dbo\Tables\Barcodes.sql" />
+    <Build Include="dbo\Tables\Dyes.sql" />
+    <Build Include="dbo\Tables\Equipments.sql" />
+    <Build Include="dbo\Tables\JobTypes.sql" />
+    <Build Include="dbo\Tables\Primers.sql" />
+    <Build Include="dbo\Tables\PhredQuality.sql" />
+    <Build Include="dbo\Tables\PhredQualityStats.sql" />
+    <Build Include="dbo\Tables\Strains.sql" />
+    <Build Include="dbo\Tables\Vectors.sql" />
+    <Build Include="dbo\Tables\VectorTypes.sql" />
+    <Build Include="dbo\Tables\Antibiotics.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\LookupData.sql" />
   </ItemGroup>
 </Project>
