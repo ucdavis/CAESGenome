@@ -1,0 +1,71 @@
+9/19/2012 10:55:28 AM	This log contains information about the import schema operation into project 'CAESGenome.Db' on computer 'SUPERKING' by user 'lai'.
+9/19/2012 10:55:29 AM	Import of database schema has started.
+9/19/2012 10:55:33 AM	Gathering database options
+9/19/2012 10:55:33 AM	Gathering users
+9/19/2012 10:55:33 AM	Gathering roles
+9/19/2012 10:55:33 AM	Gathering application roles
+9/19/2012 10:55:33 AM	Gathering role memberships
+9/19/2012 10:55:33 AM	Gathering filegroups
+9/19/2012 10:55:33 AM	Gathering full-text catalogs
+9/19/2012 10:55:33 AM	Gathering assemblies
+9/19/2012 10:55:33 AM	Gathering certificates
+9/19/2012 10:55:33 AM	Gathering asymmetric keys
+9/19/2012 10:55:33 AM	Gathering symmetric keys
+9/19/2012 10:55:33 AM	Gathering encrypted symmetric keys
+9/19/2012 10:55:33 AM	Gathering schemas
+9/19/2012 10:55:33 AM	Gathering XML schema collections
+9/19/2012 10:55:33 AM	Gathering user-defined data types
+9/19/2012 10:55:33 AM	Gathering user-defined types
+9/19/2012 10:55:33 AM	Gathering table types
+9/19/2012 10:55:33 AM	Gathering unique keys for table types
+9/19/2012 10:55:33 AM	Gathering primary keys for table types
+9/19/2012 10:55:33 AM	Gathering check constraints for table types
+9/19/2012 10:55:33 AM	Gathering default constraints for table types
+9/19/2012 10:55:33 AM	Gathering partition functions
+9/19/2012 10:55:33 AM	Gathering partition schemes
+9/19/2012 10:55:33 AM	Gathering functions
+9/19/2012 10:55:33 AM	Gathering encrypted functions
+9/19/2012 10:55:33 AM	Gathering aggregates
+9/19/2012 10:55:33 AM	Gathering procedures
+9/19/2012 10:55:33 AM	Gathering encrypted procedures
+9/19/2012 10:55:33 AM	Gathering tables
+9/19/2012 10:55:33 AM	Gathering primary keys
+9/19/2012 10:55:33 AM	Gathering unique constraints
+9/19/2012 10:55:33 AM	Gathering foreign keys
+9/19/2012 10:55:34 AM	Gathering default constraints
+9/19/2012 10:55:34 AM	Gathering check constraints
+9/19/2012 10:55:34 AM	Gathering views
+9/19/2012 10:55:34 AM	Gathering encrypted views
+9/19/2012 10:55:34 AM	Gathering indexes
+9/19/2012 10:55:34 AM	Gathering statistics
+9/19/2012 10:55:34 AM	Gathering full-text index stoplists
+9/19/2012 10:55:34 AM	Gathering full-text indexes
+9/19/2012 10:55:34 AM	Gathering spatial indexes
+9/19/2012 10:55:34 AM	Gathering XML indexes
+9/19/2012 10:55:34 AM	Gathering encrypted triggers
+9/19/2012 10:55:34 AM	Gathering triggers
+9/19/2012 10:55:34 AM	Gathering encrypted and clr ddl triggers
+9/19/2012 10:55:34 AM	Gathering ddl triggers
+9/19/2012 10:55:34 AM	Gathering synonyms
+9/19/2012 10:55:34 AM	Gathering defaults
+9/19/2012 10:55:34 AM	Gathering data constraint uddt bindings
+9/19/2012 10:55:34 AM	Gathering rules
+9/19/2012 10:55:34 AM	Gathering data constraint uddt bindings
+9/19/2012 10:55:34 AM	Gathering message types
+9/19/2012 10:55:34 AM	Gathering queues
+9/19/2012 10:55:34 AM	Gathering contracts
+9/19/2012 10:55:34 AM	Gathering services
+9/19/2012 10:55:34 AM	Gathering event notifications
+9/19/2012 10:55:34 AM	Gathering remote service bindings
+9/19/2012 10:55:34 AM	Gathering broker priorities
+9/19/2012 10:55:34 AM	Gathering signatures
+9/19/2012 10:55:34 AM	Gathering data compression options
+9/19/2012 10:55:34 AM	Gathering extended properties
+9/19/2012 10:55:34 AM	Gathering credentials
+9/19/2012 10:55:34 AM	Gathering logins
+9/19/2012 10:55:34 AM	Gathering server audits
+9/19/2012 10:55:34 AM	Scanning project for duplicate elements
+9/19/2012 10:55:34 AM	Finished duplicate element processing
+9/19/2012 10:55:34 AM	Finished importing database.
+9/19/2012 10:55:34 AM	A summary of the import was saved to the following location: c:\users\lai\documents\visual studio 11\Projects\CAESGenome\CAESGenome.Db\Import Schema Logs\CAESGenome.Db_20120919055528.log
+9/19/2012 10:55:34 AM	Click Finish to continue...
