@@ -20,14 +20,14 @@ SET IDENTITY_INSERT [dbo].[Bacteria] OFF
 --
 -- Vector Types
 --
-
-INSERT INTO [VectorTypes] (Id, Name) VALUES (1, 'Cosmid');
-INSERT INTO [VectorTypes] (Id, Name) VALUES (2, 'Phage');
-INSERT INTO [VectorTypes] (Id, Name) VALUES (3, 'Plasmid');
-INSERT INTO [VectorTypes] (Id, Name) VALUES (4, 'YAC');
-INSERT INTO [VectorTypes] (Id, Name) VALUES (5, 'other');
-INSERT INTO [VectorTypes] (Id, Name) VALUES (10, 'BAC');
-
+SET IDENTITY_INSERT [dbo].[VectorTypes] ON
+INSERT INTO [dbo].[VectorTypes] (Id, Name) VALUES (1, 'Cosmid');
+INSERT INTO [dbo].[VectorTypes] (Id, Name) VALUES (2, 'Phage');
+INSERT INTO [dbo].[VectorTypes] (Id, Name) VALUES (3, 'Plasmid');
+INSERT INTO [dbo].[VectorTypes] (Id, Name) VALUES (4, 'YAC');
+INSERT INTO [dbo].[VectorTypes] (Id, Name) VALUES (5, 'other');
+INSERT INTO [dbo].[VectorTypes] (Id, Name) VALUES (10, 'BAC');
+SET IDENTITY_INSERT [dbo].[VectorTypes] OFF
 --
 -- Dyes
 --
@@ -48,15 +48,15 @@ INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (14, 'LIZ', 0, 0);
 INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (15, 'HEX', 0, 0);
 INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (16, 'TAMRA', 0, 0);
 -- Data from Dyes_Genotyping
-INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (1, 'FAM', 1, 1);
-INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (2, 'ROX', 1, 1);
-INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (3, 'TET', 1, 1);
-INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (4, 'VIC', 1, 1);
-INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (5, 'NED', 1, 1);
-INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (6, 'PET', 1, 1);
-INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (7, 'LIZ', 1, 1);
-INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (8, 'HEX', 1, 1);
-INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (9, 'TAMRA', 1, 1);
+INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (21, 'FAM', 1, 1);
+INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (22, 'ROX', 1, 1);
+INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (23, 'TET', 1, 1);
+INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (24, 'VIC', 1, 1);
+INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (25, 'NED', 1, 1);
+INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (26, 'PET', 1, 1);
+INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (27, 'LIZ', 1, 1);
+INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (28, 'HEX', 1, 1);
+INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (29, 'TAMRA', 1, 1);
 SET IDENTITY_INSERT [dbo].[Dyes] OFF
 
 --
@@ -153,7 +153,7 @@ INSERT INTO [dbo].[Strains] (Id, Name, Supplied, BacteriaId) VALUES (43, 'Strata
 INSERT INTO [dbo].[Strains] (Id, Name, Supplied, BacteriaId) VALUES (44, 'StrataClone SoloPack cells', 0, 1);
 INSERT INTO [dbo].[Strains] (Id, Name, Supplied, BacteriaId) VALUES (45, 'StrataClone SoloPack', 0, 1);
 INSERT INTO [dbo].[Strains] (Id, Name, Supplied, BacteriaId) VALUES (46, 'p-BlueScript in E.coli', 0, 1);
-INSERT INTO [dbo].[Strains] (Id, Name, Supplied, BacteriaId) VALUES (47, '', 0, 1);
+INSERT INTO [dbo].[Strains] (Id, Name, Supplied, BacteriaId) VALUES (47, 'n/a', 0, 1);
 INSERT INTO [dbo].[Strains] (Id, Name, Supplied, BacteriaId) VALUES (48, 'StrataClone SoloPack Competent Cells', 0, 1);
 INSERT INTO [dbo].[Strains] (Id, Name, Supplied, BacteriaId) VALUES (49, 'StrataClone SoloPack cells', 0, 1);
 INSERT INTO [dbo].[Strains] (Id, Name, Supplied, BacteriaId) VALUES (50, 'StrataClone SoloPack', 0, 1);
@@ -167,40 +167,48 @@ SET IDENTITY_INSERT [dbo].[strains] OFF
 --
 -- Vectors
 --
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (1, 'pBlueScript II SK', 1, 6, 3);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (2, 'pUC18', 1, 6, 3);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (4, 'pCR2.1-TOPO', 12, 6, 3);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (5, 'Other', 6, 6, 5);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (6, 'pBeloBAC11', 2, 6, 3);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (7, 'pUC19', 1, 6, 3);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (8, 'pBlueScript SK', 1, 6, 3);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (9, 'pBlueScript KS', 1, 6, 3);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (10, 'pCR4-TOPO', 12, 6, 3);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (86, 'pSmart-Kan', 3, 6, 3);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (21, 'pTriplEx2', 1, 6, 3);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (22, 'pBAD', 1, 6, 3);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (23, 'pDNR', 13, 6, 3);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (24, 'pGEM-Teasy', 1, 6, 3);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (25, 'pBiBAC', 3, 6, 10);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (84, 'pEZSeq-Amp', 1, 6, 3);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (28, 'pBACe3.6', 2, 6, 10);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (29, 'pWE15', 1, 6, 1);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (31, 'pAD22', 5, 6, 1);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (85, 'pEZSeq-Kan', 3, 6, 3);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (33, 'pBelloBAC11', 2, 6, 10);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (83, 'pSmart-Amp', 1, 6, 3);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (42, 'pCC1BAC', 2, 6, 10);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (87, 'pTAR BAC 4', 1, 2, 10);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (58, 'pECSBAC4', 2, 6, 10);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (88, 'pBRcDNA-SFI-ab', 1, 6, 3);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (89, 'TOPO  TA', 1, 6, 3);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (90, 'pBR322', 11, 6, 3);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (91, 'pBK-CMV', 3, 6, 3);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (92, 'pBiBAC', 3, 6, 3);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (93, 'pINDIGO451', 2, 6, 3);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (94, 'pDONR207', 3, 6, 3);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (95, 'pBRcDNA-Sfi-AB', 1, 6, 3);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (96, 'pENTR-JW', 4, 6, 3);
-INSERT INTO [Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (97, '', 2, 1, 10);
+SET IDENTITY_INSERT [dbo].[Vectors] ON
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (1, 'pBlueScript II SK', 1, 6, 3);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (2, 'pUC18', 1, 6, 3);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (4, 'pCR2.1-TOPO', 12, 6, 3);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (5, 'Other', 6, 6, 5);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (6, 'pBeloBAC11', 2, 6, 3);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (7, 'pUC19', 1, 6, 3);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (8, 'pBlueScript SK', 1, 6, 3);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (9, 'pBlueScript KS', 1, 6, 3);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (10, 'pCR4-TOPO', 12, 6, 3);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (86, 'pSmart-Kan', 3, 6, 3);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (21, 'pTriplEx2', 1, 6, 3);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (22, 'pBAD', 1, 6, 3);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (23, 'pDNR', 13, 6, 3);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (24, 'pGEM-Teasy', 1, 6, 3);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (25, 'pBiBAC', 3, 6, 10);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (84, 'pEZSeq-Amp', 1, 6, 3);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (28, 'pBACe3.6', 2, 6, 10);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (29, 'pWE15', 1, 6, 1);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (31, 'pAD22', 5, 6, 1);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (85, 'pEZSeq-Kan', 3, 6, 3);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (33, 'pBelloBAC11', 2, 6, 10);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (83, 'pSmart-Amp', 1, 6, 3);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (42, 'pCC1BAC', 2, 6, 10);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (87, 'pTAR BAC 4', 1, 2, 10);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (58, 'pECSBAC4', 2, 6, 10);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (88, 'pBRcDNA-SFI-ab', 1, 6, 3);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (89, 'TOPO  TA', 1, 6, 3);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (90, 'pBR322', 11, 6, 3);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (91, 'pBK-CMV', 3, 6, 3);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (92, 'pBiBAC', 3, 6, 3);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (93, 'pINDIGO451', 2, 6, 3);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (94, 'pDONR207', 3, 6, 3);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (95, 'pBRcDNA-Sfi-AB', 1, 6, 3);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (96, 'pENTR-JW', 4, 6, 3);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (97, '', 2, 1, 10);
+SET IDENTITY_INSERT [dbo].[Vectors] OFF
 
-
+--
+-- Roles
+--
+INSERT INTO [dbo].[webpages_Roles] (RoleName) VALUES ('Admin');
+INSERT INTO [dbo].[webpages_Roles] (RoleName) VALUES ('PI');
+INSERT INTO [dbo].[webpages_Roles] (RoleName) VALUES ('Staff');
+INSERT INTO [dbo].[webpages_Roles] (RoleName) VALUES ('User');

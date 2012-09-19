@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="8894aa3f-eab7-4ad0-b816-da60eca39230" ChangeDateTime="09/19/2012 21:31:01">
+    <Property Name="ElementName" Value="[dbo].[UserJobs].[Status]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserJobs]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="StatusId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="23fe9a83-b458-4704-b63f-881302bfb6e3" ChangeDateTime="09/19/2012 21:32:17">
+    <Property Name="ElementName" Value="[dbo].[UserJobs].[StatusId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserJobs]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="StatusCodeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="cf5bc635-37d6-4ecf-b421-a9881f2a742d" ChangeDateTime="09/19/2012 21:48:46">
+    <Property Name="ElementName" Value="[dbo].[UserProfile].[Fax]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserProfile]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Phone" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f9dab1dd-c239-4808-b31c-14d27f3dfa29" ChangeDateTime="09/19/2012 21:48:50">
+    <Property Name="ElementName" Value="[dbo].[UserProfile].[Phone]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserProfile]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Fax" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="191883d7-47f5-43c6-88f9-a3adbc92ec9b" ChangeDateTime="09/19/2012 21:56:37">
+    <Property Name="ElementName" Value="[dbo].[Universities].[Address1]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Universities]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Address" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="15bae96e-f82d-48f4-baf7-d0653dc204ad" ChangeDateTime="09/19/2012 21:58:05">
+    <Property Name="ElementName" Value="[dbo].[Departments].[name]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Departments]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Name" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="51fc8a21-d9cd-48b1-8f2d-b34d55f9d890" ChangeDateTime="09/19/2012 22:01:20">
+    <Property Name="ElementName" Value="[dbo].[RechargeAccounts].[DateStart]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[RechargeAccounts]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Start" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="efc15261-c438-4031-8b44-88f03f3bc213" ChangeDateTime="09/19/2012 22:02:13">
+    <Property Name="ElementName" Value="[dbo].[UserProfilesXRechargeAccounts].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserProfilesXRechargeAccounts]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8fc6d4a0-5d8f-452c-8912-7768e57035f9" ChangeDateTime="09/19/2012 22:03:47">
+    <Property Name="ElementName" Value="[dbo].[UserProfilesXRechargeAccounts].[RecharceAccountId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserProfilesXRechargeAccounts]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="RechargeAccountId" />
+  </Operation>
+</Operations>
