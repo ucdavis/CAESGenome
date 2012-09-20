@@ -4,5 +4,6 @@
     [Name] VARCHAR(50) NOT NULL IDENTITY, 
     [Order] INT NOT NULL, 
     [JobTypeId] INT NOT NULL, 
+    [IsComplete] BIT NOT NULL DEFAULT 0, 
     CONSTRAINT [FK_Stages_JobTypes] FOREIGN KEY ([JobTypeId]) REFERENCES [JobTypes]([Id])
 )
