@@ -84,6 +84,7 @@
     <Build Include="dbo\Tables\Departments.sql" />
     <Build Include="dbo\Tables\RechargeAccounts.sql" />
     <Build Include="dbo\Tables\UserProfilesXRechargeAccounts.sql" />
+    <Build Include="dbo\Tables\UserJobPlates.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\LookupData.sql" />
