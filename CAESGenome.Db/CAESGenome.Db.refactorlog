@@ -70,4 +70,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="SourceBarcodeId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="d45cbe5f-f165-4df0-80e4-1385f70bca53" ChangeDateTime="09/20/2012 16:50:20">
+    <Property Name="ElementName" Value="[dbo].[UserJobs].[StatusCodeId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserJobs]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="StageId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8b485f02-4330-41e3-80ac-7051080e581f" ChangeDateTime="09/20/2012 16:51:20">
+    <Property Name="ElementName" Value="[dbo].[Barcodes].[Stage]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Barcodes]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="StageId" />
+  </Operation>
 </Operations>

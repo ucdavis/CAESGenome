@@ -79,7 +79,7 @@
     <Build Include="dbo\Tables\webpages_OAuthMembership.sql" />
     <Build Include="dbo\Tables\webpages_Membership.sql" />
     <Build Include="dbo\Tables\UserProfile.sql" />
-    <Build Include="dbo\Tables\StatusCodes.sql" />
+    <Build Include="dbo\Tables\Stages.sql" />
     <Build Include="dbo\Tables\Universities.sql" />
     <Build Include="dbo\Tables\Departments.sql" />
     <Build Include="dbo\Tables\RechargeAccounts.sql" />
