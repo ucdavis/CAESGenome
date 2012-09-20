@@ -63,4 +63,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="RechargeAccountId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="c9c7a6a7-9ce3-4d0b-bbb6-49700abc02d4" ChangeDateTime="09/20/2012 16:37:42">
+    <Property Name="ElementName" Value="[dbo].[Barcodes].[SourceBarcode]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Barcodes]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SourceBarcodeId" />
+  </Operation>
 </Operations>
