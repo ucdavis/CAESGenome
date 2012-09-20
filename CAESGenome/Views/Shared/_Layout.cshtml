@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <title>@ViewBag.Title - CA&ES Genomics Facility</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/css")
@@ -12,7 +12,7 @@
         <header>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
+                    <p class="site-title">@Html.ActionLink("CA&ES Genomics Facility", "Index", "Home")</p>
                 </div>
                 <div class="float-right">
                     <section id="login">
@@ -37,7 +37,10 @@
         <footer>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                    <p>&copy; The Regents of the University of California, Davis Campus.  All Rights Reserved.</p>
+                </div>
+                <div class="float-right">
+                    <p>Version: @ViewBag.Version</p>
                 </div>
             </div>
         </footer>

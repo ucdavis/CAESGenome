@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace CAESGenome.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : ApplicationController
     {
         public ActionResult Index()
         {
