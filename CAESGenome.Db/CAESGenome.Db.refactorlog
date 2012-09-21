@@ -84,4 +84,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="StageId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="c2c174cd-e96d-45f5-b7cb-515703c5beb3" ChangeDateTime="09/21/2012 15:12:51">
+    <Property Name="ElementName" Value="[dbo].[EquipmentHiGro].[WellType]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[EquipmentHiGro]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="WellTypeId" />
+  </Operation>
 </Operations>

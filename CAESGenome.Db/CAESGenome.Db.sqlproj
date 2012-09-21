@@ -85,6 +85,9 @@
     <Build Include="dbo\Tables\RechargeAccounts.sql" />
     <Build Include="dbo\Tables\UserProfilesXRechargeAccounts.sql" />
     <Build Include="dbo\Tables\UserJobPlates.sql" />
+    <Build Include="dbo\Tables\EquipmentReservations.sql" />
+    <Build Include="dbo\Tables\EquipmentHiGro.sql" />
+    <Build Include="dbo\Tables\WellTypes.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\LookupData.sql" />
