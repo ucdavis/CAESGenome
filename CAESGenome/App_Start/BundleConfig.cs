@@ -23,7 +23,12 @@ namespace CAESGenome
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
+            bundles.Add(new StyleBundle("~/Content/css").Include(
+                        "~/Content/site.css",
+                        "~/Content/bootstrap.css",
+                        "~/Content/bootstrap-responsive.css",
+                        "~/Content/themes/uibootstrap/jquery-ui-1.8.16.custom.css"
+                        ));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",

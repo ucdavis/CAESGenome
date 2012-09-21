@@ -39,8 +39,8 @@ namespace CAESGenome.Core.Domain
 
             Map(x => x.AccountNum);
             Map(x => x.Description);
-            Map(x => x.Start);
-            Map(x => x.End);
+            Map(x => x.Start).Column("`Start`");
+            Map(x => x.End).Column("`End`");
             Map(x => x.IsValid);
 
             References(x => x.User).Column("UserProfileId");

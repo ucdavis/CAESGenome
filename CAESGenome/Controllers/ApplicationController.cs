@@ -1,4 +1,7 @@
-﻿using UCDArch.Web.Controller;
+﻿using System.Data;
+using System.Linq;
+using CAESGenome.Core.Domain;
+using UCDArch.Web.Controller;
 using UCDArch.Web.Attributes;
 
 namespace CAESGenome.Controllers
@@ -13,5 +16,24 @@ namespace CAESGenome.Controllers
         }
 
         private const string TEMP_DATA_ERROR_MESSAGE_KEY = "ErrorMessage";
+        private const string UserKey = "UserKey";
+
+        public User GetCurrentUser(bool forceReload = false)
+        {
+            var user = (User) Session[UserKey];
+
+            if (user == null || forceReload)
+            {
+                user = Repository.OfType<User>().Queryable.FirstOrDefault(a => a.UserName == CurrentUser.Identity.Name);
+                Session[UserKey] = user;
+            }
+
+            if (user == null)
+            {
+                throw new ObjectNotFoundException("User does not exist.");
+            }
+
+            return user;
+        }
     }
 }

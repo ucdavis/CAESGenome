@@ -1,0 +1,53 @@
+﻿@model IList<RechargeAccount>
+
+@{
+    ViewBag.Title = "Recharge Accounts";
+    ViewBag.SubPageTitle = "Recharge Accounts";
+}
+
+@section scripts
+{
+    @Html.Partial("_DataTables")
+}
+
+@section SubPageMenu
+{
+    <ul class="nav nav-pills">
+        <li>@Html.ActionLink("Back to PI Home", "Index")</li>
+    </ul>
+}
+
+<table class="table table-striped table-bordered default_table">
+    <thead>
+        <tr>
+            <th></th>
+            <td>Account #</td>
+            <td>Description</td>
+            <td>Start Date</td>
+            <td>End Date</td>
+            <td>Is Valid</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var acct in Model)
+        {
+            <tr>
+                <td></td>
+                <td>@acct.AccountNum</td>
+                <td>@acct.Description</td>
+                <td>@acct.Start.Date</td>
+                <td>@acct.End.Date</td>
+                <td>
+                    @if(acct.IsValid)
+                    {
+                        <div class="label label-success">Yes</div>
+                    }
+                    else
+                    {
+                        <div class="label label-warning">No</div>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -9,6 +9,7 @@
     [DateCreated] DATETIME NOT NULL DEFAULT getdate(), 
     [UniversityId] INT NULL, 
     [DepartmentId] INT NULL, 
+    [ParentUserId] INT NULL, 
     PRIMARY KEY CLUSTERED ([UserId] ASC),
     UNIQUE NONCLUSTERED ([UserName] ASC), 
     CONSTRAINT [FK_UserProfile_Universities] FOREIGN KEY ([UniversityId]) REFERENCES [Universities]([Id]), 

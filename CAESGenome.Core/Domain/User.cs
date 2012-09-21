@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using FluentNHibernate.Mapping;
 using UCDArch.Core.DomainModel;
 
@@ -17,15 +18,21 @@ namespace CAESGenome.Core.Domain
             DateCreated = DateTime.Now;
         }
 
+        [Display(Name="Email")]
         public virtual string UserName { get; set; }
+        [Display(Name="First Name")]
         public virtual string FirstName { get; set; }
+        [Display(Name="Last Name")]
         public virtual string LastName { get; set; }
         public virtual string Title { get; set; }
+        [DataType(DataType.PhoneNumber)]
         public virtual string Phone { get; set; }
+        [DataType(DataType.PhoneNumber)]
         public virtual string Fax { get; set; }
         public virtual DateTime DateCreated { get; set; }
         public virtual University University { get; set; }
         public virtual Department Department { get; set; }
+        public virtual User ParentUser { get; set; }
 
         public virtual IList<RechargeAccount> RechargeAccounts { get; set; }
         public virtual IList<RechargeAccount> OwnedRechargeAcccounts { get; set; }
@@ -37,7 +44,7 @@ namespace CAESGenome.Core.Domain
         {
             Table("UserProfile");
 
-            Id(x => x.Id);
+            Id(x => x.Id).Column("UserId");
 
             Map(x => x.UserName);
             Map(x => x.FirstName);
@@ -49,6 +56,7 @@ namespace CAESGenome.Core.Domain
 
             References(x => x.University);
             References(x => x.Department);
+            References(x => x.ParentUser).Column("ParentUserId").Cascade.None();
 
             HasManyToMany(x => x.RechargeAccounts).Table("UserProfilesXRechargeAccounts")
                 .ParentKeyColumn("UserProfileId").ChildKeyColumn("RechargeAccountId")

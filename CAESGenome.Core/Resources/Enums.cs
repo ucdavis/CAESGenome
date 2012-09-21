@@ -7,9 +7,9 @@
 
     public static class RoleNames
     {
-        public static string Admin = "Admin";
-        public static string PI = "PI";
-        public static string Staff = "Staff";
-        public static string User = "User";
+        public const string Admin = "Admin";
+        public const string PI = "PI";
+        public const string Staff = "Staff";
+        public const string User = "User";
     }
 }

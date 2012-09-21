@@ -31,6 +31,15 @@
         <div id="body">
             @RenderSection("featured", required: false)
             <section class="content-wrapper main-content clear-fix">
+                <div class="pull-right">
+                    @RenderSection("SubPageMenu", required: false)          
+                </div>
+                
+                @if(!string.IsNullOrEmpty(ViewBag.SubPageTitle))
+                {
+                    <h2>@ViewBag.SubPageTitle</h2>    
+                }
+
                 @RenderBody()
             </section>
         </div>
@@ -47,5 +56,12 @@
 
         @Scripts.Render("~/bundles/jquery")
         @RenderSection("scripts", required: false)
+        <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+
+        <script type="text/javascript">
+            $(function () {
+                $(".hastip").tooltip();
+            });
+        </script>
     </body>
 </html>
