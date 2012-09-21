@@ -112,4 +112,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="DestinationPlateType" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="1e683d9e-83a6-4bd9-a1fb-b708e899bc36" ChangeDateTime="09/21/2012 17:48:04">
+    <Property Name="ElementName" Value="[dbo].[UserProfilesXRechargeAccounts].[UserId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserProfilesXRechargeAccounts]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserProfileId" />
+  </Operation>
 </Operations>
