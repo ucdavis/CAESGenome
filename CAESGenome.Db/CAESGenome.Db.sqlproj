@@ -93,6 +93,8 @@
     <Build Include="dbo\Tables\UserJobQbotGridding.sql" />
     <Build Include="dbo\Tables\UserJobQbotReplicating.sql" />
     <Build Include="dbo\Tables\UserJobSubLibrary.sql" />
+    <Build Include="dbo\Tables\UserJobUserRun.sql" />
+    <Build Include="dbo\Tables\UserJobGenotyping.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\LookupData.sql" />
