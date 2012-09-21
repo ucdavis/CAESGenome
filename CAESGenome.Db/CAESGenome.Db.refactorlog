@@ -91,4 +91,25 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="WellTypeId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="28ffc8ea-ea22-4d4e-b444-07a053f0d64e" ChangeDateTime="09/21/2012 15:31:01">
+    <Property Name="ElementName" Value="[dbo].[UserJobDna].[Primer1]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserJobDna]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Primer1Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="98a3fc7a-8274-4fa4-87e8-a0163da25adf" ChangeDateTime="09/21/2012 15:44:45">
+    <Property Name="ElementName" Value="[dbo].[UserJobQbotReplicating].[PlateTypeDestination]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserJobQbotReplicating]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DestinationPlateTypeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fefcc9cb-1311-4ad6-9ad3-d0077687b8d2" ChangeDateTime="09/21/2012 15:47:48">
+    <Property Name="ElementName" Value="[dbo].[UserJobQbotReplicating].[DestinationPlateTypeId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserJobQbotReplicating]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DestinationPlateType" />
+  </Operation>
 </Operations>
