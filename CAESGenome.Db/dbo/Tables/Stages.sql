@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Stages]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
+	[Id] CHAR(4) NOT NULL PRIMARY KEY, 
     [Name] VARCHAR(50) NOT NULL, 
     [Order] INT NOT NULL, 
     [JobTypeId] INT NOT NULL, 

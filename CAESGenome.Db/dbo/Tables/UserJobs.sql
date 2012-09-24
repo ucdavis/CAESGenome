@@ -8,7 +8,7 @@
     [NumberPlates] INT NOT NULL, 
     [PlateType] VARCHAR(100) NOT NULL, 
     [Comments] VARCHAR(MAX) NULL, 
-    [StageId] INT NOT NULL, 
+    [StageId] CHAR(4) NOT NULL, 
     [LastUpdate] DATETIME NOT NULL DEFAULT getdate(), 
     [DateTimeCreated] DATETIME NOT NULL DEFAULT getdate(), 
     [UserJobBacterialCloneId] INT NULL, 

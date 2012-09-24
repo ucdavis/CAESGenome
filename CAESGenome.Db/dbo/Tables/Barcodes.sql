@@ -3,7 +3,7 @@
     [PlateId]       INT  NULL,
     [PlateSubId]    INT  NULL,
     [PrimerId]      INT  NULL,
-    [StageId]         INT  NULL,
+    [StageId]         char(4)  NULL,
     [SourceBarcodeId] INT  NULL,
     [Date]          DATE NULL,
     [Done]          BIT  NULL,
