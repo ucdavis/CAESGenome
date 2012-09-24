@@ -212,3 +212,40 @@ INSERT INTO [dbo].[webpages_Roles] (RoleName) VALUES ('Admin');
 INSERT INTO [dbo].[webpages_Roles] (RoleName) VALUES ('PI');
 INSERT INTO [dbo].[webpages_Roles] (RoleName) VALUES ('Staff');
 INSERT INTO [dbo].[webpages_Roles] (RoleName) VALUES ('User');
+
+--
+-- Stages
+--
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('BCWP', 'Web Submitted Plates', 1, 1, 0)
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('BCPS', 'Plate Submissions', 2, 1, 0)
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('BCRC', 'RCA', 3, 1, 0)
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('BCSR', 'Sequencing Reaction', 4, 1, 0)
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('BC37', '3730xl', 5, 1, 1)
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('PPWP', 'Web Submitted Plates', 1, 2, 0)
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('PPPS', 'Plate Submission', 2, 2, 0)
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('PPSR', 'Sequencing Reaction', 3, 2, 0)
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('PP37', '3730xl', 4, 2, 1)
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('URWP', 'Web Submitted Plates', 1, 3, 0)
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('URPS', 'Plate Submission', 2, 3, 0)
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('UR37', '3730xl', 3, 3, 1)
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('PDWP', 'Web Submitted Plates', 1, 4, 0)
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('PDPS', 'Plate Submission', 2, 4, 0)
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('PDSR', 'Sequencing Reaction', 3, 4, 0)
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('PD37', '3730xl', 4, 4, 1)
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('SLWP', 'Web Submitted Plates', 1, 5, 0)
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('SLPS', 'Plate Submission', 2, 5, 1)
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('UGWP', 'Web Submitted Plates', 1, 11, 0)
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('UGPS', 'Plate Submission', 2, 11, 0)
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('UG37', '3730xl', 3, 11, 1)
+
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('QPWP', 'Web Submitted Plates', 1, 21, 0)
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('QPPS', 'Plate Submission', 2, 21, 1)
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('QRWP', 'Web Submitted Plates', 1, 22, 0)
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('QRPS', 'Plate Submission', 2, 22, 1)
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('QGWP', 'Web Submitted Plates', 1, 23, 0)
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('QGPS', 'Plate Submission', 2, 23, 1)
+
+
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('', '', 1, 1, 0)
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('', '', 1, 1, 0)
+INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('', '', 1, 1, 0)
