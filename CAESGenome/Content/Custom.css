@@ -1,0 +1,11 @@
+﻿a.btn, input.btn {
+    font-size: 1.2em;
+    font-weight: 400;
+    padding: 7px;
+    border: 1px solid #787878;
+    margin-right: 8px;
+}
+
+a.btn.btn-success {
+    color: #FFFFFF;
+}
