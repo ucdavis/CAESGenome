@@ -1,0 +1,21 @@
+﻿@model RechargeAccountViewModel
+
+@{
+    ViewBag.Title = "Edit Recharge Account";
+    ViewBag.SubPageTitle = "Edit Recharge Account";
+}
+
+@section scripts
+{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.bootstrapcheckbox.js")"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#RechargeAccount_IsValid").bootstrapcheckbox({affirmativeTxt: "Active", negativeTxt: "Inactive"});
+        });
+    </script>
+}
+
+@using(Html.BeginForm("EditRechargeAccount", "PI", FormMethod.Post, new {@class="form-horizontal"}))
+{
+    @Html.Partial("_RechargeAccountForm")
+}

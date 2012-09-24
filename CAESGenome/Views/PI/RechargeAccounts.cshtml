@@ -13,6 +13,7 @@
 @section SubPageMenu
 {
     <ul class="nav nav-pills">
+        <li>@Html.ActionLink("Create New Account", "CreateRechargeAccount")</li>
         <li>@Html.ActionLink("Back to PI Home", "Index")</li>
     </ul>
 }
@@ -25,26 +26,28 @@
             <td>Description</td>
             <td>Start Date</td>
             <td>End Date</td>
-            <td>Is Valid</td>
+            <td>Is Active</td>
         </tr>
     </thead>
     <tbody>
-        @foreach(var acct in Model)
+        @foreach(var acct in Model.OrderBy(a => a.IsValid).ThenBy(a => a.AccountNum))
         {
             <tr>
-                <td></td>
+                <td>
+                    <a href="@Url.Action("EditRechargeAccount", new {id = acct.Id})" class="btn hastip" title="Edit Recharge Account"><i class="icon-pencil"></i></a>
+                </td>
                 <td>@acct.AccountNum</td>
                 <td>@acct.Description</td>
-                <td>@acct.Start.Date</td>
-                <td>@acct.End.Date</td>
+                <td>@acct.Start.ToShortDateString()</td>
+                <td>@acct.End.ToShortDateString()</td>
                 <td>
-                    @if(acct.IsValid)
+                    @if(acct.IsActive())
                     {
-                        <div class="label label-success">Yes</div>
+                        <span class="label label-success">Yes</span>
                     }
                     else
                     {
-                        <div class="label label-warning">No</div>
+                        <span class="label label-warning">No</span>
                     }
                 </td>
             </tr>

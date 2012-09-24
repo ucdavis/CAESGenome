@@ -27,7 +27,8 @@ namespace CAESGenome
                         "~/Content/site.css",
                         "~/Content/bootstrap.css",
                         "~/Content/bootstrap-responsive.css",
-                        "~/Content/themes/uibootstrap/jquery-ui-1.8.16.custom.css"
+                        "~/Content/themes/uibootstrap/jquery-ui-1.8.16.custom.css",
+                        "~/Content/Custom.css"
                         ));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(

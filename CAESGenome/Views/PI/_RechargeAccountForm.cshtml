@@ -1,0 +1,50 @@
+﻿@model RechargeAccountViewModel
+
+@Html.AntiForgeryToken()
+@Html.ValidationSummary(false)
+    
+<div class="control-group">
+    <fieldset>
+        <div class="control-group">
+            @Html.LabelFor(model => model.RechargeAccount.AccountNum, new {@class = "control-label"})
+            <div class="controls">
+                @Html.EditorFor(model => model.RechargeAccount.AccountNum)
+                @Html.ValidationMessageFor(model => model.RechargeAccount.AccountNum)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.RechargeAccount.Description, new {@class = "control-label"})
+            <div class="controls">
+                @Html.EditorFor(model => model.RechargeAccount.Description)
+                @Html.ValidationMessageFor(model => model.RechargeAccount.Description)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.RechargeAccount.Start, new {@class = "control-label"})
+            <div class="controls">
+                @Html.EditorFor(model => model.RechargeAccount.Start)
+                @Html.ValidationMessageFor(model => model.RechargeAccount.Start)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.RechargeAccount.End, new {@class = "control-label"})
+            <div class="controls">
+                @Html.EditorFor(model => model.RechargeAccount.End)
+                @Html.ValidationMessageFor(model => model.RechargeAccount.End)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.RechargeAccount.IsValid, new {@class = "control-label"})
+            <div class="controls">
+                @Html.EditorFor(model => model.RechargeAccount.IsValid)
+                @Html.ValidationMessageFor(model => model.RechargeAccount.IsValid)
+            </div>
+        </div>
+    </fieldset>
+</div>
+    
+<div class="form-actions">
+    <input type="submit" class="btn btn-primary" value="Save"/>
+    @Html.ActionLink("Cancel", "RechargeAccounts", "PI", new {}, new {@class="btn"})
+</div>
+

@@ -21,14 +21,25 @@ namespace CAESGenome.Core.Domain
 
         [StringLength(50)]
         [Required]
+        [Display(Name="Account Number")]
         public virtual string AccountNum { get; set; }
         [StringLength(100)]
         public virtual string Description { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name="Start Date")]
         public virtual DateTime Start { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name = "End Date")]
         public virtual DateTime End { get; set; }
+        [Display(Name = "Is Active")]
         public virtual bool IsValid { get; set; }
-
+        [Required]
         public virtual User User { get; set; }
+
+        public virtual bool IsActive()
+        {
+            return (DateTime.Now.Date <= End && IsValid);
+        }
     }
 
     public class RechargeAccountMap : ClassMap<RechargeAccount>

@@ -1,0 +1,11 @@
+﻿@model RechargeAccountViewModel
+
+@{
+    ViewBag.Title = "Create Recharge Account";
+    ViewBag.SubPageTitle = "Create Recharge Account";
+}
+
+@using(Html.BeginForm("CreateRechargeAccount", "PI", FormMethod.Post, new {@class="form-horizontal"}))
+{
+    @Html.Partial("_RechargeAccountForm")
+}

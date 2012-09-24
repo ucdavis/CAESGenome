@@ -4,6 +4,8 @@ using CAESGenome.Core.Domain;
 using CAESGenome.Core.Repositories;
 using CAESGenome.Core.Resources;
 using CAESGenome.Models;
+using UCDArch.Web.ActionResults;
+using UCDArch.Web.Helpers;
 
 namespace CAESGenome.Controllers
 {
@@ -58,5 +60,64 @@ namespace CAESGenome.Controllers
             return View(accounts);
         }
 
+        public ActionResult CreateRechargeAccount()
+        {
+            return View(RechargeAccountViewModel.Create());
+        }
+
+        [HttpPost]
+        public ActionResult CreateRechargeAccount(RechargeAccount rechargeAccount)
+        {
+            rechargeAccount.User = GetCurrentUser(true);
+            ModelState.Clear();
+            rechargeAccount.TransferValidationMessagesTo(ModelState);
+
+            if (ModelState.IsValid)
+            {
+                _repositoryFactory.RechargeAccountRepository.EnsurePersistent(rechargeAccount);
+                Message = "Recharge Account has been saved.";
+                return RedirectToAction("RechargeAccounts");
+            }
+
+            return View(RechargeAccountViewModel.Create(rechargeAccount));
+        }
+
+        public ActionResult EditRechargeAccount(int id)
+        {
+            var rechargeAccount = _repositoryFactory.RechargeAccountRepository.GetNullableById(id);
+
+            if (rechargeAccount == null)
+            {
+                Message = "Recharge account could not be found.";
+                return RedirectToAction("RechargeAccounts");
+            }
+
+            return View(RechargeAccountViewModel.Create(rechargeAccount));
+        }
+
+        [HttpPost]
+        public ActionResult EditRechargeAccount(int id, RechargeAccount rechargeAccount)
+        {
+            var rechargeAccountToEdit = _repositoryFactory.RechargeAccountRepository.GetNullableById(id);
+
+            if (rechargeAccountToEdit == null)
+            {
+                Message = "Recharge account could not be found.";
+                return RedirectToAction("RechargeAccounts");
+            }
+
+            AutoMapper.Mapper.Map(rechargeAccount, rechargeAccountToEdit);
+            ModelState.Clear();
+            rechargeAccountToEdit.TransferValidationMessagesTo(ModelState);
+
+            if (ModelState.IsValid)
+            {
+                _repositoryFactory.RechargeAccountRepository.EnsurePersistent(rechargeAccountToEdit);
+                Message = "Recharge Account has been saved.";
+                return RedirectToAction("RechargeAccounts");
+            }
+
+            return View(RechargeAccountViewModel.Create(rechargeAccountToEdit));
+        }
     }
 }

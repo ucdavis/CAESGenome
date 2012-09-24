@@ -55,9 +55,7 @@
 
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/jqueryui")
-        @RenderSection("scripts", required: false)
         <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
-        
         @Html.Partial("_polyfills")
 
         <script type="text/javascript">
@@ -65,5 +63,7 @@
                 $(".hastip").tooltip();
             });
         </script>
+        
+        @RenderSection("scripts", required: false)
     </body>
 </html>
