@@ -6,7 +6,6 @@
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")
     </head>
     <body>
         <header>
@@ -55,8 +54,11 @@
         </footer>
 
         @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")
         @RenderSection("scripts", required: false)
         <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+        
+        @Html.Partial("_polyfills")
 
         <script type="text/javascript">
             $(function () {
