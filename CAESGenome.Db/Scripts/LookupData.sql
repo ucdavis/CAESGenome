@@ -244,8 +244,3 @@ INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('Q
 INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('QRPS', 'Plate Submission', 2, 22, 1)
 INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('QGWP', 'Web Submitted Plates', 1, 23, 0)
 INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('QGPS', 'Plate Submission', 2, 23, 1)
-
-
-INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('', '', 1, 1, 0)
-INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('', '', 1, 1, 0)
-INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('', '', 1, 1, 0)
