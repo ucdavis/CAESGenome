@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[RechargeAccounts]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [AccountNum] VARCHAR(50) NOT NULL, 
     [Description] VARCHAR(100) NULL, 
     [Start] DATE NOT NULL, 
