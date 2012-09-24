@@ -68,6 +68,7 @@
     <Compile Include="Domain\RechargeAccount.cs" />
     <Compile Include="Domain\University.cs" />
     <Compile Include="Domain\User.cs" />
+    <Compile Include="Domain\UserJob.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IRepositoryFactory.cs" />
     <Compile Include="Resources\Enums.cs" />

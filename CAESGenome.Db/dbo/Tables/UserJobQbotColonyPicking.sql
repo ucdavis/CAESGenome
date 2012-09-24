@@ -8,8 +8,6 @@
     [Concentration] VARCHAR(50) NOT NULL, 
     [Replication] INT NOT NULL, 
     [NumColonies] INT NOT NULL, 
-    [UserJobId] INT NOT NULL,
 	CONSTRAINT [FK_UserJobQbotColonyPicking_Strains] FOREIGN KEY ([StrainId]) REFERENCES [Strains]([Id]),
-	CONSTRAINT [FK_UserJobQbotColonyPicking_Vectors] FOREIGN KEY ([VectorId]) REFERENCES [Vectors]([Id]),
-	CONSTRAINT [FK_UserJobQbotColonyPicking_UserJobs] FOREIGN KEY ([UserJobId]) REFERENCES [UserJobs] ([Id])
+	CONSTRAINT [FK_UserJobQbotColonyPicking_Vectors] FOREIGN KEY ([VectorId]) REFERENCES [Vectors]([Id])
 )
