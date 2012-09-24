@@ -43,28 +43,27 @@
                 @Html.ValidationMessageFor(model => model.User.Phone)
             </div>
         </div>
-        <div class="control-group">
-            <label for="Password" class="control-label">Password</label>
-            <div class="controls">
-                @Html.Password("Password")
-                @if((bool?)ViewBag.EditUser ?? false)
-                {
-                    <div class="help-inline">
-                        <p>Leave blank if you do not wish to change the user's password.</p>
-                    </div>    
-                }
-            </div>
-        </div>
-        <div class="control-group">
-            <label for="Retype Password" class="control-label">Re-Type Password</label>
-            <div class="controls">
-                @Html.Password("ReTypePassword")
+        @if((bool?)ViewBag.NewUser ?? false)
+        {
+            <div class="control-group">
+                <label for="Password" class="control-label">Password</label>
+                <div class="controls">
+                    @Html.Password("Password")
+                </div>
+            </div>    
+            <div class="control-group">
+                <label for="Retype Password" class="control-label">Re-Type Password</label>
+                <div class="controls">
+                    @Html.Password("ReTypePassword")
                     
-                <span id="match-icon" class="label label-success hastip" title="Passwords Match" style="display: none;"><i class="icon-ok-sign"></i></span>
-                <span id="nomatch-icon" class="label label-important hastip" title="Passwords do not match" style="display:none;"><i class="icon-remove-sign"></i></span>
+                    <span id="match-icon" class="label label-success hastip" title="Passwords Match" style="display: none;"><i class="icon-ok-sign"></i></span>
+                    <span id="nomatch-icon" class="label label-important hastip" title="Passwords do not match" style="display:none;"><i class="icon-remove-sign"></i></span>
 
+                </div>
             </div>
-        </div>
+        }
+        
+        
     </fieldset>
 
     @if((bool?)ViewBag.EditUser ?? false)

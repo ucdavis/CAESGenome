@@ -80,7 +80,7 @@ namespace CAESGenome.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditUser(int id, User user)
+        public ActionResult EditUser(int id, User user, string password, string retypePassword)
         {
             var userToEdit = _repositoryFactory.UserRepository.GetNullableById(id);
 
