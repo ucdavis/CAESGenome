@@ -1,8 +1,10 @@
 ﻿@model UserViewModel
 
 @{
-    ViewBag.Title = "Create User";
-    ViewBag.SubPagetitle = "Create User";
+    ViewBag.Title = "Edit User";
+    ViewBag.SubPagetitle = "Edit User";
+
+    ViewBag.EditUser = true;
 }
 
 @section scripts
@@ -22,7 +24,7 @@
     </script>
 }
 
-@using(Html.BeginForm("CreateUser", "PI", FormMethod.Post, new {@class="form-horizontal"}))
+@using(Html.BeginForm("EditUser", "PI", FormMethod.Post, new {@class="form-horizontal"}))
 {
     @Html.Partial("_UserForm")
 }

@@ -16,6 +16,9 @@ namespace CAESGenome.Core.Domain
         private void SetDefaults()
         {
             DateCreated = DateTime.Now;
+
+            RechargeAccounts = new List<RechargeAccount>();
+            OwnedRechargeAcccounts = new List<RechargeAccount>();
         }
 
         [Display(Name="Email")]

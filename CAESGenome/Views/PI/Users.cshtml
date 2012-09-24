@@ -33,7 +33,11 @@
         @foreach(var user in Model)
         {
             <tr>
-                <td></td>
+                <td>
+                    <a href="@Url.Action("EditUser", new {@id = user.Id})" class="btn hastip" title="Edit User">
+                        <i class="icon-pencil"></i>
+                    </a>
+                </td>
                 <td>@user.FirstName</td>
                 <td>@user.LastName</td>
                 <td>@user.Title</td>

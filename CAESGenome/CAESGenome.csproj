@@ -380,6 +380,8 @@
     <Content Include="Views\PI\EditRechargeAccount.cshtml" />
     <Content Include="Views\PI\_RechargeAccountForm.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\PI\EditUser.cshtml" />
+    <Content Include="Views\PI\_UserForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

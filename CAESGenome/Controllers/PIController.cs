@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using CAESGenome.Core.Domain;
 using CAESGenome.Core.Repositories;
@@ -6,6 +7,7 @@ using CAESGenome.Core.Resources;
 using CAESGenome.Models;
 using UCDArch.Web.ActionResults;
 using UCDArch.Web.Helpers;
+using WebMatrix.WebData;
 
 namespace CAESGenome.Controllers
 {
@@ -41,12 +43,66 @@ namespace CAESGenome.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateUser(User user)
+        public ActionResult CreateUser(User user, string password, string retypePassword)
         {
+            user.ParentUser = GetCurrentUser(true);
+
+            if (password != retypePassword)
+            {
+                ModelState.AddModelError("Password", "Passwords do not match.");
+            }
+
             if (ModelState.IsValid)
             {
-                _repositoryFactory.UserRepository.EnsurePersistent(user);
+                // create the user
+                WebSecurity.CreateUserAndAccount(user.UserName, password, new {FirstName = user.FirstName, LastName = user.LastName, Title = user.Title, Phone = user.Phone, fax = user.Fax, parentUserId = user.ParentUser.Id});
+                
                 Message = "User has been created.";
+                return RedirectToAction("Users");
+            }
+
+            var viewModel = UserViewModel.Create(_repositoryFactory, CurrentUser.Identity.Name, user);
+            return View(viewModel);
+        }
+
+        public ActionResult EditUser(int id)
+        {
+            var user = _repositoryFactory.UserRepository.GetNullableById(id);
+
+            if (user == null)
+            {
+                Message = "User was not found";
+                return RedirectToAction("Users");
+            }
+
+            var viewModel = UserViewModel.Create(_repositoryFactory, CurrentUser.Identity.Name, user);
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult EditUser(int id, User user)
+        {
+            var userToEdit = _repositoryFactory.UserRepository.GetNullableById(id);
+
+            if (userToEdit == null)
+            {
+                Message = "User was not found";
+                return RedirectToAction("Users");
+            }
+
+            // copy the main fields
+            AutoMapper.Mapper.Map(user, userToEdit);
+            
+            // reconcile the recharge codes
+            UpdateRechargeAccounts(userToEdit.RechargeAccounts, user.RechargeAccounts);
+            
+            ModelState.Clear();
+            userToEdit.TransferValidationMessagesTo(ModelState);
+
+            if (ModelState.IsValid)
+            {
+                _repositoryFactory.UserRepository.EnsurePersistent(userToEdit);
+                Message = "User has been updated";
                 return RedirectToAction("Users");
             }
 
@@ -118,6 +174,29 @@ namespace CAESGenome.Controllers
             }
 
             return View(RechargeAccountViewModel.Create(rechargeAccountToEdit));
+        }
+
+        /// <summary>
+        /// Reconciles the list and makes sure that the updated list is the correct one written
+        /// </summary>
+        /// <param name="original"></param>
+        /// <param name="newList"></param>
+        private void UpdateRechargeAccounts(IList<RechargeAccount> original, IList<RechargeAccount> newList) 
+        {
+            // to delete
+            var delete = original.Where(a => !newList.Select(b => b.Id).Contains(a.Id)).ToList();
+            // add add
+            var add = newList.Where(a => !original.Select(b => b.Id).Contains(a.Id)).ToList();
+
+            foreach(var ra in delete)
+            {
+                original.Remove(ra);
+            }
+
+            foreach(var ra in add)
+            {
+                original.Add(ra);
+            }
         }
     }
 }

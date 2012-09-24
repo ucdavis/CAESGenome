@@ -2,10 +2,11 @@
     font-size: 1.2em;
     font-weight: 400;
     padding: 7px;
-    border: 1px solid #787878;
     margin-right: 8px;
 }
 
 a.btn.btn-success, a.btn.btn-info, a.btn.btn-warning, a.btn.btn-danger, a.btn.btn-inverse {
     color: #FFFFFF;
 }
+
+.control-group .required { color: red; }
