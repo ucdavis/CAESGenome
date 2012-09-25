@@ -8,21 +8,13 @@
 
 @section scripts
 {
-    @if(Model.JobType.Id == (int)JobTypeIds.BacterialClone)
+    <style type="text/css">
+        #plate-container input { display: block;margin-bottom: 6px;}
+    </style>
+
+    @if(Model.JobTypeSelected() && Model.JobType.Id == (int)JobTypeIds.BacterialClone)
     {
-        <script type="text/javascript">
-            $(function () {
-                $("#PostModel_Strain").change(function (event) {
-                    if($(this).find("option:selected").html() == "other") {
-                        $("#otherHost").show('normal');
-                    } else {
-                        $("#otherHost").hide('normal');
-                        $("#PostModel_NewStrain").val('');
-                        $("#PostModel_Bacteria").val('-1');
-                    }
-                });
-            });
-        </script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/Single/BacterialCloneForm.js")"></script>
     }
 }
 

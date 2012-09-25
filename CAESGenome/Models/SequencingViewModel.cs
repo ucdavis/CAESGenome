@@ -15,7 +15,7 @@ namespace CAESGenome.Models
         public SequencingPostModel PostModel { get; set; }
 
         // lists for drop downs
-        public List<RechargeAccount> RechargeAccounts { get; set; }
+        public List<SelectListItem> RechargeAccounts { get; set; }
         public List<KeyValuePair<PlateTypes, string>> PlateTypes { get; set; }
         public List<KeyValuePair<SequenceDirection, string>> SequenceDirections { get; set; }
         public IEnumerable<SelectListItem> Strains { get; set; }
@@ -35,7 +35,7 @@ namespace CAESGenome.Models
 
             if (jobType != null)
             {
-                viewModel.RechargeAccounts = user.RechargeAccounts.ToList();
+                viewModel.RechargeAccounts = user.RechargeAccounts.Select(a => new SelectListItem(){Text = a.AccountNum, Value = a.Id.ToString()}).ToList();
             }
 
             if (jobType != null && jobType.Id == (int)JobTypeIds.BacterialClone)
@@ -87,6 +87,7 @@ namespace CAESGenome.Models
         // shared fields
         public User User { get; set; }
         public JobType JobType { get; set; }
+        [Required]
         public RechargeAccount RechargeAccount { get; set; }
         [Required]
         [StringLength(50)]
@@ -98,7 +99,10 @@ namespace CAESGenome.Models
         [Display(Name="Plate Type")]
         public PlateTypes PlateType { get; set; }
         [Display(Name="Number of Plates")]
+        [Range(0, 100)]
         public int NumPlates { get; set; }
+        [Display(Name = "Plate Names")]
+        public List<string> PlateNames { get; set; }
 
         // bacterial clone
         [Display(Name="Sequence Direction")]

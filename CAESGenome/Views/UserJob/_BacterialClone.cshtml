@@ -15,6 +15,13 @@
                 </div>
             </div>
             <div class="control-group">
+                @Html.LabelFor(model => model.PostModel.RechargeAccount, new {@class = "control-label"})
+                <div class="controls">
+                    @Html.DropDownList("PostModel.RechargeAccount", Model.RechargeAccounts, "--Select Recharge Account--")
+                    @Html.ValidationMessageFor(model => model.PostModel.RechargeAccount)
+                </div>
+            </div>
+            <div class="control-group">
                 @Html.LabelFor(model => model.PostModel.PlateType, new {@class = "control-label"})
                 <div class="controls">
                     @foreach(var pt in Model.PlateTypes)
@@ -101,6 +108,22 @@
                     @Html.ValidationMessageFor(model => model.PostModel.Comments)
                 </div>
             </div>
+        </fieldset>
+        
+        <fieldset>
+            <legend>Plates</legend>
+            
+            <div class="control-group">
+                @Html.LabelFor(model => model.PostModel.PlateNames, new {@class = "control-label"})
+                <div class="controls">
+                    <div id="plate-container"></div>
+                    <div class="help-block"><p>Label name(s) on the side of your plate(s), not hte plate seal(s).</p></div>
+                </div>
+                
+            </div>
+            
+            
+
         </fieldset>
     </div>
     
