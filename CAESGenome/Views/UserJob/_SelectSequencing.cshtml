@@ -1,0 +1,43 @@
+﻿@model SequencingViewModel
+
+@using(Html.BeginForm("CreateSequencing", "UserJob", FormMethod.Get))
+{
+    <h3>Standard Sequencing:</h3>
+
+    <ul class="unstyled">
+        @foreach(var jt in Model.JobTypes.Where(a => a.StandardSequencing).OrderBy(a => a.Id))
+        {
+            <li>
+                <label class="checkbox">
+                    @Html.RadioButton("id", jt.Id)
+                    @Html.Raw(jt.DisplayName)
+                </label>
+            </li>
+        }
+    </ul>
+
+    <h3>Custom Sequencing</h3>
+
+    <p>
+        DNA is sheared using HydroShear (Gene Machines) to produce smaller fragments for sequencing. The fragments with an average size of 2-4 kb are isolated from agarose gel electrophoresis following enzymatic repairing of the damaged ends. The resulting fragments are subcloned into the SmaI site of pUC18 vector with DH5alpha as an E. Coli host.
+    </p>
+
+    <ul class="unstyled">
+        @foreach(var jt in Model.JobTypes.Where(a => a.CustomSequencing).OrderBy(a => a.Id))
+        {
+            <li>
+                <label class="checkbox">
+                    @Html.RadioButton("id", jt.Id)
+                    @Html.Raw(jt.DisplayName)
+                </label>
+            </li>
+        }
+    </ul>    
+    
+    <h3>Other Custom Jobs</h3>
+    
+    <p>Contact CGF Staff - Jongmin Baek <a href="mailto:jmbaek@ucdavis.edu">jmbaek@ucdavis.edu</a></p>
+    
+    <input type="submit" value="Open Job" class="btn btn-primary"/>
+}
+

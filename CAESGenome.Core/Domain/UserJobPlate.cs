@@ -4,24 +4,22 @@ using UCDArch.Core.DomainModel;
 
 namespace CAESGenome.Core.Domain
 {
-    public class Vector : DomainObject
+    public class UserJobPlate : DomainObject
     {
-        [Required]
+        public virtual UserJob UserJob { get; set; }
         [StringLength(50)]
+        [Required]
         public virtual string Name { get; set; }
-
-        public virtual VectorType VectorType { get; set; }
     }
 
-    public class VectorMap : ClassMap<Vector>
+    public class UserJobPlateMap : ClassMap<UserJobPlate>
     {
-        public VectorMap()
+        public UserJobPlateMap()
         {
             Id(x => x.Id);
 
+            References(x => x.UserJob);
             Map(x => x.Name);
-            References(x => x.VectorType);
-
         }
     }
 }

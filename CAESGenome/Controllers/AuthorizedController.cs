@@ -4,7 +4,7 @@ using CAESGenome.Core.Resources;
 namespace CAESGenome.Controllers
 {
     [Authorize(Roles = RoleNames.User)]
-    public class AuthorizedController : Controller
+    public class AuthorizedController : ApplicationController
     {
         //
         // GET: /Authorized/

@@ -22,7 +22,7 @@ namespace CAESGenome.Core.Domain
 
             Map(x => x.Name);
             Map(x => x.Supplied);
-            Map(x => x.Bacteria);
+            References(x => x.Bacteria);
         }
     }
 }

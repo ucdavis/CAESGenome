@@ -1,0 +1,39 @@
+﻿@using CAESGenome.Core.Resources
+@model SequencingViewModel
+
+@{
+    ViewBag.Title = "Create Sequencing Submission";
+    ViewBag.SubPageTitle = "Create Sequencing Submission";
+}
+
+@section scripts
+{
+    @if(Model.JobType.Id == (int)JobTypeIds.BacterialClone)
+    {
+        <script type="text/javascript">
+            $(function () {
+                $("#PostModel_Strain").change(function (event) {
+                    if($(this).find("option:selected").html() == "other") {
+                        $("#otherHost").show('normal');
+                    } else {
+                        $("#otherHost").hide('normal');
+                        $("#PostModel_NewStrain").val('');
+                        $("#PostModel_Bacteria").val('-1');
+                    }
+                });
+            });
+        </script>
+    }
+}
+
+@if(!Model.JobTypeSelected())
+{
+    @Html.Partial("_SelectSequencing")     
+}
+else
+{
+    if (Model.JobType.Id == (int)JobTypeIds.BacterialClone)
+    {
+        @Html.Partial("_BacterialClone")
+    }
+}

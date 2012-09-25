@@ -5,7 +5,7 @@
     margin-right: 8px;
 }
 
-a.btn.btn-success, a.btn.btn-info, a.btn.btn-warning, a.btn.btn-danger, a.btn.btn-inverse {
+a.btn.btn-success, a.btn.btn-info, a.btn.btn-warning, a.btn.btn-danger, a.btn.btn-inverse, a.btn-primary {
     color: #FFFFFF;
 }
 

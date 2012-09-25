@@ -1,0 +1,39 @@
+﻿@model IQueryable<UserJob>
+
+@{
+    ViewBag.Title = "User Job History";
+    ViewBag.SubPageTitle = "User Job History";
+}
+
+@section scripts
+{
+    @Html.Partial("_DataTables")
+}
+
+<table class="table table-bordered table-striped default_table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Job Type</th>
+            <th>Plates</th>
+            <th>Comments</th>
+            <th>Date</th>
+            <th>Last Update</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var uj in Model.OrderBy(a => a.IsOpen).ThenBy(a => a.DateTimeCreated))
+        {
+            <tr>
+                <td></td>
+                <td>@uj.Name</td>
+                <td>@uj.JobType.Name</td>
+                <td></td>
+                <td>@uj.Comments</td>
+                <td>@uj.DateTimeCreated</td>
+                <td>@uj.LastUpdate</td>
+            </tr>
+        }
+    </tbody>
+</table>

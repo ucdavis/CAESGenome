@@ -1,0 +1,111 @@
+﻿@model SequencingViewModel
+
+@using(Html.BeginForm("CreateSequencing", "UserJob", FormMethod.Post, new {@class="form-horizontal"}))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false)
+    
+    <div class="control-group">
+        <fieldset>
+            <div class="control-group">
+                @Html.LabelFor(model => model.PostModel.Name, new {@class = "control-label"})
+                <div class="controls">
+                    @Html.EditorFor(model => model.PostModel.Name)
+                    @Html.ValidationMessageFor(model => model.PostModel.Name)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.PostModel.PlateType, new {@class = "control-label"})
+                <div class="controls">
+                    @foreach(var pt in Model.PlateTypes)
+                    {
+                        <label class="radio inline">
+                            @Html.RadioButton("PlateType", pt.Key)    
+                            @pt.Value
+                        </label>    
+                    }
+                    @Html.ValidationMessageFor(model => model.PostModel.PlateType)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.PostModel.NumPlates, new {@class = "control-label"})
+                <div class="controls">
+                    @Html.EditorFor(model => model.PostModel.NumPlates)
+                    @Html.ValidationMessageFor(model => model.PostModel.NumPlates)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.PostModel.SequenceDirection, new {@class = "control-label"})
+                <div class="controls">
+                    @foreach(var sd in Model.SequenceDirections)
+                    {
+                        <label class="radio inline">
+                            @Html.RadioButton("SequenceDirection", sd.Key)
+                            @sd.Value
+                        </label>
+                    }
+                    @Html.ValidationMessageFor(model => model.PostModel.SequenceDirection)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.PostModel.Strain, new {@class = "control-label"})
+                <div class="controls">
+                    @Html.DropDownList("PostModel.Strain", Model.Strains, "--Select Host--")
+                    @Html.ValidationMessageFor(model => model.PostModel.Strain)
+                </div>
+            </div>
+            <div id="otherHost" style="display:none;">
+                <div class="control-group">
+                    @Html.LabelFor(model => model.PostModel.NewStrain, new {@class = "control-label"})
+                    <div class="controls">
+                        @Html.EditorFor(model => model.PostModel.NewStrain)
+                        @Html.ValidationMessageFor(model => model.PostModel.NewStrain)
+                    </div>
+                </div>
+                <div class="control-group">
+                    @Html.LabelFor(model => model.PostModel.Bacteria, new {@class = "control-label"})
+                    <div class="controls">
+                        @Html.DropDownList("PostModel.Bacteria", Model.Bacterias, "--Select Bacteria--")
+                        @Html.ValidationMessageFor(model => model.PostModel.Bacteria)
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.PostModel.Primer, new {@class = "control-label"})
+                <div class="controls">
+                    @Html.DropDownList("PostModel.Primer", Model.Primers, "--Select Primer--")
+                    @Html.ValidationMessageFor(model => model.PostModel.Primer)
+                    <span class="help-inline">
+                        Select "will supply" if you will bring your own primer
+                    </span>
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.PostModel.Vector, new {@class = "control-label"})
+                <div class="controls">
+                    @Html.DropDownList("PostModel.Vector", Model.Vectors, "--Select Vector--")
+                    @Html.ValidationMessageFor(model => model.PostModel.Vector)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.PostModel.Antibiotic, new {@class = "control-label"})
+                <div class="controls">
+                    @Html.DropDownList("PostModel.Antibiotic", Model.Antibiotics, "--Select Antibiotic--")
+                    @Html.ValidationMessageFor(model => model.PostModel.Antibiotic)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.PostModel.Comments, new {@class = "control-label"})
+                <div class="controls">
+                    @Html.EditorFor(model => model.PostModel.Comments)
+                    @Html.ValidationMessageFor(model => model.PostModel.Comments)
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    
+    <div class="form-actions">
+        <input type="submit" value="Submit Job" class="btn btn-primary"/>
+        @Html.ActionLink("Cancel", "Index", "Authorized", new {}, new {@class="btn"})
+    </div>
+}

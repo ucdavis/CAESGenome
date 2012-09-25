@@ -12,6 +12,11 @@ namespace CAESGenome.Core.Domain
         }
 
         public virtual string Name { get; set; }
+        public virtual string DisplayName { get; set; }
+        public virtual bool StandardSequencing { get; set; }
+        public virtual bool CustomSequencing { get; set; }
+        public virtual bool Genotyping { get; set; }
+        public virtual bool Qbot { get; set; }
 
         public virtual IList<Stage> Stages { get; set; }
     }
@@ -24,6 +29,11 @@ namespace CAESGenome.Core.Domain
 
             Id(x => x.Id);
             Map(x => x.Name);
+            Map(x => x.DisplayName);
+            Map(x => x.StandardSequencing);
+            Map(x => x.CustomSequencing);
+            Map(x => x.Genotyping);
+            Map(x => x.Qbot);
 
             HasMany(x => x.Stages).Inverse();
         }
