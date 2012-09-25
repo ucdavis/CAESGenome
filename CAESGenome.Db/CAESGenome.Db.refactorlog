@@ -126,4 +126,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="UserJobDnaId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="0119f57d-ab6b-45a3-ba9a-c3e69028e336" ChangeDateTime="09/25/2012 21:30:40">
+    <Property Name="ElementName" Value="[dbo].[JobTypes].[DNASequencing]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[JobTypes]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DnaSequencing" />
+  </Operation>
 </Operations>
