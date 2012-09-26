@@ -1,8 +1,8 @@
 ﻿CREATE TABLE [dbo].[UserJobs]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [UserId] INT NOT NULL, 
-    [AccountId] INT NOT NULL, 
+    [RechargeAccountId] INT NOT NULL, 
     [Name] VARCHAR(100) NOT NULL, 
     [JobTypeId] INT NOT NULL, 
     [NumberPlates] INT NOT NULL, 

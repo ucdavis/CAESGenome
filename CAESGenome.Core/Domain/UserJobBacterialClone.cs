@@ -18,6 +18,8 @@ namespace CAESGenome.Core.Domain
     {
         public UserJobBacterialCloneMap()
         {
+            Table("UserJobBacterialClone");
+
             Id(x => x.Id);
 
             Map(x => x.SequenceDirection).CustomType<NHibernate.Type.EnumStringType<SequenceDirection>>();

@@ -14,6 +14,9 @@
 
     @if(Model.JobTypeSelected() && Model.JobType.Id == (int)JobTypeIds.BacterialClone)
     {
+        <script type="text/javascript">
+            var sequenceDirectionTwo = '@((int)SequenceDirection.Backward)';
+        </script>
         <script type="text/javascript" src="@Url.Content("~/Scripts/Single/BacterialCloneForm.js")"></script>
     }
 }

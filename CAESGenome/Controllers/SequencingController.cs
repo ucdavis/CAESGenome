@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using CAESGenome.Core.Domain;
 using CAESGenome.Core.Repositories;
@@ -10,6 +7,7 @@ using CAESGenome.Models;
 
 namespace CAESGenome.Controllers
 {
+    [Authorize(Roles = RoleNames.User)]
     public class SequencingController : ApplicationController
     {
         private readonly IRepositoryFactory _repositoryFactory;
@@ -58,13 +56,32 @@ namespace CAESGenome.Controllers
                     Message = "Invalid job type specified";
                     return RedirectToAction("Create");
                 }
+
+                postModel.JobType = jobType;
             }
 
             ValidateSequencingModel(jobType, postModel);
 
             if (ModelState.IsValid)
             {
-                Message = "Was valid for saving, saved!";
+                var userJob = new UserJob();
+                var userJobBacterialClone = new UserJobBacterialClone();
+
+                AutoMapper.Mapper.Map(postModel, userJob);
+                AutoMapper.Mapper.Map(postModel, userJobBacterialClone);
+                userJob.UserJobBacterialClone = userJobBacterialClone;
+                userJob.User = GetCurrentUser(true);
+                userJob.RechargeAccount = postModel.RechargeAccount;
+
+                foreach(var name in postModel.PlateNames)
+                {
+                    userJob.AddUserJobPlates(new UserJobPlate(){Name = name});  
+                }
+
+                _repositoryFactory.UserJobRepository.EnsurePersistent(userJob);
+
+                Message = "Your job request has been successfully submitted.";
+                return RedirectToAction("Index", "Authorized");
             }
 
             var user = GetCurrentUser();
@@ -92,7 +109,7 @@ namespace CAESGenome.Controllers
                 ModelState.AddModelError("PostModel.SequenceDirection", "Sequence Direction is required.");
             }
 
-            if (postModel.Primer == null)
+            if (postModel.Primer1 == null)
             {
                 ModelState.AddModelError("PostModel.Primer", "Primer is required.");
             }
@@ -117,7 +134,7 @@ namespace CAESGenome.Controllers
                 ModelState.AddModelError("PostModel.NumPlates", "More than one plate is required.");
             }
 
-            if (postModel.PlateNames != null && postModel.NumPlates != postModel.PlateNames.Count)
+            if (postModel.PlateNames != null && postModel.PlateNames.Count(a => !string.IsNullOrEmpty(a)) < postModel.NumPlates)
             {
                 ModelState.AddModelError("PostModel.PlateNames", "Please specify a name for each plate.");
             }

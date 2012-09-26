@@ -133,4 +133,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="DnaSequencing" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="516c9066-63d4-4184-8a3d-40d3b4c2e158" ChangeDateTime="09/26/2012 21:01:43">
+    <Property Name="ElementName" Value="[dbo].[UserJobs].[AccountId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserJobs]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="RechargeAccountId" />
+  </Operation>
 </Operations>

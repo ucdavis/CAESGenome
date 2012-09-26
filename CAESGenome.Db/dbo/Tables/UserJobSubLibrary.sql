@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[UserJobSubLibrary]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [SampleType] VARCHAR(3) NOT NULL, 
     [DnaConcentration] FLOAT NULL, 
     [GenomeSize] FLOAT NULL, 

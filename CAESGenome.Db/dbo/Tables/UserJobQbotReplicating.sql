@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[UserJobQbotReplicating]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [VectorId] INT NOT NULL, 
     [StrainId] INT NOT NULL, 
     [NumSourcePlates] INT NOT NULL, 

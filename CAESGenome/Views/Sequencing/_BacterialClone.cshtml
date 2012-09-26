@@ -27,7 +27,7 @@
                     @foreach(var pt in Model.PlateTypes)
                     {
                         <label class="radio inline">
-                            @Html.RadioButton("PlateType", pt.Value)    
+                            @Html.RadioButton("PostModel.PlateType", pt.Value)    
                             @pt.Text
                         </label>    
                     }
@@ -41,13 +41,13 @@
                     @Html.ValidationMessageFor(model => model.PostModel.NumPlates)
                 </div>
             </div>
-            <div class="control-group">
+            <div class="control-group" id="sequencedirections">
                 @Html.LabelFor(model => model.PostModel.SequenceDirection, new {@class = "control-label"})
                 <div class="controls">
                     @foreach(var sd in Model.SequenceDirections)
                     {
                         <label class="radio inline">
-                            @Html.RadioButton("SequenceDirection", sd.Value)
+                            @Html.RadioButton("PostModel.SequenceDirection", sd.Value)
                             @sd.Text
                         </label>
                     }
@@ -78,10 +78,20 @@
                 </div>
             </div>
             <div class="control-group">
-                @Html.LabelFor(model => model.PostModel.Primer, new {@class = "control-label"})
+                @Html.LabelFor(model => model.PostModel.Primer1, new {@class = "control-label"})
                 <div class="controls">
-                    @Html.Partial("_selectList", new SelectListModel("PostModel.Primer", Model.Primers, "--Select Primer--"))
-                    @Html.ValidationMessageFor(model => model.PostModel.Primer)
+                    @Html.Partial("_selectList", new SelectListModel("PostModel.Primer1", Model.Primers, "--Select Primer--"))
+                    @Html.ValidationMessageFor(model => model.PostModel.Primer1)
+                    <span class="help-inline">
+                        Select "will supply" if you will bring your own primer
+                    </span>
+                </div>
+            </div>
+            <div class="control-group" id="primer2" style="display: none;">
+                @Html.LabelFor(model => model.PostModel.Primer2, new {@class = "control-label"})
+                <div class="controls">
+                    @Html.Partial("_selectList", new SelectListModel("PostModel.Primer2", Model.Primers2, "--Select Primer--"))
+                    @Html.ValidationMessageFor(model => model.PostModel.Primer2)
                     <span class="help-inline">
                         Select "will supply" if you will bring your own primer
                     </span>
@@ -116,19 +126,23 @@
             <div class="control-group">
                 @Html.LabelFor(model => model.PostModel.PlateNames, new {@class = "control-label"})
                 <div class="controls">
-                    <div id="plate-container"></div>
+                    <div id="plate-container">
+                        @for (var i = 0; i < Model.PostModel.NumPlates; i++ )
+                        {
+                            var name = Model.PostModel.PlateNames != null ? Model.PostModel.PlateNames[i] : string.Empty;
+                            @Html.TextBox("PostModel.PlateNames", name)
+                        }
+                    </div>
+                    @Html.ValidationMessageFor(model => model.PostModel.PlateNames)
                     <div class="help-block"><p>Label name(s) on the side of your plate(s), not hte plate seal(s).</p></div>
                 </div>
                 
             </div>
-            
-            
-
         </fieldset>
     </div>
     
     <div class="form-actions">
         <input type="submit" value="Submit Job" class="btn btn-primary"/>
-        @Html.ActionLink("Cancel", "Index", "Authorized", new {}, new {@class="btn"})
+        @Html.ActionLink("Cancel", "Index", "Authorized", new { }, new { @class = "btn" })
     </div>
 }

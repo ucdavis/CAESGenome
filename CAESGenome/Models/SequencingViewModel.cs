@@ -22,6 +22,7 @@ namespace CAESGenome.Models
         public SelectList SequenceDirections { get; set; }
         public SelectList Strains { get; set; }
         public SelectList Primers { get; set; }
+        public SelectList Primers2 { get; set; }
         public SelectList Vectors { get; set; }
         public SelectList Antibiotics { get; set; }
         public SelectList Bacterias { get; set; }
@@ -49,18 +50,21 @@ namespace CAESGenome.Models
                 viewModel.PlateTypes = new SelectList(pts, "Value", "Text");
 
                 var sd = new List<SelectListItem>();
-                sd.Add(new SelectListItem() {Value = ((int)SequenceDirection.Forward).ToString(), Text = "Forward"});
-                sd.Add(new SelectListItem() { Value = ((int)SequenceDirection.Backward).ToString(), Text = "Backward" });
+                sd.Add(new SelectListItem() { Value = ((int)SequenceDirection.Forward).ToString(), Text = "One"});
+                sd.Add(new SelectListItem() { Value = ((int)SequenceDirection.Backward).ToString(), Text = "Two" });
                 viewModel.SequenceDirections = new SelectList(sd, "Value", "Text");
 
                 var sid = postModel != null && postModel.Strain != null ? postModel.Strain.Id : -1;
                 viewModel.Strains = new SelectList(repositoryFactory.StrainRepository.Queryable.Where(a => a.Supplied), "Id", "Name", sid);
 
-                var pid = postModel != null && postModel.Primer != null ? postModel.Primer.Id : -1;
-                viewModel.Primers = new SelectList(repositoryFactory.PrimerRepository.Queryable.Where(a => a.Supplied), "Id", "Name", pid);
+                var pid1 = postModel != null && postModel.Primer1!= null ? postModel.Primer1.Id : -1;
+                viewModel.Primers = new SelectList(repositoryFactory.PrimerRepository.Queryable.Where(a => a.Supplied), "Id", "Name", pid1);
+
+                var pid2 = postModel != null && postModel.Primer2 != null ? postModel.Primer2.Id : -1;
+                viewModel.Primers2 = new SelectList(repositoryFactory.PrimerRepository.Queryable.Where(a => a.Supplied), "Id", "Name", pid1);
 
                 var vid = postModel != null && postModel.Vector != null ? postModel.Vector.Id : -1;
-                viewModel.Vectors = new SelectList(repositoryFactory.StrainRepository.Queryable.OrderBy(a => a.Name), "Id", "Name", vid);
+                viewModel.Vectors = new SelectList(repositoryFactory.VectorRepository.Queryable.OrderByDescending(a => a.Name), "Id", "Name", vid);
 
                 var aid = postModel != null && postModel.Antibiotic != null ? postModel.Antibiotic.Id : -1;
                 viewModel.Antibiotics = new SelectList(repositoryFactory.AntibioticRepository.Queryable.OrderBy(a => a.Name), "Id", "Name", aid);
@@ -80,6 +84,11 @@ namespace CAESGenome.Models
 
     public class SequencingPostModel
     {
+        public SequencingPostModel()
+        {
+            NumPlates = 1;
+        }
+
         // shared fields
         public User User { get; set; }
         public JobType JobType { get; set; }
@@ -89,6 +98,7 @@ namespace CAESGenome.Models
         public RechargeAccount RechargeAccount { get; set; }
         [Required]
         [StringLength(50)]
+        [Display(Name = "Job Name")]
         public string Name { get; set; }
         [DataType(DataType.MultilineText)]
         public string Comments { get; set; }
@@ -111,7 +121,10 @@ namespace CAESGenome.Models
         public string NewStrain { get; set; }
         public Bacteria Bacteria { get; set; }
 
-        public Primer Primer { get; set; }
+        [Display(Name="Primer One")]
+        public Primer Primer1 { get; set; }
+        [Display(Name="Primer Two")]
+        public Primer Primer2 { get; set; }
         public Vector Vector { get; set; }
         public Antibiotic Antibiotic { get; set; }
     }

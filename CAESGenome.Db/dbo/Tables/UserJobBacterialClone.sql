@@ -1,9 +1,9 @@
 ﻿CREATE TABLE [dbo].[UserJobBacterialClone]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [SequenceDirection] VARCHAR(15) NOT NULL, 
     [Primer1Id] INT NOT NULL, 
-    [Primer2Id] INT NOT NULL, 
+    [Primer2Id] INT NULL, 
     [StrainId] INT NOT NULL, 
     [VectorId] INT NOT NULL, 
     [AntibioticId] INT NOT NULL, 
