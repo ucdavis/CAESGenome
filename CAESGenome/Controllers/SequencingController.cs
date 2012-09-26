@@ -57,10 +57,39 @@ namespace CAESGenome.Controllers
                     return RedirectToAction("Create");
                 }
 
-                postModel.JobType = jobType;
+                // all job types are assignble except dna submission
+                if (jobType.Id != (int)JobTypeIds.DnaSubmission)
+                {
+                    postModel.JobType = jobType;
+                }
             }
 
-            ValidateSequencingModel(jobType, postModel);
+            var result = false;
+
+            switch(jobType.Id)
+            {
+                case (int)JobTypeIds.BacterialClone: 
+                    result = SaveBacterialClone(postModel);
+                    break;
+                case (int)JobTypeIds.DnaSubmission:
+                    result = SaveDnaSubmission(postModel);
+                    break;
+            }
+            
+            if (result)
+            {
+                Message = "Your job request has been successfully submitted.";
+                return RedirectToAction("Index", "Authorized");
+            }
+
+            var user = GetCurrentUser();
+            var viewModel = SequencingViewModel.Create(_repositoryFactory, user, jobType, postModel);
+            return View(viewModel);
+        }
+
+        private bool SaveBacterialClone(SequencingPostModel postModel)
+        {
+            ValidateBacterialClone(postModel);
 
             if (ModelState.IsValid)
             {
@@ -73,30 +102,18 @@ namespace CAESGenome.Controllers
                 userJob.User = GetCurrentUser(true);
                 userJob.RechargeAccount = postModel.RechargeAccount;
 
-                foreach(var name in postModel.PlateNames)
+                foreach (var name in postModel.PlateNames)
                 {
-                    userJob.AddUserJobPlates(new UserJobPlate(){Name = name});  
+                    userJob.AddUserJobPlates(new UserJobPlate() { Name = name });
                 }
 
                 _repositoryFactory.UserJobRepository.EnsurePersistent(userJob);
 
-                Message = "Your job request has been successfully submitted.";
-                return RedirectToAction("Index", "Authorized");
+                return true;
             }
 
-            var user = GetCurrentUser();
-            var viewModel = SequencingViewModel.Create(_repositoryFactory, user, jobType, postModel);
-            return View(viewModel);
+            return false;
         }
-
-        private void ValidateSequencingModel(JobType jobType, SequencingPostModel postModel)
-        {
-            if (jobType.Id == (int)JobTypeIds.BacterialClone)
-            {
-                ValidateBacterialClone(postModel);
-            }
-        }
-
         private void ValidateBacterialClone(SequencingPostModel postModel)
         {
             if (postModel.PlateType == null)
@@ -111,7 +128,12 @@ namespace CAESGenome.Controllers
 
             if (postModel.Primer1 == null)
             {
-                ModelState.AddModelError("PostModel.Primer", "Primer is required.");
+                ModelState.AddModelError("PostModel.Primer1", "Primer One is required.");
+            }
+
+            if (postModel.SequenceDirection.HasValue && postModel.SequenceDirection == SequenceDirection.Backward && postModel.Primer2 == null)
+            {
+                ModelState.AddModelError("PostModel.Primer2", "Primer Two is required.");
             }
 
             if (postModel.Vector == null)
@@ -127,6 +149,45 @@ namespace CAESGenome.Controllers
             if (postModel.Strain == null)
             {
                 ModelState.AddModelError("PostModel.Strain", "Host is required.");
+            }
+
+            if (postModel.NumPlates <= 0)
+            {
+                ModelState.AddModelError("PostModel.NumPlates", "More than one plate is required.");
+            }
+
+            if (postModel.PlateNames != null && postModel.PlateNames.Count(a => !string.IsNullOrEmpty(a)) < postModel.NumPlates)
+            {
+                ModelState.AddModelError("PostModel.PlateNames", "Please specify a name for each plate.");
+            }
+        }
+
+        private bool SaveDnaSubmission(SequencingPostModel postModel)
+        {
+            ValidateDnaSubmission(postModel);
+
+            if (ModelState.IsValid)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        private void ValidateDnaSubmission(SequencingPostModel postModel)
+        {
+            if (postModel.JobType == null)
+            {
+                ModelState.AddModelError("PostModel.JobType", "Job Type is required.");
+            }
+
+            if (postModel.PlateType == null)
+            {
+                ModelState.AddModelError("PostModel.PlateType", "Plate Type is required.");
+            }
+
+            if (postModel.Primer1 == null)
+            {
+                ModelState.AddModelError("PostModel.Primer1", "Primer One is required.");
             }
 
             if (postModel.NumPlates <= 0)

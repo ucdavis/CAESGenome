@@ -11,6 +11,11 @@
     <style type="text/css">
         #plate-container input { display: block;margin-bottom: 6px;}
     </style>
+    
+    @if(Model.JobTypeSelected() && (Model.JobType.Id == (int)JobTypeIds.BacterialClone || Model.JobType.Id == (int)JobTypeIds.DnaSubmission || Model.JobType.Id == (int)JobTypeIds.UserRunSequencing))
+    {
+        <script type="text/javascript" src="@Url.Content("~/Scripts/Single/SequencePlatesForm.js")"></script>
+    }
 
     @if(Model.JobTypeSelected() && Model.JobType.Id == (int)JobTypeIds.BacterialClone)
     {
@@ -30,5 +35,9 @@ else
     if (Model.JobType.Id == (int)JobTypeIds.BacterialClone)
     {
         @Html.Partial("_BacterialClone")
+    }
+    if (Model.JobType.Id == (int)JobTypeIds.DnaSubmission)
+    {
+        @Html.Partial("_Dna")
     }
 }

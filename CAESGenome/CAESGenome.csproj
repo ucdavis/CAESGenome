@@ -337,6 +337,7 @@
     <Content Include="Scripts\modernizr.custom.27227.js" />
     <Content Include="Scripts\polyfills-datepicker.js" />
     <Content Include="Scripts\Single\BacterialCloneForm.js" />
+    <Content Include="Scripts\Single\SequencePlatesForm.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -394,6 +395,8 @@
     <Content Include="Views\Sequencing\_SelectSequencing.cshtml" />
     <Content Include="Views\Sequencing\_BacterialClone.cshtml" />
     <Content Include="Views\Shared\_selectList.cshtml" />
+    <Content Include="Views\Authorized\OpenJobs.cshtml" />
+    <Content Include="Views\Sequencing\_Dna.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

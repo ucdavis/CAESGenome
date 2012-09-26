@@ -16,7 +16,6 @@ namespace CAESGenome.Models
         public SequencingPostModel PostModel { get; set; }
 
         // lists for drop downs
-        //public IEnumerable<SelectListItem> RechargeAccounts { get; set; }
         public SelectList RechargeAccounts { get; set; }
         public SelectList PlateTypes { get; set; }
         public SelectList SequenceDirections { get; set; }
@@ -26,6 +25,9 @@ namespace CAESGenome.Models
         public SelectList Vectors { get; set; }
         public SelectList Antibiotics { get; set; }
         public SelectList Bacterias { get; set; }
+
+        // dna submission only
+        public SelectList DnaJobTypes { get; set; }
 
         public static SequencingViewModel Create(IRepositoryFactory repositoryFactory, User user, JobType jobType = null, SequencingPostModel postModel = null)
         {
@@ -40,37 +42,52 @@ namespace CAESGenome.Models
             {
                 var rid = postModel != null && postModel.RechargeAccount != null ? postModel.RechargeAccount.Id : -1;
                 viewModel.RechargeAccounts = new SelectList(user.RechargeAccounts, "Id", "AccountNum", rid);
-            }
 
-            if (jobType != null && jobType.Id == (int)JobTypeIds.BacterialClone)
-            {
-                var pts = new List<SelectListItem>();
-                pts.Add(new SelectListItem(){ Value = ((int)Core.Resources.PlateTypes.NinetySix).ToString(), Text = "96"});
-                pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.ThreeEightyFour).ToString(), Text = "384" });
-                viewModel.PlateTypes = new SelectList(pts, "Value", "Text");
+                // shared for bacterial clone, dna submission, user run sequencing
+                if (jobType.Id == (int)JobTypeIds.BacterialClone || jobType.Id == (int)JobTypeIds.DnaSubmission || jobType.Id == (int)JobTypeIds.UserRunSequencing)
+                {
+                    var pts = new List<SelectListItem>();
+                    pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.NinetySix).ToString(), Text = "96" });
+                    pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.ThreeEightyFour).ToString(), Text = "384" });
+                    viewModel.PlateTypes = new SelectList(pts, "Value", "Text");
+                }
 
-                var sd = new List<SelectListItem>();
-                sd.Add(new SelectListItem() { Value = ((int)SequenceDirection.Forward).ToString(), Text = "One"});
-                sd.Add(new SelectListItem() { Value = ((int)SequenceDirection.Backward).ToString(), Text = "Two" });
-                viewModel.SequenceDirections = new SelectList(sd, "Value", "Text");
+                // shared for bacterial clone, dna submission
+                if (jobType.Id == (int)JobTypeIds.BacterialClone || jobType.Id == (int)JobTypeIds.DnaSubmission)
+                {
+                    var pid1 = postModel != null && postModel.Primer1 != null ? postModel.Primer1.Id : -1;
+                    viewModel.Primers = new SelectList(repositoryFactory.PrimerRepository.Queryable.Where(a => a.Supplied), "Id", "Name", pid1);
+                }
 
-                var sid = postModel != null && postModel.Strain != null ? postModel.Strain.Id : -1;
-                viewModel.Strains = new SelectList(repositoryFactory.StrainRepository.Queryable.Where(a => a.Supplied), "Id", "Name", sid);
+                // only for baacterial clone
+                if (jobType.Id == (int)JobTypeIds.BacterialClone)
+                {
+                    var sd = new List<SelectListItem>();
+                    sd.Add(new SelectListItem() { Value = ((int)SequenceDirection.Forward).ToString(), Text = "One" });
+                    sd.Add(new SelectListItem() { Value = ((int)SequenceDirection.Backward).ToString(), Text = "Two" });
+                    viewModel.SequenceDirections = new SelectList(sd, "Value", "Text");
 
-                var pid1 = postModel != null && postModel.Primer1!= null ? postModel.Primer1.Id : -1;
-                viewModel.Primers = new SelectList(repositoryFactory.PrimerRepository.Queryable.Where(a => a.Supplied), "Id", "Name", pid1);
+                    var sid = postModel != null && postModel.Strain != null ? postModel.Strain.Id : -1;
+                    viewModel.Strains = new SelectList(repositoryFactory.StrainRepository.Queryable.Where(a => a.Supplied), "Id", "Name", sid);
 
-                var pid2 = postModel != null && postModel.Primer2 != null ? postModel.Primer2.Id : -1;
-                viewModel.Primers2 = new SelectList(repositoryFactory.PrimerRepository.Queryable.Where(a => a.Supplied), "Id", "Name", pid1);
+                    var pid2 = postModel != null && postModel.Primer2 != null ? postModel.Primer2.Id : -1;
+                    viewModel.Primers2 = new SelectList(repositoryFactory.PrimerRepository.Queryable.Where(a => a.Supplied), "Id", "Name", pid2);
 
-                var vid = postModel != null && postModel.Vector != null ? postModel.Vector.Id : -1;
-                viewModel.Vectors = new SelectList(repositoryFactory.VectorRepository.Queryable.OrderByDescending(a => a.Name), "Id", "Name", vid);
+                    var vid = postModel != null && postModel.Vector != null ? postModel.Vector.Id : -1;
+                    viewModel.Vectors = new SelectList(repositoryFactory.VectorRepository.Queryable.OrderByDescending(a => a.Name), "Id", "Name", vid);
 
-                var aid = postModel != null && postModel.Antibiotic != null ? postModel.Antibiotic.Id : -1;
-                viewModel.Antibiotics = new SelectList(repositoryFactory.AntibioticRepository.Queryable.OrderBy(a => a.Name), "Id", "Name", aid);
+                    var aid = postModel != null && postModel.Antibiotic != null ? postModel.Antibiotic.Id : -1;
+                    viewModel.Antibiotics = new SelectList(repositoryFactory.AntibioticRepository.Queryable.OrderBy(a => a.Name), "Id", "Name", aid);
 
-                var bid = postModel != null && postModel.Bacteria != null ? postModel.Bacteria.Id : -1;
-                viewModel.Bacterias = new SelectList(repositoryFactory.BacteriaRepository.Queryable, "Id", "Name", bid);
+                    var bid = postModel != null && postModel.Bacteria != null ? postModel.Bacteria.Id : -1;
+                    viewModel.Bacterias = new SelectList(repositoryFactory.BacteriaRepository.Queryable, "Id", "Name", bid);
+                }
+
+                if (jobType.Id == (int)JobTypeIds.DnaSubmission)
+                {
+                    var jid = postModel != null && postModel.JobType != null ? postModel.JobType.Id : -1;
+                    viewModel.DnaJobTypes = new SelectList(repositoryFactory.JobTypeRepository.Queryable.Where(a => a.DNASequencing), "Id", "Name", jid);
+                }
             }
 
             return viewModel;

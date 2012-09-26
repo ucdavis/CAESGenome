@@ -44,7 +44,6 @@ namespace CAESGenome.Helpers
                 .ForMember(dest => dest.Vector, opt => opt.MapFrom(src => src.Vector))
                 .ForMember(dest => dest.Antibiotic, opt => opt.MapFrom(src => src.Antibiotic))
                 ;
-
         }
     }
 }

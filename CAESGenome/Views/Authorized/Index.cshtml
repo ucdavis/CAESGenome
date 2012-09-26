@@ -3,4 +3,8 @@
     ViewBag.SubPageTitle = "Authorized Home";
 }
 
+<ul type="circle">
+    <li>@Html.ActionLink("Open Jobs", "OpenJobs")</li>
+</ul>
+
 @Html.ActionLink("Submit Sequencing Job", "Create", "Sequencing", new {}, new {@class="btn btn-large btn-primary"})

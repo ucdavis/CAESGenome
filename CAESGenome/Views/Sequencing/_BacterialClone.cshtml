@@ -1,4 +1,5 @@
-﻿@model SequencingViewModel
+﻿@using CAESGenome.Core.Resources
+@model SequencingViewModel
 
 @using(Html.BeginForm("Create", "Sequencing", new {id=Model.JobType.Id}, FormMethod.Post, new {@class="form-horizontal"}))
 {
@@ -27,7 +28,7 @@
                     @foreach(var pt in Model.PlateTypes)
                     {
                         <label class="radio inline">
-                            @Html.RadioButton("PostModel.PlateType", pt.Value)    
+                            @Html.RadioButton("PostModel.PlateType", pt.Value, pt.Selected)    
                             @pt.Text
                         </label>    
                     }
@@ -47,7 +48,7 @@
                     @foreach(var sd in Model.SequenceDirections)
                     {
                         <label class="radio inline">
-                            @Html.RadioButton("PostModel.SequenceDirection", sd.Value)
+                            @Html.RadioButton("PostModel.SequenceDirection", sd.Value, sd.Selected)
                             @sd.Text
                         </label>
                     }
@@ -87,7 +88,7 @@
                     </span>
                 </div>
             </div>
-            <div class="control-group" id="primer2" style="display: none;">
+            <div class="control-group" id="primer2" style="@(Model.PostModel.SequenceDirection.HasValue && Model.PostModel.SequenceDirection == SequenceDirection.Backward ? "display:block;" : "display:none;")">
                 @Html.LabelFor(model => model.PostModel.Primer2, new {@class = "control-label"})
                 <div class="controls">
                     @Html.Partial("_selectList", new SelectListModel("PostModel.Primer2", Model.Primers2, "--Select Primer--"))
