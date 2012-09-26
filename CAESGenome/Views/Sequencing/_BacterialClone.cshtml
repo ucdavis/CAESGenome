@@ -17,18 +17,7 @@
             <div class="control-group">
                 @Html.LabelFor(model => model.PostModel.RechargeAccount, new {@class = "control-label"})
                 <div class="controls">
-                    
                     @Html.Partial("_selectList", new SelectListModel("PostModel.RechargeAccount", Model.RechargeAccounts, "--Select Recharge--"))
-
-                    @*@Html.DropDownListFor(model => model.PostModel.RechargeAccount.Id, Model.RechargeAccounts, "--Select Recharge--")*@
-                    @*@Html.DropDownList("PostModel.RechargeAccount", Model.RechargeAccounts, "--Select Recharge--")*@
-                    @*<select id="PostModel.RechargeAccount" name="PostModel.RechargeAccount">
-                        <option value="-1">--Select Recharge--</option>
-                        @foreach(var ra in Model.RechargeAccounts)
-                        {
-                            <option value="@ra.Value" @(ra.Selected ? "selected" : string.Empty)>@ra.Text</option>
-                        }
-                    </select>*@
                     @Html.ValidationMessageFor(model => model.PostModel.RechargeAccount)
                 </div>
             </div>
@@ -38,8 +27,8 @@
                     @foreach(var pt in Model.PlateTypes)
                     {
                         <label class="radio inline">
-                            @Html.RadioButton("PlateType", pt.Key)    
-                            @pt.Value
+                            @Html.RadioButton("PlateType", pt.Value)    
+                            @pt.Text
                         </label>    
                     }
                     @Html.ValidationMessageFor(model => model.PostModel.PlateType)
@@ -58,8 +47,8 @@
                     @foreach(var sd in Model.SequenceDirections)
                     {
                         <label class="radio inline">
-                            @Html.RadioButton("SequenceDirection", sd.Key)
-                            @sd.Value
+                            @Html.RadioButton("SequenceDirection", sd.Value)
+                            @sd.Text
                         </label>
                     }
                     @Html.ValidationMessageFor(model => model.PostModel.SequenceDirection)
@@ -68,7 +57,7 @@
             <div class="control-group">
                 @Html.LabelFor(model => model.PostModel.Strain, new {@class = "control-label"})
                 <div class="controls">
-                    @Html.DropDownList("PostModel.Strain", Model.Strains, "--Select Host--")
+                    @Html.Partial("_selectList", new SelectListModel("PostModel.Strain", Model.Strains, "--Select Host--"))
                     @Html.ValidationMessageFor(model => model.PostModel.Strain)
                 </div>
             </div>
@@ -83,7 +72,7 @@
                 <div class="control-group">
                     @Html.LabelFor(model => model.PostModel.Bacteria, new {@class = "control-label"})
                     <div class="controls">
-                        @Html.DropDownList("PostModel.Bacteria", Model.Bacterias, "--Select Bacteria--")
+                        @Html.Partial("_selectList", new SelectListModel("PostModel.Bacteria", Model.Bacterias, "--Select Bacteria--"))
                         @Html.ValidationMessageFor(model => model.PostModel.Bacteria)
                     </div>
                 </div>
@@ -91,7 +80,7 @@
             <div class="control-group">
                 @Html.LabelFor(model => model.PostModel.Primer, new {@class = "control-label"})
                 <div class="controls">
-                    @Html.DropDownList("PostModel.Primer", Model.Primers, "--Select Primer--")
+                    @Html.Partial("_selectList", new SelectListModel("PostModel.Primer", Model.Primers, "--Select Primer--"))
                     @Html.ValidationMessageFor(model => model.PostModel.Primer)
                     <span class="help-inline">
                         Select "will supply" if you will bring your own primer
@@ -101,14 +90,14 @@
             <div class="control-group">
                 @Html.LabelFor(model => model.PostModel.Vector, new {@class = "control-label"})
                 <div class="controls">
-                    @Html.DropDownList("PostModel.Vector", Model.Vectors, "--Select Vector--")
+                    @Html.Partial("_selectList", new SelectListModel("PostModel.Vector", Model.Vectors, "--Select Vector--"))
                     @Html.ValidationMessageFor(model => model.PostModel.Vector)
                 </div>
             </div>
             <div class="control-group">
                 @Html.LabelFor(model => model.PostModel.Antibiotic, new {@class = "control-label"})
                 <div class="controls">
-                    @Html.DropDownList("PostModel.Antibiotic", Model.Antibiotics, "--Select Antibiotic--")
+                    @Html.Partial("_selectList", new SelectListModel("PostModel.Antibiotic", Model.Antibiotics, "--Select Antibiotic--"))
                     @Html.ValidationMessageFor(model => model.PostModel.Antibiotic)
                 </div>
             </div>

@@ -60,7 +60,7 @@ namespace CAESGenome.Controllers
                 }
             }
 
-            ValidateSequencingModel(jobType, postModel, ModelState);
+            ValidateSequencingModel(jobType, postModel);
 
             if (ModelState.IsValid)
             {
@@ -72,17 +72,55 @@ namespace CAESGenome.Controllers
             return View(viewModel);
         }
 
-        private void ValidateSequencingModel(JobType jobType, SequencingPostModel postModel, ModelStateDictionary modelState)
+        private void ValidateSequencingModel(JobType jobType, SequencingPostModel postModel)
         {
             if (jobType.Id == (int)JobTypeIds.BacterialClone)
             {
-                ValidateBacterialClone(postModel, modelState);
+                ValidateBacterialClone(postModel);
             }
         }
 
-        private void ValidateBacterialClone(SequencingPostModel postModel, ModelStateDictionary modelState)
+        private void ValidateBacterialClone(SequencingPostModel postModel)
         {
-            
+            if (postModel.PlateType == null)
+            {
+                ModelState.AddModelError("PostModel.PlateType", "Plate Type is required.");
+            }
+
+            if (postModel.SequenceDirection == null)
+            {
+                ModelState.AddModelError("PostModel.SequenceDirection", "Sequence Direction is required.");
+            }
+
+            if (postModel.Primer == null)
+            {
+                ModelState.AddModelError("PostModel.Primer", "Primer is required.");
+            }
+
+            if (postModel.Vector == null)
+            {
+                ModelState.AddModelError("PostModel.Vector", "Vector is required.");
+            }
+
+            if (postModel.Antibiotic == null)
+            {
+                ModelState.AddModelError("PostModel.Antibiotic", "Antibiotic is required.");
+            }
+
+            if (postModel.Strain == null)
+            {
+                ModelState.AddModelError("PostModel.Strain", "Host is required.");
+            }
+
+            if (postModel.NumPlates <= 0)
+            {
+                ModelState.AddModelError("PostModel.NumPlates", "More than one plate is required.");
+            }
+
+            if (postModel.PlateNames != null && postModel.NumPlates != postModel.PlateNames.Count)
+            {
+                ModelState.AddModelError("PostModel.PlateNames", "Please specify a name for each plate.");
+            }
         }
     }
 }

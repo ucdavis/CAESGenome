@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -17,13 +18,13 @@ namespace CAESGenome.Models
         // lists for drop downs
         //public IEnumerable<SelectListItem> RechargeAccounts { get; set; }
         public SelectList RechargeAccounts { get; set; }
-        public List<KeyValuePair<PlateTypes, string>> PlateTypes { get; set; }
-        public List<KeyValuePair<SequenceDirection, string>> SequenceDirections { get; set; }
-        public IEnumerable<SelectListItem> Strains { get; set; }
-        public IEnumerable<SelectListItem> Primers { get; set; }
-        public IEnumerable<SelectListItem> Vectors { get; set; }
-        public IEnumerable<SelectListItem> Antibiotics { get; set; }
-        public IEnumerable<SelectListItem> Bacterias { get; set; }
+        public SelectList PlateTypes { get; set; }
+        public SelectList SequenceDirections { get; set; }
+        public SelectList Strains { get; set; }
+        public SelectList Primers { get; set; }
+        public SelectList Vectors { get; set; }
+        public SelectList Antibiotics { get; set; }
+        public SelectList Bacterias { get; set; }
 
         public static SequencingViewModel Create(IRepositoryFactory repositoryFactory, User user, JobType jobType = null, SequencingPostModel postModel = null)
         {
@@ -37,49 +38,35 @@ namespace CAESGenome.Models
             if (jobType != null)
             {
                 var rid = postModel != null && postModel.RechargeAccount != null ? postModel.RechargeAccount.Id : -1;
-                //viewModel.RechargeAccounts = user.RechargeAccounts.Select(a => new SelectListItem() { Text = a.AccountNum, Value = a.Id.ToString(), Selected = a.Id == rid }).ToList();
-                //viewModel.RechargeAccounts = user.RechargeAccounts.Select(a => new SelectListItem(){Text = a.AccountNum, Value = a.Id.ToString()}).ToList();
-
-                //viewModel.RechargeAccounts = user.RechargeAccounts.Select(a => new SelectListItem(){Text = a.AccountNum, Value = a.Id.ToString()});
-
                 viewModel.RechargeAccounts = new SelectList(user.RechargeAccounts, "Id", "AccountNum", rid);
-
-
             }
 
             if (jobType != null && jobType.Id == (int)JobTypeIds.BacterialClone)
             {
-                viewModel.PlateTypes = new List<KeyValuePair<PlateTypes, string>>();
-                viewModel.PlateTypes.Add(new KeyValuePair<PlateTypes, string>(Core.Resources.PlateTypes.NinetySix, "96"));
-                viewModel.PlateTypes.Add(new KeyValuePair<PlateTypes, string>(Core.Resources.PlateTypes.ThreeEightyFour, "384"));
+                var pts = new List<SelectListItem>();
+                pts.Add(new SelectListItem(){ Value = ((int)Core.Resources.PlateTypes.NinetySix).ToString(), Text = "96"});
+                pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.ThreeEightyFour).ToString(), Text = "384" });
+                viewModel.PlateTypes = new SelectList(pts, "Value", "Text");
 
-                viewModel.SequenceDirections = new List<KeyValuePair<SequenceDirection, string>>();
-                viewModel.SequenceDirections.Add(new KeyValuePair<SequenceDirection, string>(SequenceDirection.Forward, "Forward"));
-                viewModel.SequenceDirections.Add(new KeyValuePair<SequenceDirection, string>(SequenceDirection.Backward, "Backward"));
+                var sd = new List<SelectListItem>();
+                sd.Add(new SelectListItem() {Value = ((int)SequenceDirection.Forward).ToString(), Text = "Forward"});
+                sd.Add(new SelectListItem() { Value = ((int)SequenceDirection.Backward).ToString(), Text = "Backward" });
+                viewModel.SequenceDirections = new SelectList(sd, "Value", "Text");
 
                 var sid = postModel != null && postModel.Strain != null ? postModel.Strain.Id : -1;
-                viewModel.Strains = repositoryFactory.StrainRepository.Queryable
-                                        .Where(a => a.Supplied)
-                                        .Select(a => new SelectListItem() { Text = a.Name, Value = a.Id.ToString(), Selected = a.Id == sid});
+                viewModel.Strains = new SelectList(repositoryFactory.StrainRepository.Queryable.Where(a => a.Supplied), "Id", "Name", sid);
 
                 var pid = postModel != null && postModel.Primer != null ? postModel.Primer.Id : -1;
-                viewModel.Primers = repositoryFactory.PrimerRepository.Queryable
-                                        .Where(a => a.Supplied)
-                                        .Select(a => new SelectListItem() { Text = a.Name, Value = a.Id.ToString(), Selected = a.Id == pid }).ToList();
+                viewModel.Primers = new SelectList(repositoryFactory.PrimerRepository.Queryable.Where(a => a.Supplied), "Id", "Name", pid);
 
                 var vid = postModel != null && postModel.Vector != null ? postModel.Vector.Id : -1;
-                viewModel.Vectors = repositoryFactory.VectorRepository.Queryable
-                                        .OrderBy(a => a.Name)
-                                        .Select(a => new SelectListItem() { Text = a.Name, Value = a.Id.ToString(), Selected = a.Id == vid }).ToList();
+                viewModel.Vectors = new SelectList(repositoryFactory.StrainRepository.Queryable.OrderBy(a => a.Name), "Id", "Name", vid);
 
                 var aid = postModel != null && postModel.Antibiotic != null ? postModel.Antibiotic.Id : -1;
-                viewModel.Antibiotics = repositoryFactory.AntibioticRepository.Queryable
-                                            .OrderBy(a => a.Name)
-                                            .Select(a => new SelectListItem() { Text = a.Name, Value = a.Id.ToString(), Selected = a.Id == aid }).ToList();
+                viewModel.Antibiotics = new SelectList(repositoryFactory.AntibioticRepository.Queryable.OrderBy(a => a.Name), "Id", "Name", aid);
 
                 var bid = postModel != null && postModel.Bacteria != null ? postModel.Bacteria.Id : -1;
-                viewModel.Bacterias = repositoryFactory.BacteriaRepository.Queryable
-                                            .Select(a => new SelectListItem() { Text = a.Name, Value = a.Id.ToString(), Selected = a.Id == bid }).ToList();
+                viewModel.Bacterias = new SelectList(repositoryFactory.BacteriaRepository.Queryable, "Id", "Name", bid);
             }
 
             return viewModel;
@@ -108,7 +95,7 @@ namespace CAESGenome.Models
 
         // standard sequencing jobs
         [Display(Name="Plate Type")]
-        public PlateTypes PlateType { get; set; }
+        public PlateTypes? PlateType { get; set; }
         [Display(Name="Number of Plates")]
         [Range(0, 100)]
         public int NumPlates { get; set; }
@@ -117,7 +104,7 @@ namespace CAESGenome.Models
 
         // bacterial clone
         [Display(Name="Sequence Direction")]
-        public SequenceDirection SequenceDirection { get; set; }
+        public SequenceDirection? SequenceDirection { get; set; }
         [Display(Name="Host")]
         public Strain Strain { get; set; }
         [Display(Name="New Host")]

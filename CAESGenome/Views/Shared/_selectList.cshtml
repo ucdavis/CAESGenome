@@ -3,7 +3,7 @@
 <select id="@Model.Id" name="@Model.Name">
     @if(!string.IsNullOrEmpty(Model.Label))
     {
-        <option value="-1">@Model.Label</option>
+        <option>@Model.Label</option>
     }
     @foreach(var data in Model.Data)
     {
