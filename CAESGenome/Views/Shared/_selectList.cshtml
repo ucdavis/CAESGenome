@@ -1,0 +1,12 @@
+﻿@model SelectListModel
+
+<select id="@Model.Id" name="@Model.Name">
+    @if(!string.IsNullOrEmpty(Model.Label))
+    {
+        <option value="-1">@Model.Label</option>
+    }
+    @foreach(var data in Model.Data)
+    {
+        <option value="@data.Value" @(data.Selected ? "selected" : string.Empty)>@data.Text</option>
+    }
+</select>
