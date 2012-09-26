@@ -213,6 +213,7 @@
     <Compile Include="Controllers\AuthorizedController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PIController.cs" />
+    <Compile Include="Controllers\SequencingController.cs" />
     <Compile Include="Controllers\UserJobController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -220,6 +221,7 @@
     </Compile>
     <Compile Include="Helpers\AutomapperConfig.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\SelectListModel.cs" />
     <Compile Include="Models\RechargeAccountViewModel.cs" />
     <Compile Include="Models\SequencingViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
@@ -388,9 +390,10 @@
     <Content Include="Views\PI\_UserForm.cshtml" />
     <Content Include="Views\Authorized\Index.cshtml" />
     <Content Include="Views\UserJob\Index.cshtml" />
-    <Content Include="Views\UserJob\CreateSequencing.cshtml" />
-    <Content Include="Views\UserJob\_SelectSequencing.cshtml" />
-    <Content Include="Views\UserJob\_BacterialClone.cshtml" />
+    <Content Include="Views\Sequencing\Create.cshtml" />
+    <Content Include="Views\Sequencing\_SelectSequencing.cshtml" />
+    <Content Include="Views\Sequencing\_BacterialClone.cshtml" />
+    <Content Include="Views\Shared\_selectList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

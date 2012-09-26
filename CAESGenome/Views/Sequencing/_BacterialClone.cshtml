@@ -1,9 +1,9 @@
 ﻿@model SequencingViewModel
 
-@using(Html.BeginForm("CreateSequencing", "UserJob", FormMethod.Post, new {@class="form-horizontal"}))
+@using(Html.BeginForm("Create", "Sequencing", new {id=Model.JobType.Id}, FormMethod.Post, new {@class="form-horizontal"}))
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(false)
+    @Html.ValidationSummary(false)  
     
     <div class="control-group">
         <fieldset>
@@ -17,7 +17,18 @@
             <div class="control-group">
                 @Html.LabelFor(model => model.PostModel.RechargeAccount, new {@class = "control-label"})
                 <div class="controls">
-                    @Html.DropDownList("PostModel.RechargeAccount", Model.RechargeAccounts, "--Select Recharge Account--")
+                    
+                    @Html.Partial("_selectList", new SelectListModel("PostModel.RechargeAccount", Model.RechargeAccounts, "--Select Recharge--"))
+
+                    @*@Html.DropDownListFor(model => model.PostModel.RechargeAccount.Id, Model.RechargeAccounts, "--Select Recharge--")*@
+                    @*@Html.DropDownList("PostModel.RechargeAccount", Model.RechargeAccounts, "--Select Recharge--")*@
+                    @*<select id="PostModel.RechargeAccount" name="PostModel.RechargeAccount">
+                        <option value="-1">--Select Recharge--</option>
+                        @foreach(var ra in Model.RechargeAccounts)
+                        {
+                            <option value="@ra.Value" @(ra.Selected ? "selected" : string.Empty)>@ra.Text</option>
+                        }
+                    </select>*@
                     @Html.ValidationMessageFor(model => model.PostModel.RechargeAccount)
                 </div>
             </div>

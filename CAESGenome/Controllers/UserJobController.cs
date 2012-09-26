@@ -25,37 +25,6 @@ namespace CAESGenome.Controllers
         }
 
         /// <summary>
-        /// Create a sequencing job submission
-        /// </summary>
-        /// <param name="id">Job Type Id</param>
-        /// <returns></returns>
-        public ActionResult CreateSequencing(int? id)
-        {
-            JobType jobType = null;
-            if (id.HasValue)
-            {
-                jobType = _repositoryFactory.JobTypeRepository.GetNullableById(id.Value);
-
-                // check the job type
-                if (!jobType.StandardSequencing && !jobType.CustomSequencing)
-                {
-                    Message = "Invalid job type specified";
-                    return RedirectToAction("CreateSequencing");
-                }
-            }
-
-            var user = GetCurrentUser();
-            var viewModel = SequencingViewModel.Create(_repositoryFactory, user, jobType);
-            return View(viewModel);
-        }
-
-        [HttpPost]
-        public ActionResult CreateSequencing(int? id, SequencingViewModel postModel)
-        {
-            return View();
-        }
-
-        /// <summary>
         /// Create a genotyping job submission
         /// </summary>
         /// <returns></returns>

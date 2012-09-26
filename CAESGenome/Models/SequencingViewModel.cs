@@ -15,7 +15,8 @@ namespace CAESGenome.Models
         public SequencingPostModel PostModel { get; set; }
 
         // lists for drop downs
-        public List<SelectListItem> RechargeAccounts { get; set; }
+        //public IEnumerable<SelectListItem> RechargeAccounts { get; set; }
+        public SelectList RechargeAccounts { get; set; }
         public List<KeyValuePair<PlateTypes, string>> PlateTypes { get; set; }
         public List<KeyValuePair<SequenceDirection, string>> SequenceDirections { get; set; }
         public IEnumerable<SelectListItem> Strains { get; set; }
@@ -35,7 +36,15 @@ namespace CAESGenome.Models
 
             if (jobType != null)
             {
-                viewModel.RechargeAccounts = user.RechargeAccounts.Select(a => new SelectListItem(){Text = a.AccountNum, Value = a.Id.ToString()}).ToList();
+                var rid = postModel != null && postModel.RechargeAccount != null ? postModel.RechargeAccount.Id : -1;
+                //viewModel.RechargeAccounts = user.RechargeAccounts.Select(a => new SelectListItem() { Text = a.AccountNum, Value = a.Id.ToString(), Selected = a.Id == rid }).ToList();
+                //viewModel.RechargeAccounts = user.RechargeAccounts.Select(a => new SelectListItem(){Text = a.AccountNum, Value = a.Id.ToString()}).ToList();
+
+                //viewModel.RechargeAccounts = user.RechargeAccounts.Select(a => new SelectListItem(){Text = a.AccountNum, Value = a.Id.ToString()});
+
+                viewModel.RechargeAccounts = new SelectList(user.RechargeAccounts, "Id", "AccountNum", rid);
+
+
             }
 
             if (jobType != null && jobType.Id == (int)JobTypeIds.BacterialClone)
@@ -88,6 +97,8 @@ namespace CAESGenome.Models
         public User User { get; set; }
         public JobType JobType { get; set; }
         [Required]
+        [Display(Name="Recharge Account")]
+        [UIHint("DropDownList")]
         public RechargeAccount RechargeAccount { get; set; }
         [Required]
         [StringLength(50)]
