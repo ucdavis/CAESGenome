@@ -17,6 +17,7 @@ namespace CAESGenome.Core.Repositories
         IRepository<User> UserRepository { get; set; }
         IRepository<UserJob> UserJobRepository { get; set; }
         IRepository<UserJobBacterialClone> UserJobBacterialCloneRepository { get; set; }
+        IRepository<UserJobDna> UserJobDnaRepository { get; set; }
         IRepository<Vector> VectorRepository { get; set; }
         IRepository<VectorType> VectorTypeRepository { get; set; }
     }
@@ -35,6 +36,7 @@ namespace CAESGenome.Core.Repositories
         public IRepository<User> UserRepository { get; set; }
         public IRepository<UserJob> UserJobRepository { get; set; }
         public IRepository<UserJobBacterialClone> UserJobBacterialCloneRepository { get; set; }
+        public IRepository<UserJobDna> UserJobDnaRepository { get; set; }
         public IRepository<Vector> VectorRepository { get; set; }
         public IRepository<VectorType> VectorTypeRepository { get; set; }
     }

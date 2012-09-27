@@ -168,6 +168,23 @@ namespace CAESGenome.Controllers
 
             if (ModelState.IsValid)
             {
+                var userJob = new UserJob();
+                var userJobDna = new UserJobDna();
+
+                AutoMapper.Mapper.Map(postModel, userJob);
+                AutoMapper.Mapper.Map(postModel, userJobDna);
+                userJob.UserJobDna = userJobDna;
+                userJob.User = GetCurrentUser(true);
+                userJob.RechargeAccount = postModel.RechargeAccount;
+                userJob.UserJobDna.SequenceDirection = SequenceDirection.Forward;   // default mapping
+
+                foreach(var name in postModel.PlateNames)
+                {
+                    userJob.AddUserJobPlates(new UserJobPlate() {Name = name});
+                }
+
+                _repositoryFactory.UserJobRepository.EnsurePersistent(userJob);
+
                 return true;
             }
 
