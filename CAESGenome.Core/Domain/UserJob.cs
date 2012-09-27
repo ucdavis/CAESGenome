@@ -22,7 +22,7 @@ namespace CAESGenome.Core.Domain
         public virtual string Name { get; set; }
         public virtual JobType JobType { get; set; }
         public virtual int NumberPlates { get; set; }
-        public virtual PlateTypes PlateType { get; set; }
+        public virtual PlateTypes? PlateType { get; set; }
         public virtual string Comments { get; set; }
         // might not be used
         public virtual Stage Stage { get; set; }
@@ -34,6 +34,7 @@ namespace CAESGenome.Core.Domain
         public virtual UserJobBacterialClone UserJobBacterialClone { get; set; }
         public virtual UserJobDna UserJobDna { get; set; }
         public virtual UserJobUserRun UserJobUserRun { get; set; }
+        public virtual UserJobSublibrary UserJobSublibrary { get; set; }
 
         public virtual IList<UserJobPlate> UserJobPlates { get; set; }
 
@@ -66,6 +67,7 @@ namespace CAESGenome.Core.Domain
             References(x => x.UserJobBacterialClone).Cascade.All();
             References(x => x.UserJobDna).Cascade.All();
             References(x => x.UserJobUserRun).Cascade.All();
+            References(x => x.UserJobSublibrary).Cascade.All();
 
             HasMany(x => x.UserJobPlates).Inverse().Cascade.AllDeleteOrphan();
         }

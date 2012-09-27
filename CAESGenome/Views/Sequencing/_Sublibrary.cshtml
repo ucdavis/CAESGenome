@@ -1,0 +1,91 @@
+﻿@using CAESGenome.Core.Resources
+@model SequencingViewModel
+
+@using(Html.BeginForm("Create", "Sequencing", new {Id = Model.JobType.Id}, FormMethod.Post, new {@class="form-horizontal"}))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false)
+
+    <div class="control-group">
+        <fieldset>
+            <div class="control-group">
+                @Html.LabelFor(model => model.PostModel.Name, new {@class = "control-label"})
+                <div class="controls">
+                    @Html.EditorFor(model => model.PostModel.Name)
+                    @Html.ValidationMessageFor(model => model.PostModel.Name)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.PostModel.RechargeAccount, new {@class = "control-label"})
+                <div class="controls">
+                    @Html.Partial("_selectList", new SelectListModel("PostModel.RechargeAccount", Model.RechargeAccounts, "--Select Recharge--"))
+                    @Html.ValidationMessageFor(model => model.PostModel.RechargeAccount)
+                </div>
+            </div>
+            <div class="control-group" id="samples">
+                @Html.LabelFor(model => model.PostModel.TypeOfSample, new {@class = "control-label"})
+                <div class="controls">
+                    @foreach(var tos in Model.TypeOfSamples)
+                    {
+                        <label class="radio inline">
+                            @Html.RadioButton("PostModel.TypeOfSample", tos.Value, tos.Text)
+                            @tos.Text
+                        </label>
+                    }
+                    @Html.ValidationMessageFor(model => model.PostModel.TypeOfSample)
+                </div>
+            </div>
+            <div class="control-group" id="concentration" style='@(Model.PostModel != null && Model.PostModel.TypeOfSample == TypeOfSamples.DNA ? "display:block;" : "display:none;")'>
+                @Html.LabelFor(model => model.PostModel.Concentration, new {@class = "control-label"})
+                <div class="controls">
+                    @Html.EditorFor(model => model.PostModel.Concentration)
+                    <span class="help-inline">(microgram/microliter)</span>
+                    @Html.ValidationMessageFor(model => model.PostModel.Concentration)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.PostModel.GenomeSize, new {@class = "control-label"})
+                <div class="controls">
+                    @Html.EditorFor(model => model.PostModel.GenomeSize)
+                    <span class="help-inline">Kb</span>
+                    @Html.ValidationMessageFor(model => model.PostModel.GenomeSize)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.PostModel.Coverage, new {@class = "control-label"})
+                <div class="controls">
+                    @Html.EditorFor(model => model.PostModel.Coverage)
+                    <span class="help-inline">X</span>
+                    @Html.ValidationMessageFor(model => model.PostModel.Coverage)
+                </div>
+            </div>
+            <div class="control-group" id="bacvector" style='@(Model.PostModel != null && Model.PostModel.TypeOfSample == TypeOfSamples.BAC ? "display:block;" : "display:none;")'>
+                <label class="control-label" for="PostModel_Vector">BAC Vector</label>
+                <div class="controls">
+                    @Html.Partial("_selectList", new SelectListModel("PostModel.Vector", Model.Vectors, "--Select Vector--"))
+                    @Html.ValidationMessageFor(model => model.PostModel.Vector)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.PostModel.Antibiotic, new {@class = "control-label"})
+                <div class="controls">
+                    @Html.Partial("_selectList", new SelectListModel("PostModel.Antibiotic", Model.Antibiotics, "--Select Antibiotic--"))
+                    @Html.ValidationMessageFor(model => model.PostModel.Antibiotic)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.PostModel.Comments, new {@class = "control-label"})
+                <div class="controls">
+                    @Html.EditorFor(model => model.PostModel.Comments)
+                    @Html.ValidationMessageFor(model => model.PostModel.Comments)
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    
+    <div class="form-actions">
+        <input type="submit" class="btn btn-primary" value="Submit job"/>
+        @Html.ActionLink("Cancel", "Index", "Authorized", new {}, new {@class="btn"})
+    </div>
+}
+

@@ -31,6 +31,9 @@ namespace CAESGenome.Models
         // userrun sequencing
         public SelectList Dyes { get; set; }
 
+        // sublibrary
+        public SelectList TypeOfSamples { get; set; }
+
         public static SequencingViewModel Create(IRepositoryFactory repositoryFactory, User user, JobType jobType = null, SequencingPostModel postModel = null)
         {
             var viewModel = new SequencingViewModel()
@@ -61,6 +64,15 @@ namespace CAESGenome.Models
                     viewModel.Primers = new SelectList(repositoryFactory.PrimerRepository.Queryable.Where(a => a.Supplied), "Id", "Name", pid1);
                 }
 
+                if (jobType.Id == (int)JobTypeIds.BacterialClone || jobType.Id == (int)JobTypeIds.Sublibrary)
+                {
+                    var aid = postModel != null && postModel.Antibiotic != null ? postModel.Antibiotic.Id : -1;
+                    viewModel.Antibiotics = new SelectList(repositoryFactory.AntibioticRepository.Queryable.OrderBy(a => a.Name), "Id", "Name", aid);
+
+                    var vid = postModel != null && postModel.Vector != null ? postModel.Vector.Id : -1;
+                    viewModel.Vectors = new SelectList(repositoryFactory.VectorRepository.Queryable.OrderByDescending(a => a.Name), "Id", "Name", vid);
+                }
+
                 // only for baacterial clone
                 if (jobType.Id == (int)JobTypeIds.BacterialClone)
                 {
@@ -74,12 +86,6 @@ namespace CAESGenome.Models
 
                     var pid2 = postModel != null && postModel.Primer2 != null ? postModel.Primer2.Id : -1;
                     viewModel.Primers2 = new SelectList(repositoryFactory.PrimerRepository.Queryable.Where(a => a.Supplied), "Id", "Name", pid2);
-
-                    var vid = postModel != null && postModel.Vector != null ? postModel.Vector.Id : -1;
-                    viewModel.Vectors = new SelectList(repositoryFactory.VectorRepository.Queryable.OrderByDescending(a => a.Name), "Id", "Name", vid);
-
-                    var aid = postModel != null && postModel.Antibiotic != null ? postModel.Antibiotic.Id : -1;
-                    viewModel.Antibiotics = new SelectList(repositoryFactory.AntibioticRepository.Queryable.OrderBy(a => a.Name), "Id", "Name", aid);
 
                     var bid = postModel != null && postModel.Bacteria != null ? postModel.Bacteria.Id : -1;
                     viewModel.Bacterias = new SelectList(repositoryFactory.BacteriaRepository.Queryable, "Id", "Name", bid);
@@ -95,6 +101,15 @@ namespace CAESGenome.Models
                 {
                     var did = postModel != null && postModel.Dye != null ? postModel.Dye.Id : -1;
                     viewModel.Dyes = new SelectList(repositoryFactory.DyeRepository.Queryable.Where(a => a.Supplied && !a.Genotyping), "Id", "Name", did);
+                }
+
+                if (jobType.Id == (int)JobTypeIds.Sublibrary)
+                {
+                    var sid = postModel != null && postModel.TypeOfSample != null ? (int)postModel.TypeOfSample : -1;
+                    var st = new List<SelectListItem>();
+                    st.Add(new SelectListItem() {Value = ((int)Core.Resources.TypeOfSamples.BAC).ToString(), Text = "Ecoli wiht BAC"});
+                    st.Add(new SelectListItem() { Value = ((int)Core.Resources.TypeOfSamples.DNA).ToString(), Text = " Purified DNA (10 µg minimum)" });
+                    viewModel.TypeOfSamples = new SelectList(st, "Value", "Text", sid);
                 }
             }
 
@@ -155,5 +170,14 @@ namespace CAESGenome.Models
 
         // user run sequencing
         public Dye Dye { get; set; }
+
+        // sublibrary jobs
+        [Display(Name="Type of Samples")]
+        public TypeOfSamples? TypeOfSample { get; set; }
+        [Display(Name="DNA Concentration")]
+        public float? Concentration { get; set; }
+        [Display(Name="Insert Genome Size")]
+        public float? GenomeSize { get; set; }
+        public int? Coverage { get; set; }
     }
 }

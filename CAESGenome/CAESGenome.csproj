@@ -338,6 +338,7 @@
     <Content Include="Scripts\polyfills-datepicker.js" />
     <Content Include="Scripts\Single\BacterialCloneForm.js" />
     <Content Include="Scripts\Single\SequencePlatesForm.js" />
+    <Content Include="Scripts\Single\SublibraryForm.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -398,6 +399,7 @@
     <Content Include="Views\Authorized\OpenJobs.cshtml" />
     <Content Include="Views\Sequencing\_Dna.cshtml" />
     <Content Include="Views\Sequencing\_UserRun.cshtml" />
+    <Content Include="Views\Sequencing\_Sublibrary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

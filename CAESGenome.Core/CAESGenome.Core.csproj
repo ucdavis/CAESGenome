@@ -80,6 +80,7 @@
     <Compile Include="Domain\UserJobBacterialClone.cs" />
     <Compile Include="Domain\UserJobDna.cs" />
     <Compile Include="Domain\UserJobPlate.cs" />
+    <Compile Include="Domain\UserJobSublibrary.cs" />
     <Compile Include="Domain\UserJobUserRun.cs" />
     <Compile Include="Domain\Vector.cs" />
     <Compile Include="Domain\VectorType.cs" />

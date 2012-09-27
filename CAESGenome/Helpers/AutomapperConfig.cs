@@ -31,7 +31,8 @@ namespace CAESGenome.Helpers
                 .ForMember(dest => dest.JobType, opt => opt.MapFrom(src => src.JobType))
                 .ForMember(dest => dest.NumberPlates, opt => opt.MapFrom(src => src.NumPlates))
                 .ForMember(dest => dest.PlateType, opt => opt.MapFrom(src => src.PlateType))
-                .ForMember(x => x.UserJobPlates, x => x.Ignore());
+                .ForMember(x => x.UserJobPlates, x => x.Ignore())
+                .ForMember(dest => dest.Comments, opt => opt.MapFrom(src => src.Comments));
 
             CreateMap<SequencingPostModel, UserJobBacterialClone>()
                 .ForMember(dest => dest.SequenceDirection, opt => opt.MapFrom(src => src.SequenceDirection))
@@ -47,6 +48,14 @@ namespace CAESGenome.Helpers
 
             CreateMap<SequencingPostModel, UserJobUserRun>()
                 .ForMember(dest => dest.Dye, opt => opt.MapFrom(src => src.Dye));
+
+            CreateMap<SequencingPostModel, UserJobSublibrary>()
+                .ForMember(dest => dest.SampleType, opt => opt.MapFrom(src => src.TypeOfSample))
+                .ForMember(dest => dest.DnaConcentration, opt => opt.MapFrom(src => src.Concentration))
+                .ForMember(dest => dest.GenomeSize, opt => opt.MapFrom(src => src.GenomeSize))
+                .ForMember(dest => dest.Coverage, opt => opt.MapFrom(src => src.Coverage))
+                .ForMember(dest => dest.Vector, opt => opt.MapFrom(src => src.Vector))
+                .ForMember(dest => dest.Antibiotic, opt => opt.MapFrom(src => src.Antibiotic));
         }
     }
 }

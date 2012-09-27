@@ -6,7 +6,7 @@
     [Name] VARCHAR(100) NOT NULL, 
     [JobTypeId] INT NOT NULL, 
     [NumberPlates] INT NOT NULL, 
-    [PlateType] VARCHAR(100) NOT NULL, 
+    [PlateType] VARCHAR(100) NULL, 
     [Comments] VARCHAR(MAX) NULL, 
     [StageId] CHAR(4) NULL, 
 	[IsOpen]	bit not null default 1,

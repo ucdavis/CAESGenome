@@ -24,6 +24,15 @@
         </script>
         <script type="text/javascript" src="@Url.Content("~/Scripts/Single/BacterialCloneForm.js")"></script>
     }
+
+    @if(Model.JobTypeSelected() && Model.JobType.Id == (int)JobTypeIds.Sublibrary)
+    {
+        <script type="text/javascript">
+            var bac = '@((int)TypeOfSamples.BAC)';
+            var dna = '@((int)TypeOfSamples.DNA)';
+        </script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/Single/SublibraryForm.js")"></script>
+    }
 }
 
 @if(!Model.JobTypeSelected())
@@ -43,5 +52,9 @@ else
     if (Model.JobType.Id == (int)JobTypeIds.UserRunSequencing)
     {
         @Html.Partial("_UserRun")
+    }
+    if (Model.JobType.Id == (int)JobTypeIds.Sublibrary)
+    {
+        @Html.Partial("_Sublibrary")
     }
 }

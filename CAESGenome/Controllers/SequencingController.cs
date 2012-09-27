@@ -77,6 +77,9 @@ namespace CAESGenome.Controllers
                 case (int)JobTypeIds.UserRunSequencing:
                     result = SaveUserRunSubmission(postModel);
                     break;
+                case (int)JobTypeIds.Sublibrary:
+                    result = SaveSublibrarySubmission(postModel);
+                    break;
             }
             
             if (result)
@@ -267,6 +270,61 @@ namespace CAESGenome.Controllers
             if (postModel.PlateNames != null && postModel.PlateNames.Count(a => !string.IsNullOrEmpty(a)) < postModel.NumPlates)
             {
                 ModelState.AddModelError("PostModel.PlateNames", "Please specify a name for each plate.");
+            }
+        }
+
+        private bool SaveSublibrarySubmission(SequencingPostModel postModel)
+        {
+            ValidateSublibrarySubmission(postModel);
+
+            if (ModelState.IsValid)
+            {
+                var userJob = new UserJob();
+                var userJobSublibrary = new UserJobSublibrary();
+
+                AutoMapper.Mapper.Map(postModel, userJob);
+                AutoMapper.Mapper.Map(postModel, userJobSublibrary);
+                userJob.UserJobSublibrary = userJobSublibrary;
+                userJob.User = GetCurrentUser(true);
+                userJob.RechargeAccount = postModel.RechargeAccount;
+
+                _repositoryFactory.UserJobRepository.EnsurePersistent(userJob);
+
+                return true;
+            }
+
+            return false;
+        }
+        private void ValidateSublibrarySubmission(SequencingPostModel postModel)
+        {
+            if (!postModel.TypeOfSample.HasValue)
+            {
+                ModelState.AddModelError("PostModel.TypesOfSample", "Type of Sample is required.");
+            }
+
+            if (postModel.TypeOfSample == TypeOfSamples.DNA && !postModel.Concentration.HasValue)
+            {
+                ModelState.AddModelError("PostModel.Concentration", "DNA Concentration is required.");
+            }
+
+            if (postModel.TypeOfSample == TypeOfSamples.BAC && postModel.Vector == null)
+            {
+                ModelState.AddModelError("PostModel.Vector", "Vector is required.");
+            }
+
+            if (!postModel.GenomeSize.HasValue)
+            {
+                ModelState.AddModelError("PostModel.GenomeSize", "Genome Size is required.");
+            }
+
+            if (!postModel.Coverage.HasValue)
+            {
+                ModelState.AddModelError("PostModel.Coverage", "Coverage is required.");
+            }
+
+            if (postModel.Antibiotic == null)
+            {
+                ModelState.AddModelError("PostModel.Antibiotic", "Antibiotic is required.");
             }
         }
     }
