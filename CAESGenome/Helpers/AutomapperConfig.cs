@@ -56,6 +56,14 @@ namespace CAESGenome.Helpers
                 .ForMember(dest => dest.Coverage, opt => opt.MapFrom(src => src.Coverage))
                 .ForMember(dest => dest.Vector, opt => opt.MapFrom(src => src.Vector))
                 .ForMember(dest => dest.Antibiotic, opt => opt.MapFrom(src => src.Antibiotic));
+
+            CreateMap<GenotypingPostModel, UserJob>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest => dest.JobType, opt => opt.MapFrom(src => src.JobType))
+                .ForMember(dest => dest.NumberPlates, opt => opt.MapFrom(src => src.NumPlates))
+                .ForMember(dest => dest.PlateType, opt => opt.MapFrom(src => src.PlateType))
+                .ForMember(x => x.UserJobPlates, x => x.Ignore())
+                .ForMember(dest => dest.Comments, opt => opt.MapFrom(src => src.Comments));
         }
     }
 }

@@ -18,6 +18,8 @@ namespace CAESGenome.Core.Domain
     {
         public UserJobGenotypingMap()
         {
+            Table("UserJobGenotyping");
+
             Id(x => x.Id);
 
             HasManyToMany(x => x.Dyes).Table("UserJobsGenotypingXDyes").ParentKeyColumn("UserJobGenotypingId").ChildKeyColumn("DyeId").Cascade.SaveUpdate();

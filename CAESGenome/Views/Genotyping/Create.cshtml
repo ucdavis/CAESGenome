@@ -1,0 +1,27 @@
+﻿@model GenotypingViewModel
+
+@{
+    ViewBag.Title = "Create Genotyping Submission";
+    ViewBag.SubPageTitle = "Create Genotyping Submission";
+}
+
+@section scripts
+{
+    @if(Model.JobTypeSelected())
+    {
+        <style type="text/css">
+            #plate-container input { display: block;margin-bottom: 6px;}
+        </style>
+        
+        <script type="text/javascript" src="@Url.Content("~/Scripts/Single/SequencePlatesForm.js")"></script>
+    }
+}
+
+@if(!Model.JobTypeSelected())
+{
+    @Html.Partial("_SelectingGenotyping")
+}
+else
+{
+    @Html.Partial("_GenotypingForm")
+}

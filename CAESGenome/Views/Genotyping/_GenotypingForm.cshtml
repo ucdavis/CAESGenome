@@ -1,0 +1,95 @@
+﻿@model GenotypingViewModel
+
+@using(Html.BeginForm("Create", "Genotyping", new {Id = Model.JobType.Id}, FormMethod.Post, new {@class="form-horizontal"}))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false)
+
+    <div class="control-group">
+        <fieldset>
+            <div class="control-group">
+                @Html.LabelFor(model => model.PostModel.Name, new {@class = "control-label"})
+                <div class="controls">
+                    @Html.EditorFor(model => model.PostModel.Name)
+                    @Html.ValidationMessageFor(model => model.PostModel.Name)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.PostModel.RechargeAccount, new {@class = "control-label"})
+                <div class="controls">
+                    @Html.Partial("_selectList", new SelectListModel("PostModel.RechargeAccount", Model.RechargeAccounts, "--Select Recharge--"))
+                    @Html.ValidationMessageFor(model => model.PostModel.RechargeAccount)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.PostModel.PlateType, new {@class = "control-label"})
+                <div class="controls">
+                    @foreach(var pt in Model.PlateTypes)
+                    {
+                        <label class="radio inline">
+                            @Html.RadioButton("PostModel.PlateType", pt.Value, pt.Selected)    
+                            @pt.Text
+                        </label>    
+                    }
+                    @Html.ValidationMessageFor(model => model.PostModel.PlateType)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.PostModel.NumPlates, new {@class = "control-label"})
+                <div class="controls">
+                    @Html.EditorFor(model => model.PostModel.NumPlates)
+                    @Html.ValidationMessageFor(model => model.PostModel.NumPlates)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.PostModel.Dyes, new {@class = "control-label"})
+                <div class="controls">
+                    <div style="width: 220px;">
+                        @foreach(var d in Model.Dyes)
+                        {
+                            <label class="checkbox inline" style="margin-left: 0px;min-width: 50px;">
+                                @*@Html.CheckBox("PostModel.Dyes", d.Selected, new {value = d.Value})*@
+                                <input type="checkbox" name="PostModel.Dyes" value="@d.Value" checked="@d.Selected"/>
+                                @d.Text
+                            </label>
+                        }
+                    </div>
+                    @Html.ValidationMessageFor(model => model.PostModel.Dyes)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.PostModel.Comments, new {@class = "control-label"})
+                <div class="controls">
+                    @Html.EditorFor(model => model.PostModel.Comments)
+                    @Html.ValidationMessageFor(model => model.PostModel.Comments)
+                </div>
+            </div>
+        </fieldset>
+        
+        <fieldset>
+            <legend>Plates</legend>
+            
+            <div class="control-group">
+                @Html.LabelFor(model => model.PostModel.PlateNames, new {@class = "control-label"})
+                <div class="controls">
+                    <div id="plate-container">
+                        @for (var i = 0; i < Model.PostModel.NumPlates; i++ )
+                        {
+                            var name = Model.PostModel.PlateNames != null ? Model.PostModel.PlateNames[i] : string.Empty;
+                            @Html.TextBox("PostModel.PlateNames", name)
+                        }
+                    </div>
+                    @Html.ValidationMessageFor(model => model.PostModel.PlateNames)
+                    <div class="help-block"><p>Label name(s) on the side of your plate(s), not hte plate seal(s).</p></div>
+                </div>
+                
+            </div>
+        </fieldset>
+    </div>
+    
+    <div class="form-actions">
+        <input type="submit" value="Submit Job" class="btn btn-primary"/>
+        @Html.ActionLink("Cancel", "Index", "Authorized", new { }, new { @class = "btn" })
+    </div>
+}
+

@@ -134,7 +134,6 @@ namespace CAESGenome.Models
         public JobType JobType { get; set; }
         [Required]
         [Display(Name="Recharge Account")]
-        [UIHint("DropDownList")]
         public RechargeAccount RechargeAccount { get; set; }
         [Required]
         [StringLength(50)]

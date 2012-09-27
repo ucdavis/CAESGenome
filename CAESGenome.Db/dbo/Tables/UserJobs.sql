@@ -19,6 +19,7 @@
 	[UserJobQbotColonyPickingId] INT NULL, 
     [UserJobQbotGriddingId] INT NULL, 
     [UserJobQbotReplicatingId] INT NULL, 
+    [UserJobGenotypingId] INT NULL, 
     CONSTRAINT [FK_UserJobs_UserProfile] FOREIGN KEY ([UserId]) REFERENCES [UserProfile]([UserId]), 
     CONSTRAINT [FK_UserJobs_JobTypes] FOREIGN KEY ([JobTypeId]) REFERENCES [JobTypes]([Id]), 
     CONSTRAINT [FK_UserJobs_Stages] FOREIGN KEY ([StageId]) REFERENCES [Stages]([Id]), 

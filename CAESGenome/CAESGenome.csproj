@@ -211,6 +211,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\AuthorizedController.cs" />
+    <Compile Include="Controllers\GenotypingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PIController.cs" />
     <Compile Include="Controllers\SequencingController.cs" />
@@ -221,6 +222,7 @@
     </Compile>
     <Compile Include="Helpers\AutomapperConfig.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\GenotypingViewModel.cs" />
     <Compile Include="Models\SelectListModel.cs" />
     <Compile Include="Models\RechargeAccountViewModel.cs" />
     <Compile Include="Models\SequencingViewModel.cs" />
@@ -400,6 +402,9 @@
     <Content Include="Views\Sequencing\_Dna.cshtml" />
     <Content Include="Views\Sequencing\_UserRun.cshtml" />
     <Content Include="Views\Sequencing\_Sublibrary.cshtml" />
+    <Content Include="Views\Genotyping\Create.cshtml" />
+    <Content Include="Views\Genotyping\_GenotypingForm.cshtml" />
+    <Content Include="Views\Genotyping\_SelectingGenotyping.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
