@@ -79,6 +79,7 @@
     <Compile Include="Domain\UserJob.cs" />
     <Compile Include="Domain\UserJobBacterialClone.cs" />
     <Compile Include="Domain\UserJobDna.cs" />
+    <Compile Include="Domain\UserJobGenotyping.cs" />
     <Compile Include="Domain\UserJobPlate.cs" />
     <Compile Include="Domain\UserJobSublibrary.cs" />
     <Compile Include="Domain\UserJobUserRun.cs" />

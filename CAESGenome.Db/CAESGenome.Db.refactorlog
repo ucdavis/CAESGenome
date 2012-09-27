@@ -140,4 +140,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="RechargeAccountId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="e11337fa-f946-4e5d-9cc7-f405504b9139" ChangeDateTime="09/27/2012 18:25:09">
+    <Property Name="ElementName" Value="[dbo].[UserJobsGenotypingXDyes].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserJobsGenotypingXDyes]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserJobGenotypingId" />
+  </Operation>
 </Operations>
