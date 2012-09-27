@@ -288,6 +288,8 @@ namespace CAESGenome.Controllers
                 userJob.User = GetCurrentUser(true);
                 userJob.RechargeAccount = postModel.RechargeAccount;
 
+                userJob.AddUserJobPlates(new UserJobPlate(){Name = userJob.Name});
+
                 _repositoryFactory.UserJobRepository.EnsurePersistent(userJob);
 
                 return true;
