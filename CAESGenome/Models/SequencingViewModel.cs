@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -28,6 +27,9 @@ namespace CAESGenome.Models
 
         // dna submission only
         public SelectList DnaJobTypes { get; set; }
+
+        // userrun sequencing
+        public SelectList Dyes { get; set; }
 
         public static SequencingViewModel Create(IRepositoryFactory repositoryFactory, User user, JobType jobType = null, SequencingPostModel postModel = null)
         {
@@ -88,6 +90,12 @@ namespace CAESGenome.Models
                     var jid = postModel != null && postModel.JobType != null ? postModel.JobType.Id : -1;
                     viewModel.DnaJobTypes = new SelectList(repositoryFactory.JobTypeRepository.Queryable.Where(a => a.DNASequencing), "Id", "Name", jid);
                 }
+
+                if (jobType.Id == (int)JobTypeIds.UserRunSequencing)
+                {
+                    var did = postModel != null && postModel.Dye != null ? postModel.Dye.Id : -1;
+                    viewModel.Dyes = new SelectList(repositoryFactory.DyeRepository.Queryable.Where(a => a.Supplied && !a.Genotyping), "Id", "Name", did);
+                }
             }
 
             return viewModel;
@@ -144,5 +152,8 @@ namespace CAESGenome.Models
         public Primer Primer2 { get; set; }
         public Vector Vector { get; set; }
         public Antibiotic Antibiotic { get; set; }
+
+        // user run sequencing
+        public Dye Dye { get; set; }
     }
 }

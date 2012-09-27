@@ -7,6 +7,11 @@ namespace CAESGenome.Core.Domain
 {
     public class UserJobDna : DomainObject
     {
+        public UserJobDna()
+        {
+            SequenceDirection = SequenceDirection.Forward;
+        }
+
         public virtual SequenceDirection SequenceDirection { get; set; }
         [Required]
         public virtual Primer Primer1 { get; set; }

@@ -74,6 +74,9 @@ namespace CAESGenome.Controllers
                 case (int)JobTypeIds.DnaSubmission:
                     result = SaveDnaSubmission(postModel);
                     break;
+                case (int)JobTypeIds.UserRunSequencing:
+                    result = SaveUserRunSubmission(postModel);
+                    break;
             }
             
             if (result)
@@ -176,7 +179,6 @@ namespace CAESGenome.Controllers
                 userJob.UserJobDna = userJobDna;
                 userJob.User = GetCurrentUser(true);
                 userJob.RechargeAccount = postModel.RechargeAccount;
-                userJob.UserJobDna.SequenceDirection = SequenceDirection.Forward;   // default mapping
 
                 foreach(var name in postModel.PlateNames)
                 {
@@ -205,6 +207,56 @@ namespace CAESGenome.Controllers
             if (postModel.Primer1 == null)
             {
                 ModelState.AddModelError("PostModel.Primer1", "Primer One is required.");
+            }
+
+            if (postModel.NumPlates <= 0)
+            {
+                ModelState.AddModelError("PostModel.NumPlates", "More than one plate is required.");
+            }
+
+            if (postModel.PlateNames != null && postModel.PlateNames.Count(a => !string.IsNullOrEmpty(a)) < postModel.NumPlates)
+            {
+                ModelState.AddModelError("PostModel.PlateNames", "Please specify a name for each plate.");
+            }
+        }
+
+        private bool SaveUserRunSubmission(SequencingPostModel postModel)
+        {
+            ValidateUserRunSubmission(postModel);
+
+            if (ModelState.IsValid)
+            {
+                var userJob = new UserJob();
+                var userJobUserRun = new UserJobUserRun();
+
+                AutoMapper.Mapper.Map(postModel, userJob);
+                AutoMapper.Mapper.Map(postModel, userJobUserRun);
+                userJob.UserJobUserRun = userJobUserRun;
+                userJob.User = GetCurrentUser(true);
+                userJob.RechargeAccount = postModel.RechargeAccount;
+
+                foreach(var name in postModel.PlateNames)
+                {
+                    userJob.AddUserJobPlates(new UserJobPlate() {Name = name});
+                }
+
+                _repositoryFactory.UserJobRepository.EnsurePersistent(userJob);
+
+                return true;
+            }
+
+            return false;
+        }
+        private void ValidateUserRunSubmission(SequencingPostModel postModel)
+        {
+            if (postModel.PlateType == null)
+            {
+                ModelState.AddModelError("PostModel.PlateType", "Plate Type is required.");
+            }
+
+            if (postModel.Dye == null)
+            {
+                ModelState.AddModelError("PostModel.Dye", "Dye is required.");
             }
 
             if (postModel.NumPlates <= 0)

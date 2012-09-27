@@ -40,4 +40,8 @@ else
     {
         @Html.Partial("_Dna")
     }
+    if (Model.JobType.Id == (int)JobTypeIds.UserRunSequencing)
+    {
+        @Html.Partial("_UserRun")
+    }
 }

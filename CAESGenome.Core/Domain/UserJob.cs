@@ -33,6 +33,7 @@ namespace CAESGenome.Core.Domain
 
         public virtual UserJobBacterialClone UserJobBacterialClone { get; set; }
         public virtual UserJobDna UserJobDna { get; set; }
+        public virtual UserJobUserRun UserJobUserRun { get; set; }
 
         public virtual IList<UserJobPlate> UserJobPlates { get; set; }
 
@@ -64,6 +65,7 @@ namespace CAESGenome.Core.Domain
 
             References(x => x.UserJobBacterialClone).Cascade.All();
             References(x => x.UserJobDna).Cascade.All();
+            References(x => x.UserJobUserRun).Cascade.All();
 
             HasMany(x => x.UserJobPlates).Inverse().Cascade.AllDeleteOrphan();
         }

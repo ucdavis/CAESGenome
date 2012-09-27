@@ -44,6 +44,9 @@ namespace CAESGenome.Helpers
             CreateMap<SequencingPostModel, UserJobDna>()
                 .ForMember(dest => dest.Primer1, opt => opt.MapFrom(src => src.Primer1))
                 .ForMember(dest => dest.Primer2, opt => opt.MapFrom(src => src.Primer2));
+
+            CreateMap<SequencingPostModel, UserJobUserRun>()
+                .ForMember(dest => dest.Dye, opt => opt.MapFrom(src => src.Dye));
         }
     }
 }

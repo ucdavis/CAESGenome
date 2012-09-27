@@ -8,6 +8,7 @@ namespace CAESGenome.Core.Repositories
         IRepository<Antibiotic> AntibioticRepository { get; set; } 
         IRepository<Bacteria> BacteriaRepository { get; set; } 
         IRepository<Department> DepartmentRepository { get; set; }
+        IRepository<Dye> DyeRepository { get; set; } 
         IRepository<JobType> JobTypeRepository { get; set; }
         IRepository<Primer> PrimerRepository { get; set; } 
         IRepository<RechargeAccount> RechargeAccountRepository { get; set; }
@@ -18,6 +19,7 @@ namespace CAESGenome.Core.Repositories
         IRepository<UserJob> UserJobRepository { get; set; }
         IRepository<UserJobBacterialClone> UserJobBacterialCloneRepository { get; set; }
         IRepository<UserJobDna> UserJobDnaRepository { get; set; }
+        IRepository<UserJobUserRun> UserJobUserRunRepository { get; set; }
         IRepository<Vector> VectorRepository { get; set; }
         IRepository<VectorType> VectorTypeRepository { get; set; }
     }
@@ -27,6 +29,7 @@ namespace CAESGenome.Core.Repositories
         public IRepository<Antibiotic> AntibioticRepository { get; set; }
         public IRepository<Bacteria> BacteriaRepository { get; set; }
         public IRepository<Department> DepartmentRepository { get; set; }
+        public IRepository<Dye> DyeRepository { get; set; }
         public IRepository<JobType> JobTypeRepository { get; set; }
         public IRepository<Primer> PrimerRepository { get; set; }
         public IRepository<RechargeAccount> RechargeAccountRepository { get; set; }
@@ -37,6 +40,7 @@ namespace CAESGenome.Core.Repositories
         public IRepository<UserJob> UserJobRepository { get; set; }
         public IRepository<UserJobBacterialClone> UserJobBacterialCloneRepository { get; set; }
         public IRepository<UserJobDna> UserJobDnaRepository { get; set; }
+        public IRepository<UserJobUserRun> UserJobUserRunRepository { get; set; }
         public IRepository<Vector> VectorRepository { get; set; }
         public IRepository<VectorType> VectorTypeRepository { get; set; }
     }
