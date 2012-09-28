@@ -214,6 +214,7 @@
     <Compile Include="Controllers\GenotypingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PIController.cs" />
+    <Compile Include="Controllers\QbotController.cs" />
     <Compile Include="Controllers\SequencingController.cs" />
     <Compile Include="Controllers\UserJobController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -223,9 +224,11 @@
     <Compile Include="Helpers\AutomapperConfig.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\GenotypingViewModel.cs" />
+    <Compile Include="Models\QbotViewModel.cs" />
     <Compile Include="Models\SelectListModel.cs" />
     <Compile Include="Models\RechargeAccountViewModel.cs" />
     <Compile Include="Models\SequencingViewModel.cs" />
+    <Compile Include="Models\UserJobPostModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -339,6 +342,9 @@
     <Content Include="Scripts\modernizr.custom.27227.js" />
     <Content Include="Scripts\polyfills-datepicker.js" />
     <Content Include="Scripts\Single\BacterialCloneForm.js" />
+    <Content Include="Scripts\Single\ColonyPickingForm.js" />
+    <Content Include="Scripts\Single\NewStrain.js" />
+    <Content Include="Scripts\Single\NewVector.js" />
     <Content Include="Scripts\Single\SequencePlatesForm.js" />
     <Content Include="Scripts\Single\SublibraryForm.js" />
     <Content Include="Web.config" />
@@ -405,6 +411,9 @@
     <Content Include="Views\Genotyping\Create.cshtml" />
     <Content Include="Views\Genotyping\_GenotypingForm.cshtml" />
     <Content Include="Views\Genotyping\_SelectingGenotyping.cshtml" />
+    <Content Include="Views\Qbot\Create.cshtml" />
+    <Content Include="Views\Qbot\_SelectingQbot.cshtml" />
+    <Content Include="Views\Qbot\_ColonyPicking.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
