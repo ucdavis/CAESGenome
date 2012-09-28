@@ -414,6 +414,8 @@
     <Content Include="Views\Qbot\Create.cshtml" />
     <Content Include="Views\Qbot\_SelectingQbot.cshtml" />
     <Content Include="Views\Qbot\_ColonyPicking.cshtml" />
+    <Content Include="Views\Home\Service.cshtml" />
+    <Content Include="Views\Home\Rates.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

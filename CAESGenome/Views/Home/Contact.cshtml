@@ -1,23 +1,26 @@
 ﻿@{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "Contact Us";
+    ViewBag.SubPagetitle = "Contact Us";
 }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-    <h2>@ViewBag.Message</h2>
-</hgroup>
+@section scripts
+{
+    <style type="text/css">
+        .contact-label { font-weight: 700;}
+    </style>
+}
 
 <section class="contact">
     <header>
         <h3>Phone</h3>
     </header>
     <p>
-        <span class="label">Main:</span>
-        <span>425.555.0100</span>
+        <span class="contact-label">Phone:</span>
+        <span>(530) 754-6490</span>
     </p>
     <p>
-        <span class="label">After Hours:</span>
-        <span>425.555.0199</span>
+        <span class="contact-label">Phone:</span>
+        <span>(530) 754-6616</span>
     </p>
 </section>
 
@@ -26,16 +29,16 @@
         <h3>Email</h3>
     </header>
     <p>
-        <span class="label">Support:</span>
-        <span><a href="mailto:Support@example.com">Support@example.com</a></span>
+        <span class="contact-label">Facility Director:</span>
+        <span><a href="mailto:drcook@ucdavis.edu">Douglas Cook (drcook@ucdavis.edu)</a></span>
     </p>
     <p>
-        <span class="label">Marketing:</span>
-        <span><a href="mailto:Marketing@example.com">Marketing@example.com</a></span>
+        <span class="contact-label">Lab Manager:</span>
+        <span><a href="mailto:jmbaek@ucdavis.edu">Jongmin Baek (jmbaek@ucdavis.edu)</a></span>
     </p>
     <p>
-        <span class="label">General:</span>
-        <span><a href="mailto:General@example.com">General@example.com</a></span>
+        <span class="contact-label">Lab Researcher:</span>
+        <span><a href="mailto:jcgish@ucdavis.edu">John Gish (jcgish@ucdavis.edu)</a></span>
     </p>
 </section>
 
@@ -44,7 +47,8 @@
         <h3>Address</h3>
     </header>
     <p>
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399
+        117 Robbins Hall, UC Davis<br />
+        Davis, CA 95616<br/>
+        <a href="https://maps.google.com/maps?q=robbins+hall,+uc+davis&hl=en&ll=38.540748,-121.748278&spn=0.012084,0.013883&sll=38.232579,-122.033493&sspn=0.194171,0.107803&hnear=Robbins+Hall,+Davis,+California+95616&t=m&z=16">Map</a>
     </p>
 </section>

@@ -29,7 +29,8 @@
                             {
                                 <li>@Html.ActionLink("PI", "Index", "PI")</li>
                             }
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Services", "Service", "Home")</li>
+                            <li>@Html.ActionLink("Rates", "Rates", "Home")</li>
                             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                         </ul>
                     </nav>
@@ -37,7 +38,19 @@
             </div>
         </header>
         <div id="body">
-            @RenderSection("featured", required: false)
+            @*@RenderSection("featured", required: false)*@
+            
+            @if(!string.IsNullOrEmpty(ViewBag.SubPageTitle))
+            {
+                <section class="featured">
+                    <div class="content-wrapper">
+                        <hgroup class="title">
+                            <h1>@ViewBag.Title.</h1>
+                        </hgroup>
+                    </div>
+                </section>
+            }
+
             <section class="content-wrapper main-content clear-fix">
                 <div class="pull-right">
                     @RenderSection("SubPageMenu", required: false)          
@@ -47,12 +60,7 @@
                 {
                     <div class="alert alert-info">@TempData["Message"]</div>
                 }
-
-                @if(!string.IsNullOrEmpty(ViewBag.SubPageTitle))
-                {
-                    <h2>@ViewBag.SubPageTitle</h2>    
-                }
-
+                
                 @RenderBody()
             </section>
         </div>
