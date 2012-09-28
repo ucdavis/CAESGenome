@@ -64,6 +64,22 @@ namespace CAESGenome.Helpers
                 .ForMember(dest => dest.PlateType, opt => opt.MapFrom(src => src.PlateType))
                 .ForMember(x => x.UserJobPlates, x => x.Ignore())
                 .ForMember(dest => dest.Comments, opt => opt.MapFrom(src => src.Comments));
+
+            CreateMap<QbotPostModel, UserJob>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest => dest.JobType, opt => opt.MapFrom(src => src.JobType))
+                .ForMember(dest => dest.PlateType, opt => opt.MapFrom(src => src.PlateType))
+                .ForMember(x => x.UserJobPlates, x => x.Ignore())
+                .ForMember(dest => dest.Comments, opt => opt.MapFrom(src => src.Comments));
+
+            CreateMap<QbotPostModel, UserJobQbotColonyPicking>()
+                .ForMember(dest => dest.Vector, opt => opt.MapFrom(src => src.Vector))
+                .ForMember(dest => dest.Strain, opt => opt.MapFrom(src => src.Strain))
+                .ForMember(dest => dest.NumQTrays, opt => opt.MapFrom(src => src.NumQTrays))
+                .ForMember(dest => dest.NumGlycerol, opt => opt.MapFrom(src => src.NumGlycerol))
+                .ForMember(dest => dest.Concentration, opt => opt.MapFrom(src => src.Concentration))
+                .ForMember(dest => dest.Replication, opt => opt.MapFrom(src => src.Replication))
+                .ForMember(dest => dest.NumColonies, opt => opt.MapFrom(src => src.NumColonies));
         }
     }
 }

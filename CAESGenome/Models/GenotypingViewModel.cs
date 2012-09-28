@@ -49,28 +49,4 @@ namespace CAESGenome.Models
             return JobType != null;
         }
     }
-
-    public class GenotypingPostModel
-    {
-        public User User { get; set; }
-        public JobType JobType { get; set; }
-        [Required]
-        [Display(Name = "Recharge Account")]
-        public RechargeAccount RechargeAccount { get; set; }
-        [Required]
-        [StringLength(50)]
-        [Display(Name = "Job Name")]
-        public string Name { get; set; }
-        [DataType(DataType.MultilineText)]
-        public string Comments { get; set; }
-        [Required]
-        [Display(Name = "Plate Type")]
-        public PlateTypes PlateType { get; set; }
-        [Display(Name = "Number of Plates")]
-        [Range(1, 100)]
-        public int NumPlates { get; set; }
-        [Display(Name = "Plate Names")]
-        public List<string> PlateNames { get; set; }
-        public List<int> Dyes { get; set; }
-    }
 }

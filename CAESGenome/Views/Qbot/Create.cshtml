@@ -1,0 +1,40 @@
+﻿@using CAESGenome.Core.Resources
+@model QbotViewModel
+
+@{
+    ViewBag.Title = "Create Qbot Submission";
+    ViewBag.SubPageTitle = "Create Qbot Submission";
+}
+
+@section scripts
+{
+    @if (Model.JobTypeSelected())
+    {
+        if (Model.JobType.Id == (int)JobTypeIds.QbotColonyPicking)
+        {
+            <script type="text/javascript">
+                var qtray = '@((int)PlateTypes.QTray)';
+                var glycerol = '@((int)PlateTypes.GlycerolStock)';
+            </script>
+            <script type="text/javascript" src="@Url.Content("~/Scripts/Single/ColonyPickingForm.js")"></script>
+            <script type="text/javascript" src="@Url.Content("~/Scripts/Single/NewVector.js")"></script>
+            <script type="text/javascript" src="@Url.Content("~/Scripts/Single/NewStrain.js")"></script>
+        
+            <style type="text/css">
+                #newvector, #newstrain{ border: 1px solid green;padding-top: 20px;margin-bottom: 20px;}
+            </style>
+        }
+    }
+}
+
+@if(!Model.JobTypeSelected())
+{
+    @Html.Partial("_SelectingQbot")
+}
+else
+{
+    if (Model.JobType.Id == (int)JobTypeIds.QbotColonyPicking)
+    {
+        @Html.Partial("_ColonyPicking")
+    }
+}

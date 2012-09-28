@@ -5,13 +5,13 @@ namespace CAESGenome.Core.Domain
 {
     public class UserJobQbotColonyPicking : DomainObject
     {
-        public Vector Vector { get; set; }
-        public Strain Strain { get; set; }
-        public int NumQTrays { get; set; }
-        public int NumGlycerol { get; set; }
-        public string Concentration { get; set; }
-        public int Replication { get; set; }
-        public int NumColonies { get; set; }
+        public virtual Vector Vector { get; set; }
+        public virtual Strain Strain { get; set; }
+        public virtual int? NumQTrays { get; set; }
+        public virtual int NumGlycerol { get; set; }
+        public virtual string Concentration { get; set; }
+        public virtual int Replication { get; set; }
+        public virtual int NumColonies { get; set; }
     }
 
     public class UserJobQbotColonyPickingMap : ClassMap<UserJobQbotColonyPicking>
@@ -27,7 +27,7 @@ namespace CAESGenome.Core.Domain
             Map(x => x.NumQTrays);
             Map(x => x.NumGlycerol);
             Map(x => x.Concentration);
-            Map(x => x.Replication);
+            Map(x => x.Replication).Column("`Replication`");
             Map(x => x.NumColonies);
         }
     }
