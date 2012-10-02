@@ -26,7 +26,11 @@
         @foreach(var uj in Model.OrderBy(a => a.IsOpen).ThenBy(a => a.DateTimeCreated))
         {
             <tr>
-                <td></td>
+                <td>
+                    <a href="@Url.Action("Details", new {@uj.Id})" class="btn">
+                        <i class="icon-search"></i>
+                    </a>
+                </td>
                 <td>@uj.Name</td>
                 <td>@uj.JobType.Name</td>
                 <td></td>

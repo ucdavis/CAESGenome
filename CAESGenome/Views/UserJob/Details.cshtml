@@ -1,0 +1,37 @@
+﻿@model UserJob
+
+@{
+    ViewBag.Title = "Job Details";
+    ViewBag.SubPageTitle = string.Format("{0} Details", Model.Name);
+}
+
+<div class="form-horizontal">
+    
+    <fieldset>
+        <div class="control-group">
+            @Html.LabelFor(model => model.RechargeAccount.AccountNum, new {@class = "control-label"})
+            <div class="controls form-text">
+                @Html.DisplayFor(model => model.RechargeAccount.AccountNum)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.PlateType, new {@class = "control-label"})
+            <div class="controls form-text">
+                @Html.DisplayFor(model => model.PlateType)
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="JobType" class="control-label">Job Type</label>
+            <div class="controls form-text">
+                @Html.DisplayFor(model => model.JobType.Name)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.Comments, new {@class = "control-label"})
+            <div class="controls form-text">
+                @Html.DisplayFor(model => model.Comments)
+            </div>
+        </div>
+    </fieldset>
+
+</div>

@@ -42,5 +42,18 @@ namespace CAESGenome.Controllers
             return View();
         }
 
+        public ActionResult Details(int id)
+        {
+            var uj = _repositoryFactory.UserJobRepository.GetNullableById(id);
+            
+            if (uj == null)
+            {
+                Message = "Job could not be located, please try again.";
+                return RedirectToAction("Index");
+            }
+
+            return View(uj);
+        }
+
     }
 }

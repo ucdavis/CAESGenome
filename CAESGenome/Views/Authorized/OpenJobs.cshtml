@@ -25,7 +25,11 @@
         @foreach(var uj in Model)
         {
             <tr>
-                <td></td>
+                <td>
+                    <a href="@Url.Action("Details", "UserJob", new {@uj.Id})" class="btn">
+                        <i class="icon-search"></i>
+                    </a>
+                </td>
                 <td>@uj.Name</td>
                 <td>@uj.UserJobPlates.Count</td>
                 <td>@uj.JobType.Name</td>
