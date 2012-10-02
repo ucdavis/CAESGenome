@@ -12,6 +12,11 @@ namespace CAESGenome.Core.Domain
         public virtual bool Supplied { get; set; }
         [Required]
         public virtual Bacteria Bacteria { get; set; }
+
+        public virtual bool IsOther()
+        {
+            return Name.ToLower() == "other";
+        }
     }
 
     public class StrainMap : ClassMap<Strain>

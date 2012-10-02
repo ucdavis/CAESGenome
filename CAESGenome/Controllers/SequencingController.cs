@@ -113,6 +113,12 @@ namespace CAESGenome.Controllers
                     userJob.AddUserJobPlates(new UserJobPlate() { Name = name });
                 }
 
+                if (postModel.Strain != null && postModel.Strain.IsOther())
+                {
+                    var strain = new Strain() { Name = postModel.NewStrain, Bacteria = postModel.Bacteria, Supplied = false };
+                    userJob.UserJobBacterialClone.Strain = strain;
+                }
+
                 _repositoryFactory.UserJobRepository.EnsurePersistent(userJob);
 
                 return true;
@@ -155,6 +161,19 @@ namespace CAESGenome.Controllers
             if (postModel.Strain == null)
             {
                 ModelState.AddModelError("PostModel.Strain", "Host is required.");
+            }
+
+            if (postModel.Strain != null && postModel.Strain.IsOther())
+            {
+                if (string.IsNullOrEmpty(postModel.NewStrain))
+                {
+                    ModelState.AddModelError("PostModel.NewStrain", "Name for new Host is required.");
+                }
+
+                if (postModel.Bacteria == null)
+                {
+                    ModelState.AddModelError("PostModel.Bacteria", "Bacteria for new Host is required.");
+                }
             }
 
             if (postModel.NumPlates <= 0)

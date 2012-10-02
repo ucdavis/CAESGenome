@@ -25,7 +25,7 @@ namespace CAESGenome.Core.Domain
             Map(x => x.SequenceDirection).CustomType<NHibernate.Type.EnumStringType<SequenceDirection>>();
             References(x => x.Primer1).Column("Primer1Id");
             References(x => x.Primer2).Column("Primer2Id");
-            References(x => x.Strain);
+            References(x => x.Strain).Cascade.SaveUpdate();
             References(x => x.Vector);
             References(x => x.Antibiotic);
         }
