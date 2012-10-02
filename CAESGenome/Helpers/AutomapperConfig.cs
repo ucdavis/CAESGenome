@@ -80,6 +80,13 @@ namespace CAESGenome.Helpers
                 .ForMember(dest => dest.Concentration, opt => opt.MapFrom(src => src.Concentration))
                 .ForMember(dest => dest.Replication, opt => opt.MapFrom(src => src.Replication))
                 .ForMember(dest => dest.NumColonies, opt => opt.MapFrom(src => src.NumColonies));
+
+            CreateMap<QbotPostModel, UserJobQbotReplicating>()
+                .ForMember(dest => dest.Vector, opt => opt.MapFrom(src => src.Vector))
+                .ForMember(dest => dest.Strain, opt => opt.MapFrom(src => src.Strain))
+                .ForMember(dest => dest.NumSourcePlates, opt => opt.MapFrom(src => src.SourcePlates))
+                .ForMember(dest => dest.DestinationPlateType, opt => opt.MapFrom(src => src.DestinationPlateType))
+                .ForMember(dest => dest.NumCopies, opt => opt.MapFrom(src => src.NumCopies));
         }
     }
 }

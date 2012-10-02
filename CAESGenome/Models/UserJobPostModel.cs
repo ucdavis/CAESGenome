@@ -68,21 +68,24 @@ namespace CAESGenome.Models
 
     public class QbotPostModel : UserJobPostModelBase
     {
+        [Required]
         [Display(Name = "Plate Type")]
         public PlateTypes? PlateType { get; set; }
+        [Required]
         [Display(Name = "Host")]
         public Strain Strain { get; set; }
+        [Required]
         public Vector Vector { get; set; }
 
         [Display(Name="Q-Tray(s) Qty.")]
         public int? NumQTrays { get; set; }
         [Display(Name="Glycerol Qty.")]
-        public int NumGlycerol { get; set; }
+        public int? NumGlycerol { get; set; }
         [Display(Name="Glycerol Concentration")]
         public string Concentration { get; set; }
-        public int Replication { get; set; }
+        public int? Replication { get; set; }
         [Display(Name="Colonies Expected")]
-        public int NumColonies { get; set; }
+        public int? NumColonies { get; set; }
 
         // shared fields for replicating or gridding
         [Display(Name = "New Vector")]
@@ -96,6 +99,14 @@ namespace CAESGenome.Models
         [Display(Name = "New Host")]
         public string NewStrain { get; set; }
         public Bacteria Bacteria { get; set; }
+
+        // specific for replicating
+        [Display(Name="# Source Plates")]
+        public int? SourcePlates { get; set; }
+        [Display(Name="Destination Plate Type")]
+        public PlateTypes? DestinationPlateType { get; set; }
+        [Display(Name="# Copies")]
+        public int? NumCopies { get; set; }
     }
 
     public class GenotypingPostModel : UserJobPostModelBase

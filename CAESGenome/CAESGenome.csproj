@@ -417,6 +417,7 @@
     <Content Include="Views\Home\Service.cshtml" />
     <Content Include="Views\Home\Rates.cshtml" />
     <Content Include="Views\UserJob\Details.cshtml" />
+    <Content Include="Views\Qbot\_Replicating.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

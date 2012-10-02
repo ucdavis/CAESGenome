@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using CAESGenome.Core.Domain;
 using CAESGenome.Core.Repositories;
 using CAESGenome.Core.Resources;
@@ -58,10 +54,16 @@ namespace CAESGenome.Controllers
             }
 
             var result = false;
-            if (jobType.Id == (int)JobTypeIds.QbotColonyPicking)
+            switch (jobType.Id)
             {
-                result = SaveColonyPicking(postModel);
+                case (int)JobTypeIds.QbotColonyPicking:
+                    result = SaveColonyPicking(postModel);
+                    break;
+                case (int)JobTypeIds.QbotPlateReplicating:
+                    result = SaveReplicating(postModel);
+                    break;
             }
+
 
             if (result)
             {
@@ -70,7 +72,7 @@ namespace CAESGenome.Controllers
             }
 
             var user = GetCurrentUser();
-            var viewModel = QbotViewModel.Create(_repositoryFactory, user, jobType);
+            var viewModel = QbotViewModel.Create(_repositoryFactory, user, jobType, postModel);
             return View(viewModel);
         }
 
@@ -89,6 +91,18 @@ namespace CAESGenome.Controllers
                 userJob.User = GetCurrentUser(true);
                 userJob.RechargeAccount = postModel.RechargeAccount;
 
+                if (postModel.Strain.IsOther())
+                {
+                    var strain = new Strain() { Name = postModel.NewStrain, Bacteria = postModel.Bacteria, Supplied = false };
+                    userJob.UserJobQbotColonyPicking.Strain = strain;
+                }
+
+                if (postModel.Vector.IsOther())
+                {
+                    var vector = new Vector() {Name = postModel.NewVector, VectorType = postModel.VectorType, Antibiotic1 = postModel.Antibiotic1, Antibiotic2 = postModel.Antibiotic2};
+                    userJob.UserJobQbotColonyPicking.Vector = vector;
+                }
+
                 _repositoryFactory.UserJobRepository.EnsurePersistent(userJob);
 
                 return true;
@@ -98,9 +112,19 @@ namespace CAESGenome.Controllers
         }
         private void ValidateColonyPicking(QbotPostModel postModel)
         {
-            if (postModel.PlateType == null)
+            if (!postModel.PlateType.HasValue)
             {
                 ModelState.AddModelError("PostModel.PlateType", "Plate Type is required.");
+            }
+
+            if (!postModel.Replication.HasValue)
+            {
+                ModelState.AddModelError("PostModel.Replication", "Replication value is required.");
+            }
+
+            if (!postModel.NumColonies.HasValue)
+            {
+                ModelState.AddModelError("PostModel.NumColonies", "Colonies expected is required.");
             }
 
             if (postModel.Vector == null)
@@ -108,7 +132,7 @@ namespace CAESGenome.Controllers
                 ModelState.AddModelError("PostModel.Vector", "Vector is required.");
             }
             
-            if(postModel.Vector != null && postModel.Vector.Name.ToLower() == "other")
+            if(postModel.Vector != null && postModel.Vector.IsOther())
             {
                 if (string.IsNullOrEmpty(postModel.NewVector))
                 {
@@ -136,16 +160,125 @@ namespace CAESGenome.Controllers
                 ModelState.AddModelError("PostModel.Strain", "Host is required.");
             }
 
-            if (postModel.Strain != null && postModel.Strain.Name.ToLower() == "other")
+            if (postModel.Strain != null && postModel.Strain.IsOther())
             {
                 if(string.IsNullOrEmpty(postModel.NewStrain))
                 {
                     ModelState.AddModelError("PostModel.NewStrain", "New Host Name is required.");
                 }
 
-                if(postModel.Bacteria != null)
+                if(postModel.Bacteria == null)
                 {
-                    ModelState.AddModelError("PostModel.Bacteria", "Bacter is required.");
+                    ModelState.AddModelError("PostModel.Bacteria", "Bacteria is required.");
+                }
+            }
+        }
+
+        private bool SaveReplicating(QbotPostModel postModel)
+        {
+            ValidateReplicating(postModel);
+
+            if (ModelState.IsValid)
+            {
+                var userJob = new UserJob();
+                var userJobReplicating = new UserJobQbotReplicating();
+
+                AutoMapper.Mapper.Map(postModel, userJob);
+                AutoMapper.Mapper.Map(postModel, userJobReplicating);
+                userJob.UserJobQbotReplicating = userJobReplicating;
+                userJob.User = GetCurrentUser(true);
+                userJob.RechargeAccount = postModel.RechargeAccount;
+
+                if (postModel.Strain.IsOther())
+                {
+                    var strain = new Strain() { Name = postModel.NewStrain, Bacteria = postModel.Bacteria, Supplied = false };
+                    userJob.UserJobQbotReplicating.Strain = strain;
+                }
+
+                if (postModel.Vector.IsOther())
+                {
+                    var vector = new Vector() { Name = postModel.NewVector, VectorType = postModel.VectorType, Antibiotic1 = postModel.Antibiotic1, Antibiotic2 = postModel.Antibiotic2 };
+                    userJob.UserJobQbotReplicating.Vector = vector;
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+        private void ValidateReplicating(QbotPostModel postModel)
+        {
+            if (!postModel.PlateType.HasValue)
+            {
+                ModelState.AddModelError("PostModel.PlateType", "Plate type is required.");
+            }
+
+            if (!postModel.DestinationPlateType.HasValue)
+            {
+                ModelState.AddModelError("PostModel.DestinationPlateType", "Destination Plate type is required.");
+            }
+
+            if (!postModel.SourcePlates.HasValue)
+            {
+                ModelState.AddModelError("PostModel.SourcePlates", "Number of source plates is required.");
+            }
+            else if(postModel.SourcePlates.Value <= 0)
+            {
+                ModelState.AddModelError("PostModel.SourcePlates", "You must specify at least one source plate.");
+            }
+
+            if (!postModel.NumCopies.HasValue)
+            {
+                ModelState.AddModelError("PostModel.NumCopies", "Number of copies is required.");
+            }
+            else if (postModel.NumCopies.Value <= 0)
+            {
+                ModelState.AddModelError("PostModel.NumCopies", "You must specify at least one copy.");
+            }
+
+            if (postModel.Vector == null)
+            {
+                ModelState.AddModelError("PostModel.Vector", "Vector is required.");
+            }
+
+            if (postModel.Vector != null && postModel.Vector.IsOther())
+            {
+                if (string.IsNullOrEmpty(postModel.NewVector))
+                {
+                    ModelState.AddModelError("PostModel.NewVector", "New Vector name is required.");
+                }
+
+                if (postModel.VectorType == null)
+                {
+                    ModelState.AddModelError("PostModel.VectorType", "Vector Type is required.");
+                }
+
+                if (postModel.Antibiotic1 == null)
+                {
+                    ModelState.AddModelError("PostModel.Antibiotic1", "Antibiotic is required.");
+                }
+
+                if (postModel.Antibiotic2 == null)
+                {
+                    ModelState.AddModelError("PostModel.Antibiotic2", "Antibiotic is required.");
+                }
+            }
+
+            if (postModel.Strain == null)
+            {
+                ModelState.AddModelError("PostModel.Strain", "Host is required.");
+            }
+
+            if (postModel.Strain != null && postModel.Strain.IsOther())
+            {
+                if (string.IsNullOrEmpty(postModel.NewStrain))
+                {
+                    ModelState.AddModelError("PostModel.NewStrain", "New Host Name is required.");
+                }
+
+                if (postModel.Bacteria == null)
+                {
+                    ModelState.AddModelError("PostModel.Bacteria", "Bacteria is required.");
                 }
             }
         }

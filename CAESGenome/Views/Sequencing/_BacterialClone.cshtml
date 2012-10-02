@@ -62,7 +62,7 @@
                     @Html.ValidationMessageFor(model => model.PostModel.Strain)
                 </div>
             </div>          
-            <div id="newstrain" style="@(Model.PostModel.Strain != null && Model.PostModel.Strain.Name.ToLower() == "other" ? "display:block;" : "display:none;")">
+            <div id="newstrain" style="@(Model.PostModel.Strain != null && Model.PostModel.Strain.IsOther() ? "display:block;" : "display:none;")">
                 <div class="control-group">
                     @Html.LabelFor(model => model.PostModel.NewStrain, new {@class = "control-label"})
                     <div class="controls">

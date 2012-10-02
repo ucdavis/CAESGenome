@@ -82,6 +82,7 @@
     <Compile Include="Domain\UserJobGenotyping.cs" />
     <Compile Include="Domain\UserJobPlate.cs" />
     <Compile Include="Domain\UserJobQbotColonyPicking.cs" />
+    <Compile Include="Domain\UserJobQbotReplicating.cs" />
     <Compile Include="Domain\UserJobSublibrary.cs" />
     <Compile Include="Domain\UserJobUserRun.cs" />
     <Compile Include="Domain\Vector.cs" />

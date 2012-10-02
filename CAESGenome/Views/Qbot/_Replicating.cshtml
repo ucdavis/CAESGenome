@@ -1,5 +1,4 @@
-﻿@using CAESGenome.Core.Resources
-@model QbotViewModel
+﻿@model QbotViewModel
 
 @using(Html.BeginForm("Create", "Qbot", new {id=Model.JobType.Id}, FormMethod.Post, new {@class="form-horizontal"}))
 {
@@ -35,34 +34,34 @@
                     @Html.ValidationMessageFor(model => model.PostModel.PlateType)
                 </div>
             </div>
-            <div class="control-group" id="numQTrays" style="@(Model.PostModel.PlateType.HasValue && Model.PostModel.PlateType == PlateTypes.QTray ? "display:block;" : "display:none;")">
-                @Html.LabelFor(model => model.PostModel.NumQTrays, new {@class = "control-label"})
+            <div class="control-group">
+                @Html.LabelFor(model => model.PostModel.SourcePlates, new {@class = "control-label"})
                 <div class="controls">
-                    @Html.EditorFor(model => model.PostModel.NumQTrays)
-                    @Html.ValidationMessageFor(model => model.PostModel.NumQTrays)
+                    @Html.EditorFor(model => model.PostModel.SourcePlates)
+                    @Html.ValidationMessageFor(model => model.PostModel.SourcePlates)
                 </div>
             </div>
-            <div class="control-group" id="concentration" style="@(Model.PostModel.PlateType.HasValue && Model.PostModel.PlateType == PlateTypes.GlycerolStock ? "display:block;" : "display:none;")">
-                @Html.LabelFor(model => model.PostModel.Concentration, new {@class = "control-label"})
+            <div class="control-group" id="platetypes">
+                @Html.LabelFor(model => model.PostModel.DestinationPlateType, new {@class = "control-label"})
                 <div class="controls">
-                    @Html.EditorFor(model => model.PostModel.Concentration)
-                    @Html.ValidationMessageFor(model => model.PostModel.Concentration)
+                    @foreach(var pt in Model.DestinationPlateTypes)
+                    {
+                        <label class="radio inline">
+                            @Html.RadioButton("PostModel.DestinationPlateType", pt.Value, pt.Selected)    
+                            @pt.Text
+                        </label>    
+                    }
+                    @Html.ValidationMessageFor(model => model.PostModel.DestinationPlateType)
                 </div>
             </div>
             <div class="control-group">
-                @Html.LabelFor(model => model.PostModel.Replication, new {@class = "control-label"})
+                @Html.LabelFor(model => model.PostModel.NumCopies, new {@class = "control-label"})
                 <div class="controls">
-                    @Html.EditorFor(model => model.PostModel.Replication)
-                    @Html.ValidationMessageFor(model => model.PostModel.Replication)
+                    @Html.EditorFor(model => model.PostModel.NumCopies)
+                    @Html.ValidationMessageFor(model => model.PostModel.NumCopies)
                 </div>
             </div>
-            <div class="control-group">
-                @Html.LabelFor(model => model.PostModel.NumColonies, new {@class = "control-label"})
-                <div class="controls">
-                    @Html.EditorFor(model => model.PostModel.NumColonies)
-                    @Html.ValidationMessageFor(model => model.PostModel.NumColonies)
-                </div>
-            </div>
+
             <div class="control-group">
                 @Html.LabelFor(model => model.PostModel.Vector, new {@class = "control-label"})
                 <div class="controls">

@@ -11,6 +11,13 @@ namespace CAESGenome.Core.Domain
         public virtual string Name { get; set; }
 
         public virtual VectorType VectorType { get; set; }
+        public virtual Antibiotic Antibiotic1 { get; set; }
+        public virtual Antibiotic Antibiotic2 { get; set; }
+
+        public virtual bool IsOther()
+        {
+            return Name.ToLower() == "other";
+        }
     }
 
     public class VectorMap : ClassMap<Vector>
@@ -21,6 +28,8 @@ namespace CAESGenome.Core.Domain
 
             Map(x => x.Name);
             References(x => x.VectorType);
+            References(x => x.Antibiotic1).Column("Antibiotic1Id");
+            References(x => x.Antibiotic2).Column("Antibiotic2Id");
 
         }
     }

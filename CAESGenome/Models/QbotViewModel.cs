@@ -24,6 +24,9 @@ namespace CAESGenome.Models
         public SelectList Antibiotic2 { get; set; }
         public SelectList Bacterias { get; set; }
 
+        // replicating 
+        public SelectList DestinationPlateTypes { get; set; }
+
         public static QbotViewModel Create(IRepositoryFactory repositoryFactory, User user, JobType jobType = null, QbotPostModel postModel = null)
         {
             var viewModel = new QbotViewModel()
@@ -58,18 +61,32 @@ namespace CAESGenome.Models
 
                 if (jobType.Id == (int)JobTypeIds.QbotColonyPicking)
                 {
+                    var pid = postModel != null ? postModel.PlateType : null;
+
                     var pts = new List<SelectListItem>();
                     pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.QTray).ToString(), Text = "Q-Tray" });
                     pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.GlycerolStock).ToString(), Text = "Glycerol Stock" });
-                    viewModel.PlateTypes = new SelectList(pts, "Value", "Text");
+                    viewModel.PlateTypes = new SelectList(pts, "Value", "Text", pid);
                 }
 
                 if (jobType.Id == (int)JobTypeIds.QbotPlateReplicating || jobType.Id == (int)JobTypeIds.QbotGridding)
                 {
+                    var pid = postModel != null ? postModel.PlateType : null;
+
                     var pts = new List<SelectListItem>();
                     pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.NinetySix).ToString(), Text = "96" });
                     pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.ThreeEightyFour).ToString(), Text = "384" });
-                    viewModel.PlateTypes = new SelectList(pts, "Value", "Text");
+                    viewModel.PlateTypes = new SelectList(pts, "Value", "Text", pid);
+                }
+
+                if (jobType.Id == (int)JobTypeIds.QbotPlateReplicating)
+                {
+                    var pid = postModel != null ? postModel.DestinationPlateType : null;
+
+                    var pts = new List<SelectListItem>();
+                    pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.NinetySix).ToString(), Text = "96" });
+                    pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.ThreeEightyFour).ToString(), Text = "384" });
+                    viewModel.DestinationPlateTypes = new SelectList(pts, "Value", "Text", pid);
                 }
             }
 

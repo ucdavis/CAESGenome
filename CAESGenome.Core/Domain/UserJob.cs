@@ -37,6 +37,7 @@ namespace CAESGenome.Core.Domain
         public virtual UserJobSublibrary UserJobSublibrary { get; set; }
         public virtual UserJobGenotyping UserJobGenotyping { get; set; }
         public virtual UserJobQbotColonyPicking UserJobQbotColonyPicking { get; set; }
+        public virtual UserJobQbotReplicating UserJobQbotReplicating { get; set; }
 
         public virtual IList<UserJobPlate> UserJobPlates { get; set; }
 
@@ -72,6 +73,7 @@ namespace CAESGenome.Core.Domain
             References(x => x.UserJobSublibrary).Cascade.All();
             References(x => x.UserJobGenotyping).Cascade.All();
             References(x => x.UserJobQbotColonyPicking).Cascade.All();
+            References(x => x.UserJobQbotReplicating).Cascade.All();
 
             HasMany(x => x.UserJobPlates).Inverse().Cascade.AllDeleteOrphan();
         }

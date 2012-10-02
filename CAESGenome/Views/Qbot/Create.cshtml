@@ -20,6 +20,11 @@
             <script type="text/javascript" src="@Url.Content("~/Scripts/Single/NewVector.js")"></script>
             <script type="text/javascript" src="@Url.Content("~/Scripts/Single/NewStrain.js")"></script>
         }
+        if (Model.JobType.Id == (int)JobTypeIds.QbotPlateReplicating)
+        {
+            <script type="text/javascript" src="@Url.Content("~/Scripts/Single/NewVector.js")"></script>
+            <script type="text/javascript" src="@Url.Content("~/Scripts/Single/NewStrain.js")"></script>
+        }
     }
 }
 
@@ -32,5 +37,9 @@ else
     if (Model.JobType.Id == (int)JobTypeIds.QbotColonyPicking)
     {
         @Html.Partial("_ColonyPicking")
+    }
+    if (Model.JobType.Id == (int)JobTypeIds.QbotPlateReplicating)
+    {
+        @Html.Partial("_Replicating")
     }
 }

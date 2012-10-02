@@ -147,4 +147,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="UserJobGenotypingId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="e0098d3d-bebc-4a45-b027-a59d8e5ae533" ChangeDateTime="10/02/2012 20:02:06">
+    <Property Name="ElementName" Value="[dbo].[UserJobQbotReplicating].[Replication]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserJobQbotReplicating]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="NumCopies" />
+  </Operation>
 </Operations>

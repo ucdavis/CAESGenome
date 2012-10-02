@@ -22,8 +22,8 @@ namespace CAESGenome.Core.Domain
 
             Id(x => x.Id);
 
-            References(x => x.Vector);
-            References(x => x.Strain);
+            References(x => x.Vector).Cascade.SaveUpdate();
+            References(x => x.Strain).Cascade.SaveUpdate();
             Map(x => x.NumQTrays);
             Map(x => x.NumGlycerol);
             Map(x => x.Concentration);
