@@ -201,6 +201,8 @@ namespace CAESGenome.Controllers
                     userJob.UserJobQbotReplicating.Vector = vector;
                 }
 
+                _repositoryFactory.UserJobRepository.EnsurePersistent(userJob);
+
                 return true;
             }
 

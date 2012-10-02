@@ -19,6 +19,11 @@ namespace CAESGenome.Core.Repositories
         IRepository<UserJob> UserJobRepository { get; set; }
         IRepository<UserJobBacterialClone> UserJobBacterialCloneRepository { get; set; }
         IRepository<UserJobDna> UserJobDnaRepository { get; set; }
+        IRepository<UserJobGenotyping> UserJobGenotypingRepository { get; set; }
+        IRepository<UserJobPlate> UserJobPlateRepository { get; set; }
+        IRepository<UserJobQbotColonyPicking> UserJobQbotColonyPickingRepository { get; set; }
+        IRepository<UserJobQbotReplicating> UserJobQbotReplicatingRepository { get; set; }
+        IRepository<UserJobSublibrary> UserJobSublibraryRepository { get; set; } 
         IRepository<UserJobUserRun> UserJobUserRunRepository { get; set; }
         IRepository<Vector> VectorRepository { get; set; }
         IRepository<VectorType> VectorTypeRepository { get; set; }
@@ -40,6 +45,11 @@ namespace CAESGenome.Core.Repositories
         public IRepository<UserJob> UserJobRepository { get; set; }
         public IRepository<UserJobBacterialClone> UserJobBacterialCloneRepository { get; set; }
         public IRepository<UserJobDna> UserJobDnaRepository { get; set; }
+        public IRepository<UserJobGenotyping> UserJobGenotypingRepository { get; set; }
+        public IRepository<UserJobPlate> UserJobPlateRepository { get; set; }
+        public IRepository<UserJobQbotColonyPicking> UserJobQbotColonyPickingRepository { get; set; }
+        public IRepository<UserJobQbotReplicating> UserJobQbotReplicatingRepository { get; set; }
+        public IRepository<UserJobSublibrary> UserJobSublibraryRepository { get; set; }
         public IRepository<UserJobUserRun> UserJobUserRunRepository { get; set; }
         public IRepository<Vector> VectorRepository { get; set; }
         public IRepository<VectorType> VectorTypeRepository { get; set; }
