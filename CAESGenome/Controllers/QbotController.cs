@@ -62,9 +62,11 @@ namespace CAESGenome.Controllers
                 case (int)JobTypeIds.QbotPlateReplicating:
                     result = SaveReplicating(postModel);
                     break;
+                case (int)JobTypeIds.QbotGridding:
+                    result = SaveGridding(postModel);
+                    break;
             }
-
-
+            
             if (result)
             {
                 Message = "Saved!";
@@ -127,51 +129,8 @@ namespace CAESGenome.Controllers
                 ModelState.AddModelError("PostModel.NumColonies", "Colonies expected is required.");
             }
 
-            if (postModel.Vector == null)
-            {
-                ModelState.AddModelError("PostModel.Vector", "Vector is required.");
-            }
-            
-            if(postModel.Vector != null && postModel.Vector.IsOther())
-            {
-                if (string.IsNullOrEmpty(postModel.NewVector))
-                {
-                    ModelState.AddModelError("PostModel.NewVector", "New Vector name is required.");
-                }
-
-                if (postModel.VectorType == null)
-                {
-                    ModelState.AddModelError("PostModel.VectorType", "Vector Type is required.");
-                }
-
-                if (postModel.Antibiotic1 == null)
-                {
-                    ModelState.AddModelError("PostModel.Antibiotic1", "Antibiotic is required.");
-                }
-
-                if (postModel.Antibiotic2 == null)
-                {
-                    ModelState.AddModelError("PostModel.Antibiotic2", "Antibiotic is required.");
-                }    
-            }
-
-            if (postModel.Strain == null)
-            {
-                ModelState.AddModelError("PostModel.Strain", "Host is required.");
-            }
-
-            if (postModel.Strain != null && postModel.Strain.IsOther())
-            {
-                if(string.IsNullOrEmpty(postModel.NewStrain))
-                {
-                    ModelState.AddModelError("PostModel.NewStrain", "New Host Name is required.");
-                }
-
-                if(postModel.Bacteria == null)
-                {
-                    ModelState.AddModelError("PostModel.Bacteria", "Bacteria is required.");
-                }
-            }
+            ValidateVector(postModel);
+            ValidateStrain(postModel);
         }
 
         private bool SaveReplicating(QbotPostModel postModel)
@@ -238,6 +197,75 @@ namespace CAESGenome.Controllers
                 ModelState.AddModelError("PostModel.NumCopies", "You must specify at least one copy.");
             }
 
+            ValidateVector(postModel);
+            ValidateStrain(postModel);
+        }
+
+        private bool SaveGridding(QbotPostModel postModel)
+        {
+            ValidateGridding(postModel);
+
+            if (ModelState.IsValid)
+            {
+                var userJob = new UserJob();
+                var userJobQbotGridding = new UserJobQbotGridding();
+
+                AutoMapper.Mapper.Map(postModel, userJob);
+                AutoMapper.Mapper.Map(postModel, userJobQbotGridding);
+                userJob.UserJobQbotGridding = userJobQbotGridding;
+                userJob.User = GetCurrentUser(true);
+                userJob.RechargeAccount = postModel.RechargeAccount;
+
+                if (postModel.Vector.IsOther())
+                {
+                    var vector = new Vector() { Name = postModel.NewVector, VectorType = postModel.VectorType, Antibiotic1 = postModel.Antibiotic1, Antibiotic2 = postModel.Antibiotic2 };
+                    userJob.UserJobQbotGridding.Vector = vector;
+                }
+
+                if (postModel.Strain.IsOther())
+                {
+                    var strain = new Strain() { Name = postModel.NewStrain, Bacteria = postModel.Bacteria, Supplied = false };
+                    userJob.UserJobQbotGridding.Strain = strain;
+                }
+
+                _repositoryFactory.UserJobRepository.EnsurePersistent(userJob);
+
+                return true;
+            }
+
+            return false;
+        }
+        private void ValidateGridding(QbotPostModel postModel)
+        {
+            if (!postModel.NumPlates.HasValue)
+            {
+                ModelState.AddModelError("PostModel.NumPlates", "Number of plates is required.");
+            }
+            else if (postModel.NumPlates.Value <= 0)
+            {
+                ModelState.AddModelError("PostModel.NumPlates", "You must specify at least one plate.");
+            }
+
+            if (!postModel.NumMembranecopies.HasValue)
+            {
+                ModelState.AddModelError("PostModel.NumMembranecopies", "Number of membrane copies is required.");
+            }
+            else if (postModel.NumMembranecopies.Value <= 0)
+            {
+                ModelState.AddModelError("PostModel.NumMembranecopies", "You must specify at least one membrane copy.");
+            }
+
+            if (!postModel.GriddingPattern.HasValue)
+            {
+                ModelState.AddModelError("PostModel.GriddingPattern", "Gridding pattern is required.");
+            }
+
+            ValidateVector(postModel);
+            ValidateStrain(postModel);
+        }
+
+        private void ValidateVector(QbotPostModel postModel)
+        {
             if (postModel.Vector == null)
             {
                 ModelState.AddModelError("PostModel.Vector", "Vector is required.");
@@ -264,8 +292,10 @@ namespace CAESGenome.Controllers
                 {
                     ModelState.AddModelError("PostModel.Antibiotic2", "Antibiotic is required.");
                 }
-            }
-
+            }  
+        }
+        private void ValidateStrain(QbotPostModel postModel)
+        {
             if (postModel.Strain == null)
             {
                 ModelState.AddModelError("PostModel.Strain", "Host is required.");
@@ -284,5 +314,6 @@ namespace CAESGenome.Controllers
                 }
             }
         }
+
     }
 }

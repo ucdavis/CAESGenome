@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
 using CAESGenome.Core.Domain;
+using CAESGenome.Core.Helpers;
 using CAESGenome.Core.Repositories;
 using CAESGenome.Core.Resources;
 
@@ -33,8 +34,8 @@ namespace CAESGenome.Models
                 viewModel.RechargeAccounts = new SelectList(user.RechargeAccounts, "Id", "AccountNum", rid);
 
                 var pts = new List<SelectListItem>();
-                pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.NinetySix).ToString(), Text = "96" });
-                pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.ThreeEightyFour).ToString(), Text = "384" });
+                pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.NinetySix).ToString(), Text = EnumUtility.GetEnumDescription(Core.Resources.PlateTypes.NinetySix) });
+                pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.ThreeEightyFour).ToString(), Text = EnumUtility.GetEnumDescription(Core.Resources.PlateTypes.NinetySix) });
                 viewModel.PlateTypes = new SelectList(pts, "Value", "Text");
 
                 var did = postModel != null && postModel.Dyes != null ? postModel.Dyes : new List<int>();

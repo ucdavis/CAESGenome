@@ -154,4 +154,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="NumCopies" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="3fb7a2af-df68-42c2-b75c-8b5081068e74" ChangeDateTime="10/03/2012 15:37:08">
+    <Property Name="ElementName" Value="[dbo].[UserJobQbotGridding].[Pattern]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserJobQbotGridding]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="GriddingPattern" />
+  </Operation>
 </Operations>

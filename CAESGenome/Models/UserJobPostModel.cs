@@ -107,6 +107,14 @@ namespace CAESGenome.Models
         public PlateTypes? DestinationPlateType { get; set; }
         [Display(Name="# Copies")]
         public int? NumCopies { get; set; }
+
+        // gridding
+        [Display(Name="Number of Plates")]
+        public int? NumPlates { get; set; }
+        [Display(Name="Number Membrane Copies")]
+        public int? NumMembranecopies { get; set; }
+        [Display(Name="Pattern")]
+        public GriddingPattern? GriddingPattern { get; set; }
     }
 
     public class GenotypingPostModel : UserJobPostModelBase

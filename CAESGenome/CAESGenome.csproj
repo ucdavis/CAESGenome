@@ -418,6 +418,7 @@
     <Content Include="Views\Home\Rates.cshtml" />
     <Content Include="Views\UserJob\Details.cshtml" />
     <Content Include="Views\Qbot\_Replicating.cshtml" />
+    <Content Include="Views\Qbot\_Gridding.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -82,11 +82,13 @@
     <Compile Include="Domain\UserJobGenotyping.cs" />
     <Compile Include="Domain\UserJobPlate.cs" />
     <Compile Include="Domain\UserJobQbotColonyPicking.cs" />
+    <Compile Include="Domain\UserJobQbotGridding.cs" />
     <Compile Include="Domain\UserJobQbotReplicating.cs" />
     <Compile Include="Domain\UserJobSublibrary.cs" />
     <Compile Include="Domain\UserJobUserRun.cs" />
     <Compile Include="Domain\Vector.cs" />
     <Compile Include="Domain\VectorType.cs" />
+    <Compile Include="Helpers\EnumUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IRepositoryFactory.cs" />
     <Compile Include="Resources\Enums.cs" />
@@ -95,9 +97,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Helpers\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

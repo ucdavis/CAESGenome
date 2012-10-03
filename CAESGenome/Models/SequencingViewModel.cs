@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
 using CAESGenome.Core.Domain;
+using CAESGenome.Core.Helpers;
 using CAESGenome.Core.Repositories;
 using CAESGenome.Core.Resources;
 
@@ -52,8 +54,8 @@ namespace CAESGenome.Models
                 if (jobType.Id == (int)JobTypeIds.BacterialClone || jobType.Id == (int)JobTypeIds.DnaSubmission || jobType.Id == (int)JobTypeIds.UserRunSequencing)
                 {
                     var pts = new List<SelectListItem>();
-                    pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.NinetySix).ToString(), Text = "96" });
-                    pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.ThreeEightyFour).ToString(), Text = "384" });
+                    pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.NinetySix).ToString(), Text = EnumUtility.GetEnumDescription(Core.Resources.PlateTypes.NinetySix) });
+                    pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.ThreeEightyFour).ToString(), Text = EnumUtility.GetEnumDescription(Core.Resources.PlateTypes.NinetySix) });
                     viewModel.PlateTypes = new SelectList(pts, "Value", "Text");
                 }
 
@@ -77,8 +79,8 @@ namespace CAESGenome.Models
                 if (jobType.Id == (int)JobTypeIds.BacterialClone)
                 {
                     var sd = new List<SelectListItem>();
-                    sd.Add(new SelectListItem() { Value = ((int)SequenceDirection.Forward).ToString(), Text = "One" });
-                    sd.Add(new SelectListItem() { Value = ((int)SequenceDirection.Backward).ToString(), Text = "Two" });
+                    sd.Add(new SelectListItem() { Value = ((int)SequenceDirection.Forward).ToString(), Text = EnumUtility.GetEnumDescription(SequenceDirection.Forward) });
+                    sd.Add(new SelectListItem() { Value = ((int)SequenceDirection.Backward).ToString(), Text = EnumUtility.GetEnumDescription(SequenceDirection.Backward) });
                     viewModel.SequenceDirections = new SelectList(sd, "Value", "Text");
 
                     var sid = postModel != null && postModel.Strain != null ? postModel.Strain.Id : -1;
@@ -107,8 +109,8 @@ namespace CAESGenome.Models
                 {
                     var sid = postModel != null && postModel.TypeOfSample != null ? (int)postModel.TypeOfSample : -1;
                     var st = new List<SelectListItem>();
-                    st.Add(new SelectListItem() {Value = ((int)Core.Resources.TypeOfSamples.BAC).ToString(), Text = "Ecoli wiht BAC"});
-                    st.Add(new SelectListItem() { Value = ((int)Core.Resources.TypeOfSamples.DNA).ToString(), Text = " Purified DNA (10 µg minimum)" });
+                    st.Add(new SelectListItem() {Value = ((int)Core.Resources.TypeOfSamples.BAC).ToString(), Text = EnumUtility.GetEnumDescription(Core.Resources.TypeOfSamples.BAC)});
+                    st.Add(new SelectListItem() { Value = ((int)Core.Resources.TypeOfSamples.DNA).ToString(), Text = EnumUtility.GetEnumDescription(Core.Resources.TypeOfSamples.DNA) });
                     viewModel.TypeOfSamples = new SelectList(st, "Value", "Text", sid);
                 }
             }

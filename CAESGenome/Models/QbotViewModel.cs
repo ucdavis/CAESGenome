@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
 using CAESGenome.Core.Domain;
+using CAESGenome.Core.Helpers;
 using CAESGenome.Core.Repositories;
 using CAESGenome.Core.Resources;
 
@@ -26,6 +27,9 @@ namespace CAESGenome.Models
 
         // replicating 
         public SelectList DestinationPlateTypes { get; set; }
+
+        // gridding
+        public SelectList GriddingPatterns { get; set; }
 
         public static QbotViewModel Create(IRepositoryFactory repositoryFactory, User user, JobType jobType = null, QbotPostModel postModel = null)
         {
@@ -64,8 +68,8 @@ namespace CAESGenome.Models
                     var pid = postModel != null ? postModel.PlateType : null;
 
                     var pts = new List<SelectListItem>();
-                    pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.QTray).ToString(), Text = "Q-Tray" });
-                    pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.GlycerolStock).ToString(), Text = "Glycerol Stock" });
+                    pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.QTray).ToString(), Text = EnumUtility.GetEnumDescription(Core.Resources.PlateTypes.QTray) });
+                    pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.GlycerolStock).ToString(), Text = EnumUtility.GetEnumDescription(Core.Resources.PlateTypes.GlycerolStock) });
                     viewModel.PlateTypes = new SelectList(pts, "Value", "Text", pid);
                 }
 
@@ -74,8 +78,8 @@ namespace CAESGenome.Models
                     var pid = postModel != null ? postModel.PlateType : null;
 
                     var pts = new List<SelectListItem>();
-                    pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.NinetySix).ToString(), Text = "96" });
-                    pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.ThreeEightyFour).ToString(), Text = "384" });
+                    pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.NinetySix).ToString(), Text = EnumUtility.GetEnumDescription(Core.Resources.PlateTypes.NinetySix) });
+                    pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.ThreeEightyFour).ToString(), Text = EnumUtility.GetEnumDescription(Core.Resources.PlateTypes.NinetySix) });
                     viewModel.PlateTypes = new SelectList(pts, "Value", "Text", pid);
                 }
 
@@ -84,9 +88,21 @@ namespace CAESGenome.Models
                     var pid = postModel != null ? postModel.DestinationPlateType : null;
 
                     var pts = new List<SelectListItem>();
-                    pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.NinetySix).ToString(), Text = "96" });
-                    pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.ThreeEightyFour).ToString(), Text = "384" });
+                    pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.NinetySix).ToString(), Text = EnumUtility.GetEnumDescription(Core.Resources.PlateTypes.NinetySix) });
+                    pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.ThreeEightyFour).ToString(), Text = EnumUtility.GetEnumDescription(Core.Resources.PlateTypes.NinetySix) });
                     viewModel.DestinationPlateTypes = new SelectList(pts, "Value", "Text", pid);
+                }
+
+                if (jobType.Id == (int)JobTypeIds.QbotGridding)
+                {
+                    var pid = postModel != null ? postModel.GriddingPattern : null;
+
+                    var pts = new List<SelectListItem>();
+                    pts.Add(new SelectListItem(){ Value=((int)GriddingPattern.ThreeXThree).ToString(), Text = EnumUtility.GetEnumDescription(GriddingPattern.ThreeXThree)});
+                    pts.Add(new SelectListItem() { Value = ((int)GriddingPattern.FourXFour).ToString(), Text = EnumUtility.GetEnumDescription(GriddingPattern.FourXFour) });
+                    pts.Add(new SelectListItem() { Value = ((int)GriddingPattern.FiveXFive).ToString(), Text = EnumUtility.GetEnumDescription(GriddingPattern.FiveXFive) });
+
+                    viewModel.GriddingPatterns = new SelectList(pts, "Value", "Text", pid);
                 }
             }
 
