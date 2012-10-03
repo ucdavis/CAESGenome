@@ -83,7 +83,7 @@ namespace CAESGenome.Services
 
         public void AdvanceAllBarcodes(IRepositoryFactory repositoryFactory, UserJob userJob, Stage stage)
         {
-            var barcodes = userJob.UserJobPlates.SelectMany(a => a.Barcodes).Where(a => a.Stage == stage);
+            var barcodes = userJob.UserJobPlates.SelectMany(a => a.Barcodes).Where(a => a.Stage == stage && !a.Done);
 
             if (barcodes.Any())
             {

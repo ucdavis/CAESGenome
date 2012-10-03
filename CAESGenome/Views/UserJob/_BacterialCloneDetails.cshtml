@@ -1,6 +1,28 @@
 ﻿@using CAESGenome.Core.Resources
 @model UserJob
 
+@helper DisplayStage(string stageId)
+{
+    switch(stageId)
+    {
+        case StageIds.BcWebSubmittedPlates:
+            <div class="label">Web Submitted Plates</div>
+            break;
+        case StageIds.BcPlateSubmission:
+            <div class="label label-info">Plate Submissions</div>
+            break;
+        case StageIds.BcRca:
+            <div class="label label-important">RCA</div>
+            break;
+        case StageIds.BcSequencingReaction:
+            <div class="label label-warning">Sequencing Reaction</div>
+            break;
+        case StageIds.Bc3730xl:
+            <div class="label label-success">3730xl</div>
+            break;
+    }
+}
+
 <fieldset>
     
     <div class="row-fluid">
@@ -124,7 +146,9 @@
                     <td>@(barcode.Primer != null ? barcode.Primer.Name : "n/a")</td>
                     <td>@barcode.DateCreated.ToShortDateString()</td>
                     <td>@(barcode.Done ? "Complete" : "Open")</td>
-                    <td>@barcode.Stage.Name</td>
+                    <td>
+                        @DisplayStage(barcode.Stage.Id)
+                    </td>
                 </tr>
             }
         </tbody>
