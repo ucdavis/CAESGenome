@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="Domain\Antibiotic.cs" />
     <Compile Include="Domain\Bacteria.cs" />
+    <Compile Include="Domain\Barcode.cs" />
     <Compile Include="Domain\Department.cs" />
     <Compile Include="Domain\Dye.cs" />
     <Compile Include="Domain\JobType.cs" />

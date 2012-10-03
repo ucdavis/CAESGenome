@@ -6,7 +6,8 @@ namespace CAESGenome.Core.Repositories
     public interface IRepositoryFactory
     {
         IRepository<Antibiotic> AntibioticRepository { get; set; } 
-        IRepository<Bacteria> BacteriaRepository { get; set; } 
+        IRepository<Bacteria> BacteriaRepository { get; set; }
+        IRepository<Barcode> BarcodeRepository { get; set; } 
         IRepository<Department> DepartmentRepository { get; set; }
         IRepository<Dye> DyeRepository { get; set; } 
         IRepository<JobType> JobTypeRepository { get; set; }
@@ -33,6 +34,7 @@ namespace CAESGenome.Core.Repositories
     {
         public IRepository<Antibiotic> AntibioticRepository { get; set; }
         public IRepository<Bacteria> BacteriaRepository { get; set; }
+        public IRepository<Barcode> BarcodeRepository { get; set; }
         public IRepository<Department> DepartmentRepository { get; set; }
         public IRepository<Dye> DyeRepository { get; set; }
         public IRepository<JobType> JobTypeRepository { get; set; }

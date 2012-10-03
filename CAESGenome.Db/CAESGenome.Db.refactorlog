@@ -161,4 +161,25 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="GriddingPattern" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="ca57316b-5001-4d59-834c-8be44c60f675" ChangeDateTime="10/03/2012 16:47:08">
+    <Property Name="ElementName" Value="[dbo].[Barcodes].[Date]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Barcodes]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DateCreated" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="132653d3-cd6f-4a33-86ba-3134d874ddfe" ChangeDateTime="10/03/2012 20:04:33">
+    <Property Name="ElementName" Value="[dbo].[Barcodes].[PlateSubId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Barcodes]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SubPlateId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a1ad1848-5d95-4e13-8afa-1f5558f21103" ChangeDateTime="10/03/2012 20:05:05">
+    <Property Name="ElementName" Value="[dbo].[Barcodes].[PlateId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Barcodes]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserJobPlateId" />
+  </Operation>
 </Operations>

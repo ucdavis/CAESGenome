@@ -1,37 +1,35 @@
-﻿@model UserJob
+﻿@using CAESGenome.Core.Resources
+@model UserJob
 
 @{
     ViewBag.Title = "Job Details";
     ViewBag.SubPageTitle = string.Format("{0} Details", Model.Name);
 }
 
+@section SubPageMenu
+{
+    <ul class="nav nav-pills">
+        <li>@Html.ActionLink("Back to List", "Index")</li>
+    </ul>
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $(".advance").click(function (event) {
+                $(this).closest('form').submit();
+                event.preventDefault();
+            });
+        });
+    </script>
+}
+
 <div class="form-horizontal">
     
-    <fieldset>
-        <div class="control-group">
-            @Html.LabelFor(model => model.RechargeAccount.AccountNum, new {@class = "control-label"})
-            <div class="controls form-text">
-                @Html.DisplayFor(model => model.RechargeAccount.AccountNum)
-            </div>
-        </div>
-        <div class="control-group">
-            @Html.LabelFor(model => model.PlateType, new {@class = "control-label"})
-            <div class="controls form-text">
-                @Html.DisplayFor(model => model.PlateType)
-            </div>
-        </div>
-        <div class="control-group">
-            <label for="JobType" class="control-label">Job Type</label>
-            <div class="controls form-text">
-                @Html.DisplayFor(model => model.JobType.Name)
-            </div>
-        </div>
-        <div class="control-group">
-            @Html.LabelFor(model => model.Comments, new {@class = "control-label"})
-            <div class="controls form-text">
-                @Html.DisplayFor(model => model.Comments)
-            </div>
-        </div>
-    </fieldset>
+    @if(Model.JobType.Id == (int)JobTypeIds.BacterialClone)
+    {
+        @Html.Partial("_BacterialCloneDetails")
+    }
 
 </div>

@@ -56,6 +56,8 @@
                     @RenderSection("SubPageMenu", required: false)          
                 </div>
                 
+                <div style="clear:both;"></div>
+
                 @if(!string.IsNullOrEmpty(TempData["Message"] as string))
                 {
                     <div class="alert alert-info">@TempData["Message"]</div>

@@ -1,0 +1,133 @@
+﻿@using CAESGenome.Core.Resources
+@model UserJob
+
+<fieldset>
+    
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="control-group">
+                @Html.LabelFor(model => model.RechargeAccount.AccountNum, new {@class = "control-label"})
+                <div class="controls form-text">
+                    @Html.DisplayFor(model => model.RechargeAccount.AccountNum)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.PlateType, new {@class = "control-label"})
+                <div class="controls form-text">
+                    @Html.DisplayFor(model => model.PlateType)
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="JobType" class="control-label">Job Type</label>
+                <div class="controls form-text">
+                    @Html.DisplayFor(model => model.JobType.Name)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.NumberPlates, new {@class = "control-label"})
+                <div class="controls form-text">
+                    @Html.DisplayFor(model => model.NumberPlates)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.UserJobBacterialClone.SequenceDirection, new {@class = "control-label"})
+                <div class="controls form-text">
+                    @Html.DisplayFor(model => model.UserJobBacterialClone.SequenceDirection)
+                </div>
+            </div>        
+        </div>
+        <div class="span6">
+            <div class="control-group">
+                @Html.LabelFor(model => model.UserJobBacterialClone.Strain, new {@class = "control-label"})
+                <div class="controls form-text">
+                    @Html.DisplayFor(model => model.UserJobBacterialClone.Strain.Name)
+                </div>
+            </div>
+    
+            <div class="control-group">
+                @Html.LabelFor(model => model.UserJobBacterialClone.Primer1, new {@class = "control-label"})
+                <div class="controls form-text">
+                    @Html.DisplayFor(model => model.UserJobBacterialClone.Primer1.Name)
+                </div>
+            </div>
+    
+            @if(Model.UserJobBacterialClone.SequenceDirection == SequenceDirection.Backward)
+            {
+                <div class="control-group">
+                    @Html.LabelFor(model => model.UserJobBacterialClone.Primer2, new {@class = "control-label"})
+                    <div class="controls form-text">
+                        @Html.DisplayFor(model => model.UserJobBacterialClone.Primer2.Name)
+                    </div>
+                </div>
+            }
+    
+            <div class="control-group">
+                @Html.LabelFor(model => model.UserJobBacterialClone.Vector, new {@class = "control-label"})
+                <div class="controls form-text">
+                    @Html.DisplayFor(model => model.UserJobBacterialClone.Vector.Name)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.UserJobBacterialClone.Antibiotic, new {@class = "control-label"})
+                <div class="controls form-text">
+                    @Html.DisplayFor(model => model.UserJobBacterialClone.Antibiotic.Name)
+                </div>
+            </div>        
+        </div>
+        <div class="span12" style="margin-left: 0;">
+            <div class="control-group">
+                @Html.LabelFor(model => model.Comments, new {@class = "control-label"})
+                <div class="controls form-text">
+                    @Html.DisplayFor(model => model.Comments)
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</fieldset>
+
+<fieldset>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Barcode</th>
+                <th>Plate Name</th>
+                <th>Sub Plate Id</th>
+                <th>Primer</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Stage</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var barcode in Model.UserJobPlates.SelectMany(a => a.Barcodes).OrderBy(a => a.Stage.Order).ThenBy(a => a.UserJobPlate.Id))
+            {
+                <tr>
+                    <td>
+                        @if (!barcode.Done)
+                        {
+                            using(Html.BeginForm("AdvanceBarcode", "UserJob", new {id=barcode.Id}, FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <a href="javascript:;" class="btn hastip advance" title="Advance Barcode to Next Stage"><i class="icon-check"></i></a>
+                            }    
+                        }
+                    </td>
+                    <td>
+                        @barcode.Id
+                        <a href="javascript:;" class="btn pull-right"><i class="icon-print"></i></a>
+                    </td>
+                    <td>@barcode.UserJobPlate.Name</td>
+                    <td>@barcode.SubPlateId</td>
+                    <td>@(barcode.Primer != null ? barcode.Primer.Name : "n/a")</td>
+                    <td>@barcode.DateCreated.ToShortDateString()</td>
+                    <td>@(barcode.Done ? "Complete" : "Open")</td>
+                    <td>@barcode.Stage.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</fieldset>

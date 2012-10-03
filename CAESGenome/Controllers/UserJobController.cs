@@ -4,17 +4,20 @@ using CAESGenome.Core.Domain;
 using CAESGenome.Core.Repositories;
 using CAESGenome.Core.Resources;
 using CAESGenome.Models;
+using CAESGenome.Services;
 
 namespace CAESGenome.Controllers
 {
-    [Authorize(Roles = RoleNames.User)]
+    //[Authorize(Roles = RoleNames.User)]
     public class UserJobController : ApplicationController
     {
         private readonly IRepositoryFactory _repositoryFactory;
+        private readonly IBarcodeService _barcodeService;
 
-        public UserJobController(IRepositoryFactory repositoryFactory)
+        public UserJobController(IRepositoryFactory repositoryFactory, IBarcodeService barcodeService)
         {
             _repositoryFactory = repositoryFactory;
+            _barcodeService = barcodeService;
         }
 
         public ActionResult Index()
@@ -53,6 +56,22 @@ namespace CAESGenome.Controllers
             }
 
             return View(uj);
+        }
+
+        [HttpPost]
+        public ActionResult AdvanceBarcode(int id)
+        {
+            var barcode = _repositoryFactory.BarcodeRepository.GetNullableById(id);
+
+            if (barcode == null)
+            {
+                Message = "There was an error loading the selected barcode.";
+                return RedirectToAction("Index");
+            }
+
+            _barcodeService.AdvanceStage(_repositoryFactory, barcode, barcode.UserJobPlate.UserJob);
+
+            return RedirectToAction("Details", new {id = barcode.UserJobPlate.UserJob.Id});
         }
 
     }

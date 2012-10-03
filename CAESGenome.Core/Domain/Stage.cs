@@ -20,7 +20,7 @@ namespace CAESGenome.Core.Domain
             Id(x => x.Id);
 
             Map(x => x.Name);
-            Map(x => x.Order);
+            Map(x => x.Order).Column("`Order`");
             References(x => x.JobType);
             Map(x => x.IsComplete);
         }

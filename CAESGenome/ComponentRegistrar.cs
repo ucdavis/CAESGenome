@@ -1,4 +1,5 @@
 using CAESGenome.Core.Repositories;
+using CAESGenome.Services;
 using Castle.Windsor;
 using UCDArch.Core.CommonValidator;
 using UCDArch.Core.DataAnnotationsValidator.CommonValidatorAdapter;
@@ -25,6 +26,8 @@ namespace CAESGenome
             container.Register(Component.For<IRepository>().ImplementedBy<Repository>().Named("repository"));
 
             container.Register(Component.For(typeof(IRepositoryFactory)).ImplementedBy<RepositoryFactory>().Named("repositoryFactory"));
+
+            container.Register(Component.For(typeof(IBarcodeService)).ImplementedBy<BarcodeService>().Named("barcodeService"));
         }
     }
 }

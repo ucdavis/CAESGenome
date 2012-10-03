@@ -1,4 +1,5 @@
-﻿using CAESGenome.Core.Resources;
+﻿using System.ComponentModel.DataAnnotations;
+using CAESGenome.Core.Resources;
 using FluentNHibernate.Mapping;
 using UCDArch.Core.DomainModel;
 
@@ -6,9 +7,14 @@ namespace CAESGenome.Core.Domain
 {
     public class UserJobBacterialClone : DomainObject
     {
+        [UIHint("Enum")]
+        [Display(Name = "Sequence Direction")]
         public virtual SequenceDirection SequenceDirection { get; set; }
+        [Display(Name = "Primer One")]
         public virtual Primer Primer1 { get; set; }
+        [Display(Name = "Primer Two")]
         public virtual Primer Primer2 { get; set; }
+        [Display(Name = "Host")]
         public virtual Strain Strain { get; set; }
         public virtual Vector Vector { get; set; }
         public virtual Antibiotic Antibiotic { get; set; }

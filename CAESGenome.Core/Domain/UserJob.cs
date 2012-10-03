@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using CAESGenome.Core.Resources;
 using FluentNHibernate.Mapping;
 using UCDArch.Core.DomainModel;
@@ -22,6 +23,8 @@ namespace CAESGenome.Core.Domain
         public virtual string Name { get; set; }
         public virtual JobType JobType { get; set; }
         public virtual int NumberPlates { get; set; }
+        [UIHint("Enum")]
+        [Display(Name = "Plate Type")]
         public virtual PlateTypes? PlateType { get; set; }
         public virtual string Comments { get; set; }
         // might not be used

@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using CAESGenome.Core.Domain;
 using CAESGenome.Core.Repositories;
@@ -108,11 +110,8 @@ namespace CAESGenome.Controllers
                 userJob.User = GetCurrentUser(true);
                 userJob.RechargeAccount = postModel.RechargeAccount;
 
-                foreach (var name in postModel.PlateNames)
-                {
-                    userJob.AddUserJobPlates(new UserJobPlate() { Name = name });
-                }
-
+                AddPlates(postModel.PlateNames, userJob, userJob.JobType);
+                
                 if (postModel.Strain != null && postModel.Strain.IsOther())
                 {
                     var strain = new Strain() { Name = postModel.NewStrain, Bacteria = postModel.Bacteria, Supplied = false };
@@ -202,10 +201,7 @@ namespace CAESGenome.Controllers
                 userJob.User = GetCurrentUser(true);
                 userJob.RechargeAccount = postModel.RechargeAccount;
 
-                foreach(var name in postModel.PlateNames)
-                {
-                    userJob.AddUserJobPlates(new UserJobPlate() {Name = name});
-                }
+                AddPlates(postModel.PlateNames, userJob, userJob.JobType);
 
                 _repositoryFactory.UserJobRepository.EnsurePersistent(userJob);
 
@@ -257,10 +253,7 @@ namespace CAESGenome.Controllers
                 userJob.User = GetCurrentUser(true);
                 userJob.RechargeAccount = postModel.RechargeAccount;
 
-                foreach(var name in postModel.PlateNames)
-                {
-                    userJob.AddUserJobPlates(new UserJobPlate() {Name = name});
-                }
+                AddPlates(postModel.PlateNames, userJob, userJob.JobType);
 
                 _repositoryFactory.UserJobRepository.EnsurePersistent(userJob);
 
@@ -307,7 +300,7 @@ namespace CAESGenome.Controllers
                 userJob.User = GetCurrentUser(true);
                 userJob.RechargeAccount = postModel.RechargeAccount;
 
-                userJob.AddUserJobPlates(new UserJobPlate(){Name = userJob.Name});
+                AddPlates(new List<string>() {userJob.Name}, userJob, userJob.JobType);
 
                 _repositoryFactory.UserJobRepository.EnsurePersistent(userJob);
 
@@ -346,6 +339,50 @@ namespace CAESGenome.Controllers
             if (postModel.Antibiotic == null)
             {
                 ModelState.AddModelError("PostModel.Antibiotic", "Antibiotic is required.");
+            }
+        }
+
+        /// <summary>
+        /// Adds the plates necessary for the original submission
+        /// </summary>
+        /// <param name="plateNames"></param>
+        /// <param name="userJob"></param>
+        private void AddPlates(List<string> plateNames, UserJob userJob, JobType jobType)
+        {
+            // figure out the stage
+            Stage stage = null;
+
+            switch(jobType.Id)
+            {
+                case (int)JobTypeIds.BacterialClone:
+                    stage = _repositoryFactory.StageRepository.GetNullableById(StageIds.BcWebSubmittedPlates);
+                    break;
+                case (int)JobTypeIds.PCRProduct:
+                    stage = _repositoryFactory.StageRepository.GetNullableById(StageIds.PcrWebSubmittedPlates);
+                    break;
+                case (int)JobTypeIds.UserRunSequencing:
+                    stage = _repositoryFactory.StageRepository.GetNullableById(StageIds.UrsWebSubmittedPlates);
+                    break;
+                case (int)JobTypeIds.PurifiedDna:
+                    stage = _repositoryFactory.StageRepository.GetNullableById(StageIds.PdWebSubmittedPlates);
+                    break;
+                case (int)JobTypeIds.Sublibrary:
+                    stage = _repositoryFactory.StageRepository.GetNullableById(StageIds.SlWebSubmittedPlates);
+                    break;
+            }
+
+            if (stage == null)
+            {
+                throw new ArgumentException("JobType");
+            }
+
+            foreach(var name in plateNames)
+            {
+                var plate = new UserJobPlate() {Name = name};
+                var barcode = new Barcode() {Stage = stage};
+
+                plate.AddBarcode(barcode);
+                userJob.AddUserJobPlates(plate);
             }
         }
     }
