@@ -139,7 +139,11 @@
                     </td>
                     <td>
                         @barcode.Id
-                        <a href="javascript:;" class="btn pull-right"><i class="icon-print"></i></a>
+                        
+                        @using(Html.BeginForm("PrintBarcode", "UserJob", new {id=barcode.Id}, FormMethod.Post, new {@class="pull-right"}))
+                        {
+                            <a href="javascript:;" class="btn hastip" title="Print barcode"><i class="icon-print"></i></a>
+                        }
                     </td>
                     <td>@barcode.PlateName</td>
                     <td>@barcode.SubPlateId</td>
