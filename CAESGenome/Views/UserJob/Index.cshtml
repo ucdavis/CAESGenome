@@ -1,4 +1,5 @@
-﻿@model IQueryable<UserJob>
+﻿@using CAESGenome.Core.Resources
+@model IList<UserJob>
 
 @{
     ViewBag.Title = "User Job History";
@@ -17,13 +18,13 @@
             <th>Name</th>
             <th>Job Type</th>
             <th>Plates</th>
-            <th>Comments</th>
+            @*<th>Comments</th>*@
             <th>Date</th>
             <th>Last Update</th>
         </tr>
     </thead>
     <tbody>
-        @foreach(var uj in Model.OrderBy(a => a.IsOpen).ThenBy(a => a.DateTimeCreated))
+        @foreach(var uj in Model)
         {
             <tr>
                 <td>
@@ -33,8 +34,8 @@
                 </td>
                 <td>@uj.Name</td>
                 <td>@uj.JobType.Name</td>
-                <td></td>
-                <td>@uj.Comments</td>
+                <td>@uj.UserJobPlates.Count</td>
+                @*<td>@uj.Comments</td>*@
                 <td>@uj.DateTimeCreated</td>
                 <td>@uj.LastUpdate</td>
             </tr>

@@ -2,12 +2,13 @@
 using CAESGenome.Core.Domain;
 using CAESGenome.Core.Repositories;
 using CAESGenome.Core.Resources;
+using CAESGenome.Filters;
 using CAESGenome.Models;
 using System.Linq;
 
 namespace CAESGenome.Controllers
 {
-    [Authorize(Roles = RoleNames.User)]
+    [UserOnly]
     public class GenotypingController : ApplicationController
     {
         private readonly IRepositoryFactory _repositoryFactory;

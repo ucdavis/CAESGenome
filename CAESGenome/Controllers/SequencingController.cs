@@ -5,11 +5,12 @@ using System.Web.Mvc;
 using CAESGenome.Core.Domain;
 using CAESGenome.Core.Repositories;
 using CAESGenome.Core.Resources;
+using CAESGenome.Filters;
 using CAESGenome.Models;
 
 namespace CAESGenome.Controllers
 {
-    [Authorize(Roles = RoleNames.User)]
+    [UserOnly]
     public class SequencingController : ApplicationController
     {
         private readonly IRepositoryFactory _repositoryFactory;

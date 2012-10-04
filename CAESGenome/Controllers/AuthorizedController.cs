@@ -2,10 +2,11 @@
 using System.Web.Mvc;
 using CAESGenome.Core.Repositories;
 using CAESGenome.Core.Resources;
+using CAESGenome.Filters;
 
 namespace CAESGenome.Controllers
 {
-    [Authorize(Roles = RoleNames.User)]
+    [UserOnly]
     public class AuthorizedController : ApplicationController
     {
         private readonly IRepositoryFactory _repositoryFactory;

@@ -1,11 +1,15 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
+using CAESGenome.Core.Domain;
 using CAESGenome.Core.Repositories;
+using CAESGenome.Core.Resources;
+using CAESGenome.Filters;
+using CAESGenome.Helpers;
 using CAESGenome.Services;
 
 namespace CAESGenome.Controllers
 {
-    //[Authorize(Roles = RoleNames.User)]
     public class UserJobController : ApplicationController
     {
         private readonly IRepositoryFactory _repositoryFactory;
@@ -17,13 +21,25 @@ namespace CAESGenome.Controllers
             _barcodeService = barcodeService;
         }
 
+        [StaffAndUserOnly]
         public ActionResult Index()
         {
-            var user = GetCurrentUser();
-            var userJobs = _repositoryFactory.UserJobRepository.Queryable.Where(a => a.User.Id == user.Id);
+            var userJobs = new List<UserJob>();
+
+            if (CurrentUser.IsInRole(RoleNames.Staff))
+            {
+                var user = GetCurrentUser();
+                userJobs = _repositoryFactory.UserJobRepository.Queryable.Where(a => a.User == user).OrderBy(a => a.IsOpen).OrderBy(a => a.DateTimeCreated).ToList();
+            }
+            else if (CurrentUser.IsInRole(RoleNames.User))
+            {
+                userJobs = _repositoryFactory.UserJobRepository.Queryable.Where(a => a.IsOpen).OrderBy(a => a.JobType.Id).ThenBy(a => a.DateTimeCreated).ToList();
+            }
+            
             return View(userJobs);
         }
 
+        [StaffAndUserOnly]
         public ActionResult Details(int id)
         {
             var uj = _repositoryFactory.UserJobRepository.GetNullableById(id);
@@ -37,6 +53,12 @@ namespace CAESGenome.Controllers
             return View(uj);
         }
 
+        /// <summary>
+        /// Advances barcode to the next intended stage
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [StaffOnly]
         [HttpPost]
         public ActionResult AdvanceBarcode(int id)
         {
@@ -58,6 +80,7 @@ namespace CAESGenome.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [StaffOnly]
         [HttpPost]
         public ActionResult PrintBarcode(int id)
         {
@@ -81,6 +104,7 @@ namespace CAESGenome.Controllers
         /// <param name="id">User job Id</param>
         /// <param name="stageId">Stage Id</param>
         /// <returns></returns>
+        [StaffOnly]
         [HttpPost]
         public ActionResult PrintStageBarcodes(int id, string stageId)
         {

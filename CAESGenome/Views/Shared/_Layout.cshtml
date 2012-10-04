@@ -29,6 +29,10 @@
                             {
                                 <li>@Html.ActionLink("PI", "Index", "PI")</li>
                             }
+                            @if(User.IsInRole(RoleNames.Staff))
+                            {
+                                <li>@Html.ActionLink("Staff", "Index", "Staff")</li>
+                            }
                             <li>@Html.ActionLink("Services", "Service", "Home")</li>
                             <li>@Html.ActionLink("Rates", "Rates", "Home")</li>
                             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>

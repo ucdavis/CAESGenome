@@ -218,6 +218,7 @@
     <Compile Include="Controllers\PrinterController.cs" />
     <Compile Include="Controllers\QbotController.cs" />
     <Compile Include="Controllers\SequencingController.cs" />
+    <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\UserJobController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -320,6 +321,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
+    <Compile Include="Filters\RoleFilters.cs" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery.bootstrapcheckbox.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -425,6 +427,7 @@
     <Content Include="Views\Shared\DisplayTemplates\Enum.cshtml" />
     <Content Include="Views\UserJob\_BacterialCloneDetails.cshtml" />
     <Content Include="Views\Printer\Print.cshtml" />
+    <Content Include="Views\Staff\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

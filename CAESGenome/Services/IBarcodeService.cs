@@ -88,6 +88,9 @@ namespace CAESGenome.Services
             barcode.Done = true;
 
             repositoryFactory.UserJobPlateRepository.EnsurePersistent(plate);
+            
+            userJob.LastUpdate = DateTime.Now;
+            repositoryFactory.UserJobRepository.EnsurePersistent(userJob);
         }
 
         public void AdvanceAllBarcodes(IRepositoryFactory repositoryFactory, UserJob userJob, Stage stage)
@@ -164,7 +167,7 @@ namespace CAESGenome.Services
             var address = IPAddress.Parse(_printer);
             var endPoint = new IPEndPoint(address, _printerPort);
 
-            var socket = new Socket(AddressFamily.InterNetywork, SocketType.Stream, ProtocolType.Tcp);
+            var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
             // all commands are for SATO CL412e Printer
 
