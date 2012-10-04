@@ -92,7 +92,7 @@ namespace CAESGenome.Controllers
                 return RedirectToAction("Index");
             }
 
-            _barcodeService.Print(barcode);
+            _barcodeService.Print(barcode.Id, barcode.PlateName);
 
             Message = "Label has been sent to the printer";
             return RedirectToAction("Details", new { id = barcode.UserJobPlate.UserJob.Id });
@@ -121,7 +121,7 @@ namespace CAESGenome.Controllers
 
             foreach(var b in barcodes)
             {
-                _barcodeService.Print(b);
+                _barcodeService.Print(b.Id, b.PlateName);
             }
 
             Message = "Labels have been sent to the printer";

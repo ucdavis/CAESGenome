@@ -31,5 +31,9 @@
     {
         @Html.Partial("_BacterialCloneDetails")
     }
+    @if(Model.JobType.DNASequencing)
+    {
+        @Html.Partial("_DnaDetails")
+    }
 
 </div>

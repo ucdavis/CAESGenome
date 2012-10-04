@@ -428,6 +428,7 @@
     <Content Include="Views\UserJob\_BacterialCloneDetails.cshtml" />
     <Content Include="Views\Printer\Print.cshtml" />
     <Content Include="Views\Staff\Index.cshtml" />
+    <Content Include="Views\UserJob\_PcrProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

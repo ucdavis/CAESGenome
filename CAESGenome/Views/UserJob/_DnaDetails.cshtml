@@ -1,0 +1,125 @@
+﻿@using CAESGenome.Core.Resources
+@model UserJob
+
+@helper DisplayStage(string stageId)
+{
+    switch(stageId)
+    {
+        case StageIds.PcrWebSubmittedPlates:
+            <div class="label">Web Submitted Plates</div>
+            break;
+        case StageIds.PcrPlateSubmission:
+            <div class="label label-info">Plate Submissions</div>
+            break;
+        case StageIds.PcrSequencingReaction:
+            <div class="label label-warning">Sequencing Reaction</div>
+            break;
+        case StageIds.Pcr3730xl:
+            <div class="label label-success">3730xl</div>
+            break;
+    }
+}
+
+<fieldset>
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="control-group">
+                @Html.LabelFor(model => model.RechargeAccount.AccountNum, new {@class = "control-label"})
+                <div class="controls form-text">
+                    @Html.DisplayFor(model => model.RechargeAccount.AccountNum)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.PlateType, new {@class = "control-label"})
+                <div class="controls form-text">
+                    @Html.DisplayFor(model => model.PlateType)
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="JobType" class="control-label">Job Type</label>
+                <div class="controls form-text">
+                    @Html.DisplayFor(model => model.JobType.Name)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.NumberPlates, new {@class = "control-label"})
+                <div class="controls form-text">
+                    @Html.DisplayFor(model => model.NumberPlates)
+                </div>
+            </div>
+        </div>
+        <div class="span6">
+            <div class="control-group">
+                @Html.LabelFor(model => model.UserJobDna.Primer1, new {@class = "control-label"})
+                <div class="controls form-text">
+                    @Html.DisplayFor(model => model.UserJobDna.Primer1.Name)
+                </div>
+            </div>
+        </div>
+        <div class="span12" style="margin-left: 0;">
+            <div class="control-group">
+                @Html.LabelFor(model => model.Comments, new {@class = "control-label"})
+                <div class="controls form-text">
+                    @Html.DisplayFor(model => model.Comments)
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<fieldset>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Barcode</th>
+                <th>Plate Name</th>
+                <th>Sub Plate Id</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Stage</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var barcode in Model.UserJobPlates.SelectMany(a => a.Barcodes).OrderBy(a => a.Stage.Order).ThenBy(a => a.UserJobPlate.Id))
+            {
+                <tr>
+                    <td>
+                        @if (!barcode.Done)
+                        {
+                            if (User.IsInRole(RoleNames.Staff))
+                            {
+                                using(Html.BeginForm("AdvanceBarcode", "UserJob", new {id=barcode.Id}, FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <a href="javascript:;" class="btn hastip advance" title="Advance Barcode to Next Stage"><i class="icon-check"></i></a>
+                                }        
+                            }
+                        }
+                    </td>
+                    <td>
+                        @barcode.Id
+                        
+                        @if (User.IsInRole(RoleNames.Staff))
+                        {
+                            using(Html.BeginForm("PrintBarcode", "UserJob", new {id=barcode.Id}, FormMethod.Post, new {@class="pull-right"}))
+                            {
+                                <a href="javascript:;" class="btn hastip" title="Print barcode"><i class="icon-print"></i></a>
+                            }    
+                        }
+                    </td>
+                    <td>@barcode.PlateName</td>
+                    <td>@barcode.SubPlateId</td>
+                    <td>@barcode.DateCreated.ToShortDateString()</td>
+                    <td>@(barcode.Done ? "Complete" : "Open")</td>
+                    <td>
+                        @DisplayStage(barcode.Stage.Id)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+</fieldset>

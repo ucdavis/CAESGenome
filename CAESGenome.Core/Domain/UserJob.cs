@@ -22,6 +22,7 @@ namespace CAESGenome.Core.Domain
         public virtual RechargeAccount RechargeAccount { get; set; }
         public virtual string Name { get; set; }
         public virtual JobType JobType { get; set; }
+        [Display(Name="# of Plates")]
         public virtual int NumberPlates { get; set; }
         [UIHint("Enum")]
         [Display(Name = "Plate Type")]

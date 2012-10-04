@@ -14,7 +14,9 @@ namespace CAESGenome.Core.Domain
 
         public virtual SequenceDirection SequenceDirection { get; set; }
         [Required]
+        [Display(Name = "Primer One")]
         public virtual Primer Primer1 { get; set; }
+        [Display(Name = "Primer Two")]
         public virtual Primer Primer2 { get; set; }
     }
 
