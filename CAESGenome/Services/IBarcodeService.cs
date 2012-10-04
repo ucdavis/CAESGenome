@@ -17,6 +17,7 @@ namespace CAESGenome.Services
         void AdvanceAllBarcodes(IRepositoryFactory repositoryFactory, UserJob userJob, Stage stage);
 
         void Print(Barcode barcode);
+        void Print(int id, string plateName);
     }
 
     public class BarcodeService : IBarcodeService
@@ -141,6 +142,59 @@ namespace CAESGenome.Services
                 socket.Send(Encoding.ASCII.GetBytes("V0100"));
                 // XM is font command for print CGF and data
                 socket.Send(Encoding.ASCII.GetBytes(string.Format("XMCGF {0}", barcode.Id)));
+                socket.Send(cmd);
+                // print 1 label
+                socket.Send(Encoding.ASCII.GetBytes("Q1"));
+                socket.Send(cmd);
+                // end of command
+                socket.Send(Encoding.ASCII.GetBytes("Z"));
+
+                // release the socket
+                socket.Shutdown(SocketShutdown.Both);
+                socket.Close();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public void Print(int id, string plateName)
+        {
+            var address = IPAddress.Parse(_printer);
+            var endPoint = new IPEndPoint(address, _printerPort);
+
+            var socket = new Socket(AddressFamily.InterNetywork, SocketType.Stream, ProtocolType.Tcp);
+
+            // all commands are for SATO CL412e Printer
+
+            try
+            {
+                // open connection
+                socket.Connect(endPoint);
+
+                // escape command
+                var cmd = Encoding.ASCII.GetBytes(Strings.Chr(27).ToString());
+
+                // trigger the printer
+                socket.Send(cmd);
+                // start of printer command
+                socket.Send(Encoding.ASCII.GetBytes("A"));
+                socket.Send(cmd);
+                // horizontal command
+                socket.Send(Encoding.ASCII.GetBytes("H0210"));
+                socket.Send(cmd);
+                // vertical command
+                socket.Send(Encoding.ASCII.GetBytes("V0010"));
+                socket.Send(cmd);
+                // BG is for printing barcode (code128)
+                socket.Send(Encoding.ASCII.GetBytes(string.Format("BG03090 {0} . {1}", plateName, id)));
+                socket.Send(cmd);
+                socket.Send(Encoding.ASCII.GetBytes("H0250"));
+                socket.Send(cmd);
+                socket.Send(Encoding.ASCII.GetBytes("V0100"));
+                // XM is font command for print CGF and data
+                socket.Send(Encoding.ASCII.GetBytes(string.Format("XMCGF {0}", id)));
                 socket.Send(cmd);
                 // print 1 label
                 socket.Send(Encoding.ASCII.GetBytes("Q1"));

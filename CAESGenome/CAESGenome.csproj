@@ -215,6 +215,7 @@
     <Compile Include="Controllers\GenotypingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PIController.cs" />
+    <Compile Include="Controllers\PrinterController.cs" />
     <Compile Include="Controllers\QbotController.cs" />
     <Compile Include="Controllers\SequencingController.cs" />
     <Compile Include="Controllers\UserJobController.cs" />
@@ -423,6 +424,7 @@
     <Content Include="Views\Qbot\_Gridding.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Enum.cshtml" />
     <Content Include="Views\UserJob\_BacterialCloneDetails.cshtml" />
+    <Content Include="Views\Printer\Print.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

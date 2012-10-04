@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Print Test";
+    ViewBag.SubPageTitle = "Print Test";
+}
+
+@using(Html.BeginForm("Print", "Printer", FormMethod.Post, new {@class="form-horizontal"}))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="control-group">
+        <fieldset>
+            <div class="control-group">
+                <label class="control-label">Id</label>
+                <div class="controls">
+                    <input type="number" id="id" name="id"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    <div class="controls">
+                        @Html.TextBox("Name")
+                    </div>
+                </label>
+            </div>
+        </fieldset>
+    </div>
+    
+    <div class="form-actions">
+        <input type="submit" value="Print"/>
+    </div>
+}
