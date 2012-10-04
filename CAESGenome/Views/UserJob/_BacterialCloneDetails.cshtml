@@ -1,28 +1,6 @@
 ﻿@using CAESGenome.Core.Resources
 @model UserJob
 
-@helper DisplayStage(string stageId)
-{
-    switch(stageId)
-    {
-        case StageIds.BcWebSubmittedPlates:
-            <div class="label">Web Submitted Plates</div>
-            break;
-        case StageIds.BcPlateSubmission:
-            <div class="label label-info">Plate Submissions</div>
-            break;
-        case StageIds.BcRca:
-            <div class="label label-important">RCA</div>
-            break;
-        case StageIds.BcSequencingReaction:
-            <div class="label label-warning">Sequencing Reaction</div>
-            break;
-        case StageIds.Bc3730xl:
-            <div class="label label-success">3730xl</div>
-            break;
-    }
-}
-
 <fieldset>
     
     <div class="row-fluid">
@@ -108,60 +86,4 @@
     
 </fieldset>
 
-<fieldset>
-    
-    <table class="table">
-        <thead>
-            <tr>
-                <th></th>
-                <th>Barcode</th>
-                <th>Plate Name</th>
-                <th>Sub Plate Id</th>
-                <th>Primer</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th>Stage</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach(var barcode in Model.UserJobPlates.SelectMany(a => a.Barcodes).OrderBy(a => a.Stage.Order).ThenBy(a => a.UserJobPlate.Id))
-            {
-                <tr>
-                    <td>
-                        @if (!barcode.Done)
-                        {
-                            if (User.IsInRole(RoleNames.Staff))
-                            {
-                                using(Html.BeginForm("AdvanceBarcode", "UserJob", new {id=barcode.Id}, FormMethod.Post))
-                                {
-                                    @Html.AntiForgeryToken()
-                                    <a href="javascript:;" class="btn hastip advance" title="Advance Barcode to Next Stage"><i class="icon-check"></i></a>
-                                }        
-                            }
-                        }
-                    </td>
-                    <td>
-                        @barcode.Id
-                        
-                        @if (User.IsInRole(RoleNames.Staff))
-                        {
-                            using(Html.BeginForm("PrintBarcode", "UserJob", new {id=barcode.Id}, FormMethod.Post, new {@class="pull-right"}))
-                            {
-                                <a href="javascript:;" class="btn hastip" title="Print barcode"><i class="icon-print"></i></a>
-                            }    
-                        }
-                    </td>
-                    <td>@barcode.PlateName</td>
-                    <td>@barcode.SubPlateId</td>
-                    <td>@(barcode.Primer != null ? barcode.Primer.Name : "n/a")</td>
-                    <td>@barcode.DateCreated.ToShortDateString()</td>
-                    <td>@(barcode.Done ? "Complete" : "Open")</td>
-                    <td>
-                        @DisplayStage(barcode.Stage.Id)
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-
-</fieldset>
+@Html.Partial("_UserJobPlates")

@@ -35,5 +35,9 @@
     {
         @Html.Partial("_DnaDetails")
     }
+    @if(Model.JobType.Id == (int)JobTypeIds.UserRunSequencing)
+    {
+        @Html.Partial("_UserRunDetails")
+    }
 
 </div>

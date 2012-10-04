@@ -33,9 +33,9 @@
         public const string Pd3730xl = "PD37";
         
         // Sublibrary
-        public const string SlWebSubmittedPlates = "URWP";
-        public const string SlPlateSubmission = "URPS";
-        public const string Sl3730xl = "UR37";
+        public const string SlWebSubmittedPlates = "SLWP";
+        public const string SlPlateSubmission = "SLPS";
+        public const string Sl3730xl = "SL37";
 
         // Genotyping
         public const string UgWebSubmittedPlates = "UGWP";
