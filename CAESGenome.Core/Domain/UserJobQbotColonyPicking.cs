@@ -1,4 +1,5 @@
-﻿using FluentNHibernate.Mapping;
+﻿using System.ComponentModel.DataAnnotations;
+using FluentNHibernate.Mapping;
 using UCDArch.Core.DomainModel;
 
 namespace CAESGenome.Core.Domain
@@ -7,10 +8,14 @@ namespace CAESGenome.Core.Domain
     {
         public virtual Vector Vector { get; set; }
         public virtual Strain Strain { get; set; }
+        [Display(Name = "# Q-Trays")]
         public virtual int? NumQTrays { get; set; }
+        [Display(Name = "Amount Glycerol Sample")]
         public virtual int NumGlycerol { get; set; }
+        [Display(Name="Glycerol Concentration")]
         public virtual string Concentration { get; set; }
         public virtual int Replication { get; set; }
+        [Display(Name="# colonies")]
         public virtual int NumColonies { get; set; }
     }
 

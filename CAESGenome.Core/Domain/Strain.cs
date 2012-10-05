@@ -8,6 +8,7 @@ namespace CAESGenome.Core.Domain
     {
         [Required]
         [StringLength(100)]
+        [Display(Name = "Host")]
         public virtual string Name { get; set; }
         public virtual bool Supplied { get; set; }
         [Required]

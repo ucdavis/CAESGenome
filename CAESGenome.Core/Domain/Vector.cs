@@ -8,6 +8,7 @@ namespace CAESGenome.Core.Domain
     {
         [Required]
         [StringLength(50)]
+        [Display(Name = "Vector")]
         public virtual string Name { get; set; }
 
         public virtual VectorType VectorType { get; set; }
