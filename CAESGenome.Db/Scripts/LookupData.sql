@@ -245,3 +245,23 @@ INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('Q
 INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('QRPS', 'Plate Submission', 2, 22, 1)
 INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('QGWP', 'Web Submitted Plates', 1, 23, 0)
 INSERT INTO [dbo].[Stages] (Id, Name, [Order], JobTypeId, IsComplete) VALUES ('QGPS', 'Plate Submission', 2, 23, 1)
+
+--
+-- Equipment
+--
+SET IDENTITY_INSERT [dbo].[Equipments] ON
+INSERT INTO [dbo].[Equipments] (Id, Name, Operator, IsReservable) VALUES (1, 'Q-Bot', 'User_notShown', 0)
+INSERT INTO [dbo].[Equipments] (Id, Name, Operator, IsReservable) VALUES (2, 'Tetrad', 'staff only', 0)
+INSERT INTO [dbo].[Equipments] (Id, Name, Operator, IsReservable) VALUES (3, 'Sequencer 28', 'staff', 0)
+INSERT INTO [dbo].[Equipments] (Id, Name, Operator, IsReservable) VALUES (4, 'Sequencer 22', 'staff', 0)
+INSERT INTO [dbo].[Equipments] (Id, Name, Operator, IsReservable, [Message]) VALUES (5, 'Bio Rad Gene Pulser', 'User', 0, 'You can drop in to use the Gene Pulser 30 minutes or less.')
+INSERT INTO [dbo].[Equipments] (Id, Name, Operator, IsReservable) VALUES (6, 'Centrifuge', 'staff', 0)
+INSERT INTO [dbo].[Equipments] (Id, Name, Operator, IsReservable) VALUES (7, 'Confocal Microscope', 'User', 1)
+INSERT INTO [dbo].[Equipments] (Id, Name, Operator, IsReservable, [Message]) VALUES (8, 'Hydro Shear', 'User', 0, 'Contact Jongmin (754-6490) to use this equipment.')
+INSERT INTO [dbo].[Equipments] (Id, Name, Operator, IsReservable) VALUES (9, 'I Cycler', 'Staff', 0)
+INSERT INTO [dbo].[Equipments] (Id, Name, Operator, IsReservable) VALUES (10, 'MJPCR', 'staff', 0)
+INSERT INTO [dbo].[Equipments] (Id, Name, Operator, IsReservable, [Message]) VALUES (11, 'Speed Vac', 'User', 0, 'Please contact Noelia (754-6616) to reserve this equipment.')
+INSERT INTO [dbo].[Equipments] (Id, Name, Operator, IsReservable, [Message]) VALUES (12, 'Gel Imager', 'User', 0, 'You can drop in to use the Gel Imager. No Sign Up needed.')
+INSERT INTO [dbo].[Equipments] (Id, Name, Operator, IsReservable, [Message]) VALUES (13, 'Hi Gro', 'User', 0, 'Contact Jongmin (754-6490) to use this equipment.')
+INSERT INTO [dbo].[Equipments] (Id, Name, Operator, IsReservable) VALUES (14, '3730', 'staff', 0)
+SET IDENTITY_INSERT [dbo].[Equipments] OFF

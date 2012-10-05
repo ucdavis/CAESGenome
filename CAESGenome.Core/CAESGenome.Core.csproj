@@ -70,6 +70,8 @@
     <Compile Include="Domain\Barcode.cs" />
     <Compile Include="Domain\Department.cs" />
     <Compile Include="Domain\Dye.cs" />
+    <Compile Include="Domain\Equipment.cs" />
+    <Compile Include="Domain\EquipmentReservation.cs" />
     <Compile Include="Domain\JobType.cs" />
     <Compile Include="Domain\Primer.cs" />
     <Compile Include="Domain\RechargeAccount.cs" />

@@ -212,6 +212,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\AuthorizedController.cs" />
+    <Compile Include="Controllers\EquipmentController.cs" />
     <Compile Include="Controllers\GenotypingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PIController.cs" />
@@ -226,6 +227,7 @@
     </Compile>
     <Compile Include="Helpers\AutomapperConfig.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\EquipmentViewModel.cs" />
     <Compile Include="Models\GenotypingViewModel.cs" />
     <Compile Include="Models\QbotViewModel.cs" />
     <Compile Include="Models\SelectListModel.cs" />
@@ -239,6 +241,7 @@
   <ItemGroup>
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="App_Start\NHibernateProfilerBootstrapper.vb" />
+    <Content Include="Content\Anytime.css" />
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -323,6 +326,7 @@
     <Content Include="favicon.ico" />
     <Compile Include="Filters\RoleFilters.cs" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\Anytime.js" />
     <Content Include="Scripts\jquery.bootstrapcheckbox.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-1.8.1.intellisense.js" />
@@ -437,6 +441,7 @@
     <Content Include="Views\UserJob\_Genotyping.cshtml" />
     <Content Include="Views\UserJob\_qbotReplicating.cshtml" />
     <Content Include="Views\UserJob\_qbotGridding.cshtml" />
+    <Content Include="Views\Equipment\Reserve.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -9,7 +9,9 @@ namespace CAESGenome.Core.Repositories
         IRepository<Bacteria> BacteriaRepository { get; set; }
         IRepository<Barcode> BarcodeRepository { get; set; } 
         IRepository<Department> DepartmentRepository { get; set; }
-        IRepository<Dye> DyeRepository { get; set; } 
+        IRepository<Dye> DyeRepository { get; set; }
+        IRepository<Equipment> EquipmentRepository { get; set; }
+        IRepository<EquipmentReservation> EquipmentReservationRepository { get; set; } 
         IRepository<JobType> JobTypeRepository { get; set; }
         IRepository<Primer> PrimerRepository { get; set; } 
         IRepository<RechargeAccount> RechargeAccountRepository { get; set; }
@@ -37,6 +39,8 @@ namespace CAESGenome.Core.Repositories
         public IRepository<Barcode> BarcodeRepository { get; set; }
         public IRepository<Department> DepartmentRepository { get; set; }
         public IRepository<Dye> DyeRepository { get; set; }
+        public IRepository<Equipment> EquipmentRepository { get; set; }
+        public IRepository<EquipmentReservation> EquipmentReservationRepository { get; set; }
         public IRepository<JobType> JobTypeRepository { get; set; }
         public IRepository<Primer> PrimerRepository { get; set; }
         public IRepository<RechargeAccount> RechargeAccountRepository { get; set; }

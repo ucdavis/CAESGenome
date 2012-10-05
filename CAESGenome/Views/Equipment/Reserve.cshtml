@@ -1,0 +1,86 @@
+﻿@model EquipmentViewModel
+
+@{
+    ViewBag.Title = "Reserve Equipment";
+    ViewBag.SubPageTitle = "Reserve Equipment";
+}
+
+@section scripts
+{
+    @if(Model.Equipment != null && Model.Equipment.IsReservable)
+    {
+        <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/Anytime.css")"/>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/Anytime.js")"></script>
+    
+        <script type="text/javascript">
+            $(function () {
+                $("input[type='datetime']").each(function (index, item) {
+                
+                    // empty the boxes if it's "default"
+                    if (new Date($(item).val()).toDateString() == "Mon Jan 01 2001") {
+                        $(item).val('');
+                    }
+
+                    AnyTime.picker($(item).attr("id"));
+                });
+            });
+        </script>    
+    }
+}
+
+@if (Model.Equipment == null)
+{
+    <p>
+        This is available equipment in our lab.
+    </p>
+    
+    <ul class="circle">
+        @foreach(var eq in Model.Equipments)
+        {
+            <li>@Html.ActionLink(eq.Name, "Reserve", new {id=eq.Id})</li>            
+        }
+    </ul>
+}
+else
+{
+    if (Model.Equipment.IsReservable)
+    {
+        using(Html.BeginForm("Reserve", "Equipment", new {id = Model.Equipment.Id}, FormMethod.Post, new {@class="form-horizontal"}))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="control-group">
+                <fieldset>
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.Equipment.Name, new {@class = "control-label"})
+                        <div class="controls form-text">
+                            @Html.DisplayFor(model => model.Equipment.Name)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.EquipmentReservation.Start, new {@class = "control-label"})
+                        <div class="controls">
+                            @Html.EditorFor(model => model.EquipmentReservation.Start)
+                            @Html.ValidationMessageFor(model => model.EquipmentReservation.Start)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.EquipmentReservation.End, new {@class = "control-label"})
+                        <div class="controls">
+                            @Html.EditorFor(model => model.EquipmentReservation.End)
+                            @Html.ValidationMessageFor(model => model.EquipmentReservation.End)
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+    
+            <div class="form-actions">
+                <input type="submit" class="btn btn-primary" value="Submit Reservation"/>
+                @Html.ActionLink("Cancel", "Index", "Authorized", new {}, new {@class="btn"})
+            </div>
+        }
+    }
+    else
+    {
+    }
+}

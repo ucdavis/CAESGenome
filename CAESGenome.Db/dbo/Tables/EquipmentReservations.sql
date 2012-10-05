@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[EquipmentReservations]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [UserId] INT NOT NULL, 
     [EquipmentId] INT NOT NULL, 
     [DateSubmitted] DATETIME NOT NULL DEFAULT getdate(), 
