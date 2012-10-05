@@ -107,6 +107,13 @@ namespace CAESGenome.Controllers
                     userJob.UserJobQbotColonyPicking.Vector = vector;
                 }
 
+                // add plate
+                var stage = _repositoryFactory.StageRepository.GetNullableById(StageIds.QpWebSubmittedPlates);
+                var barcode = new Barcode() {Stage = stage};
+                var userJobPlate = new UserJobPlate() {Name = userJob.Name};
+                userJobPlate.AddBarcode(barcode);
+                userJob.AddUserJobPlates(userJobPlate);
+
                 _repositoryFactory.UserJobRepository.EnsurePersistent(userJob);
 
                 return true;
@@ -161,6 +168,13 @@ namespace CAESGenome.Controllers
                     var vector = new Vector() { Name = postModel.NewVector, VectorType = postModel.VectorType, Antibiotic1 = postModel.Antibiotic1, Antibiotic2 = postModel.Antibiotic2 };
                     userJob.UserJobQbotReplicating.Vector = vector;
                 }
+
+                // add plate
+                var stage = _repositoryFactory.StageRepository.GetNullableById(StageIds.QrWebSubmittedPlates);
+                var barcode = new Barcode() { Stage = stage };
+                var userJobPlate = new UserJobPlate() { Name = userJob.Name };
+                userJobPlate.AddBarcode(barcode);
+                userJob.AddUserJobPlates(userJobPlate);
 
                 _repositoryFactory.UserJobRepository.EnsurePersistent(userJob);
 
@@ -229,6 +243,13 @@ namespace CAESGenome.Controllers
                     var strain = new Strain() { Name = postModel.NewStrain, Bacteria = postModel.Bacteria, Supplied = false };
                     userJob.UserJobQbotGridding.Strain = strain;
                 }
+
+                // add plate
+                var stage = _repositoryFactory.StageRepository.GetNullableById(StageIds.QgWebSubmittedPlates);
+                var barcode = new Barcode() { Stage = stage };
+                var userJobPlate = new UserJobPlate() { Name = userJob.Name };
+                userJobPlate.AddBarcode(barcode);
+                userJob.AddUserJobPlates(userJobPlate);
 
                 _repositoryFactory.UserJobRepository.EnsurePersistent(userJob);
 
