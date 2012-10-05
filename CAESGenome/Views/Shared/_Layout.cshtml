@@ -23,15 +23,56 @@
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
                             @if(User.IsInRole(RoleNames.User))
                             {
-                                <li>@Html.ActionLink("User", "Index", "Authorized")</li>
+                                
+                                
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">User</a>
+                                    <b class="caret"></b>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("User Home", "Index", "Authorized")</li>
+                                        <li class="divider"></li>
+                                        <li class="nav-header">Job Submission</li>
+                                        <li>@Html.ActionLink("Submit Sequencing Job", "Create", "Sequencing")</li>
+                                        <li>@Html.ActionLink("Submit Genotyping Job", "Create", "Genotyping")</li>
+                                        <li>@Html.ActionLink("Submit Qbot Job", "Create", "Qbot")</li>
+                                        <li class="divider"></li>
+                                        <li class="nav-header">Job History</li>
+                                        <li>@Html.ActionLink("Open Jobs", "Index", "UserJob")</li>
+                                    </ul>
+                                </li>
+                                
                             }
                             @if(User.IsInRole(RoleNames.PI))
                             {
-                                <li>@Html.ActionLink("PI", "Index", "PI")</li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">PI</a>
+                                    <b class="caret"></b>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("PI Home", "Index", "PI")</li>
+                                        <li>@Html.ActionLink("Manage Users", "Users", "PI")</li>
+                                        <li>@Html.ActionLink("Recharge Accounts", "RechargeAccounts", "PI")</li>
+                                    </ul>
+                                </li>
+                                
                             }
                             @if(User.IsInRole(RoleNames.Staff))
                             {
-                                <li>@Html.ActionLink("Staff", "Index", "Staff")</li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Staff</a>
+                                    <b class="caret"></b>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("Staff Home", "Index", "Staff")</li>
+                                        <li class="divider"></li>
+                                        <li class="nav-header">Jobs</li>
+                                        <li>@Html.ActionLink("On-Going Jobs", "Index", "UserJob")</li>
+                                        <li><a href="#">Completed Jobs</a></li>
+                                        <li><a href="#">Monthly Stats</a></li>
+                                        <li class="divider"></li>
+                                        <li class="nav-header">Confocal Microscope</li>
+                                        <li><a href="#">Schedule</a></li>
+                                        <li><a href="#">Monthly Usage</a></li>
+                                    </ul>
+                                </li>
                             }
                             <li>@Html.ActionLink("Services", "Service", "Home")</li>
                             <li>@Html.ActionLink("Rates", "Rates", "Home")</li>

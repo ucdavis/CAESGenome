@@ -26,7 +26,6 @@ namespace CAESGenome.Controllers
 
         public ActionResult Index()
         {
-            Message = "Hellp";
             return View();
         }
 
