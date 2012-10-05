@@ -39,5 +39,20 @@
     {
         @Html.Partial("_UserRunDetails")
     }
-
+    @if(Model.JobType.Id == (int)JobTypeIds.UserRuneGenotyping)
+    {
+        @Html.Partial("_Genotyping")
+    }
+    @if(Model.JobType.Id == (int)JobTypeIds.QbotColonyPicking)
+    {
+        @Html.Partial("_qbotColonyPickingDetails")
+    }
+    @if(Model.JobType.Id == (int)JobTypeIds.QbotPlateReplicating)
+    {
+        @Html.Partial("_qbotReplicating")
+    }
+    @if(Model.JobType.Id == (int)JobTypeIds.QbotGridding)
+    {
+        @Html.Partial("_qbotGridding")
+    }
 </div>

@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using FluentNHibernate.Mapping;
 using UCDArch.Core.DomainModel;
 
@@ -12,6 +14,12 @@ namespace CAESGenome.Core.Domain
         }
 
         public virtual IList<Dye> Dyes { get; set; }
+
+        [Display(Name="Dye(s)")]
+        public virtual string DyeNames
+        {
+            get { return string.Join(", ", Dyes.Select(a => a.Name)); }
+        }
     }
 
     public class UserJobGenotypingMap : ClassMap<UserJobGenotyping>

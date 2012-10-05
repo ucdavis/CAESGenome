@@ -1,4 +1,5 @@
-﻿using CAESGenome.Core.Resources;
+﻿using System.ComponentModel.DataAnnotations;
+using CAESGenome.Core.Resources;
 using FluentNHibernate.Mapping;
 using UCDArch.Core.DomainModel;
 
@@ -9,8 +10,11 @@ namespace CAESGenome.Core.Domain
         public virtual Vector Vector { get; set; }
         public virtual Strain Strain { get; set; }
 
+        [Display(Name="# Source Plates")]
         public virtual int NumSourcePlates { get; set; }
+        [Display(Name = "Destination Plate Type")]
         public virtual PlateTypes DestinationPlateType { get; set; }
+        [Display(Name="# Copies")]
         public virtual int NumCopies { get; set; }
     }
 

@@ -431,6 +431,12 @@
     <Content Include="Views\UserJob\_DnaDetails.cshtml" />
     <Content Include="Views\UserJob\_UserRunDetails.cshtml" />
     <Content Include="Views\UserJob\_UserJobPlates.cshtml" />
+    <Content Include="Views\UserJob\_basicFieldsDetails.cshtml" />
+    <Content Include="Views\UserJob\_CommentDetails.cshtml" />
+    <Content Include="Views\UserJob\_qbotColonyPickingDetails.cshtml" />
+    <Content Include="Views\UserJob\_Genotyping.cshtml" />
+    <Content Include="Views\UserJob\_qbotReplicating.cshtml" />
+    <Content Include="Views\UserJob\_qbotGridding.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

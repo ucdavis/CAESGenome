@@ -1,0 +1,20 @@
+﻿@model UserJob
+
+<fieldset>
+    <div class="row-fluid">
+        <div class="span6">
+           @Html.Partial("_basicFieldsDetails")
+        </div>
+        <div class="span6">
+            <div class="control-group">
+                @Html.LabelFor(model => model.UserJobGenotyping.DyeNames, new {@class = "control-label"})
+                <div class="controls form-text">
+                    @Html.DisplayFor(model => model.UserJobGenotyping.DyeNames)
+                </div>
+            </div>
+        </div>
+        @Html.Partial("_CommentDetails")
+    </div>
+</fieldset>
+
+@Html.Partial("_UserJobPlates")

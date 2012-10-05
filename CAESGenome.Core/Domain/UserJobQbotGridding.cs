@@ -1,4 +1,6 @@
-﻿using CAESGenome.Core.Resources;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using CAESGenome.Core.Resources;
 using FluentNHibernate.Mapping;
 using UCDArch.Core.DomainModel;
 
@@ -9,7 +11,10 @@ namespace CAESGenome.Core.Domain
         public virtual Vector Vector { get; set; }
         public virtual Strain Strain { get; set; }
 
+        [Display(Name="# Membrane Copies")]
         public virtual int NumMembraneCopies { get; set; }
+        [UIHint("Enum")]
+        [Display(Name = "Gridding Pattern")]
         public virtual GriddingPattern GriddingPattern { get; set; }
     }
 

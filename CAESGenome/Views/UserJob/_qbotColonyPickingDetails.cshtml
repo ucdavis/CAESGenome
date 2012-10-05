@@ -1,0 +1,60 @@
+﻿@using CAESGenome.Core.Resources
+@model UserJob
+
+<fieldset>
+    
+    <div class="row-fluid">
+        <div class="span6">
+            @Html.Partial("_basicFieldsDetails")
+        </div>
+        <div class="span6">
+            @if(Model.PlateType == PlateTypes.QTray)
+            {
+                <div class="control-group">
+                    @Html.LabelFor(model => model.UserJobQbotColonyPicking.NumQTrays, new {@class = "control-label"})
+                    <div class="controls form-text">
+                        @Html.DisplayFor(model => model.UserJobQbotColonyPicking.NumQTrays)
+                    </div>
+                </div>
+            }
+            @if(Model.PlateType == PlateTypes.GlycerolStock)
+            {
+                <div class="control-group">
+                    @Html.LabelFor(model => model.UserJobQbotColonyPicking.Concentration, new {@class = "control-label"})
+                    <div class="controls form-text">
+                        @Html.DisplayFor(model => model.UserJobQbotColonyPicking.Concentration)
+                    </div>
+                </div>
+                <div class="control-group">
+                    @Html.LabelFor(model => model.UserJobQbotColonyPicking.NumGlycerol, new {@class = "control-label"})
+                    <div class="controls form-text">
+                        @Html.DisplayFor(model => model.UserJobQbotColonyPicking.NumGlycerol)
+                    </div>
+                </div>
+            }
+            
+            <div class="control-group">
+                @Html.LabelFor(model => model.UserJobQbotColonyPicking.Replication, new {@class = "control-label"})
+                <div class="controls form-text">
+                    @Html.DisplayFor(model => model.UserJobQbotColonyPicking.Replication)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.UserJobQbotColonyPicking.Vector.Name, new {@class = "control-label"})
+                <div class="controls form-text">
+                    @Html.DisplayFor(model => model.UserJobQbotColonyPicking.Vector.Name)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.UserJobQbotColonyPicking.Strain.Name, new {@class = "control-label"})
+                <div class="controls form-text">
+                    @Html.DisplayFor(model => model.UserJobQbotColonyPicking.Strain.Name)
+                </div>
+            </div>
+        </div>
+        @Html.Partial("_CommentDetails")
+    </div>
+    
+</fieldset>
+
+@Html.Partial("_UserJobPlates")

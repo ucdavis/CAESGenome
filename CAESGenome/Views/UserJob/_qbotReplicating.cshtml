@@ -1,0 +1,38 @@
+﻿@model UserJob
+
+<fieldset>
+    <div class="row-fluid">
+        <div class="span6">
+           @Html.Partial("_basicFieldsDetails")
+        </div>
+        <div class="span6">
+            <div class="control-group">
+                @Html.LabelFor(model => model.UserJobQbotReplicating.NumCopies, new {@class = "control-label"})
+                <div class="controls form-text">
+                    @Html.DisplayFor(model => model.UserJobQbotReplicating.NumCopies)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.UserJobQbotReplicating.DestinationPlateType, new {@class = "control-label"})
+                <div class="controls form-text">
+                    @Html.DisplayFor(model => model.UserJobQbotReplicating.DestinationPlateType)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.UserJobQbotReplicating.Vector.Name, new {@class = "control-label"})
+                <div class="controls form-text">
+                    @Html.DisplayFor(model => model.UserJobQbotReplicating.Vector.Name)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.UserJobQbotReplicating.Strain.Name, new {@class = "control-label"})
+                <div class="controls form-text">
+                    @Html.DisplayFor(model => model.UserJobQbotReplicating.Strain.Name)
+                </div>
+            </div>
+        </div>
+        @Html.Partial("_CommentDetails")
+    </div>
+</fieldset>
+
+@Html.Partial("_UserJobPlates")
