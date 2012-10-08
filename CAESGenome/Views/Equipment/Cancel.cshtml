@@ -1,0 +1,43 @@
+﻿@model EquipmentReservation
+
+@{
+    ViewBag.Title = "Cancel Reservation";
+    ViewBag.SubPageTitle = "Cancel Reservation";
+}
+
+<p>
+    Are you sure you want to cancel your reservation?
+</p>
+
+@using(Html.BeginForm("Cancel", "Equipment", new {id=Model.Id}, FormMethod.Post, new {@class="form-horizontal"}))
+{
+    @Html.AntiForgeryToken()   
+    
+    <div class="control-group">
+        <fieldset>
+            <div class="control-group">
+                @Html.LabelFor(model => model.Equipment.Name, new {@class = "control-label"})
+                <div class="controls form-text">
+                    @Html.DisplayFor(model => model.Equipment.Name)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.Start, new {@class = "control-label"})
+                <div class="controls form-text">
+                    @Html.DisplayFor(model => model.Start)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.End, new {@class = "control-label"})
+                <div class="controls form-text">
+                    @Html.DisplayFor(model => model.End)
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    
+    <div class="form-actions">
+        <input type="submit" class="btn btn-danger" value="Cancel Reservation"/>
+        @Html.ActionLink("Cancel", "Reservations", "Equipment", new {}, new {@class="btn"})
+    </div>
+}

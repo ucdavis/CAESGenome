@@ -1,0 +1,53 @@
+﻿@model IQueryable<EquipmentReservation>
+
+@{
+    ViewBag.Title = "Equipment Reservations";
+    ViewBag.SubPageTitle = "Equipment Reservations";
+}
+
+@section scripts
+{
+    @Html.Partial("_dataTables");
+}
+
+<table class="table table-striped table-bordered default_table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Equipment</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Date Submitted</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var er in Model)
+        {
+            <tr>
+                <td>
+                    @if(!er.Cancelled)
+                    {
+                        <a href="@Url.Action("Cancel", new {id=er.Id})" class="btn btn-danger hastip" title="Cancel Appointment">
+                            <i class="icon-remove-circle"></i>
+                        </a>    
+                    }
+                </td>
+                <td>@er.Equipment.Name</td>
+                <td>@er.Start</td>
+                <td>@er.End</td>
+                <td>@er.DateSubmitted</td>
+                <td>
+                    @if(!er.Cancelled)
+                    {
+                        <div class="label label-success">Scheduled</div>
+                    }
+                    else
+                    {
+                        <div class="label label-important">Cancelled</div>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -56,5 +56,43 @@ namespace CAESGenome.Controllers
             var viewModel = EquipmentViewModel.Create(_repositoryFactory, equipment, equipmentReservation);
             return View(viewModel);
         }
+
+        public ActionResult Reservations()
+        {
+            var user = GetCurrentUser();
+            var reservations = _repositoryFactory.EquipmentReservationRepository.Queryable.Where(a => a.User == user).OrderBy(a => a.Start);
+            return View(reservations);
+        }
+
+        public ActionResult Cancel(int id)
+        {
+            var reservation = _repositoryFactory.EquipmentReservationRepository.GetNullableById(id);
+            
+            if (reservation == null)
+            {
+                Message = "Unable to load requested reservation.";
+                return RedirectToAction("Reservations");
+            }
+
+            return View(reservation);
+        }
+
+        [HttpPost]
+        public ActionResult Cancel(int id, bool? cancel)
+        {
+            var reservation = _repositoryFactory.EquipmentReservationRepository.GetNullableById(id);
+
+            if (reservation == null)
+            {
+                Message = "Unable to load requested reservation.";
+                return RedirectToAction("Reservations");
+            }
+
+            reservation.Cancelled = true;
+            _repositoryFactory.EquipmentReservationRepository.EnsurePersistent(reservation);
+
+            Message = "Reservation has been cancelled.";
+            return RedirectToAction("Reservations");
+        }
     }
 }

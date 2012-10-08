@@ -442,6 +442,8 @@
     <Content Include="Views\UserJob\_qbotReplicating.cshtml" />
     <Content Include="Views\UserJob\_qbotGridding.cshtml" />
     <Content Include="Views\Equipment\Reserve.cshtml" />
+    <Content Include="Views\Equipment\Reservations.cshtml" />
+    <Content Include="Views\Equipment\Cancel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -10,6 +10,7 @@ namespace CAESGenome.Core.Domain
         public EquipmentReservation()
         {
             DateSubmitted = DateTime.Now;
+            Cancelled = false;
         }
 
         [Required]
@@ -21,6 +22,8 @@ namespace CAESGenome.Core.Domain
         public virtual DateTime Start { get; set; }
         [DataType(DataType.DateTime)]
         public virtual DateTime End { get; set; }
+
+        public virtual bool Cancelled { get; set; }
     }
 
     public class EquipmentReservationMap : ClassMap<EquipmentReservation>
@@ -34,6 +37,7 @@ namespace CAESGenome.Core.Domain
             Map(x => x.DateSubmitted);
             Map(x => x.Start).Column("`Start`");
             Map(x => x.End).Column("`End`");
+            Map(x => x.Cancelled);
         }
     }
 }

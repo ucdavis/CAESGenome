@@ -15,3 +15,7 @@ a.btn.btn-success, a.btn.btn-info, a.btn.btn-warning, a.btn.btn-danger, a.btn.bt
 .control-group .required { color: red; }
 
 #newvector, #newstrain{ border: 1px solid green;padding-top: 20px;margin-bottom: 20px;}
+
+/* Menu Styles */
+ul#menu li .divider, ul#menu li .nav-header { display: block;padding-left: 0;}
+ul#menu li.dropdown.open ul.dropdown-menu li {display: block; padding-top: 0;padding-bottom: 0;}
