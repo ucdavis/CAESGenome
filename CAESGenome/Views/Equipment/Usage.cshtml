@@ -6,7 +6,7 @@
     ViewBag.SubPageTitle = "Equipment Usage";
 
     var years = Model.SelectMany(a => a.EquipmentReservations).Select(a => a.Start.Year).Distinct().ToList();
-    var months = new string[] {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+    var months = new string[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
 }
 
 @section scripts

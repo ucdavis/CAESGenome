@@ -1,0 +1,37 @@
+﻿@model IQueryable<UserJob>
+
+@{
+    ViewBag.Title = "Monthly User Jobs";
+    ViewBag.SubPageTitle = "Monthly User Jobs";
+}
+
+@section scripts
+{
+    @Html.Partial("_dataTables")
+}
+
+<table class="default_table table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th></th>
+            <th>User Name</th>
+            <th>Job Type</th>
+            <th>Job Name</th>
+            <th>Date Submitted</th>
+            <th>Last Update</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var job in Model)
+        {
+            <tr>
+                <td></td>
+                <td>@job.User.FullName</td>
+                <td>@job.JobType.Name</td>
+                <td>@job.Name</td>
+                <td>@job.DateTimeCreated.ToShortDateString()</td>
+                <td>@job.LastUpdate.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using CAESGenome.Core.Resources;
 using FluentNHibernate.Mapping;
 using UCDArch.Core.DomainModel;

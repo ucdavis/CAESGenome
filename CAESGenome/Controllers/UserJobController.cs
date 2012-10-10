@@ -4,8 +4,7 @@ using System.Web.Mvc;
 using CAESGenome.Core.Domain;
 using CAESGenome.Core.Repositories;
 using CAESGenome.Core.Resources;
-using CAESGenome.Filters;
-using CAESGenome.Helpers;
+using CAESGenome.Models;
 using CAESGenome.Services;
 
 namespace CAESGenome.Controllers
@@ -128,5 +127,30 @@ namespace CAESGenome.Controllers
             return RedirectToAction("Details", new { id = userJob.Id });
         }
 
+        [Authorize(Roles = RoleNames.Staff)]
+        public ActionResult Completed()
+        {
+            var results = new List<UsageDetailsModel>();
+
+            // get the years
+            var years = _repositoryFactory.UserJobRepository.Queryable.Where(a => !a.IsOpen).Select(a => a.DateTimeCreated.Year).Distinct();
+            
+            foreach(var y in years)
+            {
+                var jobs = _repositoryFactory.UserJobRepository.Queryable.Where(a => a.DateTimeCreated.Year == y).GroupBy(
+                        a => a.DateTimeCreated.Month).Select(a => new UsageDetailsModel() {Year = y, Month = a.Key, Count = a.Count()});
+
+                results.AddRange(jobs);
+            }
+            
+            return View(results);
+        }
+
+        [Authorize(Roles = RoleNames.Staff)]
+        public ActionResult MonthlyDetails(int year, int month)
+        {
+            var jobs = _repositoryFactory.UserJobRepository.Queryable.Where(a => a.DateTimeCreated.Year == year && a.DateTimeCreated.Month == month && !a.IsOpen);
+            return View(jobs);
+        }
     }
 }

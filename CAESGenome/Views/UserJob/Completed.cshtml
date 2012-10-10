@@ -1,0 +1,44 @@
+﻿@model List<UsageDetailsModel>
+
+@{
+    ViewBag.Title = "Completed Jobs";
+    ViewBag.SubPageTitle = "Completed Jobs";
+
+    var years = Model.Select(a => a.Year).Distinct().OrderBy(a => a);
+    var months = new string[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+}
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <th></th>
+        @foreach(var m in months)
+        {
+            <th>@m</th>
+        }
+    </thead>
+    <tbody>
+        @foreach(var y in years)
+        {
+            <tr>
+                <th>@y</th>
+                @for(var i = 1; i <= 12; i++)
+                {
+                    var month = Model.FirstOrDefault(a => a.Year == y && a.Month == i);
+                    
+                    <td>
+                        @if (month.Count > 0)
+                        {
+                            @Html.ActionLink(month.Count.ToString(), "MonthlyDetails", new {year = y, month = i})
+                        }
+                        else
+                        {
+                            @(month != null ? month.Count : 0)    
+                        }
+                        
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+

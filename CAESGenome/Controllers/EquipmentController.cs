@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using CAESGenome.Core.Domain;
 using CAESGenome.Core.Repositories;
 using CAESGenome.Core.Resources;
-using CAESGenome.Filters;
 using CAESGenome.Models;
 using UCDArch.Web.ActionResults;
 using UCDArch.Web.Helpers;
