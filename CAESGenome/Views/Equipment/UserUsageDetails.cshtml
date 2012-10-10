@@ -1,0 +1,31 @@
+﻿@model IQueryable<EquipmentReservation>
+
+@{
+    ViewBag.Title = "User Equipment Usage";
+    ViewBag.SubPageTitle = "User Equipment Usage";
+}
+
+@section SubPageMenu
+{
+    <ul class="nav nav-pills">
+        <li>@Html.ActionLink("Back to Usage", "Usage")</li>
+    </ul>
+}
+
+<h3>@ViewBag.UserName</h3>
+
+@if(Model.Any())
+{
+    <ul>
+        @foreach(var res in Model)
+        {
+            <li>
+                @(string.Format("{0} - {1} for {2}", res.Start, res.End, res.Equipment.Name))
+            </li>
+        }
+    </ul>    
+}
+else
+{
+    <p>User has no reservation information.</p>
+}

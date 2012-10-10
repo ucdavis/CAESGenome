@@ -444,6 +444,9 @@
     <Content Include="Views\Equipment\Reservations.cshtml" />
     <Content Include="Views\Equipment\Cancel.cshtml" />
     <Content Include="Views\Equipment\Schedule.cshtml" />
+    <Content Include="Views\Equipment\Usage.cshtml" />
+    <Content Include="Views\Shared\_Navigation.cshtml" />
+    <Content Include="Views\Equipment\UserUsageDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

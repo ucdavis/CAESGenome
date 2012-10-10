@@ -1,0 +1,92 @@
+﻿@using System.Linq
+@model IQueryable<Equipment>
+
+@{
+    ViewBag.Title = "Equipment Usage";
+    ViewBag.SubPageTitle = "Equipment Usage";
+
+    var years = Model.SelectMany(a => a.EquipmentReservations).Select(a => a.Start.Year).Distinct().ToList();
+    var months = new string[] {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+
+        var loadUrl = '@Url.Action("LoadUsageDetails")';
+        var userDetailsUrl = '@Url.Action("UserUsageDetails")';
+
+        $(function () {
+
+            $("#dialog").dialog({ autoOpen: false, width: 500 });
+
+            $(".hours").click(function (event) {
+
+                var year = $(this).data('year');
+                var month = $(this).data('month');
+
+                $.get(loadUrl, { year: year, month: month }, function (result) {
+                    $("#dialog").empty();
+                    
+                    for(i = 0; i < result.length; i++) {
+                        $("#dialog").append($("<h5>").html(result[i].EquipmentName));
+
+                        var $ul = $("<ul>");
+                        for(j = 0; j < result[i].Reservations.length; j++) {
+                            var $li = $("<li>");
+                            $li.html(result[i].Reservations[j].Start + "-" + result[i].Reservations[j].End + " by ");
+                            $li.append($("<a>").html(result[i].Reservations[j].UserName).attr("href", userDetailsUrl + "/" + result[i].Reservations[j].UserId));
+                            $ul.append($li);
+                        }
+
+                        $("#dialog").append($ul);
+                    }
+
+                    $("#dialog").dialog('open');                   
+                });
+
+                event.preventDefault();
+            });
+
+        });
+    </script>
+}
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <th></th>
+        @foreach(var m in months)
+        {
+            <th>@m</th>
+        }
+    </thead>
+    <tbody>
+        @foreach(var y in years)
+        {
+            <tr>
+                <th>@y</th>
+                @for(var i = 1; i <= 12; i++)
+                {
+                    var hours = Enumerable.Sum(Model.SelectMany(a => a.EquipmentReservations).Where(b => b.Start.Year == y && b.Start.Month == i), reservation => (reservation.End - reservation.Start).TotalHours);
+
+                    <td>
+                        @if(hours > 0)
+                        {
+                            <a href="#" class="hours" data-year="@y" data-month="@i">
+                                @Math.Round(hours)
+                            </a>    
+                        }
+                        else
+                        {
+                            <text>@Math.Round(hours)</text>
+                        }
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div id="dialog" title="Monthly Usage">
+    
+</div>
