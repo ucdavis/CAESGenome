@@ -10,8 +10,12 @@
     @if(Model.Equipment != null && Model.Equipment.IsReservable)
     {
         <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/Anytime.css")"/>
+        <style type="text/css">
+            /* Override of UI style */
+            .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { font-size: 10px;}
+        </style>
         <script type="text/javascript" src="@Url.Content("~/Scripts/Anytime.js")"></script>
-    
+        
         <script type="text/javascript">
             $(function () {
                 $("input[type='datetime']").each(function (index, item) {
@@ -24,7 +28,7 @@
                     AnyTime.picker($(item).attr("id"));
                 });
             });
-        </script>    
+        </script>          
     }
 }
 
@@ -35,9 +39,9 @@
     </p>
     
     <ul class="circle">
-        @foreach(var eq in Model.Equipments)
+        @foreach (var eq in Model.Equipments)
         {
-            <li>@Html.ActionLink(eq.Name, "Reserve", new {id=eq.Id})</li>            
+            <li>@Html.ActionLink(eq.Name, "Reserve", new { id = eq.Id })</li>            
         }
     </ul>
 }
@@ -45,27 +49,27 @@ else
 {
     if (Model.Equipment.IsReservable)
     {
-        using(Html.BeginForm("Reserve", "Equipment", new {id = Model.Equipment.Id}, FormMethod.Post, new {@class="form-horizontal"}))
+        using (Html.BeginForm("Reserve", "Equipment", new { id = Model.Equipment.Id }, FormMethod.Post, new { @class = "form-horizontal" }))
         {
             @Html.AntiForgeryToken()
 
             <div class="control-group">
                 <fieldset>
                     <div class="control-group">
-                        @Html.LabelFor(model => model.Equipment.Name, new {@class = "control-label"})
+                        @Html.LabelFor(model => model.Equipment.Name, new { @class = "control-label" })
                         <div class="controls form-text">
                             @Html.DisplayFor(model => model.Equipment.Name)
                         </div>
                     </div>
                     <div class="control-group">
-                        @Html.LabelFor(model => model.EquipmentReservation.Start, new {@class = "control-label"})
+                        @Html.LabelFor(model => model.EquipmentReservation.Start, new { @class = "control-label" })
                         <div class="controls">
                             @Html.EditorFor(model => model.EquipmentReservation.Start)
                             @Html.ValidationMessageFor(model => model.EquipmentReservation.Start)
                         </div>
                     </div>
                     <div class="control-group">
-                        @Html.LabelFor(model => model.EquipmentReservation.End, new {@class = "control-label"})
+                        @Html.LabelFor(model => model.EquipmentReservation.End, new { @class = "control-label" })
                         <div class="controls">
                             @Html.EditorFor(model => model.EquipmentReservation.End)
                             @Html.ValidationMessageFor(model => model.EquipmentReservation.End)
@@ -76,7 +80,7 @@ else
     
             <div class="form-actions">
                 <input type="submit" class="btn btn-primary" value="Submit Reservation"/>
-                @Html.ActionLink("Cancel", "Index", "Authorized", new {}, new {@class="btn"})
+                @Html.ActionLink("Cancel", "Index", "Authorized", new { }, new { @class = "btn" })
             </div>
         }
     }
