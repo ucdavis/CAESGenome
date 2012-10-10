@@ -6,7 +6,7 @@ using CAESGenome.Filters;
 
 namespace CAESGenome.Controllers
 {
-    [UserOnly]
+    [Authorize(Roles=RoleNames.User)]
     public class AuthorizedController : ApplicationController
     {
         private readonly IRepositoryFactory _repositoryFactory;

@@ -324,7 +324,6 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
-    <Compile Include="Filters\RoleFilters.cs" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\Anytime.js" />
     <Content Include="Scripts\jquery.bootstrapcheckbox.js" />
@@ -444,6 +443,7 @@
     <Content Include="Views\Equipment\Reserve.cshtml" />
     <Content Include="Views\Equipment\Reservations.cshtml" />
     <Content Include="Views\Equipment\Cancel.cshtml" />
+    <Content Include="Views\Equipment\Schedule.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

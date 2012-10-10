@@ -10,7 +10,7 @@ using CAESGenome.Models;
 
 namespace CAESGenome.Controllers
 {
-    [UserOnly]
+    [Authorize(Roles=RoleNames.User)]
     public class SequencingController : ApplicationController
     {
         private readonly IRepositoryFactory _repositoryFactory;

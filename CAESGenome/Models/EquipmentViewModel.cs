@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CAESGenome.Core.Domain;
 using CAESGenome.Core.Repositories;
+using CAESGenome.Core.Resources;
 
 namespace CAESGenome.Models
 {
@@ -21,7 +22,7 @@ namespace CAESGenome.Models
 
             if (equipment == null)
             {
-                viewModel.Equipments = repositoryFactory.EquipmentRepository.Queryable.Where(a => a.Operator.ToLower() == "user").OrderBy(a => a.Name).ToList();
+                viewModel.Equipments = repositoryFactory.EquipmentRepository.Queryable.Where(a => a.Operator.ToLower() == EquipmentOperators.User).OrderBy(a => a.Name).ToList();
             }
 
             return viewModel;

@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace CAESGenome.Controllers
 {
-    [UserOnly]
+    [Authorize(Roles=RoleNames.User)]
     public class GenotypingController : ApplicationController
     {
         private readonly IRepositoryFactory _repositoryFactory;

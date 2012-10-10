@@ -1,0 +1,49 @@
+﻿@model IQueryable<Equipment>
+
+@{
+    ViewBag.Title = "Equipment Schedule";
+    ViewBag.SubPageTitle = "Equipment Schedule";
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $("#tabs").tabs();
+        });
+    </script>
+}
+
+<div id="tabs">
+    
+    <ul>
+        @foreach(var eq in Model)
+        {
+            <li><a href="@(string.Format("#equipment-{0}", eq.Id))">@eq.Name</a></li>
+        }
+    </ul>
+    
+    @foreach(var eq in Model)
+    {
+        <div id="@(string.Format("equipment-{0}", eq.Id))">
+            
+            <h3>@eq.Name</h3>
+            
+            @if(eq.EquipmentReservations.Any(a => a.End > DateTime.Now && !a.Cancelled))
+            {
+                <ul>
+                    @foreach(var rs in eq.EquipmentReservations.Where( a=> a.End > DateTime.Now).OrderBy(a => a.Start))
+                    {
+                        <li>@(string.Format("{0}-{1} by {2}", rs.Start, rs.End, rs.User.FullName))</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p>There are no active reservations.</p>
+            }
+
+        </div>
+    }
+
+</div>

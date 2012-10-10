@@ -2,6 +2,8 @@
 using System.Web.Mvc;
 using CAESGenome.Core.Domain;
 using CAESGenome.Core.Repositories;
+using CAESGenome.Core.Resources;
+using CAESGenome.Filters;
 using CAESGenome.Models;
 using UCDArch.Web.Helpers;
 
@@ -16,6 +18,7 @@ namespace CAESGenome.Controllers
             _repositoryFactory = repositoryFactory;
         }
 
+        [Authorize(Roles=RoleNames.User)]
         public ActionResult Reserve(int? id)
         {
             Equipment equipment = null;
@@ -28,6 +31,7 @@ namespace CAESGenome.Controllers
             return View(viewModel);
         }
 
+        [Authorize(Roles = RoleNames.User)]
         [HttpPost]
         public ActionResult Reserve(int id, EquipmentReservation equipmentReservation)
         {
@@ -57,6 +61,7 @@ namespace CAESGenome.Controllers
             return View(viewModel);
         }
 
+        [Authorize(Roles = RoleNames.User)]
         public ActionResult Reservations()
         {
             var user = GetCurrentUser();
@@ -64,6 +69,7 @@ namespace CAESGenome.Controllers
             return View(reservations);
         }
 
+        [Authorize(Roles = RoleNames.User)]
         public ActionResult Cancel(int id)
         {
             var reservation = _repositoryFactory.EquipmentReservationRepository.GetNullableById(id);
@@ -77,6 +83,7 @@ namespace CAESGenome.Controllers
             return View(reservation);
         }
 
+        [Authorize(Roles = RoleNames.User)]
         [HttpPost]
         public ActionResult Cancel(int id, bool? cancel)
         {
@@ -93,6 +100,13 @@ namespace CAESGenome.Controllers
 
             Message = "Reservation has been cancelled.";
             return RedirectToAction("Reservations");
+        }
+
+        [Authorize(Roles = RoleNames.Staff)]
+        public ActionResult Schedule()
+        {
+            var equipment = _repositoryFactory.EquipmentRepository.Queryable.Where(a => a.Operator == EquipmentOperators.User && a.IsReservable);
+            return View(equipment);
         }
     }
 }

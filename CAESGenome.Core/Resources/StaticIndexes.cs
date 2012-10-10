@@ -54,4 +54,9 @@
         public const string QgWebSubmittedPlates = "QGWP";
         public const string QgPlateSubmission = "QGPS";
     }
+
+    public class EquipmentOperators
+    {
+        public const string User = "User";
+    }
 }

@@ -21,7 +21,7 @@ namespace CAESGenome.Controllers
             _barcodeService = barcodeService;
         }
 
-        [StaffAndUserOnly]
+        [Authorize(Roles = RoleNames.User + "," + RoleNames.Staff)]
         public ActionResult Index()
         {
             var userJobs = new List<UserJob>();
@@ -39,7 +39,7 @@ namespace CAESGenome.Controllers
             return View(userJobs);
         }
 
-        [StaffAndUserOnly]
+        [Authorize(Roles = RoleNames.User + "," + RoleNames.Staff)]
         public ActionResult Details(int id)
         {
             var uj = _repositoryFactory.UserJobRepository.GetNullableById(id);
@@ -58,7 +58,7 @@ namespace CAESGenome.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [StaffOnly]
+        [Authorize(Roles=RoleNames.Staff)]
         [HttpPost]
         public ActionResult AdvanceBarcode(int id)
         {
@@ -80,7 +80,7 @@ namespace CAESGenome.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [StaffOnly]
+        [Authorize(Roles=RoleNames.Staff)]
         [HttpPost]
         public ActionResult PrintBarcode(int id)
         {
@@ -104,7 +104,7 @@ namespace CAESGenome.Controllers
         /// <param name="id">User job Id</param>
         /// <param name="stageId">Stage Id</param>
         /// <returns></returns>
-        [StaffOnly]
+        [Authorize(Roles=RoleNames.Staff)]
         [HttpPost]
         public ActionResult PrintStageBarcodes(int id, string stageId)
         {

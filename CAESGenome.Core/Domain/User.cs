@@ -39,6 +39,8 @@ namespace CAESGenome.Core.Domain
 
         public virtual IList<RechargeAccount> RechargeAccounts { get; set; }
         public virtual IList<RechargeAccount> OwnedRechargeAcccounts { get; set; }
+
+        public virtual string FullName { get { return string.Format("{0} {1}", FirstName, LastName); } }
     }
 
     public class UserMap : ClassMap<User>
