@@ -74,6 +74,28 @@ namespace CAESGenome.Controllers
             return RedirectToAction("Details", new {id = barcode.UserJobPlate.UserJob.Id});
         }
 
+        [HttpPost]
+        [Authorize(Roles = RoleNames.Staff)]
+        public ActionResult AdvanceStageBarcodes(int id, string stage)
+        {
+            var userJob = _repositoryFactory.UserJobRepository.GetNullableById(id);
+
+            if (userJob == null)
+            {
+                Message = "Unable to load job, please try again.";
+            }
+            else
+            {
+                var barcodes = userJob.UserJobPlates.SelectMany(a => a.Barcodes).Where(a => a.Stage.Id == stage && !a.Done).ToList();
+                foreach(var barcode in barcodes)
+                {
+                    _barcodeService.AdvanceStage(_repositoryFactory, barcode, barcode.UserJobPlate.UserJob);
+                }
+            }
+
+            return RedirectToAction("Details", new {id = id});
+        }
+
         /// <summary>
         /// Prints label for a particular barcode
         /// </summary>

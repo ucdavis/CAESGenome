@@ -21,8 +21,18 @@
                 $(this).closest('form').submit();
                 event.preventDefault();
             });
+
+            $(".stage").click(function (event) {
+                if (confirm("Are you sure you want to advance all plates?")) {
+                    $(this).closest('form').submit();
+                }
+            });
         });
     </script>
+    
+    <style type="text/css">
+        .stage { cursor: pointer;}
+    </style>
 }
 
 <div class="form-horizontal">
@@ -55,4 +65,5 @@
     {
         @Html.Partial("_qbotGridding")
     }
+
 </div>

@@ -7,104 +7,104 @@
     {
         // bacterial clones
         case StageIds.BcWebSubmittedPlates:
-            <div class="label">Web Submitted Plates</div>
+            <div class="label stage" data-id="@stageId" >Web Submitted Plates</div>
             break;
         case StageIds.BcPlateSubmission:
-            <div class="label label-info">Plate Submissions</div>
+            <div class="label stage label-info" data-id="@stageId" >Plate Submissions</div>
             break;
         case StageIds.BcRca:
-            <div class="label label-important">RCA</div>
+            <div class="label stage label-important" data-id="@stageId" >RCA</div>
             break;
         case StageIds.BcSequencingReaction:
-            <div class="label label-warning">Sequencing Reaction</div>
+            <div class="label stage label-warning" data-id="@stageId" >Sequencing Reaction</div>
             break;
         case StageIds.Bc3730xl:
-            <div class="label label-success">3730xl</div>
+            <div class="label stage label-success" data-id="@stageId" >3730xl</div>
             break;
         
         // pcr product    
         case StageIds.PcrWebSubmittedPlates:
-            <div class="label">Web Submitted Plates</div>
+            <div class="label stage" data-id="@stageId" >Web Submitted Plates</div>
             break;
         case StageIds.PcrPlateSubmission:
-            <div class="label label-info">Plate Submissions</div>
+            <div class="label stage label-info" data-id="@stageId" >Plate Submissions</div>
             break;
         case StageIds.PcrSequencingReaction:
-            <div class="label label-warning">Sequencing Reaction</div>
+            <div class="label stage label-warning" data-id="@stageId" >Sequencing Reaction</div>
             break;
         case StageIds.Pcr3730xl:
-            <div class="label label-success">3730xl</div>
+            <div class="label stage label-success" data-id="@stageId" >3730xl</div>
             break;
         
         // purified dna
         case StageIds.PdWebSubmittedPlates:
-            <div class="label">Web Submitted Plates</div>
+            <div class="label stage" data-id="@stageId" >Web Submitted Plates</div>
             break;
         case StageIds.PdPlateSubmission:
-            <div class="label label-info">Plate Submissions</div>
+            <div class="label stage label-info" data-id="@stageId" >Plate Submissions</div>
             break;
         case StageIds.PdSequencingReaction:
-            <div class="label label-warning">Sequencing Reaction</div>
+            <div class="label stage label-warning" data-id="@stageId" >Sequencing Reaction</div>
             break;
         case StageIds.Pd3730xl:
-            <div class="label label-success">3730xl</div>
+            <div class="label stage label-success" data-id="@stageId" >3730xl</div>
             break;
                 
         // user run sequencing
         case StageIds.UrsWebSubmittedPlates:
-            <div class="label">Web Submitted Plates</div>
+            <div class="label stage" data-id="@stageId" >Web Submitted Plates</div>
             break;
         case StageIds.UrsPlateSubmission:
-            <div class="label label-warning">Sequencing Reaction</div>
+            <div class="label stage label-warning" data-id="@stageId" >Sequencing Reaction</div>
             break;
         case StageIds.Urs3730xl:
-            <div class="label label-success">3730xl</div>
+            <div class="label stage label-success" data-id="@stageId" >3730xl</div>
             break;
             
         // sublibrary
         case StageIds.SlWebSubmittedPlates:
-            <div class="label">Web Submitted Plates</div>
+            <div class="label stage" data-id="@stageId" >Web Submitted Plates</div>
             break;
         case StageIds.SlPlateSubmission:
-            <div class="label label-warning">Sequencing Reaction</div>
+            <div class="label stage label-warning" data-id="@stageId" >Sequencing Reaction</div>
             break;
         case StageIds.Sl3730xl:
-            <div class="label label-success">3730xl</div>
+            <div class="label stage label-success" data-id="@stageId" >3730xl</div>
             break;
         
         // genotyping
         case StageIds.UgWebSubmittedPlates:
-            <div class="label">Web Submitted Plates</div>
+            <div class="label stage" data-id="@stageId" >Web Submitted Plates</div>
             break;
         case StageIds.UgPlateSubmission:
-            <div class="label label-warning">Sequencing Reaction</div>
+            <div class="label stage label-warning" data-id="@stageId" >Sequencing Reaction</div>
             break;
         case StageIds.Ug3730xl:
-            <div class="label label-success">3730xl</div>
+            <div class="label stage label-success" data-id="@stageId" >3730xl</div>
             break;
             
         // qbot colony picking
         case StageIds.QpWebSubmittedPlates:
-            <div class="label">Web Submitted Plates</div>
+            <div class="label stage" data-id="@stageId" >Web Submitted Plates</div>
             break;
         case StageIds.QpPlateSubmission:
-            <div class="label label-warning">Sequencing Reaction</div>
+            <div class="label stage label-warning" data-id="@stageId" >Sequencing Reaction</div>
             break;
 
         // qbot plate replicating
         case StageIds.QrWebSubmittedPlates:
-            <div class="label">Web Submitted Plates</div>
+            <div class="label stage" data-id="@stageId" >Web Submitted Plates</div>
             break;
         case StageIds.QrPlateSubmission:
-            <div class="label label-warning">Sequencing Reaction</div>
+            <div class="label stage label-warning" data-id="@stageId" >Sequencing Reaction</div>
             break;
             
         // qbot gridding
         case StageIds.QgPlateSubmission:
-            <div class="label">Web Submitted Plates</div>
+            <div class="label stage" data-id="@stageId" >Web Submitted Plates</div>
             break;
         case StageIds.QgWebSubmittedPlates:
-            <div class="label label-warning">Sequencing Reaction</div>
+            <div class="label stage label-warning" data-id="@stageId" >Sequencing Reaction</div>
             break;
     }
 }
@@ -139,7 +139,7 @@
                                 using(Html.BeginForm("AdvanceBarcode", "UserJob", new {id=barcode.Id}, FormMethod.Post))
                                 {
                                     @Html.AntiForgeryToken()
-                                    <a href="javascript:;" class="btn hastip advance" title="Advance Barcode to Next Stage"><i class="icon-check"></i></a>
+                                    <a href="javascript:;" class="btn hastip advance" title="Advance Barcode to Next Stage"><i class="icon-share"></i></a>
                                 }        
                             }
                         }
@@ -164,7 +164,11 @@
                     <td>@barcode.DateCreated.ToShortDateString()</td>
                     <td>@(barcode.Done ? "Complete" : "Open")</td>
                     <td>
-                        @DisplayStage(barcode.Stage.Id)
+                        @using(Html.BeginForm("AdvanceStageBarcodes", "UserJob", new {id=barcode.UserJobPlate.UserJob.Id, stage=barcode.Stage.Id}, FormMethod.Post, new {@class=""}))
+                        {
+                            @Html.AntiForgeryToken()
+                            @DisplayStage(barcode.Stage.Id)    
+                        }
                     </td>
                 </tr>
             }
