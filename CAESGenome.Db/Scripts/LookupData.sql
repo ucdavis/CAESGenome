@@ -265,3 +265,90 @@ INSERT INTO [dbo].[Equipments] (Id, Name, Operator, IsReservable, [Message]) VAL
 INSERT INTO [dbo].[Equipments] (Id, Name, Operator, IsReservable, [Message]) VALUES (13, 'Hi Gro', 'User', 0, 'Contact Jongmin (754-6490) to use this equipment.')
 INSERT INTO [dbo].[Equipments] (Id, Name, Operator, IsReservable) VALUES (14, '3730', 'staff', 0)
 SET IDENTITY_INSERT [dbo].[Equipments] OFF
+
+-- Universities
+SET IDENTITY_INSERT [dbo].[universities] ON
+INSERT INTO [universities] ([id], [name], [address], [city], [state], [zip], [country]) VALUES (1, 'University of California, Davis', 'One Shields Ave', 'Davis', 'CA', '95616', 'USA');
+INSERT INTO [universities] ([id], [name], [address], [city], [state], [zip], [country]) VALUES (2, 'Tuskegee University', NULL, 'Tuskegee', 'AL', '36088', 'US');
+INSERT INTO [universities] ([id], [name], [address], [city], [state], [zip], [country]) VALUES (3, 'Washington State University', NULL, 'Pullman', 'WA', '99164', 'US');
+INSERT INTO [universities] ([id], [name], [address], [city], [state], [zip], [country]) VALUES (4, 'Vanderbilt University', '2301 Vanderbilt Place', 'Nashville', 'TN', '37235-7703', 'US');
+INSERT INTO [universities] ([id], [name], [address], [city], [state], [zip], [country]) VALUES (5, 'USDA-ARS@Salinas', '1636 E. Alisal St.', 'Salinas', 'CA', '93905', 'USA');
+INSERT INTO [universities] ([id], [name], [address], [city], [state], [zip], [country]) VALUES (6, 'n/a', 'n/a', 'n/a', 'CA', '95616', 'USA');
+SET IDENTITY_INSERT [dbo].[universities] OFF
+
+-- Departments
+SET IDENTITY_INSERT [dbo].[departments] ON
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (1, 'Agricultural and Resource Economics', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (2, 'Agronomy & Range Science', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (3, 'Animal Science', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (4, 'Biological and Agricultural Engineering', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (5, 'Entomology', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (6, 'Environmental Horticulture', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (7, 'Environmental Toxicology', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (8, 'Food Science & Technology', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (9, 'Nematology', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (10, 'Nutrition', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (11, 'Plant Pathology', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (12, 'Pomology', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (13, 'Vegetable Crops', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (14, 'Viticulture and Enology', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (15, 'Wildlife, Fish and Conservation Biology', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (16, 'College of Agriculture and Environmental Science', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (17, 'UCDMed-Anesthesiology', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (18, 'UCDMed-Pain Medicine', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (19, 'UCDMed-Biological Chemistry', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (20, 'UCDMed-Cardiovascular Medicine', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (21, 'UCDMed-Cell Biology & Human Anatomy', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (22, 'UCDMed-Dermatology', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (23, 'UCDMed-Endocrinology, Clinical Nutrition & Vascular Medicine', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (24, 'UCDMed-Epidemiology & Preventive Medicine', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (25, 'UCDMed-Emergency Medicine', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (26, 'UCDMed-Family & Community Medicine', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (27, 'UCDMed-General Medicine', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (28, 'UCDMed-Hematology & Oncology', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (29, 'UCDMed-Human Physiology', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (30, 'UCDMed-Infectious Diseases', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (31, 'UCDMed-Internal Medicine', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (32, 'UCDMed-Medical Microbiology & Immunology', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (33, 'UCDMed-Medical Pharmacology & Tocicology', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (34, 'UCDMed-Neurological Surery', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (35, 'UCDMed-Neurology', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (36, 'UCDMed-Obstetrics & Gynecology', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (37, 'UCDMed-Opthalmology', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (38, 'UCDMed-Orthopaedic Surgery', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (39, 'UCDMed-Otolaryngology', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (40, 'UCDMed-Cleft and Craniofacial Program', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (41, 'UCDMed-Pathology', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (42, 'UCDMed-Pediatrics', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (43, 'UCDMed-Phycial Medicine and Rehabilitation', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (44, 'UCDMed-Psychiatry', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (45, 'UCDMed-Reproductive Endocrinology & Infertility', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (46, 'UCDMed-Radiation Oncology', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (47, 'UCDMed-Surgery', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (48, 'UCDMed-Urology', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (49, 'UCD Veterinarian School', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (55, 'Molecular and Cellular Biology', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (56, 'Plant Biology', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (59, 'Evolution and Ecology', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (58, 'VM Pathology, Micro & Immun', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (60, 'CAES Genomics Facility', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (61, 'Anthropology', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (62, 'Vet Genetics Laboratory', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (63, 'Plant genetics and genomics', 2);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (64, 'CROP AND SOIL SCIENCES', 3);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (65, 'Plant Sciences', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (66, 'Center of Excellence for Nutritional Genomics', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (67, 'USDA AGRICULTURAL RESEARCH SERVICE', 5);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (68, 'VM CTR COMPARATIVE MEDICINE', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (69, 'Dept. of Anatomy, Physiology and Cell Biology', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (70, 'UCDHS: OPHTHALMOLOGY & VISION SCIENCE', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (71, 'UCDMed-Biochemistry and Molecular Medicine', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (72, 'VM Population Health and Reproduction', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (73, 'VM California Animal Health and Food Safety Laboratory System, San Bernardino Branch', 1);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (74, 'Biomedical engineering', 1);
+
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (75, 'n/a', 6);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (76, 'Plant Sciences', 6);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (77, 'Anthropology', 4);
+INSERT INTO [departments] ([id], [name], [universityId]) VALUES (78, 'n/a', 1);
+SET IDENTITY_INSERT [dbo].[departments] OFF

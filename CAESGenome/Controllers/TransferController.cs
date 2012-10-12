@@ -108,7 +108,6 @@ namespace CAESGenome.Controllers
 
             return users;
         }
-
         private void InsertPIs(IEnumerable<UserAcct> users, IEnumerable<UserAcct> pis)
         {
             var check = users.Select(a => a.UserName).ToList();
@@ -134,7 +133,7 @@ namespace CAESGenome.Controllers
             using(var conn = _dbService.GetConnection())
             {
                 conn.Execute(
-                    @"INSERT INTO UserProfile(UserName, FirstName, LastName, Title, Phone, DateCreated) values (@userName, @firstName, @lastName, @title, @phone, @date)",
+                    @"INSERT INTO UserProfile(UserName, FirstName, LastName, Title, Phone, DateCreated, UniversityId, DepartmentId) values (@userName, @firstName, @lastName, @title, @phone, @date, @uid, @did)",
                     pisToCreate.Select(
                             a =>
                             new
@@ -144,9 +143,15 @@ namespace CAESGenome.Controllers
                                 lastName = a.LastName,
                                 title = a.Title,
                                 phone = a.Phone,
-                                date = a.DateCreated
+                                date = a.DateCreated,
+                                uid = a.UniversityId, did = a.DepartmentId
                             }).ToList()
                         );
+
+                conn.Execute(
+                    @"UPDATE UserProfile SET UniversityId = @uid, DepartmentId = @did WHERE UserName = @userName",
+                    pis.Where(a => check.Contains(a.UserName)).Select(a => new {uid = a.UniversityId, did = a.DepartmentId, userName = a.UserName})
+                    );
             }
 
             foreach(var user in pisToCreate)
