@@ -48,6 +48,9 @@
     <Reference Include="Castle.Windsor">
       <HintPath>..\packages\Castle.Windsor.3.0.0.4001\lib\net40\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="Dapper">
+      <HintPath>..\packages\Dapper.1.12.1\lib\net40\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="DataAnnotationsExtensions">
       <HintPath>..\packages\DataAnnotationsExtensions.1.0.2.0\lib\NETFramework40\DataAnnotationsExtensions.dll</HintPath>
     </Reference>
@@ -220,6 +223,7 @@
     <Compile Include="Controllers\QbotController.cs" />
     <Compile Include="Controllers\SequencingController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
+    <Compile Include="Controllers\TransferController.cs" />
     <Compile Include="Controllers\UserJobController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -237,6 +241,7 @@
     <Compile Include="Models\UserJobPostModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DbService.cs" />
     <Compile Include="Services\IBarcodeService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -450,6 +455,9 @@
     <Content Include="Views\Equipment\UserUsageDetails.cshtml" />
     <Content Include="Views\UserJob\Completed.cshtml" />
     <Content Include="Views\UserJob\MonthlyDetails.cshtml" />
+    <Content Include="Views\Home\Test.cshtml" />
+    <Content Include="Views\Home\Test2.cshtml" />
+    <Content Include="Views\Transfer\Accounts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -461,6 +469,10 @@
     <ProjectReference Include="..\CAESGenome.Core\CAESGenome.Core.csproj">
       <Project>{A7C9E4D0-3AB0-40CE-A28C-0DDC69B0B78A}</Project>
       <Name>CAESGenome.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CAESGenome.Transfer\CAESGenome.Transfer.csproj">
+      <Project>{28346f59-3100-4584-8166-001dc56bd10e}</Project>
+      <Name>CAESGenome.Transfer</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

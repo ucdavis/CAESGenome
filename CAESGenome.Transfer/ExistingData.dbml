@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CgfOld" Class="ExistingDataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\sqlexpress;Initial Catalog=CgfOld;Integrated Security=True" SettingsObjectName="CAESGenome.Transfer.Properties.Settings" SettingsPropertyName="CgfOldConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.barcode" Member="barcodes">
+    <Type Name="barcode">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="plateID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="plateSubID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="primerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="stage" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="sourceBarcode" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="done" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.useracct" Member="useraccts">
+    <Type Name="useracct">
+      <Column Name="useracctid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="valid" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="rechargeid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="userid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.departments" Member="departments">
+    <Type Name="department">
+      <Column Name="departmentid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="department" Member="department1" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.pi" Member="pis">
+    <Type Name="pi">
+      <Column Name="piid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="pilastname" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="pifirstname" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="piemail" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="pifax" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="piphonenum" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="pititle" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="pidatejoined" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="piusername" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="pipassword" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="universityid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="departmentid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.recharge" Member="recharges">
+    <Type Name="recharge">
+      <Column Name="rechargeid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="accountnum" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="valid" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="datestart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dateend" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="piid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.staff" Member="staffs">
+    <Type Name="staff">
+      <Column Name="staffid" Type="System.Decimal" DbType="Decimal(22,0) NOT NULL" CanBeNull="false" />
+      <Column Name="stafffirst" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="stafflast" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="staffemail" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="stafftitle" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="staffpassword" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.submission_userjob_bacterialclone" Member="submission_userjob_bacterialclones">
+    <Type Name="submission_userjob_bacterialclone">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Seq_Direction" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Primer1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Primer2" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StrainID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="VectorID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="antibioticID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.submission_userjob_qbot_colonypicking" Member="submission_userjob_qbot_colonypickings">
+    <Type Name="submission_userjob_qbot_colonypicking">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vectorID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="hostID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="numOfQTrays" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="numOfGlycerol" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="concentration" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="[replication]" Member="replication" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="numOfColonies" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.submission_userjob_qbot_replicating" Member="submission_userjob_qbot_replicatings">
+    <Type Name="submission_userjob_qbot_replicating">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vectorID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="hostID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="numOfSourcePlates" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="plateTypeDestination" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="[replication]" Member="replication" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.submission_userjob_sublibrary" Member="submission_userjob_sublibraries">
+    <Type Name="submission_userjob_sublibrary">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="typeOfSamples" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="concentrationOfDNA" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="insertGenomeSize" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="coverage" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="vectorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="antibioticID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.submission_userjob_userrun" Member="submission_userjob_userruns">
+    <Type Name="submission_userjob_userrun">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Seq_Direction" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="DyeID" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.submission_userjob_userrun_genotyping" Member="submission_userjob_userrun_genotypings">
+    <Type Name="submission_userjob_userrun_genotyping">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="dyeIDs" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.submission_userjobs" Member="submission_userjobs">
+    <Type Name="submission_userjob">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="dateSubmitted" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="uid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="accountid" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="JobName" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="submissionType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="HowManyPlates" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="plateType" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Comment" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="id2" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="done" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="statusDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.submission_userplates" Member="submission_userplates">
+    <Type Name="submission_userplate">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="JobID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="plateName" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[user]" Member="users">
+    <Type Name="user">
+      <Column Name="userid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="username" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="lastname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="firstname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="passwords" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="phonenum" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="valid" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="datejoined" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="piid" Type="System.Decimal" DbType="Decimal(22,0) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

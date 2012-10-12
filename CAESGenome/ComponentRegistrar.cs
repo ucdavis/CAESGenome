@@ -26,6 +26,7 @@ namespace CAESGenome
             container.Register(Component.For<IRepository>().ImplementedBy<Repository>().Named("repository"));
 
             container.Register(Component.For(typeof(IRepositoryFactory)).ImplementedBy<RepositoryFactory>().Named("repositoryFactory"));
+            container.Register(Component.For(typeof(IDbService)).ImplementedBy<DbService>().Named("dbService"));
 
             container.Register(Component.For(typeof(IBarcodeService)).ImplementedBy<BarcodeService>().Named("barcodeService"));
         }

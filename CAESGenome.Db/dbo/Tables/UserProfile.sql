@@ -4,7 +4,7 @@
     [FirstName] VARCHAR(50) NOT NULL, 
     [LastName] VARCHAR(50) NOT NULL, 
 	[Title]	varchar(50) NULL,
-    [Phone] VARCHAR(15) NULL, 
+    [Phone] VARCHAR(20) NULL, 
     [Fax] VARCHAR(15) NULL, 
     [DateCreated] DATETIME NOT NULL DEFAULT getdate(), 
     [UniversityId] INT NULL, 
