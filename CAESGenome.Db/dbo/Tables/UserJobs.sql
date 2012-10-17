@@ -29,5 +29,6 @@
     CONSTRAINT [FK_UserJobs_UserJobUserRun] FOREIGN KEY ([UserJobUserRunId]) REFERENCES [UserJobUserRun]([Id]), 
     CONSTRAINT [FK_UserJobs_UserJobQbotColonyPicking] FOREIGN KEY ([UserJobQbotColonyPickingId]) REFERENCES [UserJobQbotColonyPicking]([Id]), 
     CONSTRAINT [FK_UserJobs_UserJobQbotGridding] FOREIGN KEY ([UserJobQbotGriddingId]) REFERENCES [UserJobQbotGridding]([Id]), 
-    CONSTRAINT [FK_UserJobs_UserJobQbotReplicating] FOREIGN KEY ([UserJobQbotReplicatingId]) REFERENCES [UserJobQbotReplicating]([Id])
+    CONSTRAINT [FK_UserJobs_UserJobQbotReplicating] FOREIGN KEY ([UserJobQbotReplicatingId]) REFERENCES [UserJobQbotReplicating]([Id]), 
+    CONSTRAINT [FK_UserJobs_UserJobGenotyping] FOREIGN KEY ([UserJobGenotypingId]) REFERENCES [UserJobGenotyping]([Id])
 )

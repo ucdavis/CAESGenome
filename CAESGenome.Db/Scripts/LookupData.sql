@@ -8,6 +8,10 @@ INSERT INTO [dbo].[Antibiotics] (Id, Name) VALUES (3, 'kanamycin');
 INSERT INTO [dbo].[Antibiotics] (Id, Name) VALUES (6, 'other (please supply)');
 INSERT INTO [dbo].[Antibiotics] (Id, Name) VALUES (10, 'carbenicillin');
 INSERT INTO [dbo].[Antibiotics] (Id, Name) VALUES (5, 'not given');
+INSERT INTO [dbo].[Antibiotics] (Id, Name) VALUES (12, 'unknown');
+INSERT INTO [dbo].[Antibiotics] (Id, Name) VALUES (11, 'unknown');
+INSERT INTO [dbo].[Antibiotics] (Id, Name) VALUES (13, 'unknown');
+INSERT INTO [dbo].[Antibiotics] (Id, Name) VALUES (4, 'unknown');
 SET IDENTITY_INSERT [dbo].[Antibiotics] OFF
 
 --
