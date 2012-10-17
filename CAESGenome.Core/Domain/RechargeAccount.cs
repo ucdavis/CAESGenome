@@ -15,7 +15,6 @@ namespace CAESGenome.Core.Domain
         private void SetDefaults()
         {
             Start = DateTime.Now.Date;
-            End = DateTime.Now.AddDays(14).Date;
             IsValid = true;
         }
 
@@ -30,7 +29,7 @@ namespace CAESGenome.Core.Domain
         public virtual DateTime Start { get; set; }
         [DataType(DataType.Date)]
         [Display(Name = "End Date")]
-        public virtual DateTime End { get; set; }
+        public virtual DateTime? End { get; set; }
         [Display(Name = "Is Active")]
         public virtual bool IsValid { get; set; }
         [Required]

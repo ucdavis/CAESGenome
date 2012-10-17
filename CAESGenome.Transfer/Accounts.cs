@@ -36,6 +36,26 @@ namespace CAESGenome.Transfer
 
             return users;
         }
+
+        public static List<RechargeAcct> Recharge()
+        {
+            var db = new ExistingDataDataContext();
+
+            var recharge = db.recharges.Select( a =>
+                            new RechargeAcct()
+                                {
+                                    SourceId = a.rechargeid,
+                                    AccountNum = a.accountnum,
+                                    Description = a.description,
+                                    Start = a.datestart ?? DateTime.Now,
+                                    End = a.dateend,
+                                    IsValid = a.valid.ToLower() == "yes",
+                                    PiId = a.piid
+                                }).ToList();
+
+            return recharge;
+        }
+
     }
 
     public class UserAcct : User
@@ -59,5 +79,11 @@ namespace CAESGenome.Transfer
         public int DepartmentId { get; set; }
 
         public virtual bool IsActive { get; set; }
+    }
+
+    public class RechargeAcct : RechargeAccount
+    {
+        public int SourceId { get; set; }
+        public int PiId { get; set; }
     }
 }

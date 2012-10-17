@@ -24,18 +24,28 @@ namespace CAESGenome.Controllers
             _repositoryFactory = repositoryFactory;
         }
 
+        /// <summary>
+        /// Use this just to initialize the websecurity service, doesn't do anything.
+        /// </summary>
+        /// <returns></returns>
         [Authorize]
         public ActionResult Initialize()
         {
             return View();
         }
 
+        /// <summary>
+        /// Transfer the user accounts and merges user/staff/pi tables
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Accounts()
         {
             var users = Transfer.Accounts.Convert();
+            var recharge = Transfer.Accounts.Recharge();
 
             var createdUsers = InsertUsers(users.Where(a => a.User));
-            InsertPIs(createdUsers, users.Where(a => a.Pi));
+            InsertPIs(createdUsers, users.Where(a => a.Pi), recharge);
+            InsertStaff(users.Where(a => a.Staff));
 
             return View();
         }
@@ -108,7 +118,7 @@ namespace CAESGenome.Controllers
 
             return users;
         }
-        private void InsertPIs(IEnumerable<UserAcct> users, IEnumerable<UserAcct> pis)
+        private void InsertPIs(IEnumerable<UserAcct> users, IEnumerable<UserAcct> pis, List<RechargeAcct> recharges)
         {
             var check = users.Select(a => a.UserName).ToList();
             var checkPi = new List<string>();
@@ -178,13 +188,30 @@ namespace CAESGenome.Controllers
                 // grab the current PI's id
                 var piId = usersToAddRole.First(a => a.UserName == pi.UserName).Id;
 
+                // grab the PI's recharge accounts
+                var recharge = recharges.Where(a => a.PiId == pi.SourceId);
+
                 using(var conn = _dbService.GetConnection())
                 {
                     conn.Execute(
                         @"UPDATE UserProfile SET ParentUserId = @pUserId where UserId = @userId",
                         users.Where(a => a.PiId == pi.SourceId).Select(a => new {pUserId = piId, userId = a.SourceId})
                         );
+
+                    conn.Execute("SET IDENTITY_INSERT RechargeAccounts ON");
+                    conn.Execute(
+                        @"INSERT INTO RechargeAccounts (Id, AccountNum, Description, [Start], [End], IsValid, UserProfileId) VALUES (@id, @accountNum, @description, @start, @end, @isValid, @userProfileId)",
+                        recharge.Select(a => new {id = a.SourceId, accountNum = a.AccountNum, description = a.Description, start = a.Start, end = a.End, isValid = a.IsValid, userProfileId = piId})
+                        );
+                    conn.Execute("SET IDENTITY_INSERT RechargeAccounts OFF");
                 }
+            }
+        }
+        private void InsertStaff(IEnumerable<UserAcct> users )
+        {
+            foreach(var user in users)
+            {
+                
             }
         }
     }
