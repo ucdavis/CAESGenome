@@ -216,5 +216,57 @@ select id, jobid, plateName from cgfold.dbo.submission_userplates
 where jobid in (select id from cgfold.dbo.submission_userjobs where submissionType <> 0)
 set identity_insert cgf.dbo.userjobplates off
 
+set identity_insert cgf.dbo.barcodes on
 
+insert into cgf.dbo.barcodes (id, UserJobPlateId, SubPlateId, PrimerId, stageid, SourceBarcodeId, DateCreated, done)
+select bc.id, plateid, plateSubID
+	, case when primerid = 0 then null else primerid end primerid
+	, case	-- bacterial clone
+			when submissionType = 1 and stage = 0 then 'BCWP'
+			when submissionType = 1 and stage = 1 then 'BCPS'
+			when submissionType = 1 and stage = 2 then 'BCRC'
+			when submissionType = 1 and stage = 3 then 'BCSR'
+			when submissionType = 1 and stage = 4 then 'BC37'
+			-- pcr product
+			when submissionType = 2 and stage = 0 then 'PPWP'
+			when submissionType = 2 and stage = 1 then 'PPPS'
+			when submissionType = 2 and stage = 2 then 'PPSR'
+			when submissionType = 2 and stage = 3 then 'PP37'
+			-- user run sequencing
+			when submissionType = 3 and stage = 0 then 'URWP'
+			when submissionType = 3 and stage = 1 then 'URPS'
+			when submissionType = 3 and stage = 2 then 'UR37'
+			-- purified dna
+			when submissionType = 4 and stage = 0 then 'PDWP'
+			when submissionType = 4 and stage = 1 then 'PDPS'
+			when submissionType = 4 and stage = 2 then 'PDSR'
+			when submissionType = 4 and stage = 3 then 'PD37'
+			-- sublibrary
+			when submissionType = 5 and stage = 0 then 'SLWP'
+			when submissionType = 5 and stage = 1 then 'SLPS'
+			when submissionType = 5 and stage = 2 then 'SL37'
+			-- genotyping
+			when submissionType = 11 and stage = 0 then 'UGWP'
+			when submissionType = 11 and stage = 1 then 'UGPS'
+			when submissionType = 11 and stage = 2 then 'UG37'
+			-- qbot colonypicking
+			when submissionType = 21 and stage = 0 then 'QPWP'
+			when submissionType = 21 and stage = 1 then 'QPPS'
+			when submissionType = 21 and stage = 2 then 'QP37'
+			-- qbot replication
+			when submissionType = 22 and stage = 0 then 'QRWP'
+			when submissionType = 22 and stage = 1 then 'QRPS'
+			when submissionType = 22 and stage = 2 then 'QR37'
+			-- qbot gridding
+			when submissionType = 23 and stage = 0 then 'QGWP'
+			when submissionType = 23 and stage = 1 then 'QGPS'
+			when submissionType = 23 and stage = 2 then 'QG37'
+	  end stage
+	, case when sourceBarcode = 0 then null else sourceBarcode end sourceBarcode, [date]
+	, cast (bc.done as bit) done
+from cgfold.dbo.barcode bc
+	inner join cgfold.dbo.submission_userplates up on bc.plateID = up.id
+	inner join cgfold.dbo.submission_userjobs uj on up.JobID = uj.id
+
+set identity_insert cgf.dbo.barcodes off
 
