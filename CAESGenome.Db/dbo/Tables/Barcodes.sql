@@ -7,6 +7,7 @@
     [SourceBarcodeId] INT  NULL,
     [DateCreated]          DATETIME NULL,
     [Done]          BIT  NULL,
+    
     CONSTRAINT [PK_Barcodes] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_Barcodes_Primers] FOREIGN KEY ([PrimerId]) REFERENCES [dbo].[Primers] ([Id]), 
     CONSTRAINT [FK_Barcodes_Barcodes] FOREIGN KEY ([SourceBarcodeId]) REFERENCES [Barcodes]([Id]), 

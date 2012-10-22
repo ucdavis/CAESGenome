@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using FluentNHibernate.Mapping;
 using UCDArch.Core.DomainModel;
@@ -13,6 +14,8 @@ namespace CAESGenome.Core.Domain
             Done = false;
 
             SubPlateId = 0;
+
+            BarcodeFiles = new List<BarcodeFile>();
         }
 
         public virtual UserJobPlate UserJobPlate { get; set; }
@@ -22,6 +25,8 @@ namespace CAESGenome.Core.Domain
         public virtual DateTime DateCreated { get; set; }
         public virtual bool Done { get; set; }
         public virtual int SubPlateId { get; set; }
+
+        public virtual IList<BarcodeFile> BarcodeFiles { get; set; }
 
         public virtual string PlateName
         {
@@ -75,6 +80,8 @@ namespace CAESGenome.Core.Domain
             Map(x => x.DateCreated);
             Map(x => x.Done);
             Map(x => x.SubPlateId);
+
+            HasMany(x => x.BarcodeFiles).Inverse().Cascade.AllDeleteOrphan();
         }
     }
 }

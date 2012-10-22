@@ -39,6 +39,7 @@ SET IDENTITY_INSERT [dbo].[Dyes] ON
 INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (1, 'ET DYEnamic', 0, 0);
 INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (2, 'Big Dye 2.0', 0, 0);
 INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (3, 'Big Dye 3.0', 0, 0);
+INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (4, 'n/a', 0, 0);
 INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (5, 'HET', 0, 0);
 INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (6, 'FAM', 0, 0);
 INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (7, 'TET', 0, 0);
@@ -208,6 +209,7 @@ INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeI
 INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (95, 'pBRcDNA-Sfi-AB', 1, 6, 3);
 INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (96, 'pENTR-JW', 4, 6, 3);
 INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (97, '', 2, 1, 10);
+INSERT INTO [dbo].[Vectors] (Id, Name, Antibiotic1Id, Antibiotic2Id, VectorTypeId) VALUES (3, 'Unknown', 4, 4, 5);
 SET IDENTITY_INSERT [dbo].[Vectors] OFF
 
 --

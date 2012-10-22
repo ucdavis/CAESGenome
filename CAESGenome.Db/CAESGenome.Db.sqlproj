@@ -96,6 +96,7 @@
     <Build Include="dbo\Tables\UserJobUserRun.sql" />
     <Build Include="dbo\Tables\UserJobGenotyping.sql" />
     <Build Include="dbo\Tables\UserJobsGenotypingXDyes.sql" />
+    <Build Include="dbo\Tables\BarcodeFiles.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\LookupData.sql" />

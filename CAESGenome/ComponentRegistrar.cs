@@ -29,6 +29,7 @@ namespace CAESGenome
             container.Register(Component.For(typeof(IDbService)).ImplementedBy<DbService>().Named("dbService"));
 
             container.Register(Component.For(typeof(IBarcodeService)).ImplementedBy<BarcodeService>().Named("barcodeService"));
+            container.Register(Component.For(typeof(IPhredService)).ImplementedBy<PhredService>().Named("phredService"));
         }
     }
 }

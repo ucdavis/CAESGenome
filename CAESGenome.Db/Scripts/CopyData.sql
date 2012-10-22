@@ -11,10 +11,210 @@ delete from webpages_UsersInRoles
 delete from userprofile
 delete from webpages_Membership
 
-/* copy user profiles */
+/*
+Delete the job tables
+*/
+delete from UserProfilesXRechargeAccounts
+delete from UserJobBacterialClone
+delete from userjobdna
+delete from UserJobQbotColonyPicking
+delete from UserJobQbotGridding
+delete from UserJobQbotReplicating
+delete from UserJobSubLibrary
+delete from UserJobUserRun
+delete from UserJobsGenotypingXDyes
+delete from UserJobGenotyping
 
--- set the username for those that are blank
-update [user]
-set username = firstname + '.' + lastname + '@fake.com'
-where username is null
+
+/*
+Copy the Data
+*/
+
+update cgfold.dbo.recharge set valid = 'no' where rechargeid in (286, 293)
+
+insert into cgf.dbo.UserProfilesXRechargeAccounts (UserProfileId, RechargeAccountId)
+select distinct userid, rechargeid from cgfold.dbo.useracct 
+where lower(valid) = 'yes'
+  and userid in ( select userid from cgfold.dbo.[user] )
+  and rechargeid in ( select rechargeid from cgfold.dbo.recharge )
+
+set identity_insert cgf.dbo.userjobbacterialclone on
+insert into cgf.dbo.UserJobBacterialClone (id, SequenceDirection, Primer1Id, primer2id, StrainId, VectorId, AntibioticId)
+select id, 	case when Seq_Direction = 'F' then 'Forward' else 'Backward' end
+	, primer1, primer2
+	, strainid, vectorid, antibioticID
+from cgfold.dbo.submission_userjob_bacterialclone
+set identity_insert cgf.dbo.userjobbacterialclone off
+
+set identity_insert cgf.dbo.userjobdna on
+insert into cgf.dbo.UserJobDna (id, SequenceDirection, Primer1Id, primer2id)
+select id, case when Seq_Direction = 'F' then 'Forward' else 'Backward' end,
+	primer1, primer2
+from cgfold.dbo.submission_userjob_dna
+set identity_insert cgf.dbo.userjobdna off
+
+set identity_insert cgf.dbo.userjobqbotcolonypicking ON
+insert into cgf.dbo.UserJobQbotColonyPicking (id, vectorid, strainid, NumQTrays, NumGlycerol, Concentration, [Replication], NumColonies)
+select id, vectorid, hostid , numOfQTrays, cast(numOfGlycerol as float), concentration, [replication], numOfColonies
+from cgfold.dbo.submission_userjob_qbot_colonypicking
+set identity_insert cgf.dbo.userjobqbotcolonypicking OFF
+
+set identity_insert cgf.dbo.userjobqbotgridding ON
+insert into UserJobQbotGridding (id, vectorid, strainid, NumMembraneCopies, GriddingPattern)
+select id, vectorid, hostid, copiesOfMembranes, 'FourXFour' pattern
+from cgfold.dbo.submission_userjob_qbot_gridding
+set identity_insert cgf.dbo.userjobqbotgridding OFF
+
+set identity_insert cgf.dbo.userjobqbotreplicating on
+insert into cgf.dbo.UserJobQbotReplicating (id, vectorid, strainid, NumSourcePlates, DestinationPlateType, NumCopies)
+select id, vectorID, hostid, numOfSourcePlates
+	,  case when plateTypeDestination = 384 then 'ThreeEightyFour'
+	        when plateTypeDestination = 96 then 'NinetySix'
+			end 
+	, [replication]
+from cgfold.dbo.submission_userjob_qbot_replicating
+set identity_insert cgf.dbo.userjobqbotreplicating off
+
+set identity_insert cgf.dbo.userjobsublibrary on
+insert into cgf.dbo.UserJobSubLibrary (id, SampleType, DnaConcentration, GenomeSize, Coverage, vectorid, AntibioticId)
+select id, typeOfSamples, concentrationOfDNA, insertGenomeSize, coverage, vectorID, antibioticID 
+from cgfold.dbo.submission_userjob_sublibrary
+set identity_insert cgf.dbo.userjobsublibrary off
+
+set identity_insert cgf.dbo.userjobuserrun on
+insert into dbo.UserJobUserRun (id, SequenceDirection, dyeid)
+select id, 
+	case when Seq_Direction = 'F' then 'Forward'
+	else 'Backward' end
+	, dyeid
+from cgfold.dbo.submission_userjob_userrun
+set identity_insert cgf.dbo.userjobuserrun off
+
+set identity_insert cgf.dbo.userjobgenotyping on
+
+declare @cur cursor, @id int, @dyeids varchar(50)
+set @cur = cursor for select id, dyeids from cgfold.dbo.submission_userjob_userrun_genotyping
+
+open @cur
+fetch next from @cur into @id, @dyeids
+
+while (@@FETCH_STATUS = 0)
+begin
+	
+	insert into cgf.dbo.UserJobGenotyping (id) values (@id)
+
+	if (@dyeids <> '')
+	begin
+	insert into cgf.dbo.UserJobsGenotypingXDyes (UserJobGenotypingId, dyeid)
+	select @id, name from cgfold.dbo.splitstring(@dyeids)
+	end
+
+	fetch next from @cur into @id, @dyeids
+
+end
+
+close @cur
+deallocate @cur
+
+set identity_insert cgf.dbo.userjobgenotyping off
+
+insert into RechargeAccounts (AccountNum, Description, start, [end], IsValid, UserProfileId)
+select distinct 'na', 'n/a', getdate(), getdate(), 0, uid from cgfold.dbo.submission_userjobs where accountid = '' and submissionType <> 0
+go
+  
+insert into UserProfilesXRechargeAccounts (UserProfileId, RechargeAccountId)
+select UserProfileId, id from RechargeAccounts where AccountNum = 'na'
+go
+
+set identity_insert cgf.dbo.userjobs on
+insert into cgf.dbo.UserJobs (id, userid, RechargeAccountId, name, jobtypeid, NumberPlates, platetype, comments, isopen
+	, LastUpdate, DateTimeCreated
+	, UserJobBacterialCloneId, UserJobDnaId, UserJobSublibraryId, UserJobUserRunId
+	, UserJobQbotColonyPickingId, UserJobQbotReplicatingId, UserJobQbotGriddingId
+	, UserJobGenotypingId)
+select distinct 
+	id, uid, rechargeid, jobname, submissionType, HowManyPlates, plateType, Comment
+	, cast(case when done = 2 then 0 else 1 end as bit) IsOpen
+	, statusdate lastupdate, dateSubmitted datetimecreated
+	, cast(case when submissionType = 1 then id2 else null end as bit) bacterialclone
+	, cast(case when submissionType = 4 or submissionType = 2 then id2 else null end as bit) dna
+	, cast(case when submissionType = 5 then id2 else null end as bit) sublibrary
+	, cast(case when submissionType = 3 then id2 else null end as bit) userrun
+	, cast(case when submissionType = 21 then id2 else null end as bit) colonypicking
+	, cast(case when submissionType = 22 then id2 else null end as bit) replicating
+	, cast(case when submissionType = 23 then id2 else null end as bit) gridding
+	, cast(case when submissionType = 11 then id2 else null end as bit) genotyping
+from cgfold.dbo.submission_userjobs suj
+	left outer join (
+		select userid, recharge.rechargeid, accountnum from cgfold.dbo.useracct
+		inner join cgfold.dbo.recharge on useracct.rechargeid = recharge.rechargeid
+	) accts on suj.uid = accts.userid and suj.accountid = accts.accountnum
+where submissionType <> 0
+  and rechargeid is not null
+  and id not in (469 , 3107, 3130, 3549, 3623, 3686, 3705, 3713, 3996, 4458, 4476, 4520)
+
+insert into cgf.dbo.UserJobs (id, userid, RechargeAccountId, name, jobtypeid, NumberPlates, platetype, comments, isopen
+, LastUpdate, DateTimeCreated
+, UserJobBacterialCloneId, UserJobDnaId, UserJobSublibraryId, UserJobUserRunId
+, UserJobQbotColonyPickingId, UserJobQbotReplicatingId, UserJobQbotGriddingId
+, UserJobGenotypingId)
+select distinct 
+	id, uid, rechargeid, jobname, submissionType, HowManyPlates, plateType, Comment
+	, cast(case when done = 2 then 0 else 1 end as bit) IsOpen
+	, statusdate lastupdate, dateSubmitted datetimecreated
+	, cast(case when submissionType = 1 then id2 else null end as bit) bacterialclone
+	, cast(case when submissionType = 4 or submissionType = 2 then id2 else null end as bit) dna
+	, cast(case when submissionType = 5 then id2 else null end as bit) sublibrary
+	, cast(case when submissionType = 3 then id2 else null end as bit) userrun
+	, cast(case when submissionType = 21 then id2 else null end as bit) colonypicking
+	, cast(case when submissionType = 22 then id2 else null end as bit) replicating
+	, cast(case when submissionType = 23 then id2 else null end as bit) gridding
+	, cast(case when submissionType = 11 then id2 else null end as bit) genotyping
+from cgfold.dbo.submission_userjobs suj
+	left outer join (
+		select userid, recharge.rechargeid, accountnum from cgfold.dbo.useracct
+		inner join cgfold.dbo.recharge on useracct.rechargeid = recharge.rechargeid
+		where recharge.valid = 'yes'
+	) accts on suj.uid = accts.userid and suj.accountid = accts.accountnum
+where submissionType <> 0
+  and rechargeid is not null
+  and id in (469 , 3107, 3130, 3549, 3623, 3686, 3705, 3713, 3996, 4458, 4476, 4520)
+
+set identity_insert cgf.dbo.userjobs off
+
+set identity_insert cgf.dbo.userjobs on
+insert into cgf.dbo.UserJobs (id, userid, RechargeAccountId, name, jobtypeid, NumberPlates, platetype, comments, isopen
+	, LastUpdate, DateTimeCreated
+	, UserJobBacterialCloneId, UserJobDnaId, UserJobSublibraryId, UserJobUserRunId
+	, UserJobQbotColonyPickingId, UserJobQbotReplicatingId, UserJobQbotGriddingId
+	, UserJobGenotypingId)
+select distinct 
+	id, uid, accts.RechargeAccountId, jobname, submissionType, HowManyPlates, plateType, Comment
+	, cast(case when done = 2 then 0 else 1 end as bit) IsOpen
+	, statusdate lastupdate, dateSubmitted datetimecreated
+	, cast(case when submissionType = 1 then id2 else null end as bit) bacterialclone
+	, cast(case when submissionType = 4 or submissionType = 2 then id2 else null end as bit) dna
+	, cast(case when submissionType = 5 then id2 else null end as bit) sublibrary
+	, cast(case when submissionType = 3 then id2 else null end as bit) userrun
+	, cast(case when submissionType = 21 then id2 else null end as bit) colonypicking
+	, cast(case when submissionType = 22 then id2 else null end as bit) replicating
+	, cast(case when submissionType = 23 then id2 else null end as bit) gridding
+	, cast(case when submissionType = 11 then id2 else null end as bit) genotyping
+from cgfold.dbo.submission_userjobs suj
+	left outer join (
+		select ura.UserProfileId, ura.RechargeAccountId from UserProfilesXRechargeAccounts ura
+			inner join RechargeAccounts ra on ura.RechargeAccountId = ra.Id
+		where ra.AccountNum = 'na'
+	) accts on suj.uid = accts.UserProfileId
+where submissionType <> 0
+  and suj.accountid = ''
+set identity_insert cgf.dbo.userjobs off
+
+set identity_insert cgf.dbo.userjobplates on
+insert into cgf.dbo.UserJobPlates (id, userjobid, name)
+select id, jobid, plateName from cgfold.dbo.submission_userplates
+where jobid in (select id from cgfold.dbo.submission_userjobs where submissionType <> 0)
+set identity_insert cgf.dbo.userjobplates off
+
+
 

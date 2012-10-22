@@ -4,7 +4,7 @@
     [VectorId] INT NOT NULL, 
     [StrainId] INT NOT NULL, 
     [NumQTrays] INT NULL, 
-    [NumGlycerol] INT NOT NULL, 
+    [NumGlycerol] FLOAT NOT NULL, 
     [Concentration] VARCHAR(50) NULL, 
     [Replication] INT NOT NULL, 
     [NumColonies] INT NOT NULL, 
