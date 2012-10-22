@@ -271,6 +271,7 @@
     <Content Include="Content\images\sort_asc.png" />
     <Content Include="Content\images\sort_both.png" />
     <Content Include="Content\images\sort_desc.png" />
+    <Content Include="Content\jquery.fileupload-ui.css" />
     <Content Include="Content\themes\uibootstrap\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\uibootstrap\images\ui-bg_glass_55_fbf9ee_1x400.png" />
     <Content Include="Content\themes\uibootstrap\images\ui-bg_glass_65_ffffff_1x400.png" />
@@ -365,6 +366,12 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\JqueryFileUpload\cors\jquery.postmessage-transport.js" />
+    <Content Include="Scripts\JqueryFileUpload\cors\jquery.xdr-transport.js" />
+    <Content Include="Scripts\JqueryFileUpload\jquery.fileupload-fp.js" />
+    <Content Include="Scripts\JqueryFileUpload\jquery.fileupload-ui.js" />
+    <Content Include="Scripts\JqueryFileUpload\jquery.fileupload.js" />
+    <Content Include="Scripts\JqueryFileUpload\jquery.iframe-transport.js" />
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />

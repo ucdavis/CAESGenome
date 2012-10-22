@@ -10,8 +10,9 @@ namespace CAESGenome.Controllers
             return View();
         }
 
+        
         [HttpPost]
-        public ActionResult UploadFile(int barcode, HttpPostedFileBase postedFile)
+        public ActionResult UploadFile(HttpPostedFileBase[] files)
         {
             return View();
         }

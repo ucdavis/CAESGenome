@@ -3,19 +3,7 @@
     ViewBag.SubPageTitle = "Upload File";
 }
 
-@using (Html.BeginForm("UploadFile", "Test", FormMethod.Post, new { }))
+@section scripts
 {
-    @Html.AntiForgeryToken()
-
-    <ul>
-        <li>Barcode:
-            @Html.TextBox("Barcode")
-        </li>
-        <li>
-            File:
-            <input type="file" id="postedFile" name="postedFile" />
-        </li>
-        <li><input type="submit" value="submit"/></li>
-    </ul>
 }
 
