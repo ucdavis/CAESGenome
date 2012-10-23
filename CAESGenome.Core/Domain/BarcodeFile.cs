@@ -14,7 +14,7 @@ namespace CAESGenome.Core.Domain
         public virtual string ValidationContentType { get; set; }
 
         public virtual int Column { get; set; }
-        public virtual int Row { get; set; }
+        public virtual char Row { get; set; }
         public virtual Barcode Barcode { get; set; }
     }
 

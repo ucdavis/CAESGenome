@@ -8,7 +8,7 @@
     [ValidationFileName] VARCHAR(100) NULL, 
     [ValidationContentType] VARCHAR(50) NULL, 
     [Column] INT NOT NULL, 
-    [Row] INT NOT NULL, 
+    [Row] CHAR NOT NULL, 
     [BarcodeId] INT NOT NULL, 
     CONSTRAINT [FK_BarcodeFiles_Barcodes] FOREIGN KEY ([BarcodeId]) REFERENCES [Barcodes]([Id])
 	
