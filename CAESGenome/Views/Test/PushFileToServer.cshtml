@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "PushFileToServer";
+}
+
+<h2>PushFileToServer</h2>
+
+@using(Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.TextBox("Id")
+
+    <input type="submit"/>
+}

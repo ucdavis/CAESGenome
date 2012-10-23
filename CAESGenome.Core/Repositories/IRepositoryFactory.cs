@@ -7,7 +7,8 @@ namespace CAESGenome.Core.Repositories
     {
         IRepository<Antibiotic> AntibioticRepository { get; set; } 
         IRepository<Bacteria> BacteriaRepository { get; set; }
-        IRepository<Barcode> BarcodeRepository { get; set; } 
+        IRepository<Barcode> BarcodeRepository { get; set; }
+        IRepository<BarcodeFile> BarcodeFileRepository { get; set; }
         IRepository<Department> DepartmentRepository { get; set; }
         IRepository<Dye> DyeRepository { get; set; }
         IRepository<Equipment> EquipmentRepository { get; set; }
@@ -37,6 +38,7 @@ namespace CAESGenome.Core.Repositories
         public IRepository<Antibiotic> AntibioticRepository { get; set; }
         public IRepository<Bacteria> BacteriaRepository { get; set; }
         public IRepository<Barcode> BarcodeRepository { get; set; }
+        public IRepository<BarcodeFile> BarcodeFileRepository { get; set; }
         public IRepository<Department> DepartmentRepository { get; set; }
         public IRepository<Dye> DyeRepository { get; set; }
         public IRepository<Equipment> EquipmentRepository { get; set; }
