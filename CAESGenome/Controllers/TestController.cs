@@ -137,21 +137,7 @@ namespace CAESGenome.Controllers
         [HttpPost]
         public JsonNetResult PushFileToServer(int id)
         {
-            var barcode = _repositoryFactory.BarcodeRepository.GetNullableById(id);
-
-            foreach(var file in barcode.BarcodeFiles)
-            {
-                //File.WriteAllBytes("\\169.237.124.27", file.ResultFile);
-
-                //System.IO.File.WriteAllBytes(string.Format(@"\\169.237.124.27\CgfDataFiles\{0}", file.ResultFileName), file.ResultFile);
-            }
-
-            //var barcodeFile = _repositoryFactory.BarcodeFileRepository.GetNullableById(id);
-            
-            //if (barcodeFile != null)
-            //{
-            //    _phredService.PushToServer(barcodeFile.Barcode.Id.ToString(), barcodeFile.Barcode.BarcodeFiles.Select(a => new PlateResult(){File = a.ResultFile, Filename = a.ResultFileName}).ToList());
-            //}
+            _phredService.ExecuteValidation(id);
 
             return new JsonNetResult(true);
         }

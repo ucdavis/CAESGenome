@@ -11,6 +11,9 @@ namespace CAESGenome.Services
     public interface IPhredService
     {
         void PushToServer(string folderName, List<PlateResult> files);
+
+        void ExecuteValidation(int barcode);
+
     }
 
     public class PhredService : IPhredService
@@ -28,11 +31,43 @@ namespace CAESGenome.Services
             foreach(var file in files)
             {
                 var ms = new MemoryStream(file.File);
-                scp.SendFile(ms, file.Filename, dest);
             }
 
             scp.Close();
 
+        }
+
+        public void ExecuteValidation(int barcode)
+        {
+            // list of commands to execute
+            // cp -R /mnt/cgfdata/raw/{barcode} /home/caesdev/raw
+            // mkdir /home/caesdev/output/{barcode}
+            // /opt/pkg/genome/bin/phred -id /home/caesdev/raw/{barcode} -qd /home/caesdev/output/{barcode}
+            // cp -R /home/caesdev/output/{barcode} /mnt/cgfdata/output
+
+            string output = null, error = null;
+
+            var ssh = new SshExec(PhredServer, PhredUsername, PhredPassword);
+            ssh.Connect();
+
+            // copy in data
+            ssh.RunCommand(string.Format(@"cp -R /mnt/cgfdata/raw/{0} /home/{1}/raw", barcode, PhredUsername));
+            ssh.RunCommand(string.Format(@"mkdir /home/{0}/output/{1}", PhredUsername, barcode));           
+            
+            // execute
+            ssh.RunCommand(string.Format(@"/opt/pkg/genome/bin/phred -id /home/{0}/raw/{1} -qd /home/{0}/output/{1}", PhredUsername, barcode), ref output, ref error);
+            
+            // clean up
+            ssh.RunCommand(string.Format(@"mv /home/{0}/output/{1} /mnt/cgfdata/output", PhredUsername, barcode));
+            ssh.RunCommand(string.Format(@"rm /home/{0}/raw/{1}/*", PhredUsername, barcode));
+            ssh.RunCommand(string.Format(@"rmdir /home/{0}/raw/{1}", PhredUsername, barcode));
+
+            if (!string.IsNullOrEmpty(error))
+            {
+                throw new Exception(error);
+            }
+
+            ssh.Close();
         }
     }
 
