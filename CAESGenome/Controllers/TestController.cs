@@ -77,7 +77,7 @@ namespace CAESGenome.Controllers
                 }
 
                 // check for an existing file
-                var existingFile = _repositoryFactory.BarcodeFileRepository.Queryable.Where(a => a.Barcode == barcode && a.Column == col && a.Row == row).FirstOrDefault();
+                var existingFile = _repositoryFactory.BarcodeFileRepository.Queryable.Where(a => a.Barcode == barcode && a.WellColumn == col && a.WellRow == row).FirstOrDefault();
 
                 if (WriteFile(file.FileName, data, string.Format(@"{0}\raw\{1}", _storageLocation, barcodeId)))
                 {
@@ -86,8 +86,8 @@ namespace CAESGenome.Controllers
                         var bfile = new BarcodeFile()
                         {
                             Barcode = barcode,
-                            Column = col,
-                            Row = row, Uploaded = true
+                            WellColumn = col,
+                            WellRow = row, Uploaded = true
                         };
 
                         _repositoryFactory.BarcodeFileRepository.EnsurePersistent(bfile);
@@ -137,7 +137,8 @@ namespace CAESGenome.Controllers
         [HttpPost]
         public JsonNetResult PushFileToServer(int id)
         {
-            _phredService.ExecuteValidation(id);
+            //_phredService.ExecuteValidation(id);
+            _phredService.RunPhredValidation(id);
 
             return new JsonNetResult(true);
         }

@@ -74,6 +74,7 @@
     <Compile Include="Domain\Equipment.cs" />
     <Compile Include="Domain\EquipmentReservation.cs" />
     <Compile Include="Domain\JobType.cs" />
+    <Compile Include="Domain\PhredQuality.cs" />
     <Compile Include="Domain\Primer.cs" />
     <Compile Include="Domain\RechargeAccount.cs" />
     <Compile Include="Domain\Stage.cs" />

@@ -1,8 +1,8 @@
-﻿CREATE TABLE [dbo].[PhredQuality] (
+﻿CREATE TABLE [dbo].[PhredQualities] (
     [Id]                INT      IDENTITY (1, 1) NOT NULL,
     [BarcodeId]         INT      NOT NULL,
-    [CellChar]          INT      NOT NULL,
-    [CellNum]           INT      NOT NULL,
+    [WellColumn]          INT      NOT NULL,
+    [WellRow]           CHAR      NOT NULL,
     [Start]             INT      NOT NULL,
     [End]               INT      NOT NULL,
     [DateTimeSubmitted] DATETIME NOT NULL,

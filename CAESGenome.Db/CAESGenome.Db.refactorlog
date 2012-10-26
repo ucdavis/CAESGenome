@@ -182,4 +182,32 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="UserJobPlateId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="a028bf1a-6e27-43c9-be25-3792baa71150" ChangeDateTime="10/26/2012 16:18:19">
+    <Property Name="ElementName" Value="[dbo].[BarcodeFiles].[Column]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[BarcodeFiles]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="WellColumn" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="67969bdc-5a69-4957-b9fb-83f632a1a8d9" ChangeDateTime="10/26/2012 16:18:22">
+    <Property Name="ElementName" Value="[dbo].[BarcodeFiles].[Row]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[BarcodeFiles]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="WellRow" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7f603a13-b311-4b19-88d6-37296f63b98e" ChangeDateTime="10/26/2012 16:19:37">
+    <Property Name="ElementName" Value="[dbo].[PhredQuality].[CellChar]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[PhredQuality]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="WellColumn" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0ce28e0a-e666-4142-bcd7-ae7128e2085d" ChangeDateTime="10/26/2012 16:19:40">
+    <Property Name="ElementName" Value="[dbo].[PhredQuality].[CellNum]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[PhredQuality]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="WellRow" />
+  </Operation>
 </Operations>

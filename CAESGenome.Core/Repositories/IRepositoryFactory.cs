@@ -14,6 +14,7 @@ namespace CAESGenome.Core.Repositories
         IRepository<Equipment> EquipmentRepository { get; set; }
         IRepository<EquipmentReservation> EquipmentReservationRepository { get; set; } 
         IRepository<JobType> JobTypeRepository { get; set; }
+        IRepository<PhredQuality> PhredQualityRepository { get; set; }
         IRepository<Primer> PrimerRepository { get; set; } 
         IRepository<RechargeAccount> RechargeAccountRepository { get; set; }
         IRepositoryWithTypedId<Stage, string> StageRepository { get; set; }
@@ -44,6 +45,7 @@ namespace CAESGenome.Core.Repositories
         public IRepository<Equipment> EquipmentRepository { get; set; }
         public IRepository<EquipmentReservation> EquipmentReservationRepository { get; set; }
         public IRepository<JobType> JobTypeRepository { get; set; }
+        public IRepository<PhredQuality> PhredQualityRepository { get; set; }
         public IRepository<Primer> PrimerRepository { get; set; }
         public IRepository<RechargeAccount> RechargeAccountRepository { get; set; }
         public IRepositoryWithTypedId<Stage, string> StageRepository { get; set; }
