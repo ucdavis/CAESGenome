@@ -27,6 +27,24 @@
                     $(this).closest('form').submit();
                 }
             });
+
+            var validationUrl = '@Url.Action("RunValidation", "Results")';
+
+            $(".run-validation").click(function (event) {
+                var token = $("input[name='__RequestVerificationToken']").val();
+                var barcode = $(this).data('id');
+
+                $.post(validationUrl, {__RequestVerificationToken: token, id: barcode}, function (result) {
+                    if (result) {
+                        alert("success");
+                    }
+                    else {
+                        alert("failure");
+                    }
+                });
+
+                event.preventDefault();
+            });
         });
     </script>
     

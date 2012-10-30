@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using CAESGenome.Controllers;
 using CAESGenome.Core.Domain;
 using CAESGenome.Core.Repositories;
 using CAESGenome.Resources;
@@ -15,21 +13,17 @@ namespace CAESGenome.Services
     public interface IPhredService
     {
         string SaveFiles(byte[] contents, string filename, out int fileId);
-        void PushToServer(string folderName, List<PlateResult> files);
-
         void ExecuteValidation(int barcode);
-        void RunPhredValidation(int barcode);
     }
 
     public class PhredService : IPhredService
     {
         private readonly IRepositoryFactory _repositoryFactory;
 
-        public static readonly string PhredServer = ConfigurationManager.AppSettings["PhredServer"];
-        public static readonly string PhredUsername = ConfigurationManager.AppSettings["PhredUsername"];
-        public static readonly string PhredPassword = ConfigurationManager.AppSettings["PhredPassword"];
+        private static readonly string PhredServer = ConfigurationManager.AppSettings["PhredServer"];
+        private static readonly string PhredUsername = ConfigurationManager.AppSettings["PhredUsername"];
+        private static readonly string PhredPassword = ConfigurationManager.AppSettings["PhredPassword"];
         private string _storageLocation = ConfigurationManager.AppSettings["StorageLocation"];
-
         // ex. 2020717_A01.ab1
         private const string FilePattern = @"^[0123456789]+_[ABCDEFGH]{1}[0123456789]{2}\.";
 
@@ -120,21 +114,6 @@ namespace CAESGenome.Services
             }
         }
 
-        public void PushToServer(string folderName, List<PlateResult> files)
-        {
-            //var scp = new Scp(PhredServer, PhredPassword, PhredPassword);
-
-            //var dest = string.Format("/home/caesdev/raw/{0}/", folderName);
-
-            //foreach(var file in files)
-            //{
-            //    var ms = new MemoryStream(file.File);
-            //}
-
-            //scp.Close();
-
-        }
-
         public void ExecuteValidation(int barcode)
         {
             RunPhred(barcode);
@@ -149,11 +128,7 @@ namespace CAESGenome.Services
             ValidatePhred(barcode);
         }
 
-        public void RunPhredValidation(int barcode)
-        {
-            ValidatePhred(barcode);
-        }
-
+        // run phred
         private void RunPhred(int barcode)
         {
             // list of commands to execute
@@ -198,6 +173,7 @@ namespace CAESGenome.Services
             ssh.Close();
         }
 
+        // run the validation, calculate the quality results
         private void ValidatePhred(int barcode)
         {
             foreach (var bcf in _repositoryFactory.BarcodeFileRepository.Queryable.Where(a => a.Barcode.Id == barcode))

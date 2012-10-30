@@ -1,0 +1,39 @@
+﻿@model Barcode
+
+@{
+    ViewBag.Title = "Quality Analysis";
+    ViewBag.SubPageTitle = "Quality Analysis";
+
+    var quality = Model.PhredQualities;
+    var rows = quality.Select(a => a.WellRow).Distinct().OrderBy(a => a);
+    var cols = quality.Select(a => a.WellColumn).Distinct().OrderBy(a => a);
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            @foreach(var col in cols)
+            {
+                <th>@col</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var row in rows)
+        {
+            <tr>
+                <th>@row</th>
+                @foreach(var col in cols)
+                {
+                    var cell = quality.FirstOrDefault(a => a.WellColumn == col && a.WellRow == row);
+                    if (cell != null)
+                    {
+                        
+                    }
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+

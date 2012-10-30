@@ -27,6 +27,7 @@ namespace CAESGenome.Core.Domain
         public virtual int SubPlateId { get; set; }
 
         public virtual IList<BarcodeFile> BarcodeFiles { get; set; }
+        public virtual IList<PhredQuality> PhredQualities { get; set; }
 
         public virtual string PlateName
         {
@@ -82,6 +83,7 @@ namespace CAESGenome.Core.Domain
             Map(x => x.SubPlateId);
 
             HasMany(x => x.BarcodeFiles).Inverse().Cascade.AllDeleteOrphan();
+            HasMany(x => x.PhredQualities).Inverse().Cascade.AllDeleteOrphan();
         }
     }
 }
