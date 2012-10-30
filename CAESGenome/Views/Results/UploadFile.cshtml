@@ -80,7 +80,7 @@
     </script>
 }
 
-@using (Html.BeginForm("UploadFile", "Test", FormMethod.Post, new { id = "fileupload", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("UploadFile", "Results", FormMethod.Post, new { id = "fileupload", enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 

@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
+using CAESGenome.Controllers;
 using CAESGenome.Core.Domain;
 using CAESGenome.Core.Repositories;
+using CAESGenome.Resources;
 using Tamir.SharpSsh;
 
 namespace CAESGenome.Services
 {
     public interface IPhredService
     {
+        string SaveFiles(byte[] contents, string filename, out int fileId);
         void PushToServer(string folderName, List<PlateResult> files);
 
         void ExecuteValidation(int barcode);
@@ -26,9 +30,94 @@ namespace CAESGenome.Services
         public static readonly string PhredPassword = ConfigurationManager.AppSettings["PhredPassword"];
         private string _storageLocation = ConfigurationManager.AppSettings["StorageLocation"];
 
+        // ex. 2020717_A01.ab1
+        private const string FilePattern = @"^[0123456789]+_[ABCDEFGH]{1}[0123456789]{2}\.";
+
         public PhredService(IRepositoryFactory repositoryFactory)
         {
             _repositoryFactory = repositoryFactory;
+        }
+
+        public string SaveFiles(byte[] contents, string filename, out int fileId)
+        {
+            fileId = 0;
+
+            // check the filename
+            var regex = new Regex(FilePattern);
+            var match = regex.Match(filename);
+
+            if (!match.Success)
+            {
+                return FileUploadErrorKeys.InvalidFileName;
+            }
+
+            // parse the name
+            var barcodeId = Convert.ToInt32(filename.Substring(0, filename.IndexOf("_")));
+
+            // split after the barcode
+            var seperator = filename.Substring(filename.IndexOf("_") + 1);
+            // remove the extension
+            seperator = seperator.Substring(0, seperator.IndexOf("."));
+
+            var row = seperator[0];
+            var col = Convert.ToInt32(seperator.Substring(1));
+
+            // load up the barcode, from db
+            var barcode = _repositoryFactory.BarcodeRepository.GetNullableById(barcodeId);
+
+            if (barcode == null)
+            {
+                return FileUploadErrorKeys.InvalidBarcode;
+            }
+
+            // check db for existing file
+            var existingFile = _repositoryFactory.BarcodeFileRepository.Queryable.FirstOrDefault(a => a.Barcode == barcode && a.WellColumn == col && a.WellRow == row);
+
+            // check the file system
+            if (File.Exists(string.Format(@"{0}\raw\{1}\{2}", _storageLocation, barcodeId, filename)) || existingFile != null)
+            {
+                return FileUploadErrorKeys.DuplicateFile;
+            }
+
+            if (WriteFile(filename, contents, string.Format(@"{0}\raw\{1}", _storageLocation, barcodeId)))
+            {
+                var bfile = new BarcodeFile()
+                {
+                    Barcode = barcode,
+                    WellColumn = col,
+                    WellRow = row,
+                    Uploaded = true
+                };
+
+                _repositoryFactory.BarcodeFileRepository.EnsurePersistent(bfile);
+
+                fileId = bfile.Id;
+
+                return string.Empty;
+            }
+
+            return FileUploadErrorKeys.WriteError;
+        }
+
+        // write files to the storage locations
+        private bool WriteFile(string filename, byte[] data, string path)
+        {
+            try
+            {
+                // check if the path exists
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                System.IO.File.WriteAllBytes(string.Format(@"{0}\{1}", path, filename), data);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public void PushToServer(string folderName, List<PlateResult> files)

@@ -19,7 +19,9 @@ window.locale = {
             "uploadedBytes": "Uploaded bytes exceed file size",
             "emptyResult": "Empty file upload result",
             "invalidFileName": "File name is not in the correct format",
-            "invalidBarcode": "Barcode referenced in file name is invalid"
+            "invalidBarcode": "Barcode referenced in file name is invalid",
+            "duplicateFile": "File already exists",
+            "writeError": "Unable to write file to server"
         },
         "error": "Error",
         "start": "Start",
