@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Quality Analysis";
-    ViewBag.SubPageTitle = "Quality Analysis";
+    ViewBag.SubPageTitle = "Quality Analysis for " + Model.PlateName;
 
     var quality = Model.BarcodeFiles;
     var rows = quality.Select(a => a.WellRow).Distinct().OrderBy(a => a);
@@ -16,6 +16,13 @@
         .warning { color: red; }
         .good { color: green; }
     </style>
+}
+
+@section SubPageMenu
+{
+    <ul class="nav nav-pills">
+        <li>@Html.ActionLink("Back to User Job", "Details", "UserJob", new {id = Model.UserJobPlate.UserJob.Id}, new {})</li>
+    </ul>
 }
 
 <table class="table">
