@@ -210,4 +210,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="WellRow" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="3fd70431-9d7b-49ee-9313-6b2d6f799213" ChangeDateTime="10/31/2012 14:25:19">
+    <Property Name="ElementName" Value="[dbo].[BarcodeFiles].[[Start]]]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[BarcodeFiles]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Start" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="798a6dcf-cfa3-41bf-a520-eacafb4a16d1" ChangeDateTime="10/31/2012 14:25:23">
+    <Property Name="ElementName" Value="[dbo].[BarcodeFiles].[[End]]]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[BarcodeFiles]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="End" />
+  </Operation>
 </Operations>

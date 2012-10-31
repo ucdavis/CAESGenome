@@ -176,7 +176,9 @@ namespace CAESGenome.Services
         // run the validation, calculate the quality results
         private void ValidatePhred(int barcode)
         {
-            foreach (var bcf in _repositoryFactory.BarcodeFileRepository.Queryable.Where(a => a.Barcode.Id == barcode))
+            var files = _repositoryFactory.BarcodeFileRepository.Queryable.Where(a => a.Barcode.Id == barcode && !a.Validated).ToList();
+
+            foreach (var bcf in files)
             {
                 var start = 0;
                 var end = 0;
@@ -185,8 +187,12 @@ namespace CAESGenome.Services
 
                 FindIndexes(numbers, out start, out end);
 
-                var quality = new PhredQuality() { Barcode = bcf.Barcode, WellColumn = bcf.WellColumn, WellRow = bcf.WellRow, Start = start, End = end };
-                _repositoryFactory.PhredQualityRepository.EnsurePersistent(quality);
+                bcf.Start = start;
+                bcf.End = end;
+                bcf.DateTimeValidated = DateTime.Now;
+                bcf.Validated = true;
+
+                _repositoryFactory.BarcodeFileRepository.EnsurePersistent(bcf);
             }
         }
 

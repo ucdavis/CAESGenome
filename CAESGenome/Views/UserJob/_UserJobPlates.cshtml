@@ -142,7 +142,16 @@
                                     <a href="javascript:;" class="btn hastip advance" title="Advance Barcode to Next Stage"><i class="icon-share"></i></a>
                                 }        
                                 
-                                <a href="javascript:;" class="btn hastip run-validation" title="Run Validation" data-id="@barcode.Id"><i class="icon-play"></i></a>
+                                if (barcode.BarcodeFiles.Any(a => !a.Validated))
+                                {
+                                    <a href="javascript:;" class="btn hastip run-validation" title="Run Validation" data-id="@barcode.Id"><i class="icon-play"></i></a>     
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("QualityControl", "Results", new {id=barcode.Id})" title="View Quality Control Data" class="btn hastip">
+                                        <i class="icon-th"></i>
+                                    </a>
+                                }
                             }
                         }
                     </td>

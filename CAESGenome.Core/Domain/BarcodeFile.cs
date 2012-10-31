@@ -1,16 +1,28 @@
-﻿using FluentNHibernate.Mapping;
+﻿using System;
+using FluentNHibernate.Mapping;
 using UCDArch.Core.DomainModel;
 
 namespace CAESGenome.Core.Domain
 {
     public class BarcodeFile : DomainObject
     {
+        public BarcodeFile()
+        {
+            DateTimeUploaded = DateTime.Now;
+        }
+
         public virtual int WellColumn { get; set; }
         public virtual char WellRow { get; set; }
         public virtual Barcode Barcode { get; set; }
 
         public virtual bool Uploaded { get; set; }
         public virtual bool Validated { get; set; }
+
+        public virtual int Start { get; set; }
+        public virtual int End { get; set; }
+
+        public virtual DateTime DateTimeUploaded { get; set; }
+        public virtual DateTime? DateTimeValidated { get; set; }
 
         public virtual string ResultFileName
         {
@@ -49,6 +61,12 @@ namespace CAESGenome.Core.Domain
 
             Map(x => x.Uploaded);
             Map(x => x.Validated);
+
+            Map(x => x.Start).Column("`Start`");
+            Map(x => x.End).Column("`End`");
+
+            Map(x => x.DateTimeUploaded);
+            Map(x => x.DateTimeValidated);
         }
     }
 }

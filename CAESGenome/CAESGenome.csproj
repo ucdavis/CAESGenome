@@ -489,6 +489,7 @@
     <Content Include="Views\Transfer\Accounts.cshtml" />
     <Content Include="Views\Results\UploadFile.cshtml" />
     <Content Include="Views\Test\PushFileToServer.cshtml" />
+    <Content Include="Views\Results\QualityControl.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
