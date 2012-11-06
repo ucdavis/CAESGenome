@@ -3,12 +3,36 @@
     ViewBag.SubPageTitle = "Authorized Home";
 }
 
-<ul type="circle">
-    <li>@Html.ActionLink("Open Jobs", "Index", "UserJob")</li>
-</ul>
+@section scripts
+{
+    <style type="text/css">
+        
+    </style>
+}
 
-@Html.ActionLink("Submit Sequencing Job", "Create", "Sequencing", new {}, new {@class="btn btn-large btn-primary"})
-
-@Html.ActionLink("Submit Genotyping Job", "Create", "Genotyping", new {}, new {@class="btn btn-large btn-primary"})
-
-@Html.ActionLink("Submit Qbot Job", "Create", "Qbot", new {}, new {@class="btn btn-large btn-primary"})
+<div class="row-fluid main-menu">
+    <div class="span3">
+        <a href="@Url.Action("Create", "Sequencing")">
+            <img src="@Url.Content("~/Images/sequencing.png")"/>
+            <h4>Submit <br/>Sequencing Job</h4>
+        </a>
+    </div>
+    <div class="span3">
+        <a href="@Url.Action("Create", "Genotyping")">
+            <img src="@Url.Content("~/Images/genotyping.png")"/>
+            <h4>Submit <br/>Genotyping Job</h4>
+        </a>
+    </div>
+    <div class="span3">
+        <a href="@Url.Action("Create", "Qbot")">
+            <img src="@Url.Content("~/Images/qbot.png")"/>
+            <h4>Submit <br/>Qbot Job</h4>
+        </a>
+    </div>
+    <div class="span3">
+        <a href="@Url.Action("Index", "UserJob")">
+            <img src="@Url.Content("~/Images/openjobs.png")"/>
+            <h4>Open Jobs</h4>
+        </a>
+    </div>
+</div>

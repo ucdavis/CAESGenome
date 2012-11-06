@@ -359,6 +359,17 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\accounts.png" />
+    <Content Include="Images\completedjobs.png" />
+    <Content Include="Images\date.png" />
+    <Content Include="Images\usage.png" />
+    <Content Include="Images\statistics.png" />
+    <Content Include="Images\up.png" />
+    <Content Include="Images\users.png" />
+    <Content Include="Images\genotyping.png" />
+    <Content Include="Images\qbot.png" />
+    <Content Include="Images\sequencing.png" />
+    <Content Include="Images\openjobs.png" />
     <Content Include="Scripts\Anytime.js" />
     <Content Include="Scripts\jquery.bootstrapcheckbox.js" />
     <Content Include="AppSettings.config" />
@@ -390,7 +401,9 @@
     <Content Include="Scripts\Single\NewVector.js" />
     <Content Include="Scripts\Single\SequencePlatesForm.js" />
     <Content Include="Scripts\Single\SublibraryForm.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

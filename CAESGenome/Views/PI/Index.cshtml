@@ -3,11 +3,19 @@
     ViewBag.SubPageTitle = "PI Home";
 }
 
-<ul type="circle">
-    <li>
-        @Html.ActionLink("Manage Users", "Users")
-    </li>
-    <li>
-        @Html.ActionLink("Recharge Accounts", "RechargeAccounts")
-    </li>
-</ul>
+<div class="row-fluid main-menu">
+    
+    <div class="span6">
+        <a href="@Url.Action("Users")">
+            <img src="@Url.Content("~/Images/users.png")"/>
+            <h4>Manage Users</h4>
+        </a>
+    </div>
+    <div class="span6">
+        <a href="@Url.Action("RechargeAccounts")">
+            <img src="@Url.Content("~/Images/accounts.png")"/>
+            <h4>Recharge Accounts</h4>
+        </a>
+    </div>
+
+</div>
