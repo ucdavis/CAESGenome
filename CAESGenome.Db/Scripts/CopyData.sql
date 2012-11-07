@@ -6,10 +6,6 @@ delete from Barcodes
 delete from userjobplates
 delete from userjobs
 delete from UserProfilesXRechargeAccounts
-delete from RechargeAccounts
-delete from webpages_UsersInRoles
-delete from userprofile
-delete from webpages_Membership
 
 /*
 Delete the job tables
@@ -30,13 +26,15 @@ delete from UserJobGenotyping
 Copy the Data
 */
 
+set identity_insert userjobgenotyping off
+
 update cgfold.dbo.recharge set valid = 'no' where rechargeid in (286, 293)
 
-insert into cgf.dbo.UserProfilesXRechargeAccounts (UserProfileId, RechargeAccountId)
-select distinct userid, rechargeid from cgfold.dbo.useracct 
-where lower(valid) = 'yes'
-  and userid in ( select userid from cgfold.dbo.[user] )
-  and rechargeid in ( select rechargeid from cgfold.dbo.recharge )
+--insert into cgf.dbo.UserProfilesXRechargeAccounts (UserProfileId, RechargeAccountId)
+--select distinct userid, rechargeid from cgfold.dbo.useracct 
+--where lower(valid) = 'yes'
+--  and userid in ( select userid from cgfold.dbo.[user] )
+--  and rechargeid in ( select rechargeid from cgfold.dbo.recharge )
 
 set identity_insert cgf.dbo.userjobbacterialclone on
 insert into cgf.dbo.UserJobBacterialClone (id, SequenceDirection, Primer1Id, primer2id, StrainId, VectorId, AntibioticId)

@@ -1,13 +1,19 @@
-﻿@if (Request.IsAuthenticated) {
-    <text>
-        Hello, @Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })!
-        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
-            @Html.AntiForgeryToken()
-            <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
-        }
-    </text>
+﻿﻿@if (Request.IsAuthenticated) {
+    <div class="btn-group pull-right">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="icon-user"></i> @Context.User.Identity.Name
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            @*<li><a href="#">Profile</a></li>
+            <li class="divider"></li>*@
+            <li>@Html.ActionLink("Log Off", "LogOff", "Account")</li>
+        </ul>
+    </div>
 } else {
-    <ul>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+    <div class="btn-group pull-right">
+        <a class="btn" href="@Url.Action("Index", "Authorized")">
+            <i class="icon-user"></i> Login
+        </a>
+    </div>
 }

@@ -22,7 +22,7 @@ namespace CAESGenome.Transfer
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="CgfOld")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="CgfOld2")]
 	public partial class ExistingDataDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -30,27 +30,42 @@ namespace CAESGenome.Transfer
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void Insertbarcode(barcode instance);
-    partial void Updatebarcode(barcode instance);
-    partial void Deletebarcode(barcode instance);
-    partial void Insertuseracct(useracct instance);
-    partial void Updateuseracct(useracct instance);
-    partial void Deleteuseracct(useracct instance);
     partial void Insertdepartment(department instance);
     partial void Updatedepartment(department instance);
     partial void Deletedepartment(department instance);
+    partial void Insertuseracct(useracct instance);
+    partial void Updateuseracct(useracct instance);
+    partial void Deleteuseracct(useracct instance);
     partial void Insertpi(pi instance);
     partial void Updatepi(pi instance);
     partial void Deletepi(pi instance);
+    partial void Insertquality_phred(quality_phred instance);
+    partial void Updatequality_phred(quality_phred instance);
+    partial void Deletequality_phred(quality_phred instance);
     partial void Insertrecharge(recharge instance);
     partial void Updaterecharge(recharge instance);
     partial void Deleterecharge(recharge instance);
+    partial void Insertstaff(staff instance);
+    partial void Updatestaff(staff instance);
+    partial void Deletestaff(staff instance);
+    partial void Insertsubmission_equipment(submission_equipment instance);
+    partial void Updatesubmission_equipment(submission_equipment instance);
+    partial void Deletesubmission_equipment(submission_equipment instance);
+    partial void Insertsubmission_equipments_higro(submission_equipments_higro instance);
+    partial void Updatesubmission_equipments_higro(submission_equipments_higro instance);
+    partial void Deletesubmission_equipments_higro(submission_equipments_higro instance);
     partial void Insertsubmission_userjob_bacterialclone(submission_userjob_bacterialclone instance);
     partial void Updatesubmission_userjob_bacterialclone(submission_userjob_bacterialclone instance);
     partial void Deletesubmission_userjob_bacterialclone(submission_userjob_bacterialclone instance);
+    partial void Insertsubmission_userjob_dna(submission_userjob_dna instance);
+    partial void Updatesubmission_userjob_dna(submission_userjob_dna instance);
+    partial void Deletesubmission_userjob_dna(submission_userjob_dna instance);
     partial void Insertsubmission_userjob_qbot_colonypicking(submission_userjob_qbot_colonypicking instance);
     partial void Updatesubmission_userjob_qbot_colonypicking(submission_userjob_qbot_colonypicking instance);
     partial void Deletesubmission_userjob_qbot_colonypicking(submission_userjob_qbot_colonypicking instance);
+    partial void Insertsubmission_userjob_qbot_gridding(submission_userjob_qbot_gridding instance);
+    partial void Updatesubmission_userjob_qbot_gridding(submission_userjob_qbot_gridding instance);
+    partial void Deletesubmission_userjob_qbot_gridding(submission_userjob_qbot_gridding instance);
     partial void Insertsubmission_userjob_qbot_replicating(submission_userjob_qbot_replicating instance);
     partial void Updatesubmission_userjob_qbot_replicating(submission_userjob_qbot_replicating instance);
     partial void Deletesubmission_userjob_qbot_replicating(submission_userjob_qbot_replicating instance);
@@ -60,9 +75,6 @@ namespace CAESGenome.Transfer
     partial void Insertsubmission_userjob_userrun(submission_userjob_userrun instance);
     partial void Updatesubmission_userjob_userrun(submission_userjob_userrun instance);
     partial void Deletesubmission_userjob_userrun(submission_userjob_userrun instance);
-    partial void Insertsubmission_userjob_userrun_genotyping(submission_userjob_userrun_genotyping instance);
-    partial void Updatesubmission_userjob_userrun_genotyping(submission_userjob_userrun_genotyping instance);
-    partial void Deletesubmission_userjob_userrun_genotyping(submission_userjob_userrun_genotyping instance);
     partial void Insertsubmission_userjob(submission_userjob instance);
     partial void Updatesubmission_userjob(submission_userjob instance);
     partial void Deletesubmission_userjob(submission_userjob instance);
@@ -75,7 +87,7 @@ namespace CAESGenome.Transfer
     #endregion
 		
 		public ExistingDataDataContext() : 
-				base(global::CAESGenome.Transfer.Properties.Settings.Default.CgfOldConnectionString, mappingSource)
+				base(global::CAESGenome.Transfer.Properties.Settings.Default.CgfOld2ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -104,11 +116,11 @@ namespace CAESGenome.Transfer
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<barcode> barcodes
+		public System.Data.Linq.Table<department> departments
 		{
 			get
 			{
-				return this.GetTable<barcode>();
+				return this.GetTable<department>();
 			}
 		}
 		
@@ -120,19 +132,19 @@ namespace CAESGenome.Transfer
 			}
 		}
 		
-		public System.Data.Linq.Table<department> departments
-		{
-			get
-			{
-				return this.GetTable<department>();
-			}
-		}
-		
 		public System.Data.Linq.Table<pi> pis
 		{
 			get
 			{
 				return this.GetTable<pi>();
+			}
+		}
+		
+		public System.Data.Linq.Table<quality_phred> quality_phreds
+		{
+			get
+			{
+				return this.GetTable<quality_phred>();
 			}
 		}
 		
@@ -152,6 +164,22 @@ namespace CAESGenome.Transfer
 			}
 		}
 		
+		public System.Data.Linq.Table<submission_equipment> submission_equipments
+		{
+			get
+			{
+				return this.GetTable<submission_equipment>();
+			}
+		}
+		
+		public System.Data.Linq.Table<submission_equipments_higro> submission_equipments_higros
+		{
+			get
+			{
+				return this.GetTable<submission_equipments_higro>();
+			}
+		}
+		
 		public System.Data.Linq.Table<submission_userjob_bacterialclone> submission_userjob_bacterialclones
 		{
 			get
@@ -160,11 +188,27 @@ namespace CAESGenome.Transfer
 			}
 		}
 		
+		public System.Data.Linq.Table<submission_userjob_dna> submission_userjob_dnas
+		{
+			get
+			{
+				return this.GetTable<submission_userjob_dna>();
+			}
+		}
+		
 		public System.Data.Linq.Table<submission_userjob_qbot_colonypicking> submission_userjob_qbot_colonypickings
 		{
 			get
 			{
 				return this.GetTable<submission_userjob_qbot_colonypicking>();
+			}
+		}
+		
+		public System.Data.Linq.Table<submission_userjob_qbot_gridding> submission_userjob_qbot_griddings
+		{
+			get
+			{
+				return this.GetTable<submission_userjob_qbot_gridding>();
 			}
 		}
 		
@@ -189,14 +233,6 @@ namespace CAESGenome.Transfer
 			get
 			{
 				return this.GetTable<submission_userjob_userrun>();
-			}
-		}
-		
-		public System.Data.Linq.Table<submission_userjob_userrun_genotyping> submission_userjob_userrun_genotypings
-		{
-			get
-			{
-				return this.GetTable<submission_userjob_userrun_genotyping>();
 			}
 		}
 		
@@ -225,211 +261,67 @@ namespace CAESGenome.Transfer
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.barcode")]
-	public partial class barcode : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.departments")]
+	public partial class department : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _id;
+		private int _departmentid;
 		
-		private int _plateID;
-		
-		private int _plateSubID;
-		
-		private int _primerID;
-		
-		private int _stage;
-		
-		private int _sourceBarcode;
-		
-		private System.DateTime _date;
-		
-		private int _done;
+		private string _department1;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OnplateIDChanging(int value);
-    partial void OnplateIDChanged();
-    partial void OnplateSubIDChanging(int value);
-    partial void OnplateSubIDChanged();
-    partial void OnprimerIDChanging(int value);
-    partial void OnprimerIDChanged();
-    partial void OnstageChanging(int value);
-    partial void OnstageChanged();
-    partial void OnsourceBarcodeChanging(int value);
-    partial void OnsourceBarcodeChanged();
-    partial void OndateChanging(System.DateTime value);
-    partial void OndateChanged();
-    partial void OndoneChanging(int value);
-    partial void OndoneChanged();
+    partial void OndepartmentidChanging(int value);
+    partial void OndepartmentidChanged();
+    partial void Ondepartment1Changing(string value);
+    partial void Ondepartment1Changed();
     #endregion
 		
-		public barcode()
+		public department()
 		{
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_departmentid", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int departmentid
 		{
 			get
 			{
-				return this._id;
+				return this._departmentid;
 			}
 			set
 			{
-				if ((this._id != value))
+				if ((this._departmentid != value))
 				{
-					this.OnidChanging(value);
+					this.OndepartmentidChanging(value);
 					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
+					this._departmentid = value;
+					this.SendPropertyChanged("departmentid");
+					this.OndepartmentidChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_plateID", DbType="Int NOT NULL")]
-		public int plateID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="department", Storage="_department1", DbType="VarChar(150)")]
+		public string department1
 		{
 			get
 			{
-				return this._plateID;
+				return this._department1;
 			}
 			set
 			{
-				if ((this._plateID != value))
+				if ((this._department1 != value))
 				{
-					this.OnplateIDChanging(value);
+					this.Ondepartment1Changing(value);
 					this.SendPropertyChanging();
-					this._plateID = value;
-					this.SendPropertyChanged("plateID");
-					this.OnplateIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_plateSubID", DbType="Int NOT NULL")]
-		public int plateSubID
-		{
-			get
-			{
-				return this._plateSubID;
-			}
-			set
-			{
-				if ((this._plateSubID != value))
-				{
-					this.OnplateSubIDChanging(value);
-					this.SendPropertyChanging();
-					this._plateSubID = value;
-					this.SendPropertyChanged("plateSubID");
-					this.OnplateSubIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_primerID", DbType="Int NOT NULL")]
-		public int primerID
-		{
-			get
-			{
-				return this._primerID;
-			}
-			set
-			{
-				if ((this._primerID != value))
-				{
-					this.OnprimerIDChanging(value);
-					this.SendPropertyChanging();
-					this._primerID = value;
-					this.SendPropertyChanged("primerID");
-					this.OnprimerIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_stage", DbType="Int NOT NULL")]
-		public int stage
-		{
-			get
-			{
-				return this._stage;
-			}
-			set
-			{
-				if ((this._stage != value))
-				{
-					this.OnstageChanging(value);
-					this.SendPropertyChanging();
-					this._stage = value;
-					this.SendPropertyChanged("stage");
-					this.OnstageChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sourceBarcode", DbType="Int NOT NULL")]
-		public int sourceBarcode
-		{
-			get
-			{
-				return this._sourceBarcode;
-			}
-			set
-			{
-				if ((this._sourceBarcode != value))
-				{
-					this.OnsourceBarcodeChanging(value);
-					this.SendPropertyChanging();
-					this._sourceBarcode = value;
-					this.SendPropertyChanged("sourceBarcode");
-					this.OnsourceBarcodeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date", DbType="Date NOT NULL")]
-		public System.DateTime date
-		{
-			get
-			{
-				return this._date;
-			}
-			set
-			{
-				if ((this._date != value))
-				{
-					this.OndateChanging(value);
-					this.SendPropertyChanging();
-					this._date = value;
-					this.SendPropertyChanged("date");
-					this.OndateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_done", DbType="Int NOT NULL")]
-		public int done
-		{
-			get
-			{
-				return this._done;
-			}
-			set
-			{
-				if ((this._done != value))
-				{
-					this.OndoneChanging(value);
-					this.SendPropertyChanging();
-					this._done = value;
-					this.SendPropertyChanged("done");
-					this.OndoneChanged();
+					this._department1 = value;
+					this.SendPropertyChanged("department1");
+					this.Ondepartment1Changed();
 				}
 			}
 		}
@@ -488,7 +380,7 @@ namespace CAESGenome.Transfer
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_useracctid", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_useracctid", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int useracctid
 		{
 			get
@@ -589,92 +481,6 @@ namespace CAESGenome.Transfer
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.departments")]
-	public partial class department : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _departmentid;
-		
-		private string _department1;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OndepartmentidChanging(int value);
-    partial void OndepartmentidChanged();
-    partial void Ondepartment1Changing(string value);
-    partial void Ondepartment1Changed();
-    #endregion
-		
-		public department()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_departmentid", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int departmentid
-		{
-			get
-			{
-				return this._departmentid;
-			}
-			set
-			{
-				if ((this._departmentid != value))
-				{
-					this.OndepartmentidChanging(value);
-					this.SendPropertyChanging();
-					this._departmentid = value;
-					this.SendPropertyChanged("departmentid");
-					this.OndepartmentidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="department", Storage="_department1", DbType="VarChar(150)")]
-		public string department1
-		{
-			get
-			{
-				return this._department1;
-			}
-			set
-			{
-				if ((this._department1 != value))
-				{
-					this.Ondepartment1Changing(value);
-					this.SendPropertyChanging();
-					this._department1 = value;
-					this.SendPropertyChanged("department1");
-					this.Ondepartment1Changed();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.pi")]
 	public partial class pi : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -740,7 +546,7 @@ namespace CAESGenome.Transfer
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_piid", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_piid", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int piid
 		{
 			get
@@ -1001,6 +807,236 @@ namespace CAESGenome.Transfer
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.quality_phred")]
+	public partial class quality_phred : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private int _barcode;
+		
+		private string _cellChar;
+		
+		private int _cellNum;
+		
+		private short _start;
+		
+		private short _end;
+		
+		private System.DateTime _dateSubmitted;
+		
+		private System.DateTime _dateTimeSubmitted;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnbarcodeChanging(int value);
+    partial void OnbarcodeChanged();
+    partial void OncellCharChanging(string value);
+    partial void OncellCharChanged();
+    partial void OncellNumChanging(int value);
+    partial void OncellNumChanged();
+    partial void OnstartChanging(short value);
+    partial void OnstartChanged();
+    partial void OnendChanging(short value);
+    partial void OnendChanged();
+    partial void OndateSubmittedChanging(System.DateTime value);
+    partial void OndateSubmittedChanged();
+    partial void OndateTimeSubmittedChanging(System.DateTime value);
+    partial void OndateTimeSubmittedChanged();
+    #endregion
+		
+		public quality_phred()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_barcode", DbType="Int NOT NULL")]
+		public int barcode
+		{
+			get
+			{
+				return this._barcode;
+			}
+			set
+			{
+				if ((this._barcode != value))
+				{
+					this.OnbarcodeChanging(value);
+					this.SendPropertyChanging();
+					this._barcode = value;
+					this.SendPropertyChanged("barcode");
+					this.OnbarcodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cellChar", DbType="Char(2) NOT NULL", CanBeNull=false)]
+		public string cellChar
+		{
+			get
+			{
+				return this._cellChar;
+			}
+			set
+			{
+				if ((this._cellChar != value))
+				{
+					this.OncellCharChanging(value);
+					this.SendPropertyChanging();
+					this._cellChar = value;
+					this.SendPropertyChanged("cellChar");
+					this.OncellCharChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cellNum", DbType="Int NOT NULL")]
+		public int cellNum
+		{
+			get
+			{
+				return this._cellNum;
+			}
+			set
+			{
+				if ((this._cellNum != value))
+				{
+					this.OncellNumChanging(value);
+					this.SendPropertyChanging();
+					this._cellNum = value;
+					this.SendPropertyChanged("cellNum");
+					this.OncellNumChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start", DbType="SmallInt NOT NULL")]
+		public short start
+		{
+			get
+			{
+				return this._start;
+			}
+			set
+			{
+				if ((this._start != value))
+				{
+					this.OnstartChanging(value);
+					this.SendPropertyChanging();
+					this._start = value;
+					this.SendPropertyChanged("start");
+					this.OnstartChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[end]", Storage="_end", DbType="SmallInt NOT NULL")]
+		public short end
+		{
+			get
+			{
+				return this._end;
+			}
+			set
+			{
+				if ((this._end != value))
+				{
+					this.OnendChanging(value);
+					this.SendPropertyChanging();
+					this._end = value;
+					this.SendPropertyChanged("end");
+					this.OnendChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateSubmitted", DbType="Date NOT NULL")]
+		public System.DateTime dateSubmitted
+		{
+			get
+			{
+				return this._dateSubmitted;
+			}
+			set
+			{
+				if ((this._dateSubmitted != value))
+				{
+					this.OndateSubmittedChanging(value);
+					this.SendPropertyChanging();
+					this._dateSubmitted = value;
+					this.SendPropertyChanged("dateSubmitted");
+					this.OndateSubmittedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateTimeSubmitted", DbType="DateTime NOT NULL")]
+		public System.DateTime dateTimeSubmitted
+		{
+			get
+			{
+				return this._dateTimeSubmitted;
+			}
+			set
+			{
+				if ((this._dateTimeSubmitted != value))
+				{
+					this.OndateTimeSubmittedChanging(value);
+					this.SendPropertyChanging();
+					this._dateTimeSubmitted = value;
+					this.SendPropertyChanged("dateTimeSubmitted");
+					this.OndateTimeSubmittedChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.recharge")]
 	public partial class recharge : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1046,7 +1082,7 @@ namespace CAESGenome.Transfer
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rechargeid", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rechargeid", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int rechargeid
 		{
 			get
@@ -1208,8 +1244,10 @@ namespace CAESGenome.Transfer
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.staff")]
-	public partial class staff
+	public partial class staff : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private decimal _staffid;
 		
@@ -1223,11 +1261,30 @@ namespace CAESGenome.Transfer
 		
 		private string _staffpassword;
 		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnstaffidChanging(decimal value);
+    partial void OnstaffidChanged();
+    partial void OnstafffirstChanging(string value);
+    partial void OnstafffirstChanged();
+    partial void OnstafflastChanging(string value);
+    partial void OnstafflastChanged();
+    partial void OnstaffemailChanging(string value);
+    partial void OnstaffemailChanged();
+    partial void OnstafftitleChanging(string value);
+    partial void OnstafftitleChanged();
+    partial void OnstaffpasswordChanging(string value);
+    partial void OnstaffpasswordChanged();
+    #endregion
+		
 		public staff()
 		{
+			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_staffid", DbType="Decimal(22,0) NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_staffid", DbType="Decimal(22,0) NOT NULL", IsPrimaryKey=true)]
 		public decimal staffid
 		{
 			get
@@ -1238,7 +1295,11 @@ namespace CAESGenome.Transfer
 			{
 				if ((this._staffid != value))
 				{
+					this.OnstaffidChanging(value);
+					this.SendPropertyChanging();
 					this._staffid = value;
+					this.SendPropertyChanged("staffid");
+					this.OnstaffidChanged();
 				}
 			}
 		}
@@ -1254,7 +1315,11 @@ namespace CAESGenome.Transfer
 			{
 				if ((this._stafffirst != value))
 				{
+					this.OnstafffirstChanging(value);
+					this.SendPropertyChanging();
 					this._stafffirst = value;
+					this.SendPropertyChanged("stafffirst");
+					this.OnstafffirstChanged();
 				}
 			}
 		}
@@ -1270,7 +1335,11 @@ namespace CAESGenome.Transfer
 			{
 				if ((this._stafflast != value))
 				{
+					this.OnstafflastChanging(value);
+					this.SendPropertyChanging();
 					this._stafflast = value;
+					this.SendPropertyChanged("stafflast");
+					this.OnstafflastChanged();
 				}
 			}
 		}
@@ -1286,7 +1355,11 @@ namespace CAESGenome.Transfer
 			{
 				if ((this._staffemail != value))
 				{
+					this.OnstaffemailChanging(value);
+					this.SendPropertyChanging();
 					this._staffemail = value;
+					this.SendPropertyChanged("staffemail");
+					this.OnstaffemailChanged();
 				}
 			}
 		}
@@ -1302,7 +1375,11 @@ namespace CAESGenome.Transfer
 			{
 				if ((this._stafftitle != value))
 				{
+					this.OnstafftitleChanging(value);
+					this.SendPropertyChanging();
 					this._stafftitle = value;
+					this.SendPropertyChanged("stafftitle");
+					this.OnstafftitleChanged();
 				}
 			}
 		}
@@ -1318,8 +1395,444 @@ namespace CAESGenome.Transfer
 			{
 				if ((this._staffpassword != value))
 				{
+					this.OnstaffpasswordChanging(value);
+					this.SendPropertyChanging();
 					this._staffpassword = value;
+					this.SendPropertyChanged("staffpassword");
+					this.OnstaffpasswordChanged();
 				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.submission_equipments")]
+	public partial class submission_equipment : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private System.DateTime _dateSubmitted;
+		
+		private short _uid;
+		
+		private int _equipmentID;
+		
+		private System.DateTime _startDate;
+		
+		private int _startHour;
+		
+		private System.DateTime _endDate;
+		
+		private int _endHour;
+		
+		private int _HiGroID;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OndateSubmittedChanging(System.DateTime value);
+    partial void OndateSubmittedChanged();
+    partial void OnuidChanging(short value);
+    partial void OnuidChanged();
+    partial void OnequipmentIDChanging(int value);
+    partial void OnequipmentIDChanged();
+    partial void OnstartDateChanging(System.DateTime value);
+    partial void OnstartDateChanged();
+    partial void OnstartHourChanging(int value);
+    partial void OnstartHourChanged();
+    partial void OnendDateChanging(System.DateTime value);
+    partial void OnendDateChanged();
+    partial void OnendHourChanging(int value);
+    partial void OnendHourChanged();
+    partial void OnHiGroIDChanging(int value);
+    partial void OnHiGroIDChanged();
+    #endregion
+		
+		public submission_equipment()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateSubmitted", DbType="DateTime NOT NULL")]
+		public System.DateTime dateSubmitted
+		{
+			get
+			{
+				return this._dateSubmitted;
+			}
+			set
+			{
+				if ((this._dateSubmitted != value))
+				{
+					this.OndateSubmittedChanging(value);
+					this.SendPropertyChanging();
+					this._dateSubmitted = value;
+					this.SendPropertyChanged("dateSubmitted");
+					this.OndateSubmittedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_uid", DbType="SmallInt NOT NULL")]
+		public short uid
+		{
+			get
+			{
+				return this._uid;
+			}
+			set
+			{
+				if ((this._uid != value))
+				{
+					this.OnuidChanging(value);
+					this.SendPropertyChanging();
+					this._uid = value;
+					this.SendPropertyChanged("uid");
+					this.OnuidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_equipmentID", DbType="Int NOT NULL")]
+		public int equipmentID
+		{
+			get
+			{
+				return this._equipmentID;
+			}
+			set
+			{
+				if ((this._equipmentID != value))
+				{
+					this.OnequipmentIDChanging(value);
+					this.SendPropertyChanging();
+					this._equipmentID = value;
+					this.SendPropertyChanged("equipmentID");
+					this.OnequipmentIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_startDate", DbType="Date NOT NULL")]
+		public System.DateTime startDate
+		{
+			get
+			{
+				return this._startDate;
+			}
+			set
+			{
+				if ((this._startDate != value))
+				{
+					this.OnstartDateChanging(value);
+					this.SendPropertyChanging();
+					this._startDate = value;
+					this.SendPropertyChanged("startDate");
+					this.OnstartDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_startHour", DbType="Int NOT NULL")]
+		public int startHour
+		{
+			get
+			{
+				return this._startHour;
+			}
+			set
+			{
+				if ((this._startHour != value))
+				{
+					this.OnstartHourChanging(value);
+					this.SendPropertyChanging();
+					this._startHour = value;
+					this.SendPropertyChanged("startHour");
+					this.OnstartHourChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_endDate", DbType="Date NOT NULL")]
+		public System.DateTime endDate
+		{
+			get
+			{
+				return this._endDate;
+			}
+			set
+			{
+				if ((this._endDate != value))
+				{
+					this.OnendDateChanging(value);
+					this.SendPropertyChanging();
+					this._endDate = value;
+					this.SendPropertyChanged("endDate");
+					this.OnendDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_endHour", DbType="Int NOT NULL")]
+		public int endHour
+		{
+			get
+			{
+				return this._endHour;
+			}
+			set
+			{
+				if ((this._endHour != value))
+				{
+					this.OnendHourChanging(value);
+					this.SendPropertyChanging();
+					this._endHour = value;
+					this.SendPropertyChanged("endHour");
+					this.OnendHourChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HiGroID", DbType="Int NOT NULL")]
+		public int HiGroID
+		{
+			get
+			{
+				return this._HiGroID;
+			}
+			set
+			{
+				if ((this._HiGroID != value))
+				{
+					this.OnHiGroIDChanging(value);
+					this.SendPropertyChanging();
+					this._HiGroID = value;
+					this.SendPropertyChanged("HiGroID");
+					this.OnHiGroIDChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.submission_equipments_higro")]
+	public partial class submission_equipments_higro : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private short _temperature;
+		
+		private short _speed;
+		
+		private short _numOfPlates;
+		
+		private string _wellType;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OntemperatureChanging(short value);
+    partial void OntemperatureChanged();
+    partial void OnspeedChanging(short value);
+    partial void OnspeedChanged();
+    partial void OnnumOfPlatesChanging(short value);
+    partial void OnnumOfPlatesChanged();
+    partial void OnwellTypeChanging(string value);
+    partial void OnwellTypeChanged();
+    #endregion
+		
+		public submission_equipments_higro()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_temperature", DbType="SmallInt NOT NULL")]
+		public short temperature
+		{
+			get
+			{
+				return this._temperature;
+			}
+			set
+			{
+				if ((this._temperature != value))
+				{
+					this.OntemperatureChanging(value);
+					this.SendPropertyChanging();
+					this._temperature = value;
+					this.SendPropertyChanged("temperature");
+					this.OntemperatureChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speed", DbType="SmallInt NOT NULL")]
+		public short speed
+		{
+			get
+			{
+				return this._speed;
+			}
+			set
+			{
+				if ((this._speed != value))
+				{
+					this.OnspeedChanging(value);
+					this.SendPropertyChanging();
+					this._speed = value;
+					this.SendPropertyChanged("speed");
+					this.OnspeedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_numOfPlates", DbType="SmallInt NOT NULL")]
+		public short numOfPlates
+		{
+			get
+			{
+				return this._numOfPlates;
+			}
+			set
+			{
+				if ((this._numOfPlates != value))
+				{
+					this.OnnumOfPlatesChanging(value);
+					this.SendPropertyChanging();
+					this._numOfPlates = value;
+					this.SendPropertyChanged("numOfPlates");
+					this.OnnumOfPlatesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wellType", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string wellType
+		{
+			get
+			{
+				return this._wellType;
+			}
+			set
+			{
+				if ((this._wellType != value))
+				{
+					this.OnwellTypeChanging(value);
+					this.SendPropertyChanging();
+					this._wellType = value;
+					this.SendPropertyChanged("wellType");
+					this.OnwellTypeChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -1369,7 +1882,7 @@ namespace CAESGenome.Transfer
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int id
 		{
 			get
@@ -1530,6 +2043,140 @@ namespace CAESGenome.Transfer
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.submission_userjob_dna")]
+	public partial class submission_userjob_dna : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _Seq_Direction;
+		
+		private int _Primer1;
+		
+		private int _Primer2;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnSeq_DirectionChanging(string value);
+    partial void OnSeq_DirectionChanged();
+    partial void OnPrimer1Changing(int value);
+    partial void OnPrimer1Changed();
+    partial void OnPrimer2Changing(int value);
+    partial void OnPrimer2Changed();
+    #endregion
+		
+		public submission_userjob_dna()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Seq_Direction", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string Seq_Direction
+		{
+			get
+			{
+				return this._Seq_Direction;
+			}
+			set
+			{
+				if ((this._Seq_Direction != value))
+				{
+					this.OnSeq_DirectionChanging(value);
+					this.SendPropertyChanging();
+					this._Seq_Direction = value;
+					this.SendPropertyChanged("Seq_Direction");
+					this.OnSeq_DirectionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Primer1", DbType="Int NOT NULL")]
+		public int Primer1
+		{
+			get
+			{
+				return this._Primer1;
+			}
+			set
+			{
+				if ((this._Primer1 != value))
+				{
+					this.OnPrimer1Changing(value);
+					this.SendPropertyChanging();
+					this._Primer1 = value;
+					this.SendPropertyChanged("Primer1");
+					this.OnPrimer1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Primer2", DbType="Int NOT NULL")]
+		public int Primer2
+		{
+			get
+			{
+				return this._Primer2;
+			}
+			set
+			{
+				if ((this._Primer2 != value))
+				{
+					this.OnPrimer2Changing(value);
+					this.SendPropertyChanging();
+					this._Primer2 = value;
+					this.SendPropertyChanged("Primer2");
+					this.OnPrimer2Changed();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.submission_userjob_qbot_colonypicking")]
 	public partial class submission_userjob_qbot_colonypicking : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1579,7 +2226,7 @@ namespace CAESGenome.Transfer
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int id
 		{
 			get
@@ -1760,6 +2407,188 @@ namespace CAESGenome.Transfer
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.submission_userjob_qbot_gridding")]
+	public partial class submission_userjob_qbot_gridding : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private int _vectorID;
+		
+		private int _hostID;
+		
+		private string _numOfSourcePlates;
+		
+		private string _copiesOfMembranes;
+		
+		private string _pattern;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnvectorIDChanging(int value);
+    partial void OnvectorIDChanged();
+    partial void OnhostIDChanging(int value);
+    partial void OnhostIDChanged();
+    partial void OnnumOfSourcePlatesChanging(string value);
+    partial void OnnumOfSourcePlatesChanged();
+    partial void OncopiesOfMembranesChanging(string value);
+    partial void OncopiesOfMembranesChanged();
+    partial void OnpatternChanging(string value);
+    partial void OnpatternChanged();
+    #endregion
+		
+		public submission_userjob_qbot_gridding()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vectorID", DbType="Int NOT NULL")]
+		public int vectorID
+		{
+			get
+			{
+				return this._vectorID;
+			}
+			set
+			{
+				if ((this._vectorID != value))
+				{
+					this.OnvectorIDChanging(value);
+					this.SendPropertyChanging();
+					this._vectorID = value;
+					this.SendPropertyChanged("vectorID");
+					this.OnvectorIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_hostID", DbType="Int NOT NULL")]
+		public int hostID
+		{
+			get
+			{
+				return this._hostID;
+			}
+			set
+			{
+				if ((this._hostID != value))
+				{
+					this.OnhostIDChanging(value);
+					this.SendPropertyChanging();
+					this._hostID = value;
+					this.SendPropertyChanged("hostID");
+					this.OnhostIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_numOfSourcePlates", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string numOfSourcePlates
+		{
+			get
+			{
+				return this._numOfSourcePlates;
+			}
+			set
+			{
+				if ((this._numOfSourcePlates != value))
+				{
+					this.OnnumOfSourcePlatesChanging(value);
+					this.SendPropertyChanging();
+					this._numOfSourcePlates = value;
+					this.SendPropertyChanged("numOfSourcePlates");
+					this.OnnumOfSourcePlatesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_copiesOfMembranes", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string copiesOfMembranes
+		{
+			get
+			{
+				return this._copiesOfMembranes;
+			}
+			set
+			{
+				if ((this._copiesOfMembranes != value))
+				{
+					this.OncopiesOfMembranesChanging(value);
+					this.SendPropertyChanging();
+					this._copiesOfMembranes = value;
+					this.SendPropertyChanged("copiesOfMembranes");
+					this.OncopiesOfMembranesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pattern", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string pattern
+		{
+			get
+			{
+				return this._pattern;
+			}
+			set
+			{
+				if ((this._pattern != value))
+				{
+					this.OnpatternChanging(value);
+					this.SendPropertyChanging();
+					this._pattern = value;
+					this.SendPropertyChanged("pattern");
+					this.OnpatternChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.submission_userjob_qbot_replicating")]
 	public partial class submission_userjob_qbot_replicating : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1801,7 +2630,7 @@ namespace CAESGenome.Transfer
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int id
 		{
 			get
@@ -1987,7 +2816,7 @@ namespace CAESGenome.Transfer
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int id
 		{
 			get
@@ -2177,7 +3006,7 @@ namespace CAESGenome.Transfer
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int id
 		{
 			get
@@ -2258,92 +3087,6 @@ namespace CAESGenome.Transfer
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.submission_userjob_userrun_genotyping")]
-	public partial class submission_userjob_userrun_genotyping : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private string _dyeIDs;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OndyeIDsChanging(string value);
-    partial void OndyeIDsChanged();
-    #endregion
-		
-		public submission_userjob_userrun_genotyping()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dyeIDs", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string dyeIDs
-		{
-			get
-			{
-				return this._dyeIDs;
-			}
-			set
-			{
-				if ((this._dyeIDs != value))
-				{
-					this.OndyeIDsChanging(value);
-					this.SendPropertyChanging();
-					this._dyeIDs = value;
-					this.SendPropertyChanged("dyeIDs");
-					this.OndyeIDsChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.submission_userjobs")]
 	public partial class submission_userjob : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2354,7 +3097,7 @@ namespace CAESGenome.Transfer
 		
 		private System.DateTime _dateSubmitted;
 		
-		private int _uid;
+		private short _uid;
 		
 		private string _accountid;
 		
@@ -2382,7 +3125,7 @@ namespace CAESGenome.Transfer
     partial void OnidChanged();
     partial void OndateSubmittedChanging(System.DateTime value);
     partial void OndateSubmittedChanged();
-    partial void OnuidChanging(int value);
+    partial void OnuidChanging(short value);
     partial void OnuidChanged();
     partial void OnaccountidChanging(string value);
     partial void OnaccountidChanged();
@@ -2409,7 +3152,7 @@ namespace CAESGenome.Transfer
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int id
 		{
 			get
@@ -2449,8 +3192,8 @@ namespace CAESGenome.Transfer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_uid", DbType="Int NOT NULL")]
-		public int uid
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_uid", DbType="SmallInt NOT NULL")]
+		public short uid
 		{
 			get
 			{
@@ -2569,7 +3312,7 @@ namespace CAESGenome.Transfer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Comment", DbType="VarChar(MAX)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Comment", DbType="Text", UpdateCheck=UpdateCheck.Never)]
 		public string Comment
 		{
 			get
@@ -2699,7 +3442,7 @@ namespace CAESGenome.Transfer
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int id
 		{
 			get
@@ -2841,7 +3584,7 @@ namespace CAESGenome.Transfer
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userid", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userid", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int userid
 		{
 			get
