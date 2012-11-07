@@ -1,25 +1,56 @@
 ﻿@{
-    ViewBag.Title = "CAES Genomics Facility";
-    ViewBag.SubPageTitle = "WELCOME to the CAES Genomics Facility!";
+    //ViewBag.Title = "CAES Genomics Facility";
+    //ViewBag.SubPageTitle = "WELCOME to the CAES Genomics Facility!";
 }
-@*@section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-            <h8group class="title">
-                <h1>@ViewBag.Title.</h1>
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
-            <p>
-                To learn more about ASP.NET MVC visit
-                <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
-                The page features <mark>videos, tutorials, and samples</mark> to help you get the most from ASP.NET MVC.
-                If you have any questions about ASP.NET MVC visit
-                <a href="http://forums.asp.net/1146.aspx/1?MVC" title="ASP.NET MVC Forum">our forums</a>.
-            </p>
+
+<div class="row-fluid">
+    <div class="span3">
+        <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+                <li>@Html.ActionLink("Service", "Service")</li>
+                <li>@Html.ActionLink("Price", "Rates")</li>
+                <li>@Html.ActionLink("Protocol", "Protocol")</li>
+                <li>@Html.ActionLink("FAQ", "Faq")</li>
+                <li class="nav-header">Public Databases</li>
+                <li><a href="#">Citrus</a></li>
+                <li><a href="#">Prunus</a></li>
+                <li><a href="#">Apple</a></li>
+                <li><a href="#">Grape</a></li>
+                <li><a href="#">Walnut</a></li>
+            </ul>
+        </div><!--/.well -->
+    </div><!--/span-->
+    <div class="span9">
+        <div class="hero-unit">
+            <h1>Welcome to the CA&ES Genomics Facility</h1>
+            <p>The CAES Genomics Facility (CGF) provides campus researchers with genomics technologies for use in individual and collaborative research programs. The facility provides low-cost DNA sequencing, houses robotics instrumentation for liquid handling, colony picking and sample preparation, and administers computer hardware and software resources for use in sequence interpretation and related data analyses. The CGF will also incorporate additional technologies, e.g., genotyping and transcriptional profiling, when technically appropriate and if there is sufficient need. </p>
+            @*<p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>*@
         </div>
-    </section>
-}*@
+        <div class="row-fluid">
+            <div class="span3">
+                <h2>DNA Sequencing</h2>
+                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                <p><a class="btn" href="#">View details &raquo;</a></p>
+            </div><!--/span-->
+            <div class="span3">
+                <h2>Bioinformatics</h2>
+                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                <p><a class="btn" href="#">View details &raquo;</a></p>
+            </div><!--/span-->
+            <div class="span3">
+                <h2>Genotyping</h2>
+                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                <p><a class="btn" href="#">View details &raquo;</a></p>
+            </div><!--/span-->
+            <div class="span3">
+                <h2>Robotics</h2>
+                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                <p><a class="btn" href="#">View details &raquo;</a></p>
+            </div><!--/span-->
+        </div><!--/row-->
+    </div><!--/span-->
+</div><!--/row-->
 
 <p>
-    The CAES Genomics Facility (CGF) provides campus researchers with genomics technologies for use in individual and collaborative research programs. The facility provides low-cost DNA sequencing, houses robotics instrumentation for liquid handling, colony picking and sample preparation, and administers computer hardware and software resources for use in sequence interpretation and related data analyses. The CGF will also incorporate additional technologies, e.g., genotyping and transcriptional profiling, when technically appropriate and if there is sufficient need. 
+    
 </p>

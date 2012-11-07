@@ -6,10 +6,6 @@ delete from Barcodes
 delete from userjobplates
 delete from userjobs
 delete from UserProfilesXRechargeAccounts
-delete from RechargeAccounts
-delete from webpages_UsersInRoles
-delete from userprofile
-delete from webpages_Membership
 
 /*
 Delete the job tables
@@ -32,11 +28,11 @@ Copy the Data
 
 update cgfold.dbo.recharge set valid = 'no' where rechargeid in (286, 293)
 
-insert into cgf.dbo.UserProfilesXRechargeAccounts (UserProfileId, RechargeAccountId)
-select distinct userid, rechargeid from cgfold.dbo.useracct 
-where lower(valid) = 'yes'
-  and userid in ( select userid from cgfold.dbo.[user] )
-  and rechargeid in ( select rechargeid from cgfold.dbo.recharge )
+--insert into cgf.dbo.UserProfilesXRechargeAccounts (UserProfileId, RechargeAccountId)
+--select distinct userid, rechargeid from cgfold.dbo.useracct 
+--where lower(valid) = 'yes'
+--  and userid in ( select userid from cgfold.dbo.[user] )
+--  and rechargeid in ( select rechargeid from cgfold.dbo.recharge )
 
 set identity_insert cgf.dbo.userjobbacterialclone on
 insert into cgf.dbo.UserJobBacterialClone (id, SequenceDirection, Primer1Id, primer2id, StrainId, VectorId, AntibioticId)
@@ -190,7 +186,7 @@ insert into cgf.dbo.UserJobs (id, userid, RechargeAccountId, name, jobtypeid, Nu
 	, UserJobGenotypingId)
 select distinct 
 	id, uid, accts.RechargeAccountId, jobname, submissionType, HowManyPlates, plateType, Comment
-	, cast(case when done = 2 then 0 else 1 end as bit) IsOpen
+	, cast(case when done = 0 then 1 else 0 end as bit) IsOpen
 	, statusdate lastupdate, dateSubmitted datetimecreated
 	, cast(case when submissionType = 1 then id2 else null end as bit) bacterialclone
 	, cast(case when submissionType = 4 or submissionType = 2 then id2 else null end as bit) dna

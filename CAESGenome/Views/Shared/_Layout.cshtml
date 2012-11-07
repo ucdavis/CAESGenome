@@ -1,81 +1,116 @@
-﻿@using CAESGenome.Core.Resources
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>@ViewBag.Title - CA&ES Genomics Facility</title>
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/Content/css")
-    </head>
-    <body>
-        <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("CA&ES Genomics Facility", "Index", "Home")</p>
-                </div>
-                <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
-                    <nav>
-                        @Html.Partial("_Navigation")
-                    </nav>
-                </div>
-            </div>
-        </header>
-        <div id="body">
-            @*@RenderSection("featured", required: false)*@
-            
-            @if(!string.IsNullOrEmpty(ViewBag.SubPageTitle))
+  <head>
+    <meta charset="utf-8">
+    <title>CGF Genomics Facility</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+    </style>
+    <link href="@Url.Content("~/Content/bootstrap-responsive.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/Custom.css")" rel="stylesheet"/>      
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons 
+        <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+    -->
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+            <a class="brand" href="@Url.Action("Index", "Home")">
+                CA&ES Genomics Facility
+            </a>
+          <div class="nav-collapse collapse">
+            <p class="navbar-text pull-right">
+                @*Logged in as <a href="#" class="navbar-link">Username</a>*@
+                @*@Html.Partial("_LoginPartial")*@
+            </p>
+              @Html.Partial("_Navigation")    
+              
+              @Html.Partial("_LoginPartial")
+                
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+      <div class="container">
+          
+          <nav class="pull-right">
+              @RenderSection("SubPageMenu", required:false)
+          </nav>
+
+          @if (!string.IsNullOrEmpty(ViewBag.Title))
+          {
+              <h1>@ViewBag.Title</h1>
+          }
+          
+          <div style="clear:both;"></div>
+          
+          @if(!string.IsNullOrEmpty(TempData["Message"] as string))
             {
-                <section class="featured">
-                    <div class="content-wrapper">
-                        <hgroup class="title">
-                            <h1>@ViewBag.SubPageTitle</h1>
-                        </hgroup>
-                    </div>
-                </section>
+                <div class="alert alert-info">@TempData["Message"]</div>
             }
 
-            <section class="content-wrapper main-content clear-fix">
-                <div class="pull-right">
-                    @RenderSection("SubPageMenu", required: false)          
-                </div>
-                
-                <div style="clear:both;"></div>
+          @RenderBody()
 
-                @if(!string.IsNullOrEmpty(TempData["Message"] as string))
-                {
-                    <div class="alert alert-info">@TempData["Message"]</div>
-                }
-                
-                @RenderBody()
-            </section>
-        </div>
-        <footer>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p>&copy; The Regents of the University of California, Davis Campus.  All Rights Reserved.</p>
-                </div>
-                <div class="float-right">
-                    <p>Version: @ViewBag.Version</p>
-                </div>
-            </div>
-        </footer>
+          <hr>
 
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/jqueryui")
-        @Scripts.Render("~/bundles/jqueryval")
-        <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
-        @Html.Partial("_polyfills")
+          <footer>
+              <div class="float-left">
+                  <p>&copy; The Regents of the University of California, Davis Campus.  All Rights Reserved.</p>
+              </div>
+              <div class="float-right">
+                  <p>Version: @ViewBag.Version</p>
+              </div>
+          </footer>
 
-        <script type="text/javascript">
-            $(function () {
-                $(".hastip").tooltip();
-            });
-        </script>
+      </div><!--/.fluid-container-->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    @Html.Partial("_polyfills")
+
+    <script type="text/javascript">
+        $(function () {
+            $(".hastip").tooltip();
+        });
+    </script>
         
-        @RenderSection("scripts", required: false)
-    </body>
+    @RenderSection("scripts", required: false)
+
+  </body>
 </html>

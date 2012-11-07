@@ -32,5 +32,15 @@ namespace CAESGenome.Transfer.Properties {
                 return ((string)(this["CgfOldConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\sqlexpress;Initial Catalog=CgfOld2;Integrated Security=True")]
+        public string CgfOld2ConnectionString {
+            get {
+                return ((string)(this["CgfOld2ConnectionString"]));
+            }
+        }
     }
 }

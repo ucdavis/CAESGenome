@@ -1,6 +1,6 @@
 ﻿@using CAESGenome.Core.Resources
 
-<ul id="menu">
+<ul class="nav">
     <li>@Html.ActionLink("Home", "Index", "Home")</li>
     @if(User.IsInRole(RoleNames.User))
     {
@@ -58,7 +58,5 @@
             </ul>
         </li>
     }
-    <li>@Html.ActionLink("Services", "Service", "Home")</li>
-    <li>@Html.ActionLink("Rates", "Rates", "Home")</li>
     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
 </ul>

@@ -65,26 +65,6 @@ INSERT INTO [dyes] (Id, Name, Supplied, GenoTyping) VALUES (29, 'TAMRA', 1, 1);
 SET IDENTITY_INSERT [dbo].[Dyes] OFF
 
 --
--- Equipments
---
-SET IDENTITY_INSERT [dbo].[Equipments] ON
-INSERT INTO [dbo].[equipments] (Id, Name, Operator) VALUES (1, 'Q-Bot', 'User_notShown');
-INSERT INTO [dbo].[equipments] (Id, Name, Operator) VALUES (2, 'Tetrad', 'staff only');
-INSERT INTO [dbo].[equipments] (Id, Name, Operator) VALUES (3, 'Sequencer28', 'staff');
-INSERT INTO [dbo].[equipments] (Id, Name, Operator) VALUES (4, 'Sequencer22', 'staff');
-INSERT INTO [dbo].[equipments] (Id, Name, Operator) VALUES (5, 'BioRadGenePulser', 'User');
-INSERT INTO [dbo].[equipments] (Id, Name, Operator) VALUES (6, 'Centrifuge', 'staff');
-INSERT INTO [dbo].[equipments] (Id, Name, Operator) VALUES (7, 'Confocal_Microscope', 'User');
-INSERT INTO [dbo].[equipments] (Id, Name, Operator) VALUES (8, 'HydroShear', 'User');
-INSERT INTO [dbo].[equipments] (Id, Name, Operator) VALUES (9, 'I_Cycler', 'Staff');
-INSERT INTO [dbo].[equipments] (Id, Name, Operator) VALUES (10, 'MJPCR', 'staff');
-INSERT INTO [dbo].[equipments] (Id, Name, Operator) VALUES (11, 'SpeedVac', 'User');
-INSERT INTO [dbo].[equipments] (Id, Name, Operator) VALUES (12, 'Gel Imager', 'User');
-INSERT INTO [dbo].[equipments] (Id, Name, Operator) VALUES (13, 'Hi Gro', 'User');
-INSERT INTO [dbo].[equipments] (Id, Name, Operator) VALUES (14, '3730', 'staff');
-SET IDENTITY_INSERT [dbo].[Equipments] OFF
-
---
 -- Job Types
 --
 SET IDENTITY_INSERT [dbo].[JobTypes] ON
@@ -143,7 +123,7 @@ INSERT INTO [dbo].[Strains] (Id, Name, Supplied, BacteriaId) VALUES (20, 'transf
 INSERT INTO [dbo].[Strains] (Id, Name, Supplied, BacteriaId) VALUES (12, 'xl10', 0, 1);
 INSERT INTO [dbo].[Strains] (Id, Name, Supplied, BacteriaId) VALUES (18, 'nm522', 0, 1);
 INSERT INTO [dbo].[Strains] (Id, Name, Supplied, BacteriaId) VALUES (14, 'transformax epi 300 electrocompetent', 0, 1);
-INSERT INTO [dbo].[Strains] (Id, Name, Supplied, BacteriaId) VALUES (15, 'XL10-Gold', NULL, 1);
+INSERT INTO [dbo].[Strains] (Id, Name, Supplied, BacteriaId) VALUES (15, 'XL10-Gold', 0, 1);
 INSERT INTO [dbo].[Strains] (Id, Name, Supplied, BacteriaId) VALUES (28, 'ep1300', 0, 1);
 INSERT INTO [dbo].[Strains] (Id, Name, Supplied, BacteriaId) VALUES (33, 'newHost', 0, 1);
 INSERT INTO [dbo].[Strains] (Id, Name, Supplied, BacteriaId) VALUES (34, 'Mach1-T1R', 0, 1);
@@ -215,10 +195,12 @@ SET IDENTITY_INSERT [dbo].[Vectors] OFF
 --
 -- Roles
 --
-INSERT INTO [dbo].[webpages_Roles] (RoleName) VALUES ('Admin');
-INSERT INTO [dbo].[webpages_Roles] (RoleName) VALUES ('PI');
-INSERT INTO [dbo].[webpages_Roles] (RoleName) VALUES ('Staff');
-INSERT INTO [dbo].[webpages_Roles] (RoleName) VALUES ('User');
+set identity_insert webpages_roles on
+INSERT INTO [dbo].[webpages_Roles] (RoleId, RoleName) VALUES (1, 'Admin');
+INSERT INTO [dbo].[webpages_Roles] (RoleId, RoleName) VALUES (2, 'PI');
+INSERT INTO [dbo].[webpages_Roles] (RoleId, RoleName) VALUES (3, 'Staff');
+INSERT INTO [dbo].[webpages_Roles] (RoleId, RoleName) VALUES (4, 'User');
+set identity_insert webpages_roles off
 
 --
 -- Stages

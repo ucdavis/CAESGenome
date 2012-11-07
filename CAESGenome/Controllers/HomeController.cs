@@ -29,17 +29,27 @@ namespace CAESGenome.Controllers
             return View();
         }
 
-        [Authorize]
-        public ActionResult Test2()
+        public ActionResult Protocol()
         {
             return View();
         }
 
-        
-        public ActionResult Test()
+        public ActionResult Faq()
         {
-            WebSecurity.CreateUserAndAccount("lai@caes.ucdavis.edu", "password", new { FirstName = "Alan", LastName = "Lai", Title = "Programmer", Phone = "530-754-7771", fax = string.Empty});
             return View();
         }
+
+        //[Authorize]
+        //public ActionResult Test2()
+        //{
+        //    return View();
+        //}
+
+        
+        //public ActionResult Test()
+        //{
+        //    WebSecurity.CreateUserAndAccount("lai@caes.ucdavis.edu", "password", new { FirstName = "Alan", LastName = "Lai", Title = "Programmer", Phone = "530-754-7771", fax = string.Empty});
+        //    return View();
+        //}
     }
 }
