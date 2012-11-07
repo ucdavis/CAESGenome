@@ -45,7 +45,6 @@ namespace CAESGenome.Controllers
 
             var createdUsers = InsertUsers(users.Where(a => a.User));
             InsertPIs(createdUsers, users.Where(a => a.Pi), recharge);
-            InsertStaff(users.Where(a => a.Staff));
 
             return View();
         }
@@ -205,13 +204,6 @@ namespace CAESGenome.Controllers
                         );
                     conn.Execute("SET IDENTITY_INSERT RechargeAccounts OFF");
                 }
-            }
-        }
-        private void InsertStaff(IEnumerable<UserAcct> users )
-        {
-            foreach(var user in users)
-            {
-                
             }
         }
     }
