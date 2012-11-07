@@ -373,6 +373,52 @@
     <Content Include="Scripts\Anytime.js" />
     <Content Include="Scripts\jquery.bootstrapcheckbox.js" />
     <Content Include="AppSettings.config" />
+    <Content Include="docs\faqs\E_coli_sample.pdf" />
+    <Content Include="docs\faqs\General_guideline.pdf" />
+    <Content Include="docs\faqs\PCR_product_sqn.pdf" />
+    <Content Include="docs\fragmentAnalysis\Fragment Analysis.doc" />
+    <Content Include="docs\fragmentAnalysis\FragmentAnalysis.pdf" />
+    <Content Include="docs\Jr_Specialist.pdf" />
+    <Content Include="docs\Protocols_seq\ABI 3730.doc" />
+    <Content Include="docs\Protocols_seq\ABI 3730.pdf" />
+    <Content Include="docs\Protocols_seq\BAC_DNA_prep.doc" />
+    <Content Include="docs\Protocols_seq\BAC_DNA_prep.pdf" />
+    <Content Include="docs\Protocols_seq\Ethanol Precipitation.doc" />
+    <Content Include="docs\Protocols_seq\Ethanol Precipitation.pdf" />
+    <Content Include="docs\Protocols_seq\HYDRA.doc" />
+    <Content Include="docs\Protocols_seq\HYDRA.pdf" />
+    <Content Include="docs\Protocols_seq\PCR product sqn.doc" />
+    <Content Include="docs\Protocols_seq\PCR product sqn.pdf" />
+    <Content Include="docs\Protocols_seq\Quantitation+.doc" />
+    <Content Include="docs\Protocols_seq\Quantitation+.pdf" />
+    <Content Include="docs\Protocols_seq\RCAprotocol+.doc" />
+    <Content Include="docs\Protocols_seq\RCAprotocol+.pdf" />
+    <Content Include="docs\Protocols_seq\sequencing+.doc" />
+    <Content Include="docs\Protocols_seq\sequencing+.pdf" />
+    <Content Include="docs\Protocols_seq\Shotgun_Subcloning.doc" />
+    <Content Include="docs\Protocols_seq\Shotgun_Subcloning.pdf" />
+    <Content Include="docs\Q-bot\CLEANING HEADS.doc" />
+    <Content Include="docs\Q-bot\CLEANING HEADS.pdf" />
+    <Content Include="docs\Q-bot\FILTER PROCESSING SOLUTIONS.doc" />
+    <Content Include="docs\Q-bot\FILTER PROCESSING SOLUTIONS.pdf" />
+    <Content Include="docs\Q-bot\FILTER-PROCESSING.doc" />
+    <Content Include="docs\Q-bot\FILTER-PROCESSING.pdf" />
+    <Content Include="docs\Q-bot\FREEZING MEDIUM.doc" />
+    <Content Include="docs\Q-bot\FREEZING MEDIUM.pdf" />
+    <Content Include="docs\Q-bot\general.doc" />
+    <Content Include="docs\Q-bot\general.pdf" />
+    <Content Include="docs\Q-bot\GRIDDING.doc" />
+    <Content Include="docs\Q-bot\GRIDDING.pdf" />
+    <Content Include="docs\Q-bot\picking.doc" />
+    <Content Include="docs\Q-bot\picking.pdf" />
+    <Content Include="docs\Q-bot\q-fill.doc" />
+    <Content Include="docs\Q-bot\q-fill.pdf" />
+    <Content Include="docs\Q-bot\q-tray.doc" />
+    <Content Include="docs\Q-bot\q-tray.pdf" />
+    <Content Include="docs\Q-bot\REPLICATING.doc" />
+    <Content Include="docs\Q-bot\REPLICATING.pdf" />
+    <Content Include="docs\service rates revised4.doc" />
+    <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-1.8.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -410,7 +456,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />
@@ -503,6 +548,11 @@
     <Content Include="Views\Results\UploadFile.cshtml" />
     <Content Include="Views\Test\PushFileToServer.cshtml" />
     <Content Include="Views\Results\QualityControl.cshtml" />
+    <Content Include="Views\Home\Protocol.cshtml" />
+    <Content Include="Views\Home\Faq.cshtml" />
+    <None Include="Web.Test.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -523,6 +573,15 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
