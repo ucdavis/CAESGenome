@@ -39,7 +39,7 @@
                 <td>@acct.AccountNum</td>
                 <td>@acct.Description</td>
                 <td>@acct.Start.ToShortDateString()</td>
-                <td>@acct.End.ToShortDateString()</td>
+                <td>@(acct.End.HasValue ? acct.End.Value.ToShortDateString() : "no end")</td>
                 <td>
                     @if(acct.IsActive())
                     {

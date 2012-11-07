@@ -4,40 +4,28 @@
 }
 
 <div class="row-fluid main-menu">
-    <div class="span4">
-        <a href="@Url.Action("Index", "UserJob")">
-            <img src="@Url.Content("~/Images/openjobs.png")"/>
-            <h4>On-Going Jobs</h4>
-        </a>
-    </div>
-    <div class="span4">
-        <a href="@Url.Action("UploadFile", "Results")">
-            <img src="@Url.Content("~/Images/up.png")"/>
-            <h4>Upload Files</h4>
-        </a>
-    </div>
-    <div class="span4">
-        <a href="@Url.Action("Completed", "UserJob")">
-            <img src="@Url.Content("~/Images/completedjobs.png")"/>
-            <h4>Completed Jobs</h4>
-        </a>
-    </div>
-    <div class="span4">
-        <a href="#">
-            <img src="@Url.Content("~/Images/statistics.png")"/>
-            <h4>Monthly Statistics</h4>
-        </a>
-    </div>
-    <div class="span4">
-        <a href="@Url.Action("Schedule", "Equipment")">
-            <img src="@Url.Content("~/Images/date.png")"/>
-            <h4>Equipment Schedule</h4>
-        </a>
-    </div>
-    <div class="span4">
-        <a href="@Url.Action("Usage", "Equipment")">
-            <img src="@Url.Content("~/Images/usage.png")"/>
-            <h4>Equipment Usage</h4>
-        </a>
-    </div>
+    <a href="@Url.Action("Index", "UserJob")" class="span4 img-rounded">
+        <img src="@Url.Content("~/Images/openjobs.png")"/>
+        <h4>On-Going Jobs</h4>
+    </a>
+    <a href="@Url.Action("UploadFile", "Results")" class="span4 img-rounded">
+        <img src="@Url.Content("~/Images/up.png")"/>
+        <h4>Upload Files</h4>
+    </a>
+    <a href="@Url.Action("Completed", "UserJob")" class="span4 img-rounded">
+        <img src="@Url.Content("~/Images/completedjobs.png")"/>
+        <h4>Completed Jobs</h4>
+    </a>
+    <a href="#" class="span4 img-rounded">
+        <img src="@Url.Content("~/Images/statistics.png")"/>
+        <h4>Monthly Statistics</h4>
+    </a>
+    <a href="@Url.Action("Schedule", "Equipment")" class="span4 img-rounded">
+        <img src="@Url.Content("~/Images/date.png")"/>
+        <h4>Equipment Schedule</h4>
+    </a>
+    <a href="@Url.Action("Usage", "Equipment")" class="span4 img-rounded">
+        <img src="@Url.Content("~/Images/usage.png")"/>
+        <h4>Equipment Usage</h4>
+    </a>
 </div>

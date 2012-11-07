@@ -27,11 +27,11 @@ namespace CAESGenome.Controllers
 
             if (CurrentUser.IsInRole(RoleNames.Staff))
             {
-                var user = GetCurrentUser();
-                userJobs = _repositoryFactory.UserJobRepository.Queryable.OrderBy(a => a.IsOpen).OrderBy(a => a.DateTimeCreated).ToList();
+                userJobs = _repositoryFactory.UserJobRepository.Queryable.OrderBy(a => a.IsOpen).ThenByDescending(a => a.DateTimeCreated).ToList();
             }
             else if (CurrentUser.IsInRole(RoleNames.User))
             {
+                var user = GetCurrentUser();
                 userJobs = _repositoryFactory.UserJobRepository.Queryable.Where(a => a.IsOpen).OrderBy(a => a.JobType.Id).ThenBy(a => a.DateTimeCreated).ToList();
             }
             

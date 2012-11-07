@@ -134,7 +134,7 @@ insert into cgf.dbo.UserJobs (id, userid, RechargeAccountId, name, jobtypeid, Nu
 	, UserJobGenotypingId)
 select distinct 
 	id, uid, rechargeid, jobname, submissionType, HowManyPlates, plateType, Comment
-	, cast(case when done = 2 then 0 else 1 end as bit) IsOpen
+	, cast(case when done = 2 or done = 1 then 0 else 1 end as bit) IsOpen
 	, statusdate lastupdate, dateSubmitted datetimecreated
 	, cast(case when submissionType = 1 then id2 else null end as bit) bacterialclone
 	, cast(case when submissionType = 4 or submissionType = 2 then id2 else null end as bit) dna

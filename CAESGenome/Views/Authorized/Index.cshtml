@@ -11,28 +11,20 @@
 }
 
 <div class="row-fluid main-menu">
-    <div class="span3">
-        <a href="@Url.Action("Create", "Sequencing")">
-            <img src="@Url.Content("~/Images/sequencing.png")"/>
-            <h4>Submit <br/>Sequencing Job</h4>
-        </a>
-    </div>
-    <div class="span3">
-        <a href="@Url.Action("Create", "Genotyping")">
-            <img src="@Url.Content("~/Images/genotyping.png")"/>
-            <h4>Submit <br/>Genotyping Job</h4>
-        </a>
-    </div>
-    <div class="span3">
-        <a href="@Url.Action("Create", "Qbot")">
-            <img src="@Url.Content("~/Images/qbot.png")"/>
-            <h4>Submit <br/>Qbot Job</h4>
-        </a>
-    </div>
-    <div class="span3">
-        <a href="@Url.Action("Index", "UserJob")">
-            <img src="@Url.Content("~/Images/openjobs.png")"/>
-            <h4>Open Jobs</h4>
-        </a>
-    </div>
+    <a href="@Url.Action("Create", "Sequencing")" class="span3 img-rounded">
+        <img src="@Url.Content("~/Images/sequencing.png")"/>
+        <h4>Submit <br/>Sequencing Job</h4>
+    </a>
+    <a href="@Url.Action("Create", "Genotyping")" class="span3 img-rounded">
+        <img src="@Url.Content("~/Images/genotyping.png")"/>
+        <h4>Submit <br/>Genotyping Job</h4>
+    </a>
+    <a href="@Url.Action("Create", "Qbot")" class="span3 img-rounded">
+        <img src="@Url.Content("~/Images/qbot.png")"/>
+        <h4>Submit <br/>Qbot Job</h4>
+    </a>
+    <a href="@Url.Action("Index", "UserJob")" class="span3 img-rounded">
+        <img src="@Url.Content("~/Images/openjobs.png")"/>
+        <h4>Open Jobs</h4>
+    </a>
 </div>
