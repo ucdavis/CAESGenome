@@ -60,7 +60,7 @@ namespace CAESGenome.Controllers
         // fixed values, for finding indexes
         private const int StartTrigger = 20;
         private const int WindowSize = 10;
-        private const int EndTrigger = 20;
+        private const int EndTrigger = 15;
 
         private void FindIndexes(int[] numbers, out int start, out int end)
         {
