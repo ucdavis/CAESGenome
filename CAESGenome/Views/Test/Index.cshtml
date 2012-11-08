@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Index";
+
+    var counter = 0;
+    var rowSize = 23;
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+
+            $(".numbers").click(function () {
+                $(this).toggleClass("selected");
+            });
+
+        });
+    </script>
+}
+
+<style type="text/css">
+    .highlight { background: yellow;}
+    .highlight-red { background: red;color: white;}
+
+    .selected { border: 1px solid green;}
+</style>
+
+<h2>Start: @ViewBag.Start</h2>
+<h2>End: @ViewBag.End</h2>
+
+<p>Score: @(ViewBag.End - ViewBag.Start + 1)</p>
+
+<div class="well">
+    
+    @for (var i = 0; i < ViewBag.ScoreList.Length; i++ )
+    {
+        var addClass = i >= ViewBag.Start && i < ViewBag.Start + 10 ? "highlight" : "";
+        var endClass = i >= ViewBag.End && i < ViewBag.End + 10 ? "highlight-red" : "";
+        <div style="margin: 0 5px; width: 25px; display:inline-block; cursor: pointer;" class="numbers hastip @addClass @endClass" title="@i">@ViewBag.ScoreList[i]</div>
+        if (counter == rowSize)
+        {
+            <br/>
+            counter = 0;
+        }
+        counter++;
+    }
+</div>

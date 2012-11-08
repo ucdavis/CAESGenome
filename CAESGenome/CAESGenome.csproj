@@ -547,10 +547,10 @@
     <Content Include="Views\Home\Test2.cshtml" />
     <Content Include="Views\Transfer\Accounts.cshtml" />
     <Content Include="Views\Results\UploadFile.cshtml" />
-    <Content Include="Views\Test\PushFileToServer.cshtml" />
     <Content Include="Views\Results\QualityControl.cshtml" />
     <Content Include="Views\Home\Protocol.cshtml" />
     <Content Include="Views\Home\Faq.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

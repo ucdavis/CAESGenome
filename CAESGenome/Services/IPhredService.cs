@@ -190,13 +190,6 @@ namespace CAESGenome.Services
             bcf.End = end;
             bcf.DateTimeValidated = DateTime.Now;
             bcf.Validated = true;
-
-            //foreach (var bcf in files)
-            //{
-            
-
-            //    _repositoryFactory.BarcodeFileRepository.EnsurePersistent(bcf);
-            //}
         }
 
         private int[] ReadPhredFile(int barcode, BarcodeFile barcodeFile)
@@ -223,99 +216,91 @@ namespace CAESGenome.Services
         }
         
         // fixed values, for finding indexes
-        private const int StartScore = 20;
-        private const int StartWindowSize = 7;
-        private const int EndScore = 15;
-        private const int EndWindowSize = 10;
-        private const int DoubleCheckWindowSize = 50;
-        
+        private const int StartTrigger = 20;
+        private const int WindowSize = 10;
+        private const int EndTrigger = 20;
+
         private void FindIndexes(int[] numbers, out int start, out int end)
         {
-            var curr = 0;
-            var numsCount = numbers.Length;
+            start = FindStartIndex(numbers);
+            end = FindEndIndex(numbers, start);
+        }
+        private int FindStartIndex(int[] numbers)
+        {
+            var windowStart = 0;
+            var openWindow = false;
+            var windowCount = 0;
 
-            start = curr;
-            end = curr;
-
-            // find start
-            while(curr < numsCount)
+            // find the start index
+            for (var i = 0; i < numbers.Length; i++)
             {
-                var i = 0;
-
-                while(i < StartWindowSize && (curr + i) < numsCount)
+                // number meets criteria for open
+                if (numbers[i] >= StartTrigger)
                 {
-                    if (numbers[curr + i] < StartScore)
+                    // closed window, open up the window
+                    if (!openWindow)
                     {
-                        curr++;
-                        i = 0;
+                        windowStart = i;
+                        openWindow = true;
                     }
-                    else
+
+                    // increase window size
+                    windowCount++;
+
+                    // window satisfied
+                    if (windowCount == WindowSize)
                     {
-                        i++;
+                        return windowStart;
                     }
                 }
 
-                start = curr;
-                break;
+                // number below trigger, close the window
+                if (numbers[i] < StartTrigger && openWindow)
+                {
+                    openWindow = false;
+                    windowCount = 0;
+                }
             }
 
-            // find end
-            while (curr < numsCount)
+            // found nothing
+            return 0;
+        }
+        private int FindEndIndex(int[] numbers, int startIndex)
+        {
+            var windowStart = 0;
+            var openWindow = false;
+            var windowCount = 0;
+
+            // find the start index to close
+            for (var i = startIndex; i < numbers.Length; i++)
             {
-                var i = 0;
-
-                while (i < EndWindowSize)
+                if (numbers[i] < EndTrigger)
                 {
-                    if (curr + i >= numsCount)
+                    // closed window, open up the window
+                    if (!openWindow)
                     {
-                        break;
+                        windowStart = i;
+                        openWindow = true;
                     }
-                    
-                    if (numbers[curr + i] > EndScore)
+
+                    // just count to increase window
+                    windowCount++;
+
+                    // window satisfied
+                    if (windowCount >= WindowSize)
                     {
-                        curr++;
-                        i = 0;
-                    }
-                    else
-                    {
-                        i++;
+                        return windowStart;
                     }
                 }
 
-                end = curr;
-
-                var continueFlag = false;
-                var currAhead = curr;
-
-                while (currAhead + DoubleCheckWindowSize < numsCount)
+                if (numbers[i] >= EndTrigger && openWindow)
                 {
-                    var j = 0;
-                    while(j < DoubleCheckWindowSize)
-                    {
-                        if (numbers[currAhead + j] < StartScore)
-                        {
-                            currAhead++;
-                            break;
-                        }
-                        else
-                        {
-                            j++;
-                        }
-                    }
-
-                    if (j == DoubleCheckWindowSize)
-                    {
-                        curr = currAhead + DoubleCheckWindowSize;
-                        continueFlag = true;
-                        break;
-                    }
-                }
-
-                if (!continueFlag)
-                {
-                    break;
+                    openWindow = false;
+                    windowCount = 0;
                 }
             }
+
+            return 0;
         }
     }
 
