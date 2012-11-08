@@ -360,6 +360,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Images\accounts.png" />
+    <Content Include="Images\ajaxloader.gif" />
     <Content Include="Images\completedjobs.png" />
     <Content Include="Images\date.png" />
     <Content Include="Images\usage.png" />
@@ -552,6 +553,7 @@
     <Content Include="Views\Home\Faq.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>

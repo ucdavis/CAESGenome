@@ -1,4 +1,4 @@
-﻿@model CAESGenome.Models.LoginModel
+﻿@model LoginModel
 
 @{
     ViewBag.Title = "Log in";
@@ -10,8 +10,6 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Log in Form</legend>
-    
         <div class="control-group">
             @Html.LabelFor(model => model.UserName, new {@class = "control-label"})
             <div class="controls">

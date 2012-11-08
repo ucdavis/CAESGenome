@@ -33,6 +33,9 @@
             $(".run-validation").click(function (event) {
                 var token = $("input[name='__RequestVerificationToken']").val();
                 var barcode = $(this).data('id');
+                var that = this;
+
+                $(that).siblings(".ajaxloader").toggle();
 
                 $.post(validationUrl, {__RequestVerificationToken: token, id: barcode}, function (result) {
                     if (result) {
@@ -41,6 +44,8 @@
                     else {
                         alert("failure");
                     }
+                    
+                    $(that).siblings(".ajaxloader").toggle();
                 });
 
                 event.preventDefault();

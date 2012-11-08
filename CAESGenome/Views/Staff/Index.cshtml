@@ -31,3 +31,12 @@
         <h4>Equipment Usage</h4>
     </a>
 </div>
+
+<div class="well" style="margin-top: 1em;">
+    @using(Html.BeginForm("SearchByBarcode", "UserJob", FormMethod.Post, new {@class="form-search"}))
+    {
+        @Html.AntiForgeryToken()
+        <input type="number" class="search-query" name="id"/>
+        <button type="submit" class="btn">Search Barcode</button>
+    }
+</div>

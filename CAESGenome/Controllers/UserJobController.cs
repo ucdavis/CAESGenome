@@ -21,18 +21,18 @@ namespace CAESGenome.Controllers
         }
 
         [Authorize(Roles = RoleNames.User + "," + RoleNames.Staff)]
-        public ActionResult Index()
+        public ActionResult Index(bool owned = false)
         {
             var userJobs = new List<UserJob>();
 
-            if (CurrentUser.IsInRole(RoleNames.Staff))
+            if (CurrentUser.IsInRole(RoleNames.Staff) && !owned)
             {
                 userJobs = _repositoryFactory.UserJobRepository.Queryable.Where(a => a.IsOpen).OrderBy(a => a.DateTimeCreated).ToList();
             }
             else if (CurrentUser.IsInRole(RoleNames.User))
             {
                 var user = GetCurrentUser();
-                userJobs = _repositoryFactory.UserJobRepository.Queryable.Where(a => a.IsOpen).OrderBy(a => a.JobType.Id).ThenBy(a => a.DateTimeCreated).ToList();
+                userJobs = _repositoryFactory.UserJobRepository.Queryable.Where(a => a.User.Id == user.Id && a.IsOpen).OrderBy(a => a.JobType.Id).ThenBy(a => a.DateTimeCreated).ToList();
             }
             
             return View(userJobs);
@@ -173,6 +173,20 @@ namespace CAESGenome.Controllers
         {
             var jobs = _repositoryFactory.UserJobRepository.Queryable.Where(a => a.DateTimeCreated.Year == year && a.DateTimeCreated.Month == month && !a.IsOpen);
             return View(jobs);
+        }
+
+        [Authorize(Roles = RoleNames.Staff)]
+        public RedirectToRouteResult SearchByBarcode(int id)
+        {
+            var barcode = _repositoryFactory.BarcodeRepository.GetNullableById(id);
+
+            if (barcode != null)
+            {
+                return RedirectToAction("Details", new {id = barcode.UserJobPlate.UserJob.Id});
+            }
+
+            Message = "Barcode not found.";
+            return RedirectToAction("Index");
         }
     }
 }

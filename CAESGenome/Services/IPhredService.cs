@@ -122,10 +122,11 @@ namespace CAESGenome.Services
             foreach(var bcf in _repositoryFactory.BarcodeFileRepository.Queryable.Where(a => a.Barcode.Id == barcode))
             {
                 bcf.Validated = true;
+                ValidatePhred(bcf);
                 _repositoryFactory.BarcodeFileRepository.EnsurePersistent(bcf);
             }
 
-            ValidatePhred(barcode);
+            //ValidatePhred(barcode);
         }
 
         // run phred
@@ -174,26 +175,28 @@ namespace CAESGenome.Services
         }
 
         // run the validation, calculate the quality results
-        private void ValidatePhred(int barcode)
+        private void ValidatePhred(BarcodeFile bcf)
         {
-            var files = _repositoryFactory.BarcodeFileRepository.Queryable.Where(a => a.Barcode.Id == barcode && !a.Validated).ToList();
+            //var files = _repositoryFactory.BarcodeFileRepository.Queryable.Where(a => a.Barcode.Id == bcf.Barcode.Id && !a.Validated).ToList();
 
-            foreach (var bcf in files)
-            {
-                var start = 0;
-                var end = 0;
+            var start = 0;
+            var end = 0;
 
-                var numbers = ReadPhredFile(barcode, bcf);
+            var numbers = ReadPhredFile(bcf.Barcode.Id, bcf);
 
-                FindIndexes(numbers, out start, out end);
+            FindIndexes(numbers, out start, out end);
 
-                bcf.Start = start;
-                bcf.End = end;
-                bcf.DateTimeValidated = DateTime.Now;
-                bcf.Validated = true;
+            bcf.Start = start;
+            bcf.End = end;
+            bcf.DateTimeValidated = DateTime.Now;
+            bcf.Validated = true;
 
-                _repositoryFactory.BarcodeFileRepository.EnsurePersistent(bcf);
-            }
+            //foreach (var bcf in files)
+            //{
+            
+
+            //    _repositoryFactory.BarcodeFileRepository.EnsurePersistent(bcf);
+            //}
         }
 
         private int[] ReadPhredFile(int barcode, BarcodeFile barcodeFile)

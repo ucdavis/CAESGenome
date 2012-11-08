@@ -20,7 +20,7 @@
         <img src="@Url.Content("~/Images/qbot.png")"/>
         <h4>Submit <br/>Qbot Job</h4>
     </a>
-    <a href="@Url.Action("Index", "UserJob")" class="span3 img-rounded">
+    <a href="@Url.Action("Index", "UserJob", new{owned = true})" class="span3 img-rounded">
         <img src="@Url.Content("~/Images/openjobs.png")"/>
         <h4>Open Jobs</h4>
     </a>
