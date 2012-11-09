@@ -1,4 +1,6 @@
-﻿namespace CAESGenome.Core.Resources
+﻿using System.Collections.Generic;
+
+namespace CAESGenome.Core.Resources
 {
     public enum JobTypeIds
     {
@@ -6,7 +8,7 @@
         , QbotColonyPicking = 21, QbotPlateReplicating = 22, QbotGridding = 23, DnaSubmission = 24
     }
 
-    public class StageIds
+    public static class StageIds
     {
         // Bacterial Clone
         public const string BcWebSubmittedPlates = "BCWP";
@@ -53,6 +55,42 @@
         // Qbot Gridding
         public const string QgWebSubmittedPlates = "QGWP";
         public const string QgPlateSubmission = "QGPS";
+
+        public static List<string> WebPlateIds
+        {
+            get
+            {
+                return new List<string>() {BcWebSubmittedPlates, PcrWebSubmittedPlates, UrsWebSubmittedPlates, PdWebSubmittedPlates, SlWebSubmittedPlates, UgWebSubmittedPlates, QpWebSubmittedPlates, QrWebSubmittedPlates, QgWebSubmittedPlates};
+            }
+        }
+        public static List<string> LabPlateIds
+        {
+            get
+            {
+                return new List<string>() {BcPlateSubmission, PcrPlateSubmission, UrsPlateSubmission, PdPlateSubmission, SlPlateSubmission, UgPlateSubmission, QpPlateSubmission, QrPlateSubmission, QgPlateSubmission};
+            }
+        }
+        public static List<string> RcaPlateIds
+        {
+            get
+            {
+                return new List<string>() { BcRca };
+            }
+        }
+        public static List<string> SequencingPlateIds
+        {
+            get
+            {
+                return new List<string>() {BcSequencingReaction, PcrSequencingReaction, PdSequencingReaction};
+            }
+        }
+        public static List<string> Xl3730PlateIds
+        {
+            get
+            {
+                return new List<string>() {Bc3730xl, Pcr3730xl, Urs3730xl, Pd3730xl, Sl3730xl, Ug3730xl};
+            }
+        }
     }
 
     public class EquipmentOperators

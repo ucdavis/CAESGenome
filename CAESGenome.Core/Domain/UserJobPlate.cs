@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using CAESGenome.Core.Resources;
 using FluentNHibernate.Mapping;
 using UCDArch.Core.DomainModel;
 
@@ -24,7 +27,39 @@ namespace CAESGenome.Core.Domain
             barcode.UserJobPlate = this;
             Barcodes.Add(barcode);
         }
-    }
+
+        public virtual DateTime? WebDate { 
+            get { return GetBarcodeDateByStatus(StageIds.WebPlateIds); }
+        }
+        public virtual DateTime? LabDate
+        {
+            get { return GetBarcodeDateByStatus(StageIds.LabPlateIds); }
+        }
+        public virtual DateTime? RCADate
+        {
+            get { return GetBarcodeDateByStatus(StageIds.RcaPlateIds); }
+        }
+        public virtual DateTime? SeqDate
+        {
+            get { return GetBarcodeDateByStatus(StageIds.SequencingPlateIds); }
+        } 
+        public virtual DateTime? Xl3730Date
+        {
+            get { return GetBarcodeDateByStatus(StageIds.Xl3730PlateIds); }
+        }
+
+        private DateTime? GetBarcodeDateByStatus(List<string> stageIds )
+        {
+            var barcode = Barcodes.FirstOrDefault(a => stageIds.Contains(a.Stage.Id));
+
+            if (barcode != null)
+            {
+                return barcode.DateCreated;
+            }
+
+            return null;
+        }
+}
 
     public class UserJobPlateMap : ClassMap<UserJobPlate>
     {
