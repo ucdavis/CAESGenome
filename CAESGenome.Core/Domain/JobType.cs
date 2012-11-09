@@ -19,6 +19,12 @@ namespace CAESGenome.Core.Domain
         public virtual bool Genotyping { get; set; }
         public virtual bool Qbot { get; set; }
 
+        public virtual bool HasWebPlates { get; set; }
+        public virtual bool HasPlateSubmission { get; set; }
+        public virtual bool HasRca { get; set; }
+        public virtual bool HasSequencing { get; set; }
+        public virtual bool Has3730xl { get; set; }
+
         public virtual IList<Stage> Stages { get; set; }
     }
 
@@ -36,6 +42,12 @@ namespace CAESGenome.Core.Domain
             Map(x => x.CustomSequencing);
             Map(x => x.Genotyping);
             Map(x => x.Qbot);
+
+            Map(x => x.HasWebPlates);
+            Map(x => x.HasPlateSubmission);
+            Map(x => x.HasRca);
+            Map(x => x.HasSequencing);
+            Map(x => x.Has3730xl);
 
             HasMany(x => x.Stages).Inverse();
         }

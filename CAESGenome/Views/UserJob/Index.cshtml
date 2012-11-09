@@ -9,36 +9,93 @@
 @section scripts
 {
     @Html.Partial("_DataTables")
+
+    <style type="text/css">
+        .table-striped tbody td.blackout, .table-striped tbody tr:nth-child(odd) td.blackout { background-color: darkgrey;}
+    </style>
 }
 
-<table class="table table-bordered table-striped default_table">
-    <thead>
-        <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Job Type</th>
-            <th>Plates</th>
-            @*<th>Comments</th>*@
-            <th>Date</th>
-            <th>Last Update</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach(var uj in Model)
-        {
+@helper DisplayDate(DateTime? date)
+{
+    if (date.HasValue)
+    {
+        <text>@date.Value.ToString("MMM dd")</text>
+    }
+}
+
+@if (User.IsInRole(RoleNames.Staff) && !ViewBag.Owned)
+{
+    <table class="table table-bordered table-striped default_table">
+        <thead>
             <tr>
-                <td>
-                    <a href="@Url.Action("Details", new {@uj.Id})" class="btn">
-                        <i class="icon-search"></i>
-                    </a>
-                </td>
-                <td>@uj.Name</td>
-                <td>@uj.JobType.Name</td>
-                <td>@uj.UserJobPlates.Count</td>
-                @*<td>@uj.Comments</td>*@
-                <td>@uj.DateTimeCreated</td>
-                <td>@uj.LastUpdate</td>
+                <td></td>
+                <td>User</td>
+                <td>Job Type</td>
+                <td>Plate Name</td>
+                <td>Web Date</td>
+                <td>Lab Date</td>
+                <td>RCA Date</td>
+                <td>Seq RX</td>
+                <td>3730xl</td>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach(var uj in Model)
+            {
+                foreach(var plate in uj.UserJobPlates.Where(a => !a.Completed))
+                {
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("Details", new {@uj.Id})" class="btn">
+                                <i class="icon-search"></i>
+                            </a>
+                        </td>
+                        <td>@uj.User.FullName</td>
+                        <td>@uj.JobType.Name</td>
+                        <td>@plate.Name</td>
+                        <td class="@(!uj.JobType.HasWebPlates ? "blackout" : string.Empty)">@DisplayDate(plate.WebDate)</td>
+                        <td class="@(!uj.JobType.HasPlateSubmission ? "blackout" : string.Empty)">@DisplayDate(plate.LabDate)</td>
+                        <td class="@(!uj.JobType.HasRca ? "blackout" : string.Empty)">@DisplayDate(plate.RCADate)</td>
+                        <td class="@(!uj.JobType.HasSequencing ? "blackout" : string.Empty)">@DisplayDate(plate.SeqDate)</td>
+                        <td class="@(!uj.JobType.Has3730xl ? "blackout" : string.Empty)">@DisplayDate(plate.Xl3730Date)</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>    
+}
+else if (User.IsInRole(RoleNames.User))
+{
+    <table class="table table-bordered table-striped default_table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Job Type</th>
+                <th>Plates</th>
+                <th>Date</th>
+                <th>Last Update</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var uj in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="@Url.Action("Details", new {@uj.Id})" class="btn">
+                            <i class="icon-search"></i>
+                        </a>
+                    </td>
+                    <td>@uj.Name</td>
+                    <td>@uj.JobType.Name</td>
+                    <td>@uj.UserJobPlates.Count</td>
+                    <td>@uj.DateTimeCreated</td>
+                    <td>@uj.LastUpdate</td>
+                </tr>
+            }
+        </tbody>
+    </table>    
+}
+
+
+

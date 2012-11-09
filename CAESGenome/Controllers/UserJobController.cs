@@ -34,7 +34,8 @@ namespace CAESGenome.Controllers
                 var user = GetCurrentUser();
                 userJobs = _repositoryFactory.UserJobRepository.Queryable.Where(a => a.User.Id == user.Id && a.IsOpen).OrderBy(a => a.JobType.Id).ThenBy(a => a.DateTimeCreated).ToList();
             }
-            
+
+            ViewBag.Owned = owned;
             return View(userJobs);
         }
 

@@ -12,6 +12,7 @@ namespace CAESGenome.Core.Domain
     {
         public UserJobPlate()
         {
+            Completed = false;
             Barcodes = new List<Barcode>();
         }
 
@@ -19,9 +20,9 @@ namespace CAESGenome.Core.Domain
         [StringLength(50)]
         [Required]
         public virtual string Name { get; set; }
+        public virtual bool Completed { get; set; }
 
         public virtual IList<Barcode> Barcodes { get; set; }
-
         public virtual void AddBarcode(Barcode barcode)
         {
             barcode.UserJobPlate = this;
@@ -69,6 +70,7 @@ namespace CAESGenome.Core.Domain
 
             References(x => x.UserJob);
             Map(x => x.Name);
+            Map(x => x.Completed);
 
             HasMany(x => x.Barcodes).KeyColumn("UserJobPlateId").Cascade.AllDeleteOrphan().Inverse();
         }
