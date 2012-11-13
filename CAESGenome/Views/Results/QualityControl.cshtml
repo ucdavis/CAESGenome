@@ -86,7 +86,7 @@
     </tbody>
 </table>
 
-@if (!Model.Accepted)
+@if (!Model.Done)
 {
     <div class="form-actions">
         @using(Html.BeginForm("DecideQualityControl", "Results", new {id = Model.Id, accepted = true}, FormMethod.Post, new {style="display: inline-block;"}))
