@@ -141,7 +141,7 @@ namespace CAESGenome.Controllers
 
             var barcodes = userJob.UserJobPlates.SelectMany(a => a.Barcodes).Where(a => a.Stage == stage);
 
-            foreach(var b in barcodes)
+            foreach (var b in barcodes)
             {
                 _barcodeService.Print(b.Id, b.PlateName);
             }

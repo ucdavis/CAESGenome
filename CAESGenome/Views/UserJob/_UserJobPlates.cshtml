@@ -119,10 +119,15 @@
     <fieldset>
         <legend>
             <div class="pull-right">
-                <button class="btn hastip" title="Print all Barcodes">
-                    <i class="icon-print"></i>
-                    All Barcodes
-                </button>
+                @using (Html.BeginForm("PrintStageBarcodes", "UserJob", new {id=Model.Id, stageId = stage.Id}, FormMethod.Post, new {style="diplay:inline-block;"}))
+                {
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn hastip" title="Print all Barcodes">
+                        <i class="icon-print"></i>
+                        All Barcodes
+                    </button>    
+                }
+                
                 @if(!stage.IsComplete && Model.UserJobPlates.SelectMany(a => a.Barcodes).Where(a => a.Stage == stage).Any(a => !a.Done))
                 {
                     <button class="btn hastip" title="Advance All Barcodes">
