@@ -130,10 +130,13 @@
                 
                 @if(!stage.IsComplete && Model.UserJobPlates.SelectMany(a => a.Barcodes).Where(a => a.Stage == stage).Any(a => !a.Done))
                 {
-                    <button class="btn hastip" title="Advance All Barcodes">
-                        <i class="icon-share"></i>
-                        All Barcodes
-                    </button>    
+                    using(Html.BeginForm("AdvanceStageBarcodes", "UserJob", new {id=Model.Id, stageId = stage.Id}, FormMethod.Post, new {style="display:inline-block;"}))
+                    {
+                        <button class="btn hastip" title="Advance All Barcodes">
+                            <i class="icon-share"></i>
+                            All Barcodes
+                        </button>        
+                    }
                 }
             </div>
             @stage.Name
