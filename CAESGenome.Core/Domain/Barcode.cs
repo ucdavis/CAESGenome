@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using FluentNHibernate.Mapping;
 using UCDArch.Core.DomainModel;
@@ -64,6 +65,14 @@ namespace CAESGenome.Core.Domain
 
                 return result.ToString();
             }
+        }
+
+        /// <summary>
+        /// Whether or not all the validated files have been validated
+        /// </summary>
+        public virtual bool Validated
+        {
+            get { return BarcodeFiles.All(a => a.Validated); }
         }
     }
 

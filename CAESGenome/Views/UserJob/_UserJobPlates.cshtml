@@ -1,7 +1,8 @@
 ﻿@using CAESGenome.Core.Resources
 @model UserJob
 
-@helper DisplayStage(string stageId)
+
+@*@helper DisplayStage(string stageId)
 {
     switch(stageId)
     {
@@ -107,9 +108,112 @@
             <div class="label stage label-warning" data-id="@stageId" >Sequencing Reaction</div>
             break;
     }
+}*@
+
+<style type="text/css">
+    table.barcodes tr td:first-child { width: 90px;}
+</style>
+
+@foreach(var stage in Model.UserJobPlates.SelectMany(a => a.Barcodes).Select(a => a.Stage).Distinct().OrderBy(a => a.Order))
+{
+    <fieldset>
+        <legend>
+            <div class="pull-right">
+                <button class="btn hastip" title="Print all Barcodes">
+                    <i class="icon-print"></i>
+                    All Barcodes
+                </button>
+                @if(!stage.IsComplete)
+                {
+                    <button class="btn hastip" title="Advance All Barcodes">
+                        <i class="icon-share"></i>
+                        All Barcodes
+                    </button>    
+                }
+            </div>
+            @stage.Name
+        </legend>
+        
+        <table class="table barcodes">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Barcode</th>
+                    <th>Plate Name</th>
+                    <th>Sub Plate Id</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var barcode in Model.UserJobPlates.SelectMany(a => a.Barcodes).Where(a => a.Stage == stage))
+                {
+                    <tr>
+                        <td>
+                            @if (!barcode.Done)
+                            {
+                                if (User.IsInRole(RoleNames.Staff))
+                                {
+                                    if (!barcode.Stage.IsComplete)
+                                    {
+                                        using(Html.BeginForm("AdvanceBarcode", "UserJob", new {id=barcode.Id}, FormMethod.Post, new {style ="display:inline-block;"}))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <a href="javascript:;" class="btn hastip advance" title="Advance Barcode to Next Stage"><i class="icon-share"></i></a>
+                                        }            
+                                    }
+                                
+                                    if (barcode.Stage.IsComplete && barcode.BarcodeFiles.Count > 0)
+                                    {
+                                        if (barcode.BarcodeFiles.Any(a => !a.Validated))
+                                        {
+                                            <a href="javascript:;" class="btn hastip run-validation" title="Run Validation" data-id="@barcode.Id"><i class="icon-play"></i></a>     
+                                            <img src="@Url.Content("~/Images/ajaxloader.gif")" style="display:none;" class="ajaxloader"/>
+                                        }
+                                        else
+                                        {
+                                            <a href="@Url.Action("QualityControl", "Results", new {id=barcode.Id})" title="View Quality Control Data" class="btn hastip">
+                                                <i class="icon-th"></i>
+                                            </a>
+                                        }    
+                                    }
+                                }
+                            }
+                            @if (User.IsInRole(RoleNames.Staff))
+                            {
+                                using(Html.BeginForm("PrintBarcode", "UserJob", new {id=barcode.Id}, FormMethod.Post, new {style="display: inline-block;"}))
+                                {
+                                    <a href="javascript:;" class="btn hastip" title="Print barcode"><i class="icon-print"></i></a>
+                                }    
+                            }
+                        </td>
+                        <td>@barcode.Id</td>
+                        <td>@barcode.PlateName</td>
+                        <td>@barcode.SubPlateId</td>
+                        <td>@barcode.DateCreated.ToShortDateString()</td>
+                        <td>
+                            @if (barcode.Done)
+                            {
+                                <div class="label label-success">Complete</div>
+                            }
+                            else if (barcode.BarcodeFiles.Any() && !barcode.Validated)
+                            {
+                                <div class="label label-warning">Validation Pending</div>    
+                            }
+                            else
+                            {
+                                <div class="label label-info">Open</div>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </fieldset>
 }
 
-<fieldset>
+
+@*<fieldset>
     
     <table class="table">
         <thead>
@@ -132,43 +236,12 @@
             {
                 <tr>
                     <td>
-                        @if (!barcode.Done)
-                        {
-                            if (User.IsInRole(RoleNames.Staff))
-                            {
-                                using(Html.BeginForm("AdvanceBarcode", "UserJob", new {id=barcode.Id}, FormMethod.Post))
-                                {
-                                    @Html.AntiForgeryToken()
-                                    <a href="javascript:;" class="btn hastip advance" title="Advance Barcode to Next Stage"><i class="icon-share"></i></a>
-                                }        
-                                
-                                if (barcode.Stage.IsComplete && barcode.BarcodeFiles.Count > 0)
-                                {
-                                    if (barcode.BarcodeFiles.Any(a => !a.Validated))
-                                    {
-                                        <a href="javascript:;" class="btn hastip run-validation" title="Run Validation" data-id="@barcode.Id"><i class="icon-play"></i></a>     
-                                        <img src="@Url.Content("~/Images/ajaxloader.gif")" style="display:none;" class="ajaxloader"/>
-                                    }
-                                    else
-                                    {
-                                        <a href="@Url.Action("QualityControl", "Results", new {id=barcode.Id})" title="View Quality Control Data" class="btn hastip">
-                                            <i class="icon-th"></i>
-                                        </a>
-                                    }    
-                                }
-                            }
-                        }
+                        
                     </td>
                     <td>
                         @barcode.Id
                         
-                        @if (User.IsInRole(RoleNames.Staff))
-                        {
-                            using(Html.BeginForm("PrintBarcode", "UserJob", new {id=barcode.Id}, FormMethod.Post, new {@class="pull-right"}))
-                            {
-                                <a href="javascript:;" class="btn hastip" title="Print barcode"><i class="icon-print"></i></a>
-                            }    
-                        }
+                        
                     </td>
                     <td>@barcode.PlateName</td>
                     <td>@barcode.SubPlateId</td>
@@ -191,4 +264,4 @@
     </table>
 
 
-</fieldset>
+</fieldset>*@
