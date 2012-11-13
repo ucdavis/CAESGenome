@@ -16,6 +16,9 @@ namespace CAESGenome.Services
         void AdvanceStage(IRepositoryFactory repositoryFactory, Barcode barcode, UserJob userJob);
         void AdvanceAllBarcodes(IRepositoryFactory repositoryFactory, UserJob userJob, Stage stage);
 
+        void AcceptQualityControl(IRepositoryFactory repositoryFactory, Barcode barcode);
+        void DeclineQualityControl(IRepositoryFactory repositoryFactory, Barcode barcode);
+
         void Print(int id, string plateName);
     }
 
@@ -103,6 +106,29 @@ namespace CAESGenome.Services
                     AdvanceStage(repositoryFactory, bc, userJob);
                 }
             }
+        }
+
+        public void AcceptQualityControl(IRepositoryFactory repositoryFactory, Barcode barcode)
+        {
+            barcode.Done = true;
+            barcode.AllowDownload = true;
+            repositoryFactory.BarcodeRepository.EnsurePersistent(barcode);
+
+            var userJob = barcode.UserJobPlate.UserJob;
+            userJob.LastUpdate = DateTime.Now;
+            repositoryFactory.UserJobRepository.EnsurePersistent(userJob);
+        }
+
+        public void DeclineQualityControl(IRepositoryFactory repositoryFactory, Barcode barcode)
+        {
+            barcode.Done = true;
+            repositoryFactory.BarcodeRepository.EnsurePersistent(barcode);
+
+            // duplicate the barcode for a new one
+            var newBarcode = new Barcode() { UserJobPlate = barcode.UserJobPlate, SubPlateId = barcode.SubPlateId
+                , Primer = barcode.Primer, Stage = barcode.Stage, SourceBarcode = barcode.SourceBarcode
+            };
+            repositoryFactory.BarcodeRepository.EnsurePersistent(newBarcode);
         }
 
         private readonly string _printer = ConfigurationManager.AppSettings["printer"];

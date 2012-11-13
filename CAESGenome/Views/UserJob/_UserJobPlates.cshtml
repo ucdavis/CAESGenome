@@ -49,37 +49,32 @@
                 {
                     <tr>
                         <td>
-                            @if (!barcode.Done)
-                            {
-                                if (User.IsInRole(RoleNames.Staff))
-                                {
-                                    if (!barcode.Stage.IsComplete)
-                                    {
-                                        using(Html.BeginForm("AdvanceBarcode", "UserJob", new {id=barcode.Id}, FormMethod.Post, new {style ="display:inline-block;"}))
-                                        {
-                                            @Html.AntiForgeryToken()
-                                            <a href="javascript:;" class="btn hastip advance" title="Advance Barcode to Next Stage"><i class="icon-share"></i></a>
-                                        }            
-                                    }
-                                
-                                    if (barcode.Stage.IsComplete && barcode.BarcodeFiles.Count > 0)
-                                    {
-                                        if (barcode.BarcodeFiles.Any(a => !a.Validated))
-                                        {
-                                            <a href="javascript:;" class="btn hastip run-validation" title="Run Validation" data-id="@barcode.Id"><i class="icon-play"></i></a>     
-                                            <img src="@Url.Content("~/Images/ajaxloader.gif")" style="display:none;" class="ajaxloader"/>
-                                        }
-                                        else
-                                        {
-                                            <a href="@Url.Action("QualityControl", "Results", new {id=barcode.Id})" title="View Quality Control Data" class="btn hastip">
-                                                <i class="icon-th"></i>
-                                            </a>
-                                        }    
-                                    }
-                                }
-                            }
                             @if (User.IsInRole(RoleNames.Staff))
                             {
+                                if (!barcode.Stage.IsComplete)
+                                {
+                                    using(Html.BeginForm("AdvanceBarcode", "UserJob", new {id=barcode.Id}, FormMethod.Post, new {style ="display:inline-block;"}))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <a href="javascript:;" class="btn hastip advance" title="Advance Barcode to Next Stage"><i class="icon-share"></i></a>
+                                    }            
+                                }
+                                
+                                if (barcode.Stage.IsComplete && barcode.BarcodeFiles.Count > 0)
+                                {
+                                    if (!barcode.Validated)
+                                    {
+                                        <a href="javascript:;" class="btn hastip run-validation" title="Run Validation" data-id="@barcode.Id"><i class="icon-play"></i></a>     
+                                        <img src="@Url.Content("~/Images/ajaxloader.gif")" style="display:none;" class="ajaxloader"/>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("QualityControl", "Results", new {id=barcode.Id})" title="View Quality Control Data" class="btn hastip">
+                                            <i class="icon-th"></i>
+                                        </a>
+                                    }    
+                                }
+
                                 using(Html.BeginForm("PrintBarcode", "UserJob", new {id=barcode.Id}, FormMethod.Post, new {style="display: inline-block;"}))
                                 {
                                     <a href="javascript:;" class="btn hastip" title="Print barcode"><i class="icon-print"></i></a>

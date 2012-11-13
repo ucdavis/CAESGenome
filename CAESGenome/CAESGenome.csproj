@@ -357,6 +357,10 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\Uploadify\jquery.uploadify.min.js" />
+    <Content Include="Content\Uploadify\uploadify-cancel.png" />
+    <Content Include="Content\Uploadify\uploadify.css" />
+    <Content Include="Content\Uploadify\uploadify.swf" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Images\accounts.png" />

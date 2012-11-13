@@ -6,8 +6,9 @@
     [StageId]         char(4)  NULL,
     [SourceBarcodeId] INT  NULL,
     [DateCreated]          DATETIME NULL,
-    [Done]          BIT  NULL,
+    [Done]          BIT  NOT NULL DEFAULT 0,
     
+    [AllowDownload] BIT NOT NULL DEFAULT 0, 
     CONSTRAINT [PK_Barcodes] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_Barcodes_Primers] FOREIGN KEY ([PrimerId]) REFERENCES [dbo].[Primers] ([Id]), 
     CONSTRAINT [FK_Barcodes_Barcodes] FOREIGN KEY ([SourceBarcodeId]) REFERENCES [Barcodes]([Id]), 

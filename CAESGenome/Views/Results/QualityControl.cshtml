@@ -7,6 +7,8 @@
     var quality = Model.BarcodeFiles;
     var rows = quality.Select(a => a.WellRow).Distinct().OrderBy(a => a);
     var cols = quality.Select(a => a.WellColumn).Distinct().OrderBy(a => a);
+    
+    double sucessRate = Model.BarcodeFiles.Count(a => (a.End - a.Start) >= 100) / (double)Model.BarcodeFiles.Count() * 100;
 }
 
 @section scripts
@@ -24,6 +26,21 @@
         <li>@Html.ActionLink("Back to User Job", "Details", "UserJob", new {id = Model.UserJobPlate.UserJob.Id}, new {})</li>
     </ul>
 }
+
+<div class="well row-fluid">
+    <div class="span4">
+        <strong>Avg. Read Length:</strong>
+        @(Model.BarcodeFiles.Sum(a => (a.End - a.Start)) / Model.BarcodeFiles.Count)
+    </div>
+    <div class="span4">
+        <strong>Success Rate:</strong>
+        @sucessRate %
+    </div>
+    <div class="span4">
+        <strong>Status:</strong>
+        @(!Model.Done ? "Pending" : (Model.Accepted ? "Accepted" : "Declined"))
+    </div>
+</div>
 
 <table class="table">
     <thead>
@@ -48,7 +65,7 @@
                         var cls = "neutral";
                         var diff = cell.End - cell.Start;
                         diff = diff < 0 ? 0 : diff;
-                        if (diff >= 0 && diff <= 100)
+                        if (diff >= 0 && diff < 100)
                         {
                             cls = "warning";
                         }
@@ -69,3 +86,24 @@
     </tbody>
 </table>
 
+@if (!Model.Accepted)
+{
+    <div class="form-actions">
+        @using(Html.BeginForm("DecideQualityControl", "Results", new {id = Model.Id, accepted = true}, FormMethod.Post, new {style="display: inline-block;"}))
+        {
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-primary btn-large">
+                <i class="icon-ok icon-white"></i>
+                Accept
+            </button>    
+        }
+        @using(Html.BeginForm("DecideQualityControl", "Results", new {id = Model.Id, accepted = false}, FormMethod.Post, new {style="display: inline-block;"}))
+        {
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-danger btn-large">
+                <i class="icon-remove icon-white"></i>
+                Decline
+            </button>
+        }
+    </div>
+}

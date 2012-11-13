@@ -13,6 +13,7 @@ namespace CAESGenome.Core.Domain
         {
             DateCreated = DateTime.Now;
             Done = false;
+            AllowDownload = false;
 
             SubPlateId = 0;
 
@@ -25,6 +26,7 @@ namespace CAESGenome.Core.Domain
         public virtual Barcode SourceBarcode { get; set; }
         public virtual DateTime DateCreated { get; set; }
         public virtual bool Done { get; set; }
+        public virtual bool AllowDownload { get; set; }
         public virtual int SubPlateId { get; set; }
 
         public virtual IList<BarcodeFile> BarcodeFiles { get; set; }
@@ -74,6 +76,14 @@ namespace CAESGenome.Core.Domain
         {
             get { return BarcodeFiles.All(a => a.Validated); }
         }
+
+        /// <summary>
+        /// Accepted the quality control
+        /// </summary>
+        public virtual bool Accepted
+        {
+            get { return Done && AllowDownload; }
+        }
     }
 
     public class BarcodeMap : ClassMap<Barcode>
@@ -89,6 +99,7 @@ namespace CAESGenome.Core.Domain
 
             Map(x => x.DateCreated);
             Map(x => x.Done);
+            Map(x => x.AllowDownload);
             Map(x => x.SubPlateId);
 
             HasMany(x => x.BarcodeFiles).Inverse().Cascade.AllDeleteOrphan();
