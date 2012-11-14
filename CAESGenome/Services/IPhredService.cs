@@ -126,6 +126,11 @@ namespace CAESGenome.Services
                 _repositoryFactory.BarcodeFileRepository.EnsurePersistent(bcf);
             }
 
+            // update the barcode
+            var bc = _repositoryFactory.BarcodeRepository.GetById(barcode);
+            bc.DateTimeValidated = DateTime.Now;
+            _repositoryFactory.BarcodeRepository.EnsurePersistent(bc);
+
             //ValidatePhred(barcode);
         }
 

@@ -114,8 +114,18 @@ namespace CAESGenome.Services
             barcode.AllowDownload = true;
             repositoryFactory.BarcodeRepository.EnsurePersistent(barcode);
 
+            var plate = barcode.UserJobPlate;
+            plate.Completed = true;
+            plate.DateTimeCompleted = DateTime.Now;
+            repositoryFactory.UserJobPlateRepository.EnsurePersistent(plate);
+
             var userJob = barcode.UserJobPlate.UserJob;
             userJob.LastUpdate = DateTime.Now;
+            if (userJob.UserJobPlates.All(a => a.Completed))
+            {
+                userJob.IsOpen = false;
+                userJob.LastUpdate = DateTime.Now;
+            }
             repositoryFactory.UserJobRepository.EnsurePersistent(userJob);
         }
 
@@ -123,6 +133,11 @@ namespace CAESGenome.Services
         {
             barcode.Done = true;
             repositoryFactory.BarcodeRepository.EnsurePersistent(barcode);
+
+            var plate = barcode.UserJobPlate;
+            plate.Completed = true;
+            plate.DateTimeCompleted = DateTime.Now;
+            repositoryFactory.UserJobPlateRepository.EnsurePersistent(plate);
 
             // duplicate the barcode for a new one
             var newBarcode = new Barcode() { UserJobPlate = barcode.UserJobPlate, SubPlateId = barcode.SubPlateId

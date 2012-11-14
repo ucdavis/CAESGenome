@@ -1,0 +1,47 @@
+﻿@model CalendarModel
+
+@{
+    var firstDay = new DateTime(Model.DateTime.Year, Model.DateTime.Month, 1);
+    var daysInMonth = DateTime.DaysInMonth(Model.DateTime.Year, Model.DateTime.Month);
+    var lastday = new DateTime(Model.DateTime.Year, Model.DateTime.Month, daysInMonth);
+}
+
+<div class="calendar">
+    <div class="monthHeader">@Model.DateTime.ToString("MMMM yyyy")</div>
+    <div class="dayHeader">S</div>
+    <div class="dayHeader">M</div>
+    <div class="dayHeader">T</div>
+    <div class="dayHeader">W</div>
+    <div class="dayHeader">TH</div>
+    <div class="dayHeader">F</div>
+    <div class="dayHeader">S</div>
+
+    <!-- Leading Days -->
+    @for(var i = 0; i < (int)firstDay.DayOfWeek; i++)
+    {
+        <div class="inactive-day">&nbsp;</div>
+    }
+    
+    <!-- Days in Month -->
+    @for(var i = 1; i <= daysInMonth; i++)
+    {
+        var current = new DateTime(Model.DateTime.Year, Model.DateTime.Month, i);
+        <div class="day">
+            @if(Model.HighlightDates.Contains(current.Date))
+            {
+                <a href="#" class="badge badge-info">@i</a>
+            }
+            else
+            {
+                <text>@i</text>
+            }
+        </div>
+    }
+    
+    <!-- Trailing Days -->
+    @for(var i = 1; i < 7 - (int)lastday.DayOfWeek; i++)
+    {
+        <div class="inactive-day"></div>
+    }
+    <div style="clear:both;"></div>
+</div>

@@ -9,7 +9,14 @@
 @section SubPageMenu
 {
     <ul class="nav nav-pills">
-        <li>@Html.ActionLink("Back to List", "Index")</li>
+        @if (!ViewBag.Completed)
+        {
+            <li>@Html.ActionLink("Back to List", "Index")</li>    
+        }
+        else
+        {
+            <li>@Html.ActionLink("Back to List", "MonthlyDetails", new {year = Model.LastUpdate.Year, month = Model.LastUpdate.Month})</li>    
+        }
     </ul>
 }
 

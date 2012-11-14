@@ -17,7 +17,7 @@
         }
     </thead>
     <tbody>
-        @foreach(var y in years)
+        @foreach(var y in years.OrderByDescending(a => a))
         {
             <tr>
                 <th>@y</th>
@@ -26,15 +26,14 @@
                     var month = Model.FirstOrDefault(a => a.Year == y && a.Month == i);
                     
                     <td>
-                        @if (month.Count > 0)
+                        @if (month == null || month.Count == 0)
                         {
-                            @Html.ActionLink(month.Count.ToString(), "MonthlyDetails", new {year = y, month = i})
+                            <text>0</text>
                         }
                         else
                         {
-                            @(month != null ? month.Count : 0)    
+                            @Html.ActionLink(month.Count.ToString(), "MonthlyDetails", new {year = y, month = i})
                         }
-                        
                     </td>
                 }
             </tr>

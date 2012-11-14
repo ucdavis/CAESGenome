@@ -40,7 +40,7 @@ namespace CAESGenome.Controllers
         }
 
         [Authorize(Roles = RoleNames.User + "," + RoleNames.Staff)]
-        public ActionResult Details(int id)
+        public ActionResult Details(int id, bool completed = false)
         {
             var uj = _repositoryFactory.UserJobRepository.GetNullableById(id);
             
@@ -49,6 +49,8 @@ namespace CAESGenome.Controllers
                 Message = "Job could not be located, please try again.";
                 return RedirectToAction("Index");
             }
+
+            ViewBag.Completed = completed;
 
             return View(uj);
         }
@@ -156,12 +158,12 @@ namespace CAESGenome.Controllers
             var results = new List<UsageDetailsModel>();
 
             // get the years
-            var years = _repositoryFactory.UserJobRepository.Queryable.Where(a => !a.IsOpen).Select(a => a.DateTimeCreated.Year).Distinct();
+            var years = _repositoryFactory.UserJobRepository.Queryable.Where(a => !a.IsOpen).Select(a => a.LastUpdate.Year).Distinct();
             
             foreach(var y in years)
             {
-                var jobs = _repositoryFactory.UserJobRepository.Queryable.Where(a => a.DateTimeCreated.Year == y).GroupBy(
-                        a => a.DateTimeCreated.Month).Select(a => new UsageDetailsModel() {Year = y, Month = a.Key, Count = a.Count()});
+                var jobs = _repositoryFactory.UserJobRepository.Queryable.Where(a => a.LastUpdate.Year == y).GroupBy(
+                        a => a.LastUpdate.Month).Select(a => new UsageDetailsModel() {Year = y, Month = a.Key, Count = a.Count()});
 
                 results.AddRange(jobs);
             }
@@ -172,7 +174,7 @@ namespace CAESGenome.Controllers
         [Authorize(Roles = RoleNames.Staff)]
         public ActionResult MonthlyDetails(int year, int month)
         {
-            var jobs = _repositoryFactory.UserJobRepository.Queryable.Where(a => a.DateTimeCreated.Year == year && a.DateTimeCreated.Month == month && !a.IsOpen);
+            var jobs = _repositoryFactory.UserJobRepository.Queryable.Where(a => a.LastUpdate.Year == year && a.LastUpdate.Month == month && !a.IsOpen);
             return View(jobs);
         }
 

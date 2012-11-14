@@ -28,6 +28,7 @@ namespace CAESGenome.Core.Domain
         public virtual bool Done { get; set; }
         public virtual bool AllowDownload { get; set; }
         public virtual int SubPlateId { get; set; }
+        public virtual DateTime? DateTimeValidated { get; set; }
 
         public virtual IList<BarcodeFile> BarcodeFiles { get; set; }
         public virtual IList<PhredQuality> PhredQualities { get; set; }
@@ -101,6 +102,7 @@ namespace CAESGenome.Core.Domain
             Map(x => x.Done);
             Map(x => x.AllowDownload);
             Map(x => x.SubPlateId);
+            Map(x => x.DateTimeValidated);
 
             HasMany(x => x.BarcodeFiles).Inverse().Cascade.AllDeleteOrphan();
             HasMany(x => x.PhredQualities).Inverse().Cascade.AllDeleteOrphan();

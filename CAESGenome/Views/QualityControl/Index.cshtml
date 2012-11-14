@@ -1,0 +1,41 @@
+﻿@using CAESGenome.Controllers
+@model IQueryable<DateTime>
+
+@{
+    ViewBag.Title = "Quality Analysis";
+    var month = ViewBag.Month;
+    var year = ViewBag.Year;
+    var date = new DateTime(year, month, 1);
+}
+
+@section scripts
+{
+    <link href="@Url.Content("~/Content/calendar.css")" rel="stylesheet">
+}
+
+<!-- Top mennu -->
+<div class="well">
+    <div class="pull-left">
+        <a class="btn" href="@Url.Action("Index", new {month = month, year = year, direction=QualityControlController.CalendarDirection.Left})">
+            <i class="icon-arrow-left"></i>
+        </a>    
+    </div>
+    @if (date.AddMonths(1) < DateTime.Now)
+    {
+        <div class="pull-right">
+            <a class="btn" href="@Url.Action("Index", new {month = month, year = year, direction=QualityControlController.CalendarDirection.Right})">
+                <i class="icon-arrow-right"></i>
+            </a>    
+        </div>    
+    }
+    <div style="clear:both;"></div>
+</div>
+
+<!-- Calendar -->
+<div class="row" style="text-align: center;">
+    <span class="span4">@Html.Partial("_Calendar", new CalendarModel(){DateTime = date.AddMonths(-2), HighlightDates = Model})</span>
+    <span class="span4">@Html.Partial("_Calendar", new CalendarModel(){DateTime = date.AddMonths(-1), HighlightDates = Model})</span>
+    <span class="span4">@Html.Partial("_Calendar", new CalendarModel(){DateTime = date, HighlightDates = Model})</span>
+</div>
+
+

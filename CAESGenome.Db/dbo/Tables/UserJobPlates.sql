@@ -4,5 +4,6 @@
     [UserJobId] INT NOT NULL, 
     [Name] VARCHAR(50) NOT NULL, 
     [Completed] BIT NOT NULL DEFAULT 0, 
+    [DateTimeCompleted] DATETIME NULL, 
     CONSTRAINT [FK_UserJobPlates_UserJobs] FOREIGN KEY ([UserJobId]) REFERENCES [UserJobs]([Id])
 )

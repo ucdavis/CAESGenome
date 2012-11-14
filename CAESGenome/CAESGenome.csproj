@@ -233,6 +233,7 @@
     <Compile Include="Controllers\PIController.cs" />
     <Compile Include="Controllers\PrinterController.cs" />
     <Compile Include="Controllers\QbotController.cs" />
+    <Compile Include="Controllers\QualityControlController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
     <Compile Include="Controllers\SequencingController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
@@ -245,6 +246,7 @@
     </Compile>
     <Compile Include="Helpers\AutomapperConfig.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\CalendarModel.cs" />
     <Compile Include="Models\EquipmentViewModel.cs" />
     <Compile Include="Models\GenotypingViewModel.cs" />
     <Compile Include="Models\QbotViewModel.cs" />
@@ -268,6 +270,7 @@
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\calendar.css" />
     <Content Include="Content\Custom.css" />
     <Content Include="Content\dt_bootstrap.css" />
     <Content Include="Content\FileUpload\canvas-to-blob.min.js" />
@@ -555,6 +558,8 @@
     <Content Include="Views\Home\Protocol.cshtml" />
     <Content Include="Views\Home\Faq.cshtml" />
     <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\QualityControl\Index.cshtml" />
+    <Content Include="Views\QualityControl\_Calendar.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

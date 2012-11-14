@@ -1,0 +1,24 @@
+﻿.inactive-day, .day, .dayHeader {
+    display: inline-block;
+    border-bottom: 1px solid lightgray;
+    margin: 0;
+    width: 35px;
+    height: 25px;
+    float: left;
+    padding-top: 7px;
+}
+
+.dayHeader { font-weight: bold;}
+
+.calendar {
+    display: inline-block;
+    width: 259px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.monthHeader {
+    width: 100%;
+    font-weight: bold;
+    padding: 7px 0;
+}

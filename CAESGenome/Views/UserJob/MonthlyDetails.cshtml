@@ -10,6 +10,13 @@
     @Html.Partial("_dataTables")
 }
 
+@section SubPageMenu
+{
+    <ul class="nav nav-pills">
+        <li>@Html.ActionLink("Back to Completed Jobs", "Completed")</li>
+    </ul>
+}    
+
 <table class="default_table table table-striped table-bordered">
     <thead>
         <tr>
@@ -25,7 +32,11 @@
         @foreach(var job in Model)
         {
             <tr>
-                <td></td>
+                <td>
+                    <a href="@Url.Action("Details", "UserJob", new {id=job.Id, completed=true})" class="btn hastip" title="View User Job">
+                        <i class="icon icon-search"></i>
+                    </a>
+                </td>
                 <td>@job.User.FullName</td>
                 <td>@job.JobType.Name</td>
                 <td>@job.Name</td>
