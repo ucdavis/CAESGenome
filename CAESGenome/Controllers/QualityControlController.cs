@@ -47,6 +47,7 @@ namespace CAESGenome.Controllers
                 _repositoryFactory.BarcodeRepository.Queryable.Where(
                     a =>
                     a.Done && a.DateTimeValidated.HasValue && a.DateTimeValidated.Value.Date >= date.AddMonths(-2).Date && a.DateTimeValidated.Value < date.AddMonths(1)
+                    && a.BarcodeFiles.Any()
                     ).Select(a => a.DateTimeValidated.Value.Date).Distinct();
 
             ViewBag.Month = date.Month;

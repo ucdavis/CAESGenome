@@ -13,6 +13,13 @@
     </style>
 }
 
+@section SubPageMenu
+{
+    <ul class="nav nav-pills">
+        <li>@Html.ActionLink("Back to Dates", "Index", new {month = Model.Date.Month, year = Model.Date.Year})</li>
+    </ul>
+}
+
 <div class="row">
     <div class="span6">
         
@@ -40,8 +47,8 @@
                         }    
                     }
                 </div>
-
-                @barcode.UserJobPlate.UserJob.Name
+                
+                @Html.ActionLink(barcode.UserJobPlate.UserJob.Name, "Details", "UserJob", new {id = barcode.UserJobPlate.UserJob.Id}, new {})
             </div>
             
             <table class="table">
