@@ -61,6 +61,24 @@ namespace CAESGenome.Controllers
             return View(viewModel);
         }
 
+        [HttpPost]
+        public ActionResult ChangeDownload(int id)
+        {
+            var barcode = _repositoryFactory.BarcodeRepository.GetNullableById(id);
+
+            if (barcode == null)
+            {
+                Message = "barcode not found";
+                return RedirectToAction("Index");
+            }
+
+            barcode.AllowDownload = !barcode.AllowDownload;
+            _repositoryFactory.BarcodeRepository.EnsurePersistent(barcode);
+
+            Message = string.Format("Downloads for {0} have been {1}", barcode.Id, barcode.AllowDownload ? "enabled" : "disabled");
+            return RedirectToAction("ByDate", new {date = barcode.DateTimeValidated.Value.Date});
+        }
+
         public enum CalendarDirection {Left, Right}
     }
 }

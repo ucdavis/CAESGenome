@@ -14,7 +14,7 @@
 }
 
 <div class="row">
-    <div class="span7">
+    <div class="span6">
         
         @foreach(var barcode in Model.Barcodes)
         {
@@ -23,6 +23,24 @@
             var cols = quality.Select(a => a.WellColumn).Distinct().OrderBy(a => a);
     
             <div class="well">
+                
+                <div class="pull-right">
+                    @using (Html.BeginForm("ChangeDownload", "QualityControl", new {id=barcode.Id}, FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        if(barcode.AllowDownload)
+                        {
+                            <span class="good" style="font-weight: bold;">Download Enabled</span>
+                            <button type="submit" class="btn btn-danger">Click to Disable</button>
+                        }
+                        else
+                        {
+                            <span class="warning" style="font-weight: bold;">Donwload Disabled</span>
+                            <button type="submit" class="btn btn-success">Click to Enable</button>
+                        }    
+                    }
+                </div>
+
                 @barcode.UserJobPlate.UserJob.Name
             </div>
             
@@ -71,7 +89,7 @@
             </table>
         }
     </div>
-    <div class="span5">
+    <div class="span6">
         <table class="table">
             <thead>
                 <tr>
@@ -92,7 +110,7 @@
                         <td>
                             @(barcode.BarcodeFiles.Sum(a => (a.End - a.Start)) / barcode.BarcodeFiles.Count)
                         </td>
-                        <td>@sucessRate %
+                        <td>@string.Format("{0:0.##}",sucessRate) %
                         </td>
                     </tr>
                 }
