@@ -1,0 +1,102 @@
+﻿@model QualityControlByDateViewModel
+
+@{
+    ViewBag.Title = string.Format("Quality Analysis -- {0}", Model.Date.ToShortDateString());
+}
+
+@section scripts
+{
+    <style type="text/css">
+        .neutral { color: blue; }
+        .warning { color: red; }
+        .good { color: green; }
+    </style>
+}
+
+<div class="row">
+    <div class="span7">
+        
+        @foreach(var barcode in Model.Barcodes)
+        {
+            var quality = barcode.BarcodeFiles;
+            var rows = quality.Select(a => a.WellRow).Distinct().OrderBy(a => a);
+            var cols = quality.Select(a => a.WellColumn).Distinct().OrderBy(a => a);
+    
+            <div class="well">
+                @barcode.UserJobPlate.UserJob.Name
+            </div>
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        @foreach(var col in cols)
+                        {
+                            <th>@col</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var row in rows)
+                    {
+                        <tr>
+                            <th>@row</th>
+                            @foreach(var col in cols)
+                            {
+                                var cell = quality.FirstOrDefault(a => a.WellColumn == col && a.WellRow == row);
+                                if (cell != null)
+                                {
+                                    var cls = "neutral";
+                                    var diff = cell.End - cell.Start;
+                                    diff = diff < 0 ? 0 : diff;
+                                    if (diff >= 0 && diff < 100)
+                                    {
+                                        cls = "warning";
+                                    }
+                                    else if (diff >= 100 && diff <= 500)
+                                    {
+                                        cls = "good";
+                                    }
+                        
+                                    <td class="@cls">@diff</td>
+                                }
+                                else
+                                {
+                                    <td>n/a</td>
+                                }
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+    <div class="span5">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Job Id</th>
+                    <th>Plate Name</th>
+                    <th>Avg. Read Len.</th>
+                    <th>Success %</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var barcode in Model.Barcodes)
+                {
+                    double sucessRate = barcode.BarcodeFiles.Count(a => (a.End - a.Start) >= 100) / (double)barcode.BarcodeFiles.Count() * 100;
+                    
+                    <tr>
+                        <td>@barcode.UserJobPlate.UserJob.Id</td>
+                        <td>@barcode.PlateName</td>
+                        <td>
+                            @(barcode.BarcodeFiles.Sum(a => (a.End - a.Start)) / barcode.BarcodeFiles.Count)
+                        </td>
+                        <td>@sucessRate %
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

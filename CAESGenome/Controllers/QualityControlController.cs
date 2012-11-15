@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using CAESGenome.Core.Repositories;
+using CAESGenome.Models;
 
 namespace CAESGenome.Controllers
 {
@@ -52,6 +53,12 @@ namespace CAESGenome.Controllers
             ViewBag.Year = date.Year;
 
             return View(barcodes);
+        }
+
+        public ActionResult ByDate(DateTime date)
+        {
+            var viewModel = QualityControlByDateViewModel.Create(_repositoryFactory, date);
+            return View(viewModel);
         }
 
         public enum CalendarDirection {Left, Right}

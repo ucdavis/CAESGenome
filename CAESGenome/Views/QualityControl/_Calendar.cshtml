@@ -29,7 +29,7 @@
         <div class="day">
             @if(Model.HighlightDates.Contains(current.Date))
             {
-                <a href="#" class="badge badge-info">@i</a>
+                <a href="@Url.Action("ByDate", new {date = current})" class="badge badge-info">@i</a>
             }
             else
             {

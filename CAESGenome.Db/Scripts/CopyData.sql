@@ -266,3 +266,14 @@ from cgfold.dbo.barcode bc
 
 set identity_insert cgf.dbo.barcodes off
 
+
+-- imports quality analysis data, this blows, since you have to import using excel with 65k rows at a time
+set identity_insert barcodefiles on
+
+insert into barcodefiles (id, WellColumn, WellRow, BarcodeId, Uploaded, start, [end], DateTimeUploaded, DateTimeValidated)
+select id, cellnum, cellchar, barcode, 0, start, [end], datetimesubmitted, datetimesubmitted
+from cgfold.dbo.quality_phred
+where id is not null
+  and barcode in (select id from barcodes )
+
+set identity_insert barcodefiles off
