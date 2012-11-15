@@ -56,11 +56,6 @@ namespace CAESGenome.Controllers
             return new JsonNetResult(results);
         }
 
-        public FileResult DownloadFile()
-        {
-            throw new NotImplementedException();
-        }
-
         public JsonNetResult RunValidation(int id)
         {
             _phredService.ExecuteValidation(id);

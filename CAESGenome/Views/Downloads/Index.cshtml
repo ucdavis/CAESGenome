@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Barcode>
+
+@{
+    ViewBag.Title = "Downloads";
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Job Id</th>
+            <th>Plate Name</th>
+        </tr>    
+    </thead>
+    <tbody>
+        @foreach(var barcode in Model)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("File", "Downloads", new {id = barcode.Id})" class="btn">
+                        <i class="icon-download"></i>
+                    </a>
+                </td>
+                <td>@barcode.UserJobPlate.UserJob.Id</td>
+                <td>@barcode.PlateName</td>
+            </tr>
+        }
+    </tbody>
+</table>

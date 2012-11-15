@@ -73,6 +73,9 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\packages\DotNetZip.1.9.1.8\lib\net20\Ionic.Zip.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -227,6 +230,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\AuthorizedController.cs" />
+    <Compile Include="Controllers\DownloadsController.cs" />
     <Compile Include="Controllers\EquipmentController.cs" />
     <Compile Include="Controllers\GenotypingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -562,6 +566,8 @@
     <Content Include="Views\QualityControl\Index.cshtml" />
     <Content Include="Views\QualityControl\_Calendar.cshtml" />
     <Content Include="Views\QualityControl\ByDate.cshtml" />
+    <Content Include="Views\UserJob\_sublibrary.cshtml" />
+    <Content Include="Views\Downloads\Index.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

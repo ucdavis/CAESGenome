@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using CAESGenome.Core.Domain;
@@ -95,6 +96,27 @@ namespace CAESGenome.Controllers
                     _barcodeService.AdvanceStage(_repositoryFactory, barcode, barcode.UserJobPlate.UserJob);
                 }
             }
+
+            return RedirectToAction("Details", new {id = id});
+        }
+
+        [HttpPost]
+        [Authorize(Roles = RoleNames.Staff)]
+        public ActionResult CloseJob(int id)
+        {
+            var userjob = _repositoryFactory.UserJobRepository.GetNullableById(id);
+
+            if (userjob == null)
+            {
+                Message = "Job not found.";
+                return RedirectToAction("Index");
+            }
+
+            userjob.IsOpen = false;
+            userjob.LastUpdate = DateTime.Now;
+            _repositoryFactory.UserJobRepository.EnsurePersistent(userjob);
+
+            Message = "User job has been closed";
 
             return RedirectToAction("Details", new {id = id});
         }

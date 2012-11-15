@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using CAESGenome.Core.Domain;
 using CAESGenome.Core.Repositories;
 using CAESGenome.Resources;
+using Ionic.Zip;
 using Tamir.SharpSsh;
 
 namespace CAESGenome.Services
@@ -14,6 +15,8 @@ namespace CAESGenome.Services
     {
         string SaveFiles(byte[] contents, string filename, out int fileId);
         void ExecuteValidation(int barcode);
+
+        byte[] DownloadResults(Barcode barcode);
     }
 
     public class PhredService : IPhredService
@@ -132,6 +135,24 @@ namespace CAESGenome.Services
             _repositoryFactory.BarcodeRepository.EnsurePersistent(bc);
 
             //ValidatePhred(barcode);
+        }
+
+        public byte[] DownloadResults(Barcode barcode)
+        {
+            var stream = new MemoryStream();
+
+            // zip up the files and return them
+            using (var zip = new ZipFile())
+            {
+                foreach(var file in Directory.EnumerateFiles(string.Format(@"{0}\output\{1}", _storageLocation, barcode.Id), "*"))
+                {
+                    zip.AddFile(file);
+                }
+
+                zip.Save(stream);
+            }
+
+            return stream.ToArray();
         }
 
         // run phred

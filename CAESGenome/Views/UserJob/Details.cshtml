@@ -97,5 +97,20 @@
     {
         @Html.Partial("_qbotGridding")
     }
+    @if (Model.JobType.Id == (int)JobTypeIds.Sublibrary)
+    {
+        @Html.Partial("_sublibrary");
+    }
+    
+    @if (User.IsInRole(RoleNames.Staff) && Model.IsOpen)
+    {
+        using (Html.BeginForm("CloseJob", "UserJob", new { id = Model.Id }, FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <button type="submit" class="btn btn-danger">Complete Job</button>
+        }    
+    }
+    
 
 </div>
