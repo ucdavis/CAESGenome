@@ -117,6 +117,7 @@
     <None Include="Scripts\WipeTables.sql" />
     <None Include="SchemaCompare\sqlexpress.scmp" />
     <None Include="Scripts\CopyData.sql" />
+    <None Include="SchemaCompare\terry.scmp" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CAESGenome.Db.refactorlog" />

@@ -14,6 +14,7 @@ namespace CAESGenome.Services
     public interface IPhredService
     {
         string SaveFiles(byte[] contents, string filename, out int fileId);
+        void ScanFiles();
         void ExecuteValidation(int barcode);
 
         byte[] DownloadResults(Barcode barcode);
@@ -26,7 +27,9 @@ namespace CAESGenome.Services
         private static readonly string PhredServer = ConfigurationManager.AppSettings["PhredServer"];
         private static readonly string PhredUsername = ConfigurationManager.AppSettings["PhredUsername"];
         private static readonly string PhredPassword = ConfigurationManager.AppSettings["PhredPassword"];
-        private string _storageLocation = ConfigurationManager.AppSettings["StorageLocation"];
+        private readonly string _storageLocation = ConfigurationManager.AppSettings["StorageLocation"];
+        private readonly string _uploadLocation = ConfigurationManager.AppSettings["UploadLocation"];
+
         // ex. 2020717_A01.ab1
         private const string FilePattern = @"^[0123456789]+_[ABCDEFGH]{1}[0123456789]{2}\.";
 
@@ -39,25 +42,17 @@ namespace CAESGenome.Services
         {
             fileId = 0;
 
-            // check the filename
-            var regex = new Regex(FilePattern);
-            var match = regex.Match(filename);
+            var barcodeId = -1;
+            var row = 'A';
+            var col = -1;
 
-            if (!match.Success)
+            ParseFileName(filename, out barcodeId, out row, out col);
+
+            // invalid filename
+            if (barcodeId == -1)
             {
                 return FileUploadErrorKeys.InvalidFileName;
             }
-
-            // parse the name
-            var barcodeId = Convert.ToInt32(filename.Substring(0, filename.IndexOf("_")));
-
-            // split after the barcode
-            var seperator = filename.Substring(filename.IndexOf("_") + 1);
-            // remove the extension
-            seperator = seperator.Substring(0, seperator.IndexOf("."));
-
-            var row = seperator[0];
-            var col = Convert.ToInt32(seperator.Substring(1));
 
             // load up the barcode, from db
             var barcode = _repositoryFactory.BarcodeRepository.GetNullableById(barcodeId);
@@ -94,6 +89,97 @@ namespace CAESGenome.Services
             }
 
             return FileUploadErrorKeys.WriteError;
+        }
+
+        public void ScanFiles()
+        {
+            //var uploadLocation = @"\\do-files\cgfdata";
+            //var uploadLocation = @"C:\Users\lai\Dropbox\Documents\Projects\Cgf\cgf\Cgf Data\data";
+
+            foreach(var directory in Directory.EnumerateDirectories(_uploadLocation))
+            {
+                foreach(var file in Directory.EnumerateFiles(directory))
+                {
+                    var start = file.LastIndexOf('\\') + 1;
+                    var filename = file.Substring(start);
+
+                    var barcodeId = -1;
+                    var row = 'A';
+                    var col = -1;
+
+                    ParseFileName(filename, out barcodeId, out row, out col);
+
+                    if (barcodeId != -1)
+                    {
+                        // load up the barcode, from db
+                        var barcode = _repositoryFactory.BarcodeRepository.GetNullableById(barcodeId);
+
+                        if (barcode != null)
+                        {
+                            if (!Directory.Exists(string.Format(@"{0}\raw\{1}", _storageLocation, barcodeId)))
+                            {
+                                Directory.CreateDirectory(string.Format(@"{0}\raw\{1}", _storageLocation, barcodeId));
+                            }
+
+                            if (File.Exists(string.Format(@"{0}\raw\{1}\{2}", _storageLocation, barcodeId, filename)))
+                            {
+                                File.Delete(string.Format(@"{0}\raw\{1}\{2}", _storageLocation, barcodeId, filename));
+                            }
+
+                            // move the file into permanent storage, over write any existing files
+                            File.Move(file, string.Format(@"{0}\raw\{1}\{2}", _storageLocation, barcodeId, filename));
+
+                            // save the record into the database
+                            var barcodeFile = barcode.BarcodeFiles.FirstOrDefault(a => a.WellColumn == col && a.WellRow == row);
+
+                            if (barcodeFile == null)
+                            {
+                                barcodeFile = new BarcodeFile() {Barcode = barcode, WellColumn = col, WellRow = row, Uploaded = true };
+                            }
+                            else
+                            {
+                                // resets all the values so that phred runs again and displays the right values
+                                barcodeFile.DateTimeValidated = null;
+                                barcodeFile.Validated = false;
+                                barcodeFile.Uploaded = true;
+                                barcodeFile.Start = 0;
+                                barcodeFile.End = 0;
+                            }
+
+                            _repositoryFactory.BarcodeFileRepository.EnsurePersistent(barcodeFile);
+                        }
+                    }
+                }
+
+                Directory.Delete(directory);
+            }
+        }
+
+        private void ParseFileName(string filename, out int barcode, out char row, out int col)
+        {            
+            // check the filename
+            var regex = new Regex(FilePattern);
+            var match = regex.Match(filename);
+
+            if (match.Success)
+            {
+                // parse the name
+                barcode = Convert.ToInt32(filename.Substring(0, filename.IndexOf("_")));
+
+                // split after the barcode
+                var seperator = filename.Substring(filename.IndexOf("_") + 1);
+                // remove the extension
+                seperator = seperator.Substring(0, seperator.IndexOf("."));
+
+                row = seperator[0];
+                col = Convert.ToInt32(seperator.Substring(1));    
+            }
+            else
+            {
+                barcode = -1;
+                row = 'A';
+                col = -1;
+            }
         }
 
         // write files to the storage locations

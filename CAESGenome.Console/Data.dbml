@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="cgf" Class="DataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=terry;Initial Catalog=cgf;Integrated Security=True" SettingsObjectName="CAESGenome.Console.Properties.Settings" SettingsPropertyName="cgfConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.BarcodeFiles" Member="BarcodeFiles">
+    <Type Name="BarcodeFile">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="WellColumn" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="WellRow" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="BarcodeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Uploaded" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Validated" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Start" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[End]" Member="End" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DateTimeUploaded" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="DateTimeValidated" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

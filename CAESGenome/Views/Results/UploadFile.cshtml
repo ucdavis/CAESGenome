@@ -80,6 +80,7 @@
     </script>
 }
 
+<div class="well">
 @using (Html.BeginForm("UploadFile", "Results", FormMethod.Post, new { id = "fileupload", enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
@@ -122,3 +123,4 @@
         <table class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody></table>
     </div>
 }
+</div>

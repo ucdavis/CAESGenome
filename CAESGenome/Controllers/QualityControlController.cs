@@ -1,18 +1,23 @@
 ﻿using System;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 using CAESGenome.Core.Repositories;
 using CAESGenome.Models;
+using CAESGenome.Services;
 
 namespace CAESGenome.Controllers
 {
     public class QualityControlController : ApplicationController
     {
         private readonly IRepositoryFactory _repositoryFactory;
+        private readonly IPhredService _phredService;
 
-        public QualityControlController(IRepositoryFactory repositoryFactory)
+        public QualityControlController(IRepositoryFactory repositoryFactory, IPhredService phredService)
         {
             _repositoryFactory = repositoryFactory;
+            _phredService = phredService;
         }
 
         /// <summary>
@@ -53,7 +58,33 @@ namespace CAESGenome.Controllers
             ViewBag.Month = date.Month;
             ViewBag.Year = date.Year;
 
+            ViewBag.PendingUpload = Directory.EnumerateDirectories(ConfigurationManager.AppSettings["UploadLocation"]).Count();
+            ViewBag.PendingValidation = _repositoryFactory.BarcodeFileRepository.Queryable.Where(a => a.Uploaded && !a.Validated).Select(a => a.Barcode).Distinct().Count();
+
             return View(barcodes);
+        }
+
+        [HttpPost]
+        public ActionResult ScanFiles()
+        {
+            _phredService.ScanFiles();
+
+            Message = "Files have been uploaded.";
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult PhredValidation()
+        {
+            var barcodes = _repositoryFactory.BarcodeFileRepository.Queryable.Where(a => a.Uploaded && !a.Validated).Select(a => a.Barcode.Id).Distinct();
+
+            foreach(var bc in barcodes)
+            {
+                _phredService.ExecuteValidation(bc);
+            }
+
+            Message = string.Format("Validation for {0} barcode(s) has been run.", barcodes.Count());
+            return RedirectToAction("Index");
         }
 
         public ActionResult ByDate(DateTime date)

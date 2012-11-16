@@ -39,3 +39,33 @@
 </div>
 
 
+<div class="well" style="margin-top: 2em;">
+    
+    @if(ViewBag.PendingUpload > 0)
+    {
+        using(Html.BeginForm("ScanFiles", "QualityControl", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-large btn-success">Scan for new Files (@ViewBag.PendingUpload)</button>        
+        }
+    }
+    else
+    {
+        <div class="label label-info" style="margin-bottom: 1em; padding: 1em;">No Pending Files to Upload</div>
+    }
+    
+    @if(ViewBag.PendingValidation > 0)
+    {
+        using (Html.BeginForm("PhredValidation", "QualityControl", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-large btn-success">Run PHRED Validation (@ViewBag.PendingValidation)</button>        
+        }
+    }
+    else
+    {
+        <div class="label label-info" style="padding: 1em;">No Pending Barvodes to run Validation</div>
+    }
+    
+</div>
+
