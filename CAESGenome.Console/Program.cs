@@ -55,50 +55,55 @@ namespace CAESGenome.Console
                     Directory.CreateDirectory(u.Destination);
                 }
 
-                foreach(var file in Directory.EnumerateFiles(u.Source))
+                if (db.Barcodes.Any(a => a.Id == u.Barcode))
                 {
-                    try
+                    foreach (var file in Directory.EnumerateFiles(u.Source))
                     {
-                        var start = file.LastIndexOf('\\') + 1;
-                        var filename = file.Substring(start);
-
-                        //System.Console.WriteLine(file);
-                        //System.Console.WriteLine(filename);
-                        //System.Console.WriteLine(u.Barcode);
-                        //System.Console.WriteLine(string.Format("{0}\\{1}", u.Destination, filename));
-                        //System.Console.WriteLine("-----------------------");
-
-                        if (File.Exists(string.Format("{0}\\{1}", u.Destination, filename)))
+                        try
                         {
-                            File.Delete(string.Format("{0}\\{1}", u.Destination, filename));
+                            var start = file.LastIndexOf('\\') + 1;
+                            var filename = file.Substring(start);
+
+                            //System.Console.WriteLine(file);
+                            //System.Console.WriteLine(filename);
+                            //System.Console.WriteLine(u.Barcode);
+                            //System.Console.WriteLine(string.Format("{0}\\{1}", u.Destination, filename));
+                            //System.Console.WriteLine("-----------------------");
+
+                            if (File.Exists(string.Format("{0}\\{1}", u.Destination, filename)))
+                            {
+                                File.Delete(string.Format("{0}\\{1}", u.Destination, filename));
+                            }
+
+                            File.Move(string.Format("{0}\\{1}", u.Source, filename), string.Format("{0}\\{1}", u.Destination, filename));
+
+                            int barcode, col;
+                            char row;
+                            ParseFileName(filename, out barcode, out row, out col);
+
+                            var bf = db.BarcodeFiles.FirstOrDefault(a => a.BarcodeId == barcode && a.WellColumn == col && a.WellRow == row);
+                            if (bf == null)
+                            {
+                                bf = new BarcodeFile() { DateTimeUploaded = DateTime.Now, BarcodeId = barcode, Uploaded = true, WellColumn = col, WellRow = row };
+                                db.BarcodeFiles.InsertOnSubmit(bf);
+                            }
+                            else
+                            {
+                                bf.Uploaded = true;
+                                bf.DateTimeUploaded = DateTime.Now;
+                            }
+
+                            System.Console.WriteLine(string.Format("Processed {0}", filename));
                         }
-
-                        File.Move(string.Format("{0}\\{1}", u.Source, filename), string.Format("{0}\\{1}", u.Destination, filename));
-
-                        int barcode, col;
-                        char row;
-                        ParseFileName(filename, out barcode, out row, out col);
-
-                        var bf = db.BarcodeFiles.FirstOrDefault(a => a.BarcodeId == barcode && a.WellColumn == col && a.WellRow == row);
-                        if (bf == null)
+                        catch
                         {
-                            bf = new BarcodeFile() { DateTimeUploaded = DateTime.Now, BarcodeId = barcode, Uploaded = true, WellColumn = col, WellRow = row };
-                            db.BarcodeFiles.InsertOnSubmit(bf);
                         }
-                        else
-                        {
-                            bf.Uploaded = true;
-                            bf.DateTimeUploaded = DateTime.Now;
-                        }
-
-                        System.Console.WriteLine(string.Format("Processed {0}", filename));
                     }
-                    catch
-                    {
-                    }
+
+                    Directory.Delete(u.Source);
                 }
-
-                Directory.Delete(u.Source);
+                
+                
             }
 
             db.SubmitChanges();

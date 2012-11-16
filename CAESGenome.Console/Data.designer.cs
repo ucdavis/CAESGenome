@@ -33,6 +33,9 @@ namespace CAESGenome.Console
     partial void InsertBarcodeFile(BarcodeFile instance);
     partial void UpdateBarcodeFile(BarcodeFile instance);
     partial void DeleteBarcodeFile(BarcodeFile instance);
+    partial void InsertBarcode(Barcode instance);
+    partial void UpdateBarcode(Barcode instance);
+    partial void DeleteBarcode(Barcode instance);
     #endregion
 		
 		public DataDataContext() : 
@@ -72,6 +75,14 @@ namespace CAESGenome.Console
 				return this.GetTable<BarcodeFile>();
 			}
 		}
+		
+		public System.Data.Linq.Table<Barcode> Barcodes
+		{
+			get
+			{
+				return this.GetTable<Barcode>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.BarcodeFiles")]
@@ -99,6 +110,8 @@ namespace CAESGenome.Console
 		private System.DateTime _DateTimeUploaded;
 		
 		private System.Nullable<System.DateTime> _DateTimeValidated;
+		
+		private EntityRef<Barcode> _Barcode;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -128,6 +141,7 @@ namespace CAESGenome.Console
 		
 		public BarcodeFile()
 		{
+			this._Barcode = default(EntityRef<Barcode>);
 			OnCreated();
 		}
 		
@@ -202,6 +216,10 @@ namespace CAESGenome.Console
 			{
 				if ((this._BarcodeId != value))
 				{
+					if (this._Barcode.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnBarcodeIdChanging(value);
 					this.SendPropertyChanging();
 					this._BarcodeId = value;
@@ -331,6 +349,40 @@ namespace CAESGenome.Console
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Barcode_BarcodeFile", Storage="_Barcode", ThisKey="BarcodeId", OtherKey="Id", IsForeignKey=true)]
+		public Barcode Barcode
+		{
+			get
+			{
+				return this._Barcode.Entity;
+			}
+			set
+			{
+				Barcode previousValue = this._Barcode.Entity;
+				if (((previousValue != value) 
+							|| (this._Barcode.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Barcode.Entity = null;
+						previousValue.BarcodeFiles.Remove(this);
+					}
+					this._Barcode.Entity = value;
+					if ((value != null))
+					{
+						value.BarcodeFiles.Add(this);
+						this._BarcodeId = value.Id;
+					}
+					else
+					{
+						this._BarcodeId = default(int);
+					}
+					this.SendPropertyChanged("Barcode");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -349,6 +401,333 @@ namespace CAESGenome.Console
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Barcodes")]
+	public partial class Barcode : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _UserJobPlateId;
+		
+		private System.Nullable<int> _SubPlateId;
+		
+		private System.Nullable<int> _PrimerId;
+		
+		private string _StageId;
+		
+		private System.Nullable<int> _SourceBarcodeId;
+		
+		private System.Nullable<System.DateTime> _DateCreated;
+		
+		private System.Nullable<bool> _Done;
+		
+		private EntitySet<BarcodeFile> _BarcodeFiles;
+		
+		private EntitySet<Barcode> _Barcodes;
+		
+		private EntityRef<Barcode> _Barcode1;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnUserJobPlateIdChanging(System.Nullable<int> value);
+    partial void OnUserJobPlateIdChanged();
+    partial void OnSubPlateIdChanging(System.Nullable<int> value);
+    partial void OnSubPlateIdChanged();
+    partial void OnPrimerIdChanging(System.Nullable<int> value);
+    partial void OnPrimerIdChanged();
+    partial void OnStageIdChanging(string value);
+    partial void OnStageIdChanged();
+    partial void OnSourceBarcodeIdChanging(System.Nullable<int> value);
+    partial void OnSourceBarcodeIdChanged();
+    partial void OnDateCreatedChanging(System.Nullable<System.DateTime> value);
+    partial void OnDateCreatedChanged();
+    partial void OnDoneChanging(System.Nullable<bool> value);
+    partial void OnDoneChanged();
+    #endregion
+		
+		public Barcode()
+		{
+			this._BarcodeFiles = new EntitySet<BarcodeFile>(new Action<BarcodeFile>(this.attach_BarcodeFiles), new Action<BarcodeFile>(this.detach_BarcodeFiles));
+			this._Barcodes = new EntitySet<Barcode>(new Action<Barcode>(this.attach_Barcodes), new Action<Barcode>(this.detach_Barcodes));
+			this._Barcode1 = default(EntityRef<Barcode>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserJobPlateId", DbType="Int")]
+		public System.Nullable<int> UserJobPlateId
+		{
+			get
+			{
+				return this._UserJobPlateId;
+			}
+			set
+			{
+				if ((this._UserJobPlateId != value))
+				{
+					this.OnUserJobPlateIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserJobPlateId = value;
+					this.SendPropertyChanged("UserJobPlateId");
+					this.OnUserJobPlateIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubPlateId", DbType="Int")]
+		public System.Nullable<int> SubPlateId
+		{
+			get
+			{
+				return this._SubPlateId;
+			}
+			set
+			{
+				if ((this._SubPlateId != value))
+				{
+					this.OnSubPlateIdChanging(value);
+					this.SendPropertyChanging();
+					this._SubPlateId = value;
+					this.SendPropertyChanged("SubPlateId");
+					this.OnSubPlateIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrimerId", DbType="Int")]
+		public System.Nullable<int> PrimerId
+		{
+			get
+			{
+				return this._PrimerId;
+			}
+			set
+			{
+				if ((this._PrimerId != value))
+				{
+					this.OnPrimerIdChanging(value);
+					this.SendPropertyChanging();
+					this._PrimerId = value;
+					this.SendPropertyChanged("PrimerId");
+					this.OnPrimerIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StageId", DbType="Char(4)")]
+		public string StageId
+		{
+			get
+			{
+				return this._StageId;
+			}
+			set
+			{
+				if ((this._StageId != value))
+				{
+					this.OnStageIdChanging(value);
+					this.SendPropertyChanging();
+					this._StageId = value;
+					this.SendPropertyChanged("StageId");
+					this.OnStageIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SourceBarcodeId", DbType="Int")]
+		public System.Nullable<int> SourceBarcodeId
+		{
+			get
+			{
+				return this._SourceBarcodeId;
+			}
+			set
+			{
+				if ((this._SourceBarcodeId != value))
+				{
+					if (this._Barcode1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSourceBarcodeIdChanging(value);
+					this.SendPropertyChanging();
+					this._SourceBarcodeId = value;
+					this.SendPropertyChanged("SourceBarcodeId");
+					this.OnSourceBarcodeIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateCreated", DbType="DateTime")]
+		public System.Nullable<System.DateTime> DateCreated
+		{
+			get
+			{
+				return this._DateCreated;
+			}
+			set
+			{
+				if ((this._DateCreated != value))
+				{
+					this.OnDateCreatedChanging(value);
+					this.SendPropertyChanging();
+					this._DateCreated = value;
+					this.SendPropertyChanged("DateCreated");
+					this.OnDateCreatedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Done", DbType="Bit")]
+		public System.Nullable<bool> Done
+		{
+			get
+			{
+				return this._Done;
+			}
+			set
+			{
+				if ((this._Done != value))
+				{
+					this.OnDoneChanging(value);
+					this.SendPropertyChanging();
+					this._Done = value;
+					this.SendPropertyChanged("Done");
+					this.OnDoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Barcode_BarcodeFile", Storage="_BarcodeFiles", ThisKey="Id", OtherKey="BarcodeId")]
+		public EntitySet<BarcodeFile> BarcodeFiles
+		{
+			get
+			{
+				return this._BarcodeFiles;
+			}
+			set
+			{
+				this._BarcodeFiles.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Barcode_Barcode", Storage="_Barcodes", ThisKey="Id", OtherKey="SourceBarcodeId")]
+		public EntitySet<Barcode> Barcodes
+		{
+			get
+			{
+				return this._Barcodes;
+			}
+			set
+			{
+				this._Barcodes.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Barcode_Barcode", Storage="_Barcode1", ThisKey="SourceBarcodeId", OtherKey="Id", IsForeignKey=true)]
+		public Barcode Barcode1
+		{
+			get
+			{
+				return this._Barcode1.Entity;
+			}
+			set
+			{
+				Barcode previousValue = this._Barcode1.Entity;
+				if (((previousValue != value) 
+							|| (this._Barcode1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Barcode1.Entity = null;
+						previousValue.Barcodes.Remove(this);
+					}
+					this._Barcode1.Entity = value;
+					if ((value != null))
+					{
+						value.Barcodes.Add(this);
+						this._SourceBarcodeId = value.Id;
+					}
+					else
+					{
+						this._SourceBarcodeId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Barcode1");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_BarcodeFiles(BarcodeFile entity)
+		{
+			this.SendPropertyChanging();
+			entity.Barcode = this;
+		}
+		
+		private void detach_BarcodeFiles(BarcodeFile entity)
+		{
+			this.SendPropertyChanging();
+			entity.Barcode = null;
+		}
+		
+		private void attach_Barcodes(Barcode entity)
+		{
+			this.SendPropertyChanging();
+			entity.Barcode1 = this;
+		}
+		
+		private void detach_Barcodes(Barcode entity)
+		{
+			this.SendPropertyChanging();
+			entity.Barcode1 = null;
 		}
 	}
 }

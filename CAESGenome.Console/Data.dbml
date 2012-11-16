@@ -12,6 +12,22 @@
       <Column Name="[End]" Member="End" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="DateTimeUploaded" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
       <Column Name="DateTimeValidated" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Association Name="Barcode_BarcodeFile" Member="Barcode" ThisKey="BarcodeId" OtherKey="Id" Type="Barcode" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Barcodes" Member="Barcodes">
+    <Type Name="Barcode">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserJobPlateId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SubPlateId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PrimerId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StageId" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="SourceBarcodeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Done" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Barcode_BarcodeFile" Member="BarcodeFiles" ThisKey="Id" OtherKey="BarcodeId" Type="BarcodeFile" />
+      <Association Name="Barcode_Barcode" Member="Barcodes" ThisKey="Id" OtherKey="SourceBarcodeId" Type="Barcode" />
+      <Association Name="Barcode_Barcode" Member="Barcode1" ThisKey="SourceBarcodeId" OtherKey="Id" Type="Barcode" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
