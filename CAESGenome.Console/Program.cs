@@ -46,6 +46,9 @@ namespace CAESGenome.Console
 
             var db = new DataDataContext();
 
+            var total = updates.Count;
+            var counter = 0;
+            
             // rename the folders
             foreach(var u in updates)
             {
@@ -93,6 +96,9 @@ namespace CAESGenome.Console
                                 bf.DateTimeUploaded = DateTime.Now;
                             }
 
+                            counter++;
+                            System.Console.Clear();
+                            System.Console.WriteLine(string.Format("{0}% Completed",counter / total));
                             System.Console.WriteLine(string.Format("Processed {0}", filename));
                         }
                         catch
