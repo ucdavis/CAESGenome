@@ -45,3 +45,5 @@ CAESGenome.WS/bin/Test/*.dll
 *.ldf
 *.mdf
 CAESGenome.Web/Purchasing.Web.Publish.xml
+
+App.config
