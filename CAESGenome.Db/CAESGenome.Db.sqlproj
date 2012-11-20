@@ -118,6 +118,8 @@
     <None Include="SchemaCompare\sqlexpress.scmp" />
     <None Include="Scripts\CopyData.sql" />
     <None Include="SchemaCompare\terry.scmp" />
+    <None Include="Scripts\Create-ImportDatabase.sql" />
+    <None Include="Scripts\ImportDatabase.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CAESGenome.Db.refactorlog" />

@@ -148,6 +148,7 @@ from cgfold.dbo.submission_userjobs suj
 where submissionType <> 0
   and rechargeid is not null
   and id not in (469 , 3107, 3130, 3549, 3623, 3686, 3705, 3713, 3996, 4458, 4476, 4520)
+  and [datesubmitted] is not null
 
 insert into cgf.dbo.UserJobs (id, userid, RechargeAccountId, name, jobtypeid, NumberPlates, platetype, comments, isopen
 , LastUpdate, DateTimeCreated
@@ -175,6 +176,7 @@ from cgfold.dbo.submission_userjobs suj
 where submissionType <> 0
   and rechargeid is not null
   and id in (469 , 3107, 3130, 3549, 3623, 3686, 3705, 3713, 3996, 4458, 4476, 4520)
+  and [datesubmitted] is not null
 
 set identity_insert cgf.dbo.userjobs off
 
@@ -204,6 +206,7 @@ from cgfold.dbo.submission_userjobs suj
 	) accts on suj.uid = accts.UserProfileId
 where submissionType <> 0
   and suj.accountid = ''
+  and [datesubmitted] is not null
 set identity_insert cgf.dbo.userjobs off
 
 set identity_insert cgf.dbo.userjobplates on
