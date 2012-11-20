@@ -14,7 +14,7 @@ begin
 
 	update barcodefiles
 	set [start] = @start, [end] = @end, datetimeuploaded = @datetimesubmitted, datetimevalidated = @datetimesubmitted
-	where barcode = @barcode, wellrow = @cellchar, wellcolumn= @cellnum, 
+	where barcode = @barcode and wellrow = @cellchar and wellcolumn= @cellnum, 
 
 	fetch next from @cursor into @barcode, @cellchar, @cellnum, @start, @end, @datetimesubmitted
 
@@ -22,3 +22,6 @@ end
 
 close @cursor
 deallocate @cursor
+
+
+
