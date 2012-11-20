@@ -77,3 +77,40 @@ insert into submission_userplates ([id],[JobID],[plateName])
 select * 
 from cgflims...submission_userplates
 set identity_insert submission_userplates off
+
+-- ------------------------------------------------------------------
+-- Account Info Database
+-- ------------------------------------------------------------------
+
+set identity_insert [user] on
+insert into [user] (userid, username, lastname, firstname, title, email, passwords, phonenum, valid, datejoined, piid)
+select * 
+from cgfaccountinfo...[user]
+set identity_insert [user] off
+
+set identity_insert departments on
+insert into departments (departmentid, department)
+select * from cgfaccountinfo...departments
+set identity_insert departments off
+
+set identity_insert pi on
+insert into pi ([piid],[pilastname],[pifirstname],[piemail],[pifax]
+      ,[piphonenum],[pititle],[pidatejoined],[piusername]
+      ,[pipassword],[universityid],[departmentid])
+select * from cgfaccountinfo...pi
+set identity_insert pi off
+
+set identity_insert recharge on
+insert into recharge ([rechargeid],[accountnum],[valid],[description]
+      ,[datestart],[dateend],[piid])
+select * from cgfaccountinfo...recharge
+set identity_insert recharge off
+
+insert into staff ([staffid],[stafffirst],[stafflast],[staffemail]
+      ,[stafftitle],[staffpassword])
+select * from cgfaccountinfo...staff
+
+set identity_insert useracct on
+insert into useracct ([useracctid],[valid],[rechargeid],[userid])
+select * from cgfaccountinfo...useracct
+set identity_insert useracct off
