@@ -14,9 +14,22 @@ namespace CAESGenome.Console
 
         static void Main(string[] args)
         {
-            ImportFiles(args);
+            if (!args.Any())
+            {
+                return;
+            }
 
-            // validate phred values
+            if (args[0] == "-i")
+            {
+                ImportFiles(args);    
+            }
+
+            if (args[0] == "-p")
+            {
+                // validate phred values
+                PhredValiation();    
+            }
+            
         }
 
         private static void ImportFiles(string[] args)
@@ -148,17 +161,23 @@ namespace CAESGenome.Console
 
         private static void PhredValiation()
         {
+            List<int> barcodes;
+
             using(var db = new DataDataContext())
             {
-                var barcodes = db.Barcodes.Where(a => a.BarcodeFiles.Any(b => b.Uploaded && !b.Validated));
+                barcodes = db.Barcodes.Where(a => a.BarcodeFiles.Any(b => b.Uploaded && !b.Validated)).Select(a => a.Id).ToList();    
+            }
 
-                var total = barcodes.Count();
-                var counter = 0;
+            var total = barcodes.Count();
+            var counter = 0;
 
-                foreach(var barcode in barcodes)
+            foreach(var barcode in barcodes)
+            {
+                using (var db = new DataDataContext())
                 {
-                    RunPhred(barcode.Id);
-                    foreach(var bcf in barcode.BarcodeFiles)
+                    RunPhred(barcode);
+                    
+                    foreach (var bcf in db.BarcodeFiles.Where(a => a.BarcodeId == barcode))
                     {
                         ValidatePhred(bcf);
                     }
@@ -166,10 +185,10 @@ namespace CAESGenome.Console
                     counter++;
                     System.Console.Clear();
                     System.Console.WriteLine(string.Format("{0}% Completed Phred Validation", counter / total));
-                    System.Console.WriteLine(string.Format("Processed {0}", barcode.Id));
-                }
+                    System.Console.WriteLine(string.Format("Processed {0}", barcode));
 
-                db.SubmitChanges();
+                    db.SubmitChanges();
+                }    
             }
         }
 
