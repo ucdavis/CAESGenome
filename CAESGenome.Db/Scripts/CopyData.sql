@@ -2,6 +2,7 @@
   Wipe any existing data, so we don't get conflicting keys
 */
 
+delete from barcodefiles
 delete from Barcodes
 delete from userjobplates
 delete from userjobs
@@ -187,7 +188,7 @@ insert into cgf.dbo.UserJobs (id, userid, RechargeAccountId, name, jobtypeid, Nu
 	, UserJobQbotColonyPickingId, UserJobQbotReplicatingId, UserJobQbotGriddingId
 	, UserJobGenotypingId)
 select distinct 
-	id, uid, accts.RechargeAccountId, jobname, submissionType, HowManyPlates, plateType, Comment
+	id, uid, null, jobname, submissionType, HowManyPlates, plateType, Comment
 	, cast(case when done = 0 then 1 else 0 end as bit) IsOpen
 	, statusdate lastupdate, dateSubmitted datetimecreated
 	, cast(case when submissionType = 1 then id2 else null end as bit) bacterialclone
@@ -199,11 +200,6 @@ select distinct
 	, cast(case when submissionType = 23 then id2 else null end as bit) gridding
 	, cast(case when submissionType = 11 then id2 else null end as bit) genotyping
 from cgfold.dbo.submission_userjobs suj
-	left outer join (
-		select ura.UserProfileId, ura.RechargeAccountId from UserProfilesXRechargeAccounts ura
-			inner join RechargeAccounts ra on ura.RechargeAccountId = ra.Id
-		where ra.AccountNum = 'na'
-	) accts on suj.uid = accts.UserProfileId
 where submissionType <> 0
   and suj.accountid = ''
   and [datesubmitted] is not null
@@ -213,6 +209,7 @@ set identity_insert cgf.dbo.userjobplates on
 insert into cgf.dbo.UserJobPlates (id, userjobid, name)
 select id, jobid, plateName from cgfold.dbo.submission_userplates
 where jobid in (select id from cgfold.dbo.submission_userjobs where submissionType <> 0)
+  and jobid in (select id from userjobs)
 set identity_insert cgf.dbo.userjobplates off
 
 set identity_insert cgf.dbo.barcodes on

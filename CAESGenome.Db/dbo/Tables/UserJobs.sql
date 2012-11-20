@@ -2,7 +2,7 @@
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [UserId] INT NOT NULL, 
-    [RechargeAccountId] INT NOT NULL, 
+    [RechargeAccountId] INT NULL, 
     [Name] VARCHAR(100) NOT NULL, 
     [JobTypeId] INT NOT NULL, 
     [NumberPlates] INT NOT NULL, 
