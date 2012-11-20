@@ -1,4 +1,26 @@
-﻿set identity_insert barcode on
+﻿use cgfold
+
+truncate table barcode
+truncate table departments
+truncate table pi
+truncate table quality_phred
+truncate table recharge
+truncate table staff
+truncate table submission_userjob_bacterialclone
+truncate table submission_userjob_dna
+truncate table submission_userjob_qbot_colonypicking
+truncate table submission_userjob_qbot_gridding
+truncate table submission_userjob_qbot_replicating
+truncate table submission_userjob_sublibrary
+truncate table submission_userjob_userrun
+truncate table submission_userjob_userrun_genotyping
+truncate table submission_userjobs
+truncate table submission_userplates
+truncate table [user]
+truncate table useracct
+
+
+set identity_insert barcode on
 insert into barcode (id, plateID, plateSubID, primerID, stage, sourceBarcode, [date], done)
 select id, plateID, platesubid, primerID, stage, sourceBarcode, [date], done
 from cgflims...barcode
