@@ -121,6 +121,7 @@
     <None Include="SchemaCompare\terry.scmp" />
     <None Include="Scripts\Create-ImportDatabase.sql" />
     <None Include="Scripts\ImportDatabase.sql" />
+    <None Include="Scripts\ImportPhredQualities.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CAESGenome.Db.refactorlog" />
