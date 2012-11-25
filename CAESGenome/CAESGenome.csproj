@@ -568,6 +568,7 @@
     <Content Include="Views\QualityControl\ByDate.cshtml" />
     <Content Include="Views\UserJob\_sublibrary.cshtml" />
     <Content Include="Views\Downloads\Index.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
