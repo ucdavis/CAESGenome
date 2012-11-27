@@ -1,0 +1,30 @@
+﻿@model UserViewModel
+
+@{
+    ViewBag.Title = "Edit User";
+    ViewBag.SubPagetitle = "Edit User";
+
+    ViewBag.CreatePI = true;
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $("input[type='password']").change(function() {
+                if ($("#Password").val() == $("#ReTypePassword").val()) {
+                    $("#nomatch-icon").hide();
+                    $("#match-icon").show('normal');
+                } else {
+                    $("#match-icon").hide();
+                    $("#nomatch-icon").show('normal');
+                }
+            });
+        });
+    </script>
+}
+
+@using(Html.BeginForm("EditUser", "PI", FormMethod.Post, new {@class="form-horizontal"}))
+{
+    @Html.Partial("_UserForm")
+}

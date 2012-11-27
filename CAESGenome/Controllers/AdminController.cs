@@ -10,6 +10,7 @@ using CAESGenome.Core.Resources;
 using CAESGenome.Models;
 using UCDArch.Core.PersistanceSupport;
 using UCDArch.Web.ActionResults;
+using UCDArch.Web.Helpers;
 using WebMatrix.WebData;
 
 namespace CAESGenome.Controllers
@@ -72,6 +73,48 @@ namespace CAESGenome.Controllers
                 foreach(var role in roles) Roles.AddUserToRole(user.UserName, role);
 
                 Message = "User has been created.";
+                return RedirectToAction("Users");
+            }
+
+            var viewModel = UserViewModel.CreateForPi(_repositoryFactory, user);
+            return View(viewModel);
+        }
+
+        public ActionResult EditUser(int id)
+        {
+            var user = _repositoryFactory.UserRepository.GetNullableById(id);
+
+            if (user == null)
+            {
+                Message = "User was not found";
+                return RedirectToAction("Users");
+            }
+
+            var viewModel = UserViewModel.CreateForPi(_repositoryFactory, user);
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult EditUser(int id, User user, string password, string retypePassword)
+        {
+            var userToEdit = _repositoryFactory.UserRepository.GetNullableById(id);
+
+            if (userToEdit == null)
+            {
+                Message = "User was not found";
+                return RedirectToAction("Users");
+            }
+
+            // copy the main fields
+            AutoMapper.Mapper.Map(user, userToEdit);
+
+            ModelState.Clear();
+            userToEdit.TransferValidationMessagesTo(ModelState);
+
+            if (ModelState.IsValid)
+            {
+                _repositoryFactory.UserRepository.EnsurePersistent(userToEdit);
+                Message = "User has been updated";
                 return RedirectToAction("Users");
             }
 

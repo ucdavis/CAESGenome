@@ -117,12 +117,12 @@
                     <ul class="unstyled">
                         <li>
                             <label class="checkbox">
-                                <input type="checkbox" name="roles" value="@RoleNames.PI"/>@RoleNames.PI
+                                <input type="checkbox" name="roles" value="@RoleNames.PI" checked='@(Model.IsPi ? "checked" : string.Empty)'/>@RoleNames.PI
                             </label>
                         </li>
                         <li>
                             <label class="checkbox">
-                                <input type="checkbox" name="roles" value="@RoleNames.Staff"/>@RoleNames.Staff
+                                <input type="checkbox" name="roles" value="@RoleNames.Staff" checked='@(Model.IsStaff ? "checked" : string.Empty)'/>@RoleNames.Staff
                             </label>
                         </li>
                     </ul>
