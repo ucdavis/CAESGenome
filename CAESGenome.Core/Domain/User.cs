@@ -21,13 +21,18 @@ namespace CAESGenome.Core.Domain
             OwnedRechargeAcccounts = new List<RechargeAccount>();
         }
 
+        [Required]
         [Display(Name="Email")]
         public virtual string UserName { get; set; }
+        [Required]
         [Display(Name="First Name")]
         public virtual string FirstName { get; set; }
+        [Required]
         [Display(Name="Last Name")]
         public virtual string LastName { get; set; }
+        [Required]
         public virtual string Title { get; set; }
+        [Required]
         [DataType(DataType.PhoneNumber)]
         public virtual string Phone { get; set; }
         [DataType(DataType.PhoneNumber)]

@@ -1,4 +1,5 @@
-﻿@model UserViewModel
+﻿@using CAESGenome.Core.Resources
+@model UserViewModel
 
 @Html.AntiForgeryToken()
 @Html.ValidationSummary(false)
@@ -81,6 +82,54 @@
             </div>
 
         </fieldset>    
+    }
+    
+    @if((bool?)ViewBag.CreatePI ?? false)
+    {
+        <fieldset>
+            <legend>University/Department</legend>
+            
+            <div class="control-group">
+                @Html.LabelFor(model => model.User.University, new {@class = "control-label"})
+                <div class="controls">
+                    @*@Html.DropDownListFor(a => a.User.University, Model.Universities, new {@class="input-xxlarge"})*@
+                    @Html.DropDownList("User.University", Model.Universities, "--Select University--", new {@class="input-xxlarge"})
+                    @Html.ValidationMessageFor(model => model.User.University)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.User.Department, new {@class = "control-label"})
+                <div class="controls">
+                    @*@Html.DropDownListFor(a => a.User.Department, Model.Departments, new {@class="input-xxlarge"})*@
+                    @Html.DropDownList("User.Department", Model.Departments, "--Select Department--", new {@class="input-xxlarge", disabled=Model.Departments.Any() ? "disabled" : string.Empty})
+                    @Html.ValidationMessageFor(model => model.User.Department)
+                </div>
+            </div>
+
+        </fieldset>
+        
+        <fieldset>
+            <legend>Role</legend>
+            
+            <div class="control-group">
+                <label for="role" class="control-label">Role(s)<span class="required">*</span></label>
+                <div class="controls">
+                    <ul class="unstyled">
+                        <li>
+                            <label class="checkbox">
+                                <input type="checkbox" name="roles" value="@RoleNames.PI"/>@RoleNames.PI
+                            </label>
+                        </li>
+                        <li>
+                            <label class="checkbox">
+                                <input type="checkbox" name="roles" value="@RoleNames.Staff"/>@RoleNames.Staff
+                            </label>
+                        </li>
+                    </ul>
+                    @Html.ValidationMessage("roles")
+                </div>
+            </div>
+        </fieldset>
     }
 </div>
     

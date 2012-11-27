@@ -100,6 +100,10 @@ $(document).ready(function () {
         "sPaginationType": "bootstrap",
         "oLanguage": {
             "sLengthMenu": "_MENU_ records per page"
-        }
+        },
+        "iDisplayLength": 50,
+        "aoColumnDefs": [
+            {"bSortable": false, "aTargets": [0]}
+        ]
     });
 });

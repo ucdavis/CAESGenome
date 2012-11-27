@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Security;
 using CAESGenome.Core.Domain;
 using CAESGenome.Core.Repositories;
 using CAESGenome.Core.Resources;
@@ -38,7 +39,7 @@ namespace CAESGenome.Controllers
 
         public ActionResult CreateUser()
         {
-            var viewModel = UserViewModel.Create(_repositoryFactory, CurrentUser.Identity.Name);
+            var viewModel = UserViewModel.CreateForUser(_repositoryFactory, CurrentUser.Identity.Name);
             return View(viewModel);
         }
 
@@ -54,14 +55,19 @@ namespace CAESGenome.Controllers
 
             if (ModelState.IsValid)
             {
-                // create the user
-                WebSecurity.CreateUserAndAccount(user.UserName, password, new {FirstName = user.FirstName, LastName = user.LastName, Title = user.Title, Phone = user.Phone, fax = user.Fax, parentUserId = user.ParentUser.Id});
+                if (!WebSecurity.UserExists(user.UserName))
+                {
+                    // create the user
+                    WebSecurity.CreateUserAndAccount(user.UserName, password, new { FirstName = user.FirstName, LastName = user.LastName, Title = user.Title, Phone = user.Phone, fax = user.Fax, parentUserId = user.ParentUser.Id });    
+                }
                 
+                Roles.AddUserToRole(user.UserName, RoleNames.User);    
+
                 Message = "User has been created.";
                 return RedirectToAction("Users");
             }
 
-            var viewModel = UserViewModel.Create(_repositoryFactory, CurrentUser.Identity.Name, user);
+            var viewModel = UserViewModel.CreateForUser(_repositoryFactory, CurrentUser.Identity.Name, user);
             return View(viewModel);
         }
 
@@ -75,7 +81,7 @@ namespace CAESGenome.Controllers
                 return RedirectToAction("Users");
             }
 
-            var viewModel = UserViewModel.Create(_repositoryFactory, CurrentUser.Identity.Name, user);
+            var viewModel = UserViewModel.CreateForUser(_repositoryFactory, CurrentUser.Identity.Name, user);
             return View(viewModel);
         }
 
@@ -106,7 +112,7 @@ namespace CAESGenome.Controllers
                 return RedirectToAction("Users");
             }
 
-            var viewModel = UserViewModel.Create(_repositoryFactory, CurrentUser.Identity.Name, user);
+            var viewModel = UserViewModel.CreateForUser(_repositoryFactory, CurrentUser.Identity.Name, user);
             return View(viewModel);
         }
 

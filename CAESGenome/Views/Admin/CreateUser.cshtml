@@ -1,0 +1,54 @@
+﻿@model UserViewModel
+
+@{
+    ViewBag.Title = "Create PI";
+
+    ViewBag.CreatePI = true;
+    ViewBag.NewUser = true;
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $("input[type='password']").change(function() {
+                if ($("#Password").val() == $("#ReTypePassword").val()) {
+                    $("#nomatch-icon").hide();
+                    $("#match-icon").show('normal');
+                } else {
+                    $("#match-icon").hide();
+                    $("#nomatch-icon").show('normal');
+                }
+            });
+        });
+
+        var url = '@Url.Action("LoadDepartments", "Admin")';
+
+        $(function () {
+            $("select#User_University").change(function () {
+                var uniId = $(this).val();
+
+                $.get(url, { id: uniId }, function (result) {
+
+                    var select = $("select#User_Department");
+                    select.empty();
+                    var defaultOption = $("<option>").html("--Select Department--");
+                    select.append(defaultOption);
+
+                    $.each(result, function (index, item) {
+                        var option = $("<option>").val(item.Value).html(item.Text);
+                        select.append(option);
+                    });
+
+                    select.removeAttr("disabled");
+                });
+
+            });
+        });
+    </script>
+}
+
+@using (Html.BeginForm("CreateUser", "Admin", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.Partial("_UserForm")
+}

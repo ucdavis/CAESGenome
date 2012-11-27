@@ -228,6 +228,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="ComponentRegistrar.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\AuthorizedController.cs" />
     <Compile Include="Controllers\DownloadsController.cs" />
@@ -511,7 +512,7 @@
     <Content Include="Views\PI\_RechargeAccountForm.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
     <Content Include="Views\PI\EditUser.cshtml" />
-    <Content Include="Views\PI\_UserForm.cshtml" />
+    <Content Include="Views\Shared\_UserForm.cshtml" />
     <Content Include="Views\Authorized\Index.cshtml" />
     <Content Include="Views\UserJob\Index.cshtml" />
     <Content Include="Views\Sequencing\Create.cshtml" />
@@ -569,6 +570,8 @@
     <Content Include="Views\UserJob\_sublibrary.cshtml" />
     <Content Include="Views\Downloads\Index.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Admin\Users.cshtml" />
+    <Content Include="Views\Admin\CreateUser.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
