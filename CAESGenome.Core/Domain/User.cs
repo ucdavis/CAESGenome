@@ -39,6 +39,7 @@ namespace CAESGenome.Core.Domain
 
         public virtual IList<RechargeAccount> RechargeAccounts { get; set; }
         public virtual IList<RechargeAccount> OwnedRechargeAcccounts { get; set; }
+        public virtual IList<Role> Roles { get; set; }
 
         public virtual string FullName { get { return string.Format("{0} {1}", FirstName, LastName); } }
     }
@@ -68,6 +69,25 @@ namespace CAESGenome.Core.Domain
                 .Cascade.SaveUpdate();
             
             HasMany(x => x.OwnedRechargeAcccounts).KeyColumn("UserProfileId").Inverse();
+
+            HasManyToMany(x => x.Roles).Table("webpages_UsersInRoles").ParentKeyColumn("UserId").ChildKeyColumn("RoleId").Cascade.SaveUpdate();
+        }
+    }
+
+    public class Role : DomainObject
+    {
+        public virtual string Name { get; set; }
+    }
+
+    public class RoleMap : ClassMap<Role>
+    {
+        public RoleMap()
+        {
+            Table("webpages_Roles");
+            ReadOnly();
+
+            Id(x => x.Id).Column("RoleId");
+            Map(x => x.Name).Column("RoleName");
         }
     }
 }
