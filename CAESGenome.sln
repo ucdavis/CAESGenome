@@ -11,6 +11,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAESGenome.Transfer", "CAES
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAESGenome.Console", "CAESGenome.Console\CAESGenome.Console.csproj", "{52C8780A-15D1-4798-B516-212AF7B8791F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B82D14BB-C869-468D-BC49-85995F5EB362}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,7 +51,6 @@ Global
 		{28346F59-3100-4584-8166-001DC56BD10E}.Test|Any CPU.ActiveCfg = Test|Any CPU
 		{28346F59-3100-4584-8166-001DC56BD10E}.Test|Any CPU.Build.0 = Test|Any CPU
 		{52C8780A-15D1-4798-B516-212AF7B8791F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{52C8780A-15D1-4798-B516-212AF7B8791F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52C8780A-15D1-4798-B516-212AF7B8791F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52C8780A-15D1-4798-B516-212AF7B8791F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{52C8780A-15D1-4798-B516-212AF7B8791F}.Test|Any CPU.ActiveCfg = Release|Any CPU
