@@ -3,54 +3,74 @@
     //ViewBag.SubPageTitle = "WELCOME to the CAES Genomics Facility!";
 }
 
-<div class="row-fluid">
-    <div class="span3">
-        <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-                <li>@Html.ActionLink("Service", "Service")</li>
-                <li>@Html.ActionLink("Price", "Rates")</li>
-                <li>@Html.ActionLink("Protocol", "Protocol")</li>
-                <li>@Html.ActionLink("FAQ", "Faq")</li>
-                <li class="nav-header">Public Databases</li>
-                <li><a href="#">Citrus</a></li>
-                <li><a href="#">Prunus</a></li>
-                <li><a href="#">Apple</a></li>
-                <li><a href="#">Grape</a></li>
-                <li><a href="#">Walnut</a></li>
-            </ul>
-        </div><!--/.well -->
-    </div><!--/span-->
-    <div class="span9">
-        <div class="hero-unit">
-            <h1>Welcome to the CA&ES Genomics Facility</h1>
-            <p>The CAES Genomics Facility (CGF) provides campus researchers with genomics technologies for use in individual and collaborative research programs. The facility provides low-cost DNA sequencing, houses robotics instrumentation for liquid handling, colony picking and sample preparation, and administers computer hardware and software resources for use in sequence interpretation and related data analyses. The CGF will also incorporate additional technologies, e.g., genotyping and transcriptional profiling, when technically appropriate and if there is sufficient need. </p>
-            @*<p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>*@
-        </div>
-        <div class="row-fluid">
-            <div class="span3">
-                <h2>DNA Sequencing</h2>
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                <p><a class="btn" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
-            <div class="span3">
-                <h2>Bioinformatics</h2>
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                <p><a class="btn" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
-            <div class="span3">
-                <h2>Genotyping</h2>
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                <p><a class="btn" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
-            <div class="span3">
-                <h2>Robotics</h2>
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                <p><a class="btn" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
-        </div><!--/row-->
-    </div><!--/span-->
-</div><!--/row-->
-
-<p>
+@section scripts
+{
+    <link href="@Url.Content("~/Content/geno.css")" rel="stylesheet" type="text/css"/>
+}
     
-</p>
+<div id="top_content">
+    <div id="top_content_content">
+    <h1>Welcome to the CA&ES <br/>Genomics Facility</h1>
+    <p>The CAES Genomics Facility (CGF) provides campus researchers with genomics technologies for use in individual and collaborative research programs. The facility provides low-cost DNA sequencing, houses robotics instrumentation for liquid handling, colony picking and sample preparation, and administers computer hardware and software resources for use in sequence interpretation and related data analyses.</p> <p> The CGF will also incorporate additional technologies, e.g., genotyping and transcriptional profiling, when technically appropriate and if there is sufficient need.</p>
+    </div> <!-- end of top_content_content -->
+</div> <!-- end of top_content -->
+    
+<div id="nav">
+    <div id="nav_items">
+       
+        <div id="navcontainer">
+			<ul id="ul1">
+				<li><a href="#">Services</a></li>
+				<li><a href="#">Price</a></li>
+				<li><a href="#">Protocol</a></li>
+				<li><a href="#">FAQ</a></li>
+       		</ul>
+        	<ul id="ul2">
+				<li><a href="#" style="color:#bdbdbd">Citrus</a></li>
+        		<li><a href="#" style="color:#bdbdbd">Prunus</a></li>
+				<li><a href="#" style="color:#bdbdbd">Apple</a></li>
+       			<li><a href="#" style="color:#bdbdbd">Grape</a></li>
+				<li><a href="#" style="color:#bdbdbd">Walnut</a></li>
+			</ul>
+        </div>
+    
+    </div> <!-- end of nav_items -->
+</div> <!-- end of nav -->
+    
+<div id="lower_content">
+   	<div id="lower_content_content">
+    <div id="buttons">
+            <div id="bg_buttons">
+                <a href="#" class="buttons">
+             		<p>DNA SEQUENCING</p>
+                </a>
+               	<a href="#" class="buttons">
+             		<p>BIO INFORMATICS</p>
+                </a>
+                <a href="#" class="buttons">
+             		<p>GENOTYPING</p>
+                </a>
+                <a href="#" class="buttons">
+             		<p>ROBOTICS</p>
+                </a>
+            </div>
+        </div>
+        
+        <div class="lower_text">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eleifend ante eget augue accumsan tincidunt. Donec tristique sollicitudin risus vel congue. </p>
+        </div>
+            
+        <div class="lower_text">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eleifend ante eget augue accumsan tincidunt. Donec tristique sollicitudin risus vel congue.</p>
+        </div>
+            
+        <div class="lower_text">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eleifend ante eget augue accumsan tincidunt. Donec tristique sollicitudin risus vel congue. </p>
+        </div>
+            
+        <div class="lower_text">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eleifend ante eget augue accumsan tincidunt. Donec tristique sollicitudin risus vel congue.</p>
+        </div>
+            
+    </div><!-- end of bottom_content_content --> 
+</div><!-- end of bottom_content -->
