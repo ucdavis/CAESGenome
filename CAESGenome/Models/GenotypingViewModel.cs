@@ -35,7 +35,7 @@ namespace CAESGenome.Models
 
                 var pts = new List<SelectListItem>();
                 pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.NinetySix).ToString(), Text = EnumUtility.GetEnumDescription(Core.Resources.PlateTypes.NinetySix) });
-                pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.ThreeEightyFour).ToString(), Text = EnumUtility.GetEnumDescription(Core.Resources.PlateTypes.NinetySix) });
+                pts.Add(new SelectListItem() { Value = ((int)Core.Resources.PlateTypes.ThreeEightyFour).ToString(), Text = EnumUtility.GetEnumDescription(Core.Resources.PlateTypes.ThreeEightyFour) });
                 viewModel.PlateTypes = new SelectList(pts, "Value", "Text");
 
                 var did = postModel != null && postModel.Dyes != null ? postModel.Dyes : new List<int>();

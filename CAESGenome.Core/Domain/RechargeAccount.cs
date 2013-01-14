@@ -15,6 +15,7 @@ namespace CAESGenome.Core.Domain
         private void SetDefaults()
         {
             Start = DateTime.Now.Date;
+            End = DateTime.Now.Date;
             IsValid = true;
         }
 

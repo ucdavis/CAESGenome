@@ -24,7 +24,8 @@ namespace CAESGenome.Helpers
                 .ForMember(x => x.Id, x => x.Ignore())
                 .ForMember(x => x.ParentUser, x => x.Ignore())
                 .ForMember(x => x.RechargeAccounts, x => x.Ignore())
-                .ForMember(x => x.OwnedRechargeAcccounts, x => x.Ignore());
+                .ForMember(x => x.OwnedRechargeAcccounts, x => x.Ignore())
+                .ForMember(x => x.Roles, x=> x.Ignore());
 
             CreateMap<SequencingPostModel, UserJob>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
