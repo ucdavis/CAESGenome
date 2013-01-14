@@ -389,6 +389,7 @@
     <Content Include="Images\ajaxloader.gif" />
     <Content Include="Images\completedjobs.png" />
     <Content Include="Images\date.png" />
+    <Content Include="Images\down.png" />
     <Content Include="Images\usage.png" />
     <Content Include="Images\statistics.png" />
     <Content Include="Images\up.png" />
