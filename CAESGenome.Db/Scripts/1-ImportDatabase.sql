@@ -1,5 +1,8 @@
-﻿/* Import data freom the old database into our intermediate database
-	This is a straight up copy from the old db to new, one more script to import into production
+﻿/* 
+Import data freom the old database into our intermediate database
+This is a straight up copy from the old db to new, one more script to import into production
+
+**Before running this make sure to run the import function from TransferController in the web project.  It creates the user accounts
 ----------------------------------------------------------------------*/
 
 use cgfold
