@@ -76,7 +76,16 @@
             <div class="control-group">
                 @Html.LabelFor(model => model.User.RechargeAccounts, new {@class = "control-label"})
                 <div class="controls">
-                    @Html.DropDownList("User.RechargeAccounts", Model.RechargeAccounts.Select(a => new SelectListItem(){Text = a.AccountNum, Value = a.Id.ToString()}).ToList(), new {multiple="multiple"})
+                    @*@Html.DropDownList("User.RechargeAccounts", Model.RechargeAccounts.Select(a => new SelectListItem(){Text = a.AccountNum, Value = a.Id.ToString(), Selected = Model.User.RechargeAccounts.Select(b => b.AccountNum).Contains(a.AccountNum) }).ToList(), new {multiple="multiple"})*@
+                    @*@Html.DropDownList("User.RechargeAccounts", Model.RechargeAccounts, new {multiple="multiple"})*@
+                    
+                    <select id="User_RechargeAccounts" name="User.RechargeAccounts" multiple>
+                        @foreach (var ra in Model.RechargeAccounts)
+                        {
+                            <option value="@ra.Value" @(ra.Selected ? "selected" : string.Empty)>@ra.Text</option>
+                        }
+                    </select>
+
                     @Html.ValidationMessageFor(model => model.User.RechargeAccounts)
                 </div>
             </div>

@@ -13,7 +13,8 @@ namespace CAESGenome.Models
     {
         public User User { get; set; }
         
-        public List<RechargeAccount> RechargeAccounts { get; set; }
+        //public List<RechargeAccount> RechargeAccounts { get; set; }
+        public IList<SelectListItem> RechargeAccounts { get; set; }
 
         public IList<SelectListItem> Departments { get; set; }
         public IList<SelectListItem> Universities { get; set; }
@@ -24,9 +25,17 @@ namespace CAESGenome.Models
         {
             var viewModel = new UserViewModel()
                 {
-                    User = user ?? new User(),
-                    RechargeAccounts = repositoryFactory.RechargeAccountRepository.Queryable.Where(a => a.User.UserName == currentUserId).ToList()
+                    User = user ?? new User()
+                    //RechargeAccounts = repositoryFactory.RechargeAccountRepository.Queryable.Where(a => a.User.UserName == currentUserId).ToList()
                 };
+
+            var ra = repositoryFactory.RechargeAccountRepository.Queryable.Where(a => a.User.UserName == currentUserId).ToList();
+            viewModel.RechargeAccounts = ra.Select(a => new SelectListItem()
+                {
+                    Selected = viewModel.User.RechargeAccounts.Select(b => b.AccountNum).Contains(a.AccountNum),
+                    Value = a.Id.ToString(),
+                    Text = a.AccountNum
+                }).ToList();
 
             return viewModel;
         }
