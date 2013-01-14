@@ -10,26 +10,32 @@
     <fieldset>
         <legend>
             <div class="pull-right">
-                @using (Html.BeginForm("PrintStageBarcodes", "UserJob", new {id=Model.Id, stageId = stage.Id}, FormMethod.Post, new {style="diplay:inline-block;"}))
-                {
-                    @Html.AntiForgeryToken()
-                    <button type="submit" class="btn hastip" title="Print all Barcodes">
-                        <i class="icon-print"></i>
-                        All Barcodes
-                    </button>    
-                }
-                
-                @if(!stage.IsComplete && Model.UserJobPlates.SelectMany(a => a.Barcodes).Where(a => a.Stage == stage).Any(a => !a.Done))
-                {
-                    using(Html.BeginForm("AdvanceStageBarcodes", "UserJob", new {id=Model.Id, stageId = stage.Id}, FormMethod.Post, new {style="display:inline-block;"}))
+                <ul class="nav nav-pills">
+                    <li>
+                    @using (Html.BeginForm("PrintStageBarcodes", "UserJob", new {id=Model.Id, stageId = stage.Id}, FormMethod.Post, new {style="diplay:inline-block;"}))
                     {
                         @Html.AntiForgeryToken()
-                        <button class="btn hastip" title="Advance All Barcodes">
-                            <i class="icon-share"></i>
+                        <button type="submit" class="btn hastip" title="Print all Barcodes">
+                            <i class="icon-print"></i>
                             All Barcodes
-                        </button>        
+                        </button>    
                     }
-                }
+                    </li>
+
+                    @if(!stage.IsComplete && Model.UserJobPlates.SelectMany(a => a.Barcodes).Where(a => a.Stage == stage).Any(a => !a.Done))
+                    {
+                        <li>
+                            @using(Html.BeginForm("AdvanceStageBarcodes", "UserJob", new {id=Model.Id, stageId = stage.Id}, FormMethod.Post, new {style="display:inline-block;"}))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button class="btn hastip" title="Advance All Barcodes">
+                                    <i class="icon-share"></i>
+                                    All Barcodes
+                                </button>        
+                            }
+                        </li>
+                    }
+                </ul>
             </div>
             @stage.Name
         </legend>
