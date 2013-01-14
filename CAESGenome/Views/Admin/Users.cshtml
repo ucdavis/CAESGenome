@@ -41,8 +41,8 @@
                 <td>@user.LastName</td>
                 <td>@user.Title</td>
                 <td>@user.Phone</td>
-                <td>@user.University.Name</td>
-                <td>@user.Department.Name</td>
+                <td>@(user.University != null ? user.University.Name : "n/a")</td>
+                <td>@(user.Department != null ? user.Department.Name : "n/a")</td>
             </tr>
         }
     </tbody>

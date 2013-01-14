@@ -53,7 +53,7 @@ namespace CAESGenome.Controllers
                 ModelState.AddModelError("Department", "Department is Required");
             }
 
-            if (!roles.Any())
+            if (roles == null || !roles.Any())
             {
                 ModelState.AddModelError("Roles", "At least one role is required");
             }
@@ -67,7 +67,7 @@ namespace CAESGenome.Controllers
             {
                 if (!WebSecurity.UserExists(user.UserName))
                 {
-                    WebSecurity.CreateUserAndAccount(user.UserName, password, new { FirstName = user.FirstName, LastName = user.LastName, Title = user.Title, Phone = user.Phone, fax = user.Fax });    
+                    WebSecurity.CreateUserAndAccount(user.UserName, password, new { FirstName = user.FirstName, LastName = user.LastName, Title = user.Title, Phone = user.Phone, fax = user.Fax, UniversityId = user.University.Id , DepartmentId = user.Department.Id });    
                 }
 
                 foreach(var role in roles) Roles.AddUserToRole(user.UserName, role);
