@@ -1,4 +1,8 @@
-﻿use cgfold
+﻿/* Import data freom the old database into our intermediate database
+	This is a straight up copy from the old db to new, one more script to import into production
+----------------------------------------------------------------------*/
+
+use cgfold
 
 truncate table barcode
 truncate table departments

@@ -1,4 +1,8 @@
-﻿declare @cursor cursor
+﻿/*
+Updates barcode files with the new phred quality values from the intermediate database
+----------------------------------------------------*/
+
+declare @cursor cursor
 declare @barcode int, @cellchar char(1), @cellnum int, @start int, @end int, @datetimesubmitted datetime
 
 set @cursor = cursor for

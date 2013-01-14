@@ -1,4 +1,8 @@
-﻿--
+﻿/*
+Lookup values needed
+-----------------------------------------------------------*/
+
+--
 --	Antibiotics table
 --
 SET IDENTITY_INSERT [dbo].[Antibiotics] ON
