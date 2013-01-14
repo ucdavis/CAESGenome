@@ -1,0 +1,54 @@
+﻿@using CAESGenome.Core.Resources
+@model IList<UserJob>
+
+@{
+    ViewBag.Title = "User Completed Job History";
+    ViewBag.SubPageTitle = "User Completed Job History";
+}
+
+@section scripts
+{
+    @Html.Partial("_DataTables")
+
+    <style type="text/css">
+        .table-striped tbody td.blackout, .table-striped tbody tr:nth-child(odd) td.blackout { background-color: darkgrey;}
+    </style>
+}
+
+@helper DisplayDate(DateTime? date)
+{
+    if (date.HasValue)
+    {
+        <text>@date.Value.ToString("MMM dd")</text>
+    }
+}
+
+   <table class="table table-bordered table-striped default_table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Job Type</th>
+                <th>Plates</th>
+                <th>Date</th>
+                <th>Last Update</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var uj in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="@Url.Action("Details", new {@uj.Id})" class="btn">
+                            <i class="icon-search"></i>
+                        </a>
+                    </td>
+                    <td>@uj.Name</td>
+                    <td>@uj.JobType.Name</td>
+                    <td>@uj.UserJobPlates.Count</td>
+                    <td>@uj.DateTimeCreated</td>
+                    <td>@uj.LastUpdate</td>
+                </tr>
+            }
+        </tbody>
+    </table>    

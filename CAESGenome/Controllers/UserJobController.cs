@@ -40,6 +40,13 @@ namespace CAESGenome.Controllers
             return View(userJobs);
         }
 
+        [Authorize(Roles = RoleNames.User)]
+        public ActionResult UserCompleted()
+        {
+            var userJobs = _repositoryFactory.UserJobRepository.Queryable.Where(a => !a.IsOpen).OrderBy(a => a.DateTimeCreated).ToList();
+            return View(userJobs);
+        }
+
         [Authorize(Roles = RoleNames.User + "," + RoleNames.Staff)]
         public ActionResult Details(int id, bool completed = false)
         {

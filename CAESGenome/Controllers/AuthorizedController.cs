@@ -2,7 +2,6 @@
 using System.Web.Mvc;
 using CAESGenome.Core.Repositories;
 using CAESGenome.Core.Resources;
-using CAESGenome.Filters;
 
 namespace CAESGenome.Controllers
 {
@@ -21,12 +20,19 @@ namespace CAESGenome.Controllers
             return View();
         }
 
-        public ActionResult OpenJobs()
-        {
-            var user = GetCurrentUser();
-            var jobs = _repositoryFactory.UserJobRepository.Queryable.Where(a => a.User.Id == user.Id);
-            return View(jobs);
-        }
+        //public ActionResult OpenJobs()
+        //{
+        //    var user = GetCurrentUser();
+        //    var jobs = _repositoryFactory.UserJobRepository.Queryable.Where(a => a.User.Id == user.Id);
+        //    return View(jobs);
+        //}
+
+        //public ActionResult CompletedJobs()
+        //{
+        //    var user = GetCurrentUser();
+        //    var jobs = _repositoryFactory.UserJobRepository.Queryable.Where(a => a.User.Id == user.Id && !a.IsOpen);
+        //    return View(jobs);
+        //}
 
     }
 }
