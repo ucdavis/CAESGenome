@@ -23,6 +23,7 @@
                 {
                     using(Html.BeginForm("AdvanceStageBarcodes", "UserJob", new {id=Model.Id, stageId = stage.Id}, FormMethod.Post, new {style="display:inline-block;"}))
                     {
+                        @Html.AntiForgeryToken()
                         <button class="btn hastip" title="Advance All Barcodes">
                             <i class="icon-share"></i>
                             All Barcodes
