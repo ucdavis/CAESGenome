@@ -43,7 +43,8 @@ namespace CAESGenome.Controllers
         [Authorize(Roles = RoleNames.User)]
         public ActionResult UserCompleted()
         {
-            var userJobs = _repositoryFactory.UserJobRepository.Queryable.Where(a => !a.IsOpen).OrderBy(a => a.DateTimeCreated).ToList();
+            var user = GetCurrentUser();
+            var userJobs = _repositoryFactory.UserJobRepository.Queryable.Where(a => !a.IsOpen && a.User.Id == user.Id).OrderBy(a => a.DateTimeCreated).ToList();
             return View(userJobs);
         }
 
