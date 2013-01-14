@@ -230,9 +230,9 @@ namespace CAESGenome.Services
             // zip up the files and return them
             using (var zip = new ZipFile())
             {
-                foreach(var file in Directory.EnumerateFiles(string.Format(@"{0}\output\{1}", _storageLocation, barcode.Id), "*"))
+                foreach(var file in Directory.EnumerateFiles(string.Format(@"{0}\raw\{1}", _storageLocation, barcode.Id), "*"))
                 {
-                    zip.AddFile(file);
+                    zip.AddFile(file, string.Empty);
                 }
 
                 zip.Save(stream);
