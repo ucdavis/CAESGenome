@@ -51,7 +51,7 @@
     <DefineTrace>true</DefineTrace>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <OutputPath>C:\Users\lai\Documents\Visual Studio 11\Projects\CAESGenome\CAESGenome.Db\bin\</OutputPath>
+    <OutputPath>C:\Users\taylor\Dropbox\Documents\GitHub\CAESGenome\CAESGenome.Db\bin\</OutputPath>
   </PropertyGroup>
   <!-- VS10 without SP1 will not have VisualStudioVersion set, so do that here -->
   <PropertyGroup />
