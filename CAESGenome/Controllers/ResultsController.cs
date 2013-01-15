@@ -77,7 +77,7 @@ namespace CAESGenome.Controllers
         }
 
         [HttpPost]
-        public RedirectToRouteResult DecideQualityControl(int id, bool accepted)
+        public RedirectToRouteResult DecideQualityControl(int id, bool accepted, bool qcByDate = false)
         {
             var barcode = _repositoryFactory.BarcodeRepository.GetNullableById(id);
 
@@ -100,7 +100,14 @@ namespace CAESGenome.Controllers
                 return RedirectToAction("Index", "UserJob");
             }
 
-            return RedirectToAction("QualityControl", new {id = id});
+            if (qcByDate)
+            {
+                return RedirectToAction("ByDate", "QualityControl", new {date = barcode.DateTimeValidated.Value});
+            }
+            else
+            {
+                return RedirectToAction("QualityControl", new { id = id });
+            }
         }
     }
 

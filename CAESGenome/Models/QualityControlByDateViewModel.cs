@@ -16,7 +16,7 @@ namespace CAESGenome.Models
         {
             var viewModel = new QualityControlByDateViewModel()
                 {
-                    Barcodes = repositoryFactory.BarcodeRepository.Queryable.Where(a => a.Done && a.DateTimeValidated.Value.Date == date.Date && a.BarcodeFiles.Any()),
+                    Barcodes = repositoryFactory.BarcodeRepository.Queryable.Where(a => a.DateTimeValidated.Value.Date == date.Date && a.BarcodeFiles.Any()),
                     Date = date
                 };
 

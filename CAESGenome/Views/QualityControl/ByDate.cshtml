@@ -32,19 +32,47 @@
             <div class="well">
                 
                 <div class="pull-right">
-                    @using (Html.BeginForm("ChangeDownload", "QualityControl", new {id=barcode.Id}, FormMethod.Post))
+                    @if (barcode.Done)
                     {
-                        @Html.AntiForgeryToken()
-                        if(barcode.AllowDownload)
+                        using (Html.BeginForm("ChangeDownload", "QualityControl", new {id=barcode.Id}, FormMethod.Post))
                         {
-                            <span class="good" style="font-weight: bold;">Download Enabled</span>
-                            <button type="submit" class="btn btn-danger">Click to Disable</button>
+                            @Html.AntiForgeryToken()
+                            if(barcode.AllowDownload)
+                            {
+                                <span class="good" style="font-weight: bold;">Download Enabled</span>
+                                <button type="submit" class="btn btn-danger">Click to Disable</button>
+                            }
+                            else
+                            {
+                                <span class="warning" style="font-weight: bold;">Download Disabled</span>
+                                <button type="submit" class="btn btn-success">Click to Enable</button>
+                            }    
                         }
-                        else
-                        {
-                            <span class="warning" style="font-weight: bold;">Download Disabled</span>
-                            <button type="submit" class="btn btn-success">Click to Enable</button>
-                        }    
+                    }
+                    else
+                    {
+                        <ul class="nav nav-pills">
+                            <li>
+                                @using (Html.BeginForm("DecideQualityControl", "Results", new { id = barcode.Id, accepted = true, qcByDate = true}, FormMethod.Post, new { style = "display: inline-block;" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-primary btn-large">
+                                        <i class="icon-ok icon-white"></i>
+                                        Accept
+                                    </button>    
+                                }
+                            </li>
+                            <li>
+                                @using (Html.BeginForm("DecideQualityControl", "Results", new { id = barcode.Id, accepted = false, qcByDate = true}, FormMethod.Post, new { style = "display: inline-block;" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-danger btn-large">
+                                        <i class="icon-remove icon-white"></i>
+                                        Decline
+                                    </button>
+                                }
+                            </li>
+                        </ul>
                     }
                 </div>
                 
