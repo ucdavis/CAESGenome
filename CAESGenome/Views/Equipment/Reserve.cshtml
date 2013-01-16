@@ -38,12 +38,28 @@
         This is available equipment in our lab.
     </p>
     
-    <ul class="circle">
+    <dl class="circle">
         @foreach (var eq in Model.Equipments)
         {
-            <li>@Html.ActionLink(eq.Name, "Reserve", new { id = eq.Id })</li>            
+            if (eq.IsReservable)
+            {
+                <dt>
+                @Html.ActionLink(eq.Name, "Reserve", new { id = eq.Id }) 
+                </dt>
+            }     
+            else
+            {
+                <dt>@eq.Name</dt>   
+            }  
+                <dd>@(!eq.Message.IsEmpty() ? eq.Message : "")</dd>   
         }
-    </ul>
+    </dl>
+    @*<ul>
+         @foreach (var eq in Model.Equipments)
+        {
+        <li>@Html.ActionLink(eq.Name, "Reserve", new { id = eq.Id })</li>
+         }
+    </ul>*@
 }
 else
 {
@@ -86,5 +102,9 @@ else
     }
     else
     {
+        <dl>
+            <dt>@Html.DisplayFor(model => model.Equipment.Name)</dt>
+            <dd>This item is not reservable - @Html.DisplayFor(model => model.Equipment.Message)</dd>
+        </dl>
     }
 }

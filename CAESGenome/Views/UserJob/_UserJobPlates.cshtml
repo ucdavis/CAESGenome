@@ -28,9 +28,9 @@
                             @using(Html.BeginForm("AdvanceStageBarcodes", "UserJob", new {id=Model.Id, stage = stage.Id}, FormMethod.Post, new {style="display:inline-block;"}))
                             {
                                 @Html.AntiForgeryToken()
-                                <button class="btn hastip" title="Advance All Barcodes">
+                                <button class="btn hastip" title="Advance All Plates">
                                     <i class="icon-share"></i>
-                                    All Barcodes
+                                    All Plates
                                 </button>        
                             }
                         </li>
@@ -63,7 +63,7 @@
                                     using(Html.BeginForm("AdvanceBarcode", "UserJob", new {id=barcode.Id}, FormMethod.Post, new {style ="display:inline-block;"}))
                                     {
                                         @Html.AntiForgeryToken()
-                                        <a href="javascript:;" class="btn hastip advance" title="Advance Barcode to Next Stage"><i class="icon-share"></i></a>
+                                        <a href="javascript:;" class="btn hastip advance" title="Advance Plate to Next Stage"><i class="icon-share"></i></a>
                                     }            
                                 }
                                 

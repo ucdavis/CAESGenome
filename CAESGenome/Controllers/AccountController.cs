@@ -92,6 +92,9 @@ namespace CAESGenome.Controllers
                     message.Body += token;
 
                     client.Send(message);
+
+                    ViewBag.Email = email;
+
                 }
                 else
                 {
@@ -113,7 +116,8 @@ namespace CAESGenome.Controllers
                 Message = "Please provide an email address.";
             }
 
-            ViewBag.Token = token;
+            //ViewBag.Token = token;
+            
             return View();
         }
 

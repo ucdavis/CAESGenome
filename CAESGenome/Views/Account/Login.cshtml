@@ -22,6 +22,7 @@
             <div class="controls">
                 @Html.EditorFor(model => model.Password)
                 @Html.ValidationMessageFor(model => model.Password)
+                @Html.ActionLink("Forgot Password?", "ResetPassword", "Account")
             </div>
         </div>
         <div class="control-group">
@@ -37,3 +38,4 @@
         </div>
     </fieldset>
 }
+ 
