@@ -33,7 +33,8 @@ namespace CAESGenome.Controllers
                 jobType = _repositoryFactory.JobTypeRepository.GetNullableById(id.Value);
 
                 // check the job type
-                if (!jobType.StandardSequencing && !jobType.CustomSequencing)
+                // 2013-01-16 by kjt: Should be all 3 types of sequencing jobs as per Jong-Min
+                if (!jobType.StandardSequencing && !jobType.CustomSequencing && !jobType.DNASequencing)
                 {
                     Message = "Invalid job type specified";
                     return RedirectToAction("Create");
@@ -54,7 +55,8 @@ namespace CAESGenome.Controllers
                 jobType = _repositoryFactory.JobTypeRepository.GetNullableById(id.Value);
 
                 // check the job type
-                if (!jobType.StandardSequencing && !jobType.CustomSequencing)
+                // 2013-01-16 by kjt: Should be all 3 types of sequencing jobs as per Jong-Min
+                if (!jobType.StandardSequencing && !jobType.CustomSequencing && !jobType.DNASequencing)
                 {
                     Message = "Invalid job type specified";
                     return RedirectToAction("Create");

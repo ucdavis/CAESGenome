@@ -91,6 +91,10 @@ namespace CAESGenome.Services
             return FileUploadErrorKeys.WriteError;
         }
 
+        /*
+         * This is apparently the method that scans the "uploadLocation", and copies the files to 
+         * the raw directory for either PhRed processing or user download.
+         */
         public void ScanFiles()
         {
             //var uploadLocation = @"\\do-files\cgfdata";
@@ -128,6 +132,10 @@ namespace CAESGenome.Services
 
                             // move the file into permanent storage, over write any existing files
                             File.Move(file, string.Format(@"{0}\raw\{1}\{2}", _storageLocation, barcodeId, filename));
+
+                            // This is probably the best place to add the logic that updates non-sequencing
+                            // jobs so that they can be downloaded directly by the user without any further 
+                            // processing.
 
                             // save the record into the database
                             var barcodeFile = barcode.BarcodeFiles.FirstOrDefault(a => a.WellColumn == col && a.WellRow == row);
@@ -241,6 +249,7 @@ namespace CAESGenome.Services
             return stream.ToArray();
         }
 
+        // This should only be run for sequencing jobs, i.e. those requiring PhRed validation.
         // run phred
         private void RunPhred(int barcode)
         {

@@ -26,7 +26,7 @@
                 <td>@barcode.UserJobPlate.UserJob.Name</td>
                 <td>@barcode.PlateName</td>
                 <td>@barcode.DateCreated.ToShortDateString()</td>
-                <td>@(barcode.DateTimeValidated == null ? "" : Convert.ToDateTime(barcode.DateTimeValidated).ToShortDateString())</td>
+                <td>@(barcode.DateTimeValidated == null ? string.Empty : Convert.ToDateTime(barcode.DateTimeValidated).ToShortDateString())</td>
             </tr>
         }
     </tbody>
