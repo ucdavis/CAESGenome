@@ -20,10 +20,10 @@
        
         <div id="navcontainer">
 			<ul id="ul1">
-				<li><a href="#">Services</a></li>
-				<li><a href="#">Price</a></li>
-				<li><a href="#">Protocol</a></li>
-				<li><a href="#">FAQ</a></li>
+				<li>@Html.ActionLink("Services","Service","Home")</li>
+				<li>@Html.ActionLink("Price","Rates","Home")</li>
+				<li>@Html.ActionLink("Protocol","Protocol","Home")</li>
+				<li>@Html.ActionLink("FAQ","Faq","Home")</li>
        		</ul>
         </div>
     
@@ -34,35 +34,35 @@
    	<div id="lower_content_content">
     <div id="buttons">
             <div id="bg_buttons">
-                <a href="#" class="buttons">
+                <a href="@Url.Content("~/Home/Service#DNASequencing")" class="buttons">
              		<p>DNA SEQUENCING</p>
-                </a>
-               	<a href="#" class="buttons">
+                <a/>
+               	<a href="@Url.Content("~/Home/Service#Bioinformatics")" class="buttons">
              		<p>BIO INFORMATICS</p>
                 </a>
-                <a href="#" class="buttons">
+                <a href="@Url.Content("~/Home/Service#DNASequencing")" class="buttons">
              		<p>GENOTYPING</p>
                 </a>
-                <a href="#" class="buttons">
+                <a href="@Url.Content("~/Home/Service#Robotics")" class="buttons">
              		<p>ROBOTICS</p>
                 </a>
             </div>
         </div>
         
         <div class="lower_text">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eleifend ante eget augue accumsan tincidunt. Donec tristique sollicitudin risus vel congue. </p>
+            <ul><li>From bacterial colony to processed FASTA files</li><li>PCR products, plasmid DNA and large insert clones<li>Capillary instruments (ABI 3730XL)</li></ul>
         </div>
             
         <div class="lower_text">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eleifend ante eget augue accumsan tincidunt. Donec tristique sollicitudin risus vel congue.</p>
+            <ul><li>Automated GenBank submissions</li><li>Clustering and BLAST analysis<li>Customized relational databases for data mining</li></ul>
         </div>
             
         <div class="lower_text">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eleifend ante eget augue accumsan tincidunt. Donec tristique sollicitudin risus vel congue. </p>
+            <ul><li>Simple sequence repeats</li><li>Custom fragment analysis<li>Genotype analysis software</li></ul>
         </div>
             
         <div class="lower_text">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eleifend ante eget augue accumsan tincidunt. Donec tristique sollicitudin risus vel congue.</p>
+            <ul><li>Colony picking</li><li>Replicating</li><li>Gridding</li><li>Rearraying</li><li>Liquid handling</li></ul>
         </div>
             
     </div><!-- end of bottom_content_content --> 
