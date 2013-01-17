@@ -107,7 +107,8 @@ namespace CAESGenome.Controllers
             barcode.AllowDownload = !barcode.AllowDownload;
             _repositoryFactory.BarcodeRepository.EnsurePersistent(barcode);
 
-            Message = string.Format("Downloads for {0} have been {1}", barcode.Id, barcode.AllowDownload ? "enabled" : "disabled");
+            // 2013-01-17 by kjt: Changed message to contain UserJob.Name vs. barcode.id so job could be more easily identified.
+            Message = string.Format("Downloads for {0} have been {1}", barcode.UserJobPlate.UserJob.Name, barcode.AllowDownload ? "enabled" : "disabled");
             return RedirectToAction("ByDate", new {date = barcode.DateTimeValidated.Value.Date});
         }
 

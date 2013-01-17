@@ -22,6 +22,5 @@ namespace CAESGenome.Models
 
             return viewModel;
         }
-
     }
 }

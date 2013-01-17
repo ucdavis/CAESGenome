@@ -112,8 +112,7 @@ namespace CAESGenome.Services
         {
             barcode.Done = true;
             barcode.AllowDownload = true;
-            repositoryFactory.BarcodeRepository.EnsurePersistent(barcode);
-
+  
             var plate = barcode.UserJobPlate;
             plate.Completed = true;
             plate.DateTimeCompleted = DateTime.Now;

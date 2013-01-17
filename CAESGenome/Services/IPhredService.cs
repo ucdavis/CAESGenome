@@ -139,7 +139,7 @@ namespace CAESGenome.Services
 
                             // save the record into the database
                             var barcodeFile = barcode.BarcodeFiles.FirstOrDefault(a => a.WellColumn == col && a.WellRow == row);
-
+                            
                             if (barcodeFile == null)
                             {
                                 barcodeFile = new BarcodeFile() {Barcode = barcode, WellColumn = col, WellRow = row, Uploaded = true };
@@ -155,13 +155,26 @@ namespace CAESGenome.Services
                             }
 
                             _repositoryFactory.BarcodeFileRepository.EnsurePersistent(barcodeFile);
-                        }
-                    }
-                }
+
+                            /*
+                             * 2013-01-17 by kjt: Added logic to bypass need for validation
+                             * if Barcode.UserJobPlate.UserJob.JobType.HasSequencing is false,
+                             * since PhRed os only required on jobs with jobtypes that have sequencing.
+                             */
+                            var hasSequencing = barcode.UserJobPlate.UserJob.JobType.HasSequencing;
+                            if (!hasSequencing)
+                            {
+                                //Skip Validation And Allow For Download
+                                SkipValidationAndAllowForDownload(barcode);
+                            }
+                        } // end if barcode != null
+                        // however, if the barcode was null we end up here.
+                    } // end if barcode != -1
+                } // end for each file in directory
 
                 Directory.Delete(directory);
-            }
-        }
+            } // end for each directory.
+        } // end method ScanFiles().
 
         private void ParseFileName(string filename, out int barcode, out char row, out int col)
         {            
@@ -209,6 +222,36 @@ namespace CAESGenome.Services
             {
                 return false;
             }
+        }
+
+        /* 2013-01-17 by kjt: This method should "shortcut" the
+         * need to perform validation on the barcode provided.
+         * This in intended to be called for non-sequencing jobs,
+         * so they can be downloaded immediately after moving into "raw"
+         * directory.
+         */
+        public void SkipValidationAndAllowForDownload(Barcode barcode)
+        {
+            IBarcodeService barcodeService = new BarcodeService();
+
+            // This sets the barcode files' "Validated" bit so they won't
+            // show up as needing PhRed validation:
+            foreach (var bcf in barcode.BarcodeFiles)
+            {
+                bcf.Validated = true;
+                _repositoryFactory.BarcodeFileRepository.EnsurePersistent(bcf);
+            }
+
+            // This sets DateTimeValidated because it's doubling as DateTimeCompleted
+            // on the downloads page at it would otherwise remain blank because
+            // validation is being bypassed for non-sequencing jobs:
+            barcode.DateTimeValidated = DateTime.Now;
+            _repositoryFactory.BarcodeRepository.EnsurePersistent(barcode);
+
+            // This sets the remainder of the fields that allow downloading,
+            // such as "Done", and "AllowDownload", etc, plus some basic 
+            // housekeeping and setting of fields for sub-objects:
+            barcodeService.AcceptQualityControl(_repositoryFactory, barcode);
         }
 
         public void ExecuteValidation(int barcode)
