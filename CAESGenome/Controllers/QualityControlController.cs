@@ -59,7 +59,9 @@ namespace CAESGenome.Controllers
             ViewBag.Year = date.Year;
 
             ViewBag.PendingUpload = Directory.EnumerateDirectories(ConfigurationManager.AppSettings["UploadLocation"]).Count();
-            ViewBag.PendingValidation = _repositoryFactory.BarcodeFileRepository.Queryable.Where(a => a.Uploaded && !a.Validated).Select(a => a.Barcode).Distinct().Count();
+            // 2013-01-18 by kjt: Added additional check to exclude non-sequencing jobs from Pending Validation count.
+            //ViewBag.PendingValidation = _repositoryFactory.BarcodeFileRepository.Queryable.Where(a => a.Uploaded && !a.Validated).Select(a => a.Barcode)..Distinct().Count();
+            ViewBag.PendingValidation = _repositoryFactory.BarcodeFileRepository.Queryable.Where(a => a.Uploaded && !a.Validated && a.Barcode.UserJobPlate.UserJob.JobType.HasSequencing).Select(a => a.Barcode).Distinct().Count();
 
             return View(barcodes);
         }
@@ -76,7 +78,9 @@ namespace CAESGenome.Controllers
         [HttpPost]
         public ActionResult PhredValidation()
         {
-            var barcodes = _repositoryFactory.BarcodeFileRepository.Queryable.Where(a => a.Uploaded && !a.Validated).Select(a => a.Barcode.Id).Distinct();
+            // 2013-01-18 by kjt: Added additional check to exclude non-sequencing jobs from barcodes requiring validation.
+            //var barcodes = _repositoryFactory.BarcodeFileRepository.Queryable.Where(a => a.Uploaded && !a.Validated).Select(a => a.Barcode.Id).Distinct();
+            var barcodes = _repositoryFactory.BarcodeFileRepository.Queryable.Where(a => a.Uploaded && !a.Validated && a.Barcode.UserJobPlate.UserJob.JobType.HasSequencing).Select(a => a.Barcode.Id).Distinct();
 
             foreach(var bc in barcodes)
             {

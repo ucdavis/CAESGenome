@@ -234,19 +234,19 @@ namespace CAESGenome.Services
         {
             IBarcodeService barcodeService = new BarcodeService();
 
-            // This sets the barcode files' "Validated" bit so they won't
-            // show up as needing PhRed validation:
-            foreach (var bcf in barcode.BarcodeFiles)
-            {
-                bcf.Validated = true;
-                _repositoryFactory.BarcodeFileRepository.EnsurePersistent(bcf);
-            }
+            //// This sets the barcode files' "Validated" bit so they won't
+            //// show up as needing PhRed validation:
+            //foreach (var bcf in barcode.BarcodeFiles)
+            //{
+            //    bcf.Validated = true;
+            //    _repositoryFactory.BarcodeFileRepository.EnsurePersistent(bcf);
+            //}
 
-            // This sets DateTimeValidated because it's doubling as DateTimeCompleted
-            // on the downloads page at it would otherwise remain blank because
-            // validation is being bypassed for non-sequencing jobs:
-            barcode.DateTimeValidated = DateTime.Now;
-            _repositoryFactory.BarcodeRepository.EnsurePersistent(barcode);
+            //// This sets DateTimeValidated because it's doubling as DateTimeCompleted
+            //// on the downloads page at it would otherwise remain blank because
+            //// validation is being bypassed for non-sequencing jobs:
+            //barcode.DateTimeValidated = DateTime.Now;
+            //_repositoryFactory.BarcodeRepository.EnsurePersistent(barcode);
 
             // This sets the remainder of the fields that allow downloading,
             // such as "Done", and "AllowDownload", etc, plus some basic 
