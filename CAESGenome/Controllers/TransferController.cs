@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using CAESGenome.Core.Repositories;
@@ -95,7 +96,7 @@ namespace CAESGenome.Controllers
                         new
                             {
                                 userId = a.SourceId,
-                                userName = a.UserName,
+                                userName = a.UserName ?? "unknown",
                                 firstName = a.FirstName,
                                 lastName = a.LastName,
                                 title = a.Title,
@@ -112,7 +113,16 @@ namespace CAESGenome.Controllers
 
             foreach (var user in users.Where(a => a.IsActive))
             {
-                WebSecurity.CreateAccount(user.UserName, user.Password);
+                try
+                {
+                    WebSecurity.CreateAccount(user.UserName ?? user.FullName
+                                              , user.Password);
+                }
+                catch (Exception ex)
+                {
+                    
+                }
+                
             }
 
             return users;
@@ -142,16 +152,17 @@ namespace CAESGenome.Controllers
             using(var conn = _dbService.GetConnection())
             {
                 conn.Execute(
-                    @"INSERT INTO UserProfile(UserName, FirstName, LastName, Title, Phone, DateCreated, UniversityId, DepartmentId) values (@userName, @firstName, @lastName, @title, @phone, @date, @uid, @did)",
+                    @"INSERT INTO UserProfile(UserName, FirstName, LastName, Title, Phone, Fax, DateCreated, UniversityId, DepartmentId) values (@userName, @firstName, @lastName, @title, @phone, @fax, @date, @uid, @did)",
                     pisToCreate.Select(
                             a =>
                             new
                             {
-                                userName = a.UserName,
-                                firstName = a.FirstName,
-                                lastName = a.LastName,
+                                userName = a.UserName ?? "unknown",
+                                firstName = a.FirstName ?? "Unknown",
+                                lastName = a.LastName ?? "Unknown",
                                 title = a.Title,
-                                phone = a.Phone,
+                                phone = a.Phone ?? "530-555-5555",
+                                fax = a.Fax,
                                 date = a.DateCreated,
                                 uid = a.UniversityId, did = a.DepartmentId
                             }).ToList()
@@ -165,7 +176,7 @@ namespace CAESGenome.Controllers
 
             foreach(var user in pisToCreate)
             {
-                WebSecurity.CreateAccount(user.UserName, user.Password);
+                WebSecurity.CreateAccount(user.UserName ?? "unknown", user.Password ?? "password");
             }
 
             // all the Pi's
@@ -185,22 +196,37 @@ namespace CAESGenome.Controllers
             foreach(var pi in allPis)
             {
                 // grab the current PI's id
-                var piId = usersToAddRole.First(a => a.UserName == pi.UserName).Id;
+                var myPi = usersToAddRole.FirstOrDefault(a => a.UserName.Equals(pi.UserName ?? "unknown"));
+                if (myPi == null) continue;
+                var piId = myPi.Id;
+                //var piId = usersToAddRole.First(a => a.UserName == (pi.UserName ?? "unknown")).Id;
 
                 // grab the PI's recharge accounts
                 var recharge = recharges.Where(a => a.PiId == pi.SourceId);
 
-                using(var conn = _dbService.GetConnection())
+                using (var conn = _dbService.GetConnection())
                 {
                     conn.Execute(
                         @"UPDATE UserProfile SET ParentUserId = @pUserId where UserId = @userId",
-                        users.Where(a => a.PiId == pi.SourceId).Select(a => new {pUserId = piId, userId = a.SourceId})
+                        users.Where(a => a.PiId == pi.SourceId)
+                             .Select(a => new {pUserId = piId, userId = a.SourceId})
                         );
 
                     conn.Execute("SET IDENTITY_INSERT RechargeAccounts ON");
                     conn.Execute(
                         @"INSERT INTO RechargeAccounts (Id, AccountNum, Description, [Start], [End], IsValid, UserProfileId) VALUES (@id, @accountNum, @description, @start, @end, @isValid, @userProfileId)",
-                        recharge.Select(a => new {id = a.SourceId, accountNum = a.AccountNum, description = a.Description, start = a.Start, end = a.End, isValid = a.IsValid, userProfileId = piId})
+                        recharge.Select(
+                            a =>
+                            new
+                                {
+                                    id = a.SourceId,
+                                    accountNum = a.AccountNum,
+                                    description = a.Description,
+                                    start = a.Start,
+                                    end = a.End,
+                                    isValid = a.IsValid,
+                                    userProfileId = piId
+                                })
                         );
                     conn.Execute("SET IDENTITY_INSERT RechargeAccounts OFF");
                 }

@@ -70,9 +70,9 @@ namespace CAESGenome.Models
                     var dept = viewModel.Departments.FirstOrDefault(a => a.Value == user.Department.Id.ToString());
                     dept.Selected = true;
                 }
-
-                viewModel.IsPi = Roles.IsUserInRole(RoleNames.PI);
-                viewModel.IsStaff = Roles.IsUserInRole(RoleNames.Staff);
+                
+                viewModel.IsPi = Roles.IsUserInRole(user.UserName, RoleNames.PI);
+                viewModel.IsStaff = Roles.IsUserInRole(user.UserName, RoleNames.Staff);
             }
 
             return viewModel;

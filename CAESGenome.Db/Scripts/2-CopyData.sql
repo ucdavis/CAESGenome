@@ -1,7 +1,18 @@
 ﻿/*
 	Performs data transforms from intermediate database to production
 --------------------------------------------------------*/
+/* 
+  Update a few PI users' profiles with 0 as a department ID and/or university ID, since there is department or university with a zero ID, but
+  there are university and departments that have n/a as there entries and are a suitable target for the FK relationship  
+*/
+  update [cgf].[dbo].[UserProfile]
+  set DepartmentId =  78 where departmentid = 0 and UniversityId = 1
 
+  update [cgf].[dbo].[UserProfile]
+  set DepartmentId =  75 where departmentid = 0 and UniversityId = 0
+
+    update [cgf].[dbo].[UserProfile]
+  set UniversityId = 6 where UniversityId = 0
 
 /*
   Wipe any existing data, so we don't get conflicting keys
@@ -40,6 +51,7 @@ update cgfold.dbo.recharge set valid = 'no' where rechargeid in (286, 293)
 --  and userid in ( select userid from cgfold.dbo.[user] )
 --  and rechargeid in ( select rechargeid from cgfold.dbo.recharge )
 
+set identity_insert cgf.dbo.UserJobPlates off
 set identity_insert cgf.dbo.userjobbacterialclone on
 insert into cgf.dbo.UserJobBacterialClone (id, SequenceDirection, Primer1Id, primer2id, StrainId, VectorId, AntibioticId)
 select id, 	case when Seq_Direction = 'F' then 'Forward' else 'Backward' end
@@ -108,7 +120,7 @@ begin
 	if (@dyeids <> '')
 	begin
 	insert into cgf.dbo.UserJobsGenotypingXDyes (UserJobGenotypingId, dyeid)
-	select @id, name from cgfold.dbo.splitstring(@dyeids)
+	select @id, element AS name from master.dbo.udf_splitstring(@dyeids, default)
 	end
 
 	fetch next from @cur into @id, @dyeids

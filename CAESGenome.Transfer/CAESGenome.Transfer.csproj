@@ -84,15 +84,15 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ExistingData.dbml.layout">
-      <DependentUpon>ExistingData.dbml</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\CAESGenome.Core\CAESGenome.Core.csproj">
       <Project>{a7c9e4d0-3ab0-40ce-a28c-0ddc69b0b78a}</Project>
       <Name>CAESGenome.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ExistingData.dbml.layout">
+      <DependentUpon>ExistingData.dbml</DependentUpon>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

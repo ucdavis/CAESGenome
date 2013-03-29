@@ -102,7 +102,7 @@
                 @Html.LabelFor(model => model.User.University, new {@class = "control-label"})
                 <div class="controls">
                     @*@Html.DropDownListFor(a => a.User.University, Model.Universities, new {@class="input-xxlarge"})*@
-                    @Html.DropDownList("User.University", Model.Universities, "--Select University--", new {@class="input-xxlarge"})
+                    @Html.DropDownList("Model.User.University", Model.Universities, "--Select University--", new {@class="input-xxlarge"})
                     @Html.ValidationMessageFor(model => model.User.University)
                 </div>
             </div>
@@ -110,7 +110,7 @@
                 @Html.LabelFor(model => model.User.Department, new {@class = "control-label"})
                 <div class="controls">
                     @*@Html.DropDownListFor(a => a.User.Department, Model.Departments, new {@class="input-xxlarge"})*@
-                    @Html.DropDownList("User.Department", Model.Departments, "--Select Department--", new {@class="input-xxlarge", disabled=Model.Departments.Any() ? "disabled" : string.Empty})
+                    @Html.DropDownList("Model.User.Department", Model.Departments, "--Select Department--", new {@class="input-xxlarge", disabled=Model.Departments.Any() ? "disabled" : string.Empty})
                     @Html.ValidationMessageFor(model => model.User.Department)
                 </div>
             </div>
@@ -126,12 +126,13 @@
                     <ul class="unstyled">
                         <li>
                             <label class="checkbox">
-                                <input type="checkbox" name="roles" value="@RoleNames.PI" checked='@(Model.IsPi ? "checked" : string.Empty)'/>@RoleNames.PI
+                                <input type="checkbox" name="roles" value="@RoleNames.PI" @(Model.IsPi ? "checked=true" : string.Empty) />@RoleNames.PI
                             </label>
                         </li>
                         <li>
                             <label class="checkbox">
-                                <input type="checkbox" name="roles" value="@RoleNames.Staff" checked='@(Model.IsStaff ? "checked" : string.Empty)'/>@RoleNames.Staff
+                                <input type="checkbox" name="roles" value="@RoleNames.Staff" @(Model.IsStaff ? "checked=true" : string.Empty) />@RoleNames.Staff
+                                
                             </label>
                         </li>
                     </ul>

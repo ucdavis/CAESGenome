@@ -15,7 +15,10 @@ namespace CAESGenome.Transfer
 
             var users = db.users.Select(user => new UserAcct()
                 {
-                    SourceId = user.userid, UserName = user.username, LastName = user.lastname, FirstName = user.firstname, 
+                    SourceId = user.userid,
+                    UserName = user.username ?? user.firstname + user.lastname,
+                    LastName = user.lastname,
+                    FirstName = user.firstname, 
                     Title = user.title, Password = user.passwords ?? "password", Phone = user.phonenum ?? "530-555-5555", DateCreated = user.datejoined ?? DateTime.Now, 
                     PiId = (int) user.piid, User = true, IsActive = user.valid.ToLower() == "yes"
                 }).ToList();
@@ -23,7 +26,7 @@ namespace CAESGenome.Transfer
             users.AddRange(db.pis.Select(pi => new UserAcct()
                 {
                     SourceId = pi.piid, UserName = pi.piemail, LastName = pi.pilastname, FirstName = pi.pifirstname, 
-                    Title = pi.pititle, Password = pi.pipassword, Phone = pi.piphonenum, DateCreated = pi.pidatejoined ?? DateTime.Now, 
+                    Title = pi.pititle, Password = pi.pipassword, Phone = pi.piphonenum, Fax = pi.pifax, DateCreated = pi.pidatejoined ?? DateTime.Now, 
                     Pi = true, UniversityId = pi.universityid, DepartmentId = pi.departmentid
                 }));
 

@@ -400,7 +400,9 @@
     <Content Include="Images\openjobs.png" />
     <Content Include="Scripts\Anytime.js" />
     <Content Include="Scripts\jquery.bootstrapcheckbox.js" />
-    <Content Include="AppSettings.config" />
+    <Content Include="AppSettings.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="docs\faqs\E_coli_sample.pdf" />
     <Content Include="docs\faqs\General_guideline.pdf" />
     <Content Include="docs\faqs\PCR_product_sqn.pdf" />
@@ -446,6 +448,7 @@
     <Content Include="docs\Q-bot\REPLICATING.doc" />
     <Content Include="docs\Q-bot\REPLICATING.pdf" />
     <Content Include="docs\service rates revised4.doc" />
+    <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-1.8.1.intellisense.js" />
@@ -588,6 +591,7 @@
     <Content Include="Views\Admin\CreateUser.cshtml" />
     <Content Include="Views\Admin\EditUser.cshtml" />
     <Content Include="Views\UserJob\UserCompleted.cshtml" />
+    <Content Include="Views\Transfer\Initialize.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
@@ -634,7 +638,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>44067</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:5033/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
