@@ -34,6 +34,7 @@ namespace CAESGenome.Core.Domain
         public virtual string Title { get; set; }
         [Required]
         [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Phone Number")]
         public virtual string Phone { get; set; }
         [DataType(DataType.PhoneNumber)]
         public virtual string Fax { get; set; }
@@ -46,6 +47,7 @@ namespace CAESGenome.Core.Domain
         public virtual IList<RechargeAccount> OwnedRechargeAcccounts { get; set; }
         public virtual IList<Role> Roles { get; set; }
 
+        [Display(Name = "Name")]
         public virtual string FullName { get { return string.Format("{0} {1}", FirstName, LastName); } }
     }
 

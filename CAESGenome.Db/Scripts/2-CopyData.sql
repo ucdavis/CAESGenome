@@ -294,3 +294,60 @@ where id is not null
   and barcode in (select id from barcodes )
 
 set identity_insert barcodefiles off
+
+--Additions by Ken Taylor, April 3rd, 2013:
+-- Delete any sample on-going jobs from database:
+delete from [cgf].[dbo].UserJobPlates
+where UserJobId IN (
+
+select UserJobId from [cgf].[dbo].UserJobPlates
+where UserJobId IN (
+
+SELECT [Id] 
+   FROM [cgf].[dbo].[UserJobs]
+  where isOpen = 1
+  )
+  )
+
+  DELETE   FROM [cgf].[dbo].[UserJobs]
+  where isOpen = 1
+
+  GO
+
+  --Build insert statements and insert userId and recharge account IDs into  UserProfilesXRechargeAccounts:
+  DECLARE @TSQL varchar(MAX) = ''
+  DECLARE MyCursor CURSOR FOR SELECT DISTINCT 
+	'INSERT INTO UserProfilesXRechargeAccounts (UserProfileId, RechargeAccountId) VALUES (' + 
+	convert(varchar(10), [userid]) + ', ' + 
+    convert (varchar(10),[rechargeid]) + ')'
+FROM 
+	[CgfOld].[dbo].[useracct]
+WHERE 
+	rechargeid in (
+		select rechargeid from [CgfOld].[dbo].recharge
+		where valid like 'Yes')
+	AND valid like 'Yes'
+
+	OPEN MyCursor
+	FETCH NEXT FROM MyCursor INTO @TSQL
+	WHILE @@FETCH_STATUS <> -1 
+	BEGIN
+		EXEC(@TSQL)
+		FETCH NEXT FROM MyCursor INTO @TSQL
+	END
+	CLOSE MyCursor
+	DEALLOCATE MyCursor
+
+GO
+
+--Update the HasSequencing to 1 for any job that has any kind of sequencing.  This is what determines if a job required PHRED QA:
+UPDATE [cgf].[dbo].[JobTypes]
+SET [HasSequencing] = 0
+
+UPDATE [cgf].[dbo].[JobTypes]
+SET [HasSequencing] = 1
+WHERE [StandardSequencing] = 1 OR [DnaSequencing] = 1 OR [CustomSequencing] = 1
+GO
+
+
+

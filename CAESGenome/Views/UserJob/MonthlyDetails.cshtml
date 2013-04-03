@@ -20,7 +20,7 @@
 <table class="default_table table table-striped table-bordered">
     <thead>
         <tr>
-            <th></th>
+            <th>Job ID</th>
             <th>User Name</th>
             <th>Job Type</th>
             <th>Job Name</th>
@@ -34,7 +34,8 @@
             <tr>
                 <td>
                     <a href="@Url.Action("Details", "UserJob", new {id=job.Id, completed=true})" class="btn hastip" title="View User Job">
-                        <i class="icon icon-search"></i>
+                        @*<i class="icon icon-search"></i>*@
+                        @job.Id
                     </a>
                 </td>
                 <td>@job.User.FullName</td>

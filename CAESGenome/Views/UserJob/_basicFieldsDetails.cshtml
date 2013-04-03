@@ -1,6 +1,30 @@
 ﻿@model UserJob
 
 <div class="control-group">
+    @Html.LabelFor(model => model.User.FullName, new {@class = "control-label"})
+    <div class="controls form-text">
+        @Html.DisplayFor(model => model.User.FullName)
+    </div>
+</div>
+<div class="control-group">
+    @Html.LabelFor(model => model.User.UserName, new {@class = "control-label"})
+    <div class="controls form-text">
+        @Html.DisplayFor(model => model.User.UserName)
+    </div>
+</div>
+<div class="control-group">
+    @Html.LabelFor(model => model.User.Phone, new {@class = "control-label"})
+    <div class="controls form-text">
+        @Html.DisplayFor(model => model.User.Phone)
+    </div>
+</div>
+<div class="control-group">
+    @Html.Label("PI Name", new {@class = "control-label"})
+    <div class="controls form-text">
+        @Html.DisplayFor(model => model.User.ParentUser.FullName)
+    </div>
+</div>
+<div class="control-group">
     @Html.LabelFor(model => model.RechargeAccount.AccountNum, new {@class = "control-label"})
     <div class="controls form-text">
         @Html.DisplayFor(model => model.RechargeAccount.AccountNum)
