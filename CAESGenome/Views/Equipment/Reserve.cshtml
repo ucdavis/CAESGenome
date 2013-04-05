@@ -7,28 +7,36 @@
 
 @section scripts
 {
-    @if(Model.Equipment != null && Model.Equipment.IsReservable)
+    @if (Model.Equipment != null && Model.Equipment.IsReservable)
     {
         <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/Anytime.css")"/>
         <style type="text/css">
             /* Override of UI style */
-            .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { font-size: 10px;}
+            .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { font-size: 10px; }
         </style>
         <script type="text/javascript" src="@Url.Content("~/Scripts/Anytime.js")"></script>
-        
+
         <script type="text/javascript">
-            $(function () {
-                $("input[type='datetime']").each(function (index, item) {
-                
+            $(function() {
+                $("input[type='datetime']").each(function(index, item) {
+
                     // empty the boxes if it's "default"
                     if (new Date($(item).val()).toDateString() == "Mon Jan 01 2001") {
                         $(item).val('');
                     }
 
-                    AnyTime.picker($(item).attr("id"));
+                    //2013-04-05 by kjt: Added date fomatting so that date matched anticipated date format so that
+                    // error message would not occur when user attempted to select a date from date picker.
+                    //  Old code had default formatting that did not match what system was expecting:
+                    //AnyTime.picker($(item).attr("id"));
+                    AnyTime.picker(
+                        $(item).attr("id"),
+                    {
+                        format: "%m/%d/%Y %h:%i:%s %p"
+                    });
                 });
             });
-        </script>          
+        </script>
     }
 }
 

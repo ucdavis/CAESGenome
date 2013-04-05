@@ -1,8 +1,8 @@
-﻿@model IQueryable<UserJob>
+﻿@model MonthlyDetailsViewModel
 
 @{
     ViewBag.Title = "Monthly User Jobs";
-    ViewBag.SubPageTitle = "Monthly User Jobs";
+    ViewBag.SubPageTitle = string.Format("{0} ({1}, {2})", "Monthly User Jobs", Model.Month, Model.Year);
 }
 
 @section scripts
@@ -29,11 +29,11 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(var job in Model)
+        @foreach(var job in Model.Jobs)
         {
             <tr>
                 <td>
-                    <a href="@Url.Action("Details", "UserJob", new {id=job.Id, completed=true})" class="btn hastip" title="View User Job">
+                    <a href="@Url.Action("Details", "UserJob", new {id=job.Id, completed=true})" class="btn btn-mini hastip" title="View User Job">
                         @*<i class="icon icon-search"></i>*@
                         @job.Id
                     </a>

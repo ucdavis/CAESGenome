@@ -103,7 +103,8 @@ $(document).ready(function () {
         },
         "iDisplayLength": 50,
         "aoColumnDefs": [
-            {"bSortable": false, "aTargets": [0]}
+            /* changed false to true so that first column would also be sortable */
+            {"bSortable": true, "aTargets": [0]}
         ]
     });
 });

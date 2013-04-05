@@ -201,11 +201,14 @@ namespace CAESGenome.Controllers
             return View(results);
         }
 
+        //2013-04-04 by kjt: Changed to return model so that month could be displayed on Monthly Comleted Jobs Page.
         [Authorize(Roles = RoleNames.Staff)]
         public ActionResult MonthlyDetails(int year, int month)
         {
-            var jobs = _repositoryFactory.UserJobRepository.Queryable.Where(a => a.LastUpdate.Year == year && a.LastUpdate.Month == month && !a.IsOpen);
-            return View(jobs);
+            var jobs = _repositoryFactory.UserJobRepository.Queryable.Where(a => a.LastUpdate.Year == year && a.LastUpdate.Month == month && !a.IsOpen).ToList();
+            var model = new MonthlyDetailsViewModel(){Jobs = jobs, Year = year, Month = month};
+
+            return View(model);
         }
 
         [Authorize(Roles = RoleNames.Staff)]

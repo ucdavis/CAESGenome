@@ -349,5 +349,20 @@ SET [HasSequencing] = 1
 WHERE [StandardSequencing] = 1 OR [DnaSequencing] = 1 OR [CustomSequencing] = 1
 GO
 
+-- SQL to update Equipments table where contact = Jongmin to Noelia:
+  update [cgf].[dbo].[Equipments]
+  set [Message] = replace([Message], 'Jongmin (754-6490)', 'Noelia (530-754-6166)')
+  where [message] like '%Jongmin (754-6490)%'
+
+  update [cgf].[dbo].[Equipments]
+  set [Message] = replace([Message], 'Contact ', 'Please contact ')
+  where [message] not like 'Please contact%'
+
+  update [cgf].[dbo].[Equipments]
+  set [Message] = replace([Message], '(754-6616)', '(530-754-6166)')
+  where [message] not like '%(530-754-6166)%'
+
+  GO
+
 
 

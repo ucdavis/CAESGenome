@@ -73,6 +73,12 @@
               <h1>@ViewBag.Title</h1>
           }
           
+          @if (!string.IsNullOrEmpty(ViewBag.SubPageTitle))
+          {
+              <hr/>
+              <h3 class="text-info">@ViewBag.SubPageTitle</h3>
+          }
+          
           <div style="clear:both;"></div>
           
           @if(!string.IsNullOrEmpty(TempData["Message"] as string))

@@ -256,6 +256,7 @@
     <Compile Include="Models\CalendarModel.cs" />
     <Compile Include="Models\EquipmentViewModel.cs" />
     <Compile Include="Models\GenotypingViewModel.cs" />
+    <Compile Include="Models\MonthlyDetailsViewModel.cs" />
     <Compile Include="Models\QbotViewModel.cs" />
     <Compile Include="Models\QualityControlByDateViewModel.cs" />
     <Compile Include="Models\SelectListModel.cs" />
