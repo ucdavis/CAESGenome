@@ -123,6 +123,7 @@
     <None Include="Scripts\2-CopyData.sql" />
     <None Include="SchemaCompare\terry.scmp" />
     <None Include="Scripts\1-ImportDatabase.sql" />
+    <None Include="Scripts\2a-Add missing indexes for performance.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CAESGenome.Db.refactorlog" />

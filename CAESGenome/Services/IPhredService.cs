@@ -99,8 +99,8 @@ namespace CAESGenome.Services
         {
             //var uploadLocation = @"\\do-files\cgfdata";
             //var uploadLocation = @"C:\Users\lai\Dropbox\Documents\Projects\Cgf\cgf\Cgf Data\data";
-
-            foreach(var directory in Directory.EnumerateDirectories(_uploadLocation))
+            var re = new Regex(@"^Backup$");
+            foreach(var directory in Directory.EnumerateDirectories(_uploadLocation).Where(d => !re.IsMatch(Path.GetFileName(d))))
             {
                 foreach(var file in Directory.EnumerateFiles(directory))
                 {
@@ -310,7 +310,8 @@ namespace CAESGenome.Services
             try
             {
                 // copy in data
-                ssh.RunCommand(string.Format(@"cp -R /mnt/cgfdata/raw/{0} /home/{1}/raw", barcode, PhredUsername));
+                //ssh.RunCommand(string.Format(@"cp -R /mnt/cgfdata/raw/{0} /home/{1}/raw", barcode, PhredUsername));
+                ssh.RunCommand(string.Format(@"cp -R /mnt/cgfdata/Backup/raw/{0} /home/{1}/raw", barcode, PhredUsername));
                 ssh.RunCommand(string.Format(@"mkdir /home/{0}/output/{1}", PhredUsername, barcode));
 
                 // execute
@@ -322,7 +323,8 @@ namespace CAESGenome.Services
                 }
 
                 // clean up
-                ssh.RunCommand(string.Format(@"mv /home/{0}/output/{1} /mnt/cgfdata/output", PhredUsername, barcode));
+                //ssh.RunCommand(string.Format(@"mv /home/{0}/output/{1} /mnt/cgfdata/output", PhredUsername, barcode));
+                ssh.RunCommand(string.Format(@"mv /home/{0}/output/{1} /mnt/cgfdata/Backup/output", PhredUsername, barcode));
                 ssh.RunCommand(string.Format(@"rm /home/{0}/raw/{1}/*", PhredUsername, barcode));
                 ssh.RunCommand(string.Format(@"rmdir /home/{0}/raw/{1}", PhredUsername, barcode));
             }

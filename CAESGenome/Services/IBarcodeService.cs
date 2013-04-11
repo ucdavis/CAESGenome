@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Net.Sockets;
 using System.Text;
 using CAESGenome.Core.Domain;
@@ -112,7 +113,7 @@ namespace CAESGenome.Services
         {
             barcode.Done = true;
             barcode.AllowDownload = true;
-  
+
             var plate = barcode.UserJobPlate;
             plate.Completed = true;
             plate.DateTimeCompleted = DateTime.Now;
@@ -125,7 +126,11 @@ namespace CAESGenome.Services
                 userJob.IsOpen = false;
                 userJob.LastUpdate = DateTime.Now;
             }
+            
             repositoryFactory.UserJobRepository.EnsurePersistent(userJob);
+
+            // 2013-04-09 by kjt: Added client email notification:
+            EmailService.SendMessage(userJob);
         }
 
         public void DeclineQualityControl(IRepositoryFactory repositoryFactory, Barcode barcode)
