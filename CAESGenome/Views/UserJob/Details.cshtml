@@ -3,7 +3,7 @@
 
 @{
     ViewBag.Title = "Job Details";
-    ViewBag.SubPageTitle = string.Format("{0} Details", Model.Name);
+    ViewBag.SubPageTitle = string.Format("Job {0}{1} Details", Model.Id, string.IsNullOrEmpty(Model.Name) ? string.Empty : " (" + Model.Name + ")");
 }
 
 @section SubPageMenu

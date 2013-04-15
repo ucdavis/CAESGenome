@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using CAESGenome.Core.Domain;
 using CAESGenome.Core.Repositories;
@@ -171,7 +172,7 @@ namespace CAESGenome.Controllers
                 return RedirectToAction("Index");
             }
 
-            var barcodes = userJob.UserJobPlates.SelectMany(a => a.Barcodes).Where(a => a.Stage == stage);
+            var barcodes = userJob.UserJobPlates.SelectMany(a => a.Barcodes).Where(a => a.Stage.Equals(stage));
 
             foreach (var b in barcodes)
             {
@@ -187,16 +188,33 @@ namespace CAESGenome.Controllers
         {
             var results = new List<UsageDetailsModel>();
 
+            // This is my attempt to correct the N+1 issue that was being caused by making a database call for each
+            // year where there are completed jobs.
+            // This approach solves the N+1 but then nHibernate profiler complains that a large number of rows are returned.
+            var jobs = _repositoryFactory.UserJobRepository.Queryable
+                                         .Where(job => !job.IsOpen)
+                                         .GroupBy(job => new { job.LastUpdate.Year, job.LastUpdate.Month })
+                                         .Select(
+                                         group =>
+                                             new UsageDetailsModel()
+                                                 {
+                                                     Year = group.Key.Year,
+                                                     Month = group.Key.Month,
+                                                     Count = group.Count()
+                                                 });
+                                       
+            results.AddRange(jobs.ToList());
+                     
             // get the years
-            var years = _repositoryFactory.UserJobRepository.Queryable.Where(a => !a.IsOpen).Select(a => a.LastUpdate.Year).Distinct();
+            //var years = _repositoryFactory.UserJobRepository.Queryable.Where(a => !a.IsOpen).Select(a => a.LastUpdate.Year).Distinct();
             
-            foreach(var y in years)
-            {
-                var jobs = _repositoryFactory.UserJobRepository.Queryable.Where(a => a.LastUpdate.Year == y).GroupBy(
-                        a => a.LastUpdate.Month).Select(a => new UsageDetailsModel() {Year = y, Month = a.Key, Count = a.Count()});
+            //foreach(var y in years)
+            //{
+            //    var jobs = _repositoryFactory.UserJobRepository.Queryable.Where(a => a.LastUpdate.Year == y).GroupBy(
+            //            a => a.LastUpdate.Month).Select(a => new UsageDetailsModel() {Year = y, Month = a.Key, Count = a.Count()});
 
-                results.AddRange(jobs);
-            }
+            //    results.AddRange(jobs);
+            //}
             
             return View(results);
         }

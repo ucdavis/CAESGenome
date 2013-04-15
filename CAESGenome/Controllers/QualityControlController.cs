@@ -54,7 +54,7 @@ namespace CAESGenome.Controllers
                     a =>
                     a.DateTimeValidated.HasValue && a.DateTimeValidated.Value.Date >= date.AddMonths(-2).Date && a.DateTimeValidated.Value < date.AddMonths(1)
                     && a.BarcodeFiles.Any()
-                    ).Select(a => a.DateTimeValidated.Value.Date).Distinct();
+                    ).Select(a => a.DateTimeValidated.Value.Date).Distinct().ToList();
 
             ViewBag.Month = date.Month;
             ViewBag.Year = date.Year;

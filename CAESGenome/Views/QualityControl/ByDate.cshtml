@@ -76,7 +76,7 @@
                     }
                 </div>
                 
-                @Html.ActionLink(barcode.UserJobPlate.UserJob.Name, "Details", "UserJob", new {id = barcode.UserJobPlate.UserJob.Id}, new {})
+                @Html.ActionLink(barcode.UserJobPlate.UserJob.Id + ": " + barcode.UserJobPlate.Name, "Details", "UserJob", new {id = barcode.UserJobPlate.UserJob.Id}, new {})
             </div>
             
             <table class="table">

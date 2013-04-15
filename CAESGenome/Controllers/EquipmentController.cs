@@ -66,7 +66,7 @@ namespace CAESGenome.Controllers
         public ActionResult Reservations()
         {
             var user = GetCurrentUser();
-            var reservations = _repositoryFactory.EquipmentReservationRepository.Queryable.Where(a => a.User == user).OrderBy(a => a.Start);
+            var reservations = _repositoryFactory.EquipmentReservationRepository.Queryable.Where(a => a.User == user).OrderBy(a => a.Start).ToList();
             return View(reservations);
         }
 
@@ -106,14 +106,14 @@ namespace CAESGenome.Controllers
         [Authorize(Roles = RoleNames.Staff)]
         public ActionResult Schedule()
         {
-            var equipment = _repositoryFactory.EquipmentRepository.Queryable.Where(a => a.Operator == EquipmentOperators.User && a.IsReservable);
+            var equipment = _repositoryFactory.EquipmentRepository.Queryable.Where(a => a.Operator == EquipmentOperators.User && a.IsReservable).ToList();
             return View(equipment);
         }
 
         [Authorize(Roles=RoleNames.Staff)]
         public ActionResult Usage()
         {
-            var equipment = _repositoryFactory.EquipmentRepository.Queryable.Where(a => a.Operator == EquipmentOperators.User && a.IsReservable);
+            var equipment = _repositoryFactory.EquipmentRepository.Queryable.Where(a => a.Operator == EquipmentOperators.User && a.IsReservable).ToList();
             return View(equipment);
         }
 
@@ -152,7 +152,7 @@ namespace CAESGenome.Controllers
 
             ViewBag.UserName = user.FullName;
 
-            var reservations = _repositoryFactory.EquipmentReservationRepository.Queryable.Where(a => a.User == user && !a.Cancelled);
+            var reservations = _repositoryFactory.EquipmentReservationRepository.Queryable.Where(a => a.User == user && !a.Cancelled).ToList();
             return View(reservations);
         }
     }

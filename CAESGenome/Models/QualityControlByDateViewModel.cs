@@ -9,14 +9,14 @@ namespace CAESGenome.Models
 {
     public class QualityControlByDateViewModel
     {
-        public IEnumerable<Barcode> Barcodes { get; set; }
+        public IList<Barcode> Barcodes { get; set; }
         public DateTime Date { get; set; }
 
         public static QualityControlByDateViewModel Create(IRepositoryFactory repositoryFactory, DateTime date)
         {
             var viewModel = new QualityControlByDateViewModel()
                 {
-                    Barcodes = repositoryFactory.BarcodeRepository.Queryable.Where(a => a.DateTimeValidated.Value.Date == date.Date && a.BarcodeFiles.Any()),
+                    Barcodes = repositoryFactory.BarcodeRepository.Queryable.Where(a => a.DateTimeValidated.Value.Date == date.Date && a.BarcodeFiles.Any()).ToList(),
                     Date = date
                 };
 

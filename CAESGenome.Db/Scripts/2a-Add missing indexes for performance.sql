@@ -42,6 +42,21 @@ INCLUDE ([Id])
 GO
 
 
+/*
+Missing Index Details from SQLQuery1.sql - donbot.master (AESDEAN\taylor (64))
+The Query Processor estimates that implementing the following index could improve the query cost by 40.5169%.
+*/
+
+
+USE [cgf]
+GO
+CREATE NONCLUSTERED INDEX [UserJobs_IsOpen_w_LastUpdate_CVDX]
+ON [dbo].[UserJobs] ([IsOpen])
+INCLUDE ([LastUpdate])
+GO
+
+
+
 
 
 
