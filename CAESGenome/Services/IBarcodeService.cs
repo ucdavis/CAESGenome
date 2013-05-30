@@ -139,7 +139,10 @@ namespace CAESGenome.Services
             repositoryFactory.BarcodeRepository.EnsurePersistent(barcode);
 
             var plate = barcode.UserJobPlate;
-            plate.Completed = true;
+            // 2013-05-29 by kjt: Revised to set to false because even though a new barcode will be created (below),
+            // the job will appear in "ongoing jobs" otherwise.
+            //plate.Completed = true;
+            plate.Completed = false;
             plate.DateTimeCompleted = DateTime.Now;
             repositoryFactory.UserJobPlateRepository.EnsurePersistent(plate);
 
