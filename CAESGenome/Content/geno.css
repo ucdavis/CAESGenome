@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 /* CSS Document */
 
 body {
@@ -113,6 +113,17 @@ ul#ul2 {
 	margin-top:-34px;
 	margin-right:27px;
 }
+/* ---------------- */
+/*system wide status*/
+/* ---------------- */
+#system-messages-text {margin:0.5em auto; text-align:center;}
+#system-messages-text .critical {font-weight:bolder; color:Red; font-size:1.5em;}
+#system-messages-text .info {font-weight:bold; font-size:1.25em;background-color: yellow; padding-left: 5px}
+#system-messages {border:3px solid #C83900; background-color:#fcf0f0; width: 99.5%; padding: .25em 0 .5em;}
+#system-messages p {padding-bottom: 0px;}
+#system-messages h2 { padding-left: 10px;}
+
+
 /*#database {
 	width:250px;
 	height:auto;
@@ -124,7 +135,6 @@ ul#ul2 {
 	margin-bottom:-27px;
 		
 }
-
 
 /*  Nav  */
 #nav {

@@ -1,4 +1,5 @@
-﻿@{
+﻿@using System.Configuration
+@{
     //ViewBag.Title = "CAES Genomics Facility";
     //ViewBag.SubPageTitle = "WELCOME to the CAES Genomics Facility!";
 }
@@ -14,6 +15,17 @@
     <p>The CAES Genomics Facility (CGF) provides campus researchers with genomics technologies for use in individual and collaborative research programs. The facility provides low-cost DNA sequencing, houses robotics instrumentation for liquid handling, colony picking and sample preparation, and administers computer hardware and software resources for use in sequence interpretation and related data analyses.</p> <p> The CGF will also incorporate additional technologies, e.g., genotyping and transcriptional profiling, when technically appropriate and if there is sufficient need.</p>
     </div> <!-- end of top_content_content -->
 </div> <!-- end of top_content -->
+
+@if (!String.IsNullOrEmpty(ConfigurationManager.AppSettings["ServiceMessage"])) {
+    <div id="system-messages">
+        <h2>Important Notice:</h2>
+        <div id="system-messages-text">
+            <p class="info">@ConfigurationManager.AppSettings["ServiceMessage"]</p>
+        </div>
+    </div>
+    <br/>
+}
+
     
 <div id="nav">
     <div id="nav_items">
