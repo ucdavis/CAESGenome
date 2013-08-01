@@ -4,7 +4,27 @@
     ViewBag.Title = "Downloads";
 }
 
-<table class="table table-striped">
+@section scripts
+{
+    @Html.Partial("_DataTables")
+
+    <style type="text/css">
+        .table-striped tbody td.blackout, .table-striped tbody tr:nth-child(odd) td.blackout { background-color: darkgrey;}
+    </style>
+    
+     <script type="text/javascript">
+         $(function () {
+             $(".table").dataTable({
+                 "aaSorting": [[1, "asc"]], //Default sort on second column
+                 "aoColumnDefs": [
+                     { 'bSortable': false, 'aTargets': [0] } //Disables sort on icon columns
+                 ]
+             });
+         });
+    </script>
+}
+
+<table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th></th>
