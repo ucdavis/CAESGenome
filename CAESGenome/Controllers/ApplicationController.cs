@@ -18,7 +18,7 @@ namespace CAESGenome.Controllers
         private const string TEMP_DATA_ERROR_MESSAGE_KEY = "ErrorMessage";
         private const string UserKey = "UserKey";
 
-        public User GetCurrentUser(bool forceReload = false)
+        public User GetCurrentUser(bool forceReload = true)
         {
             var user = (User) Session[UserKey];
 
