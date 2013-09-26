@@ -89,7 +89,7 @@ else
                         @Html.LabelFor(model => model.EquipmentReservation.Start, new { @class = "control-label" })
                         <div class="controls">
                             @Html.EditorFor(model => model.EquipmentReservation.Start)
-                            @Html.ValidationMessageFor(model => model.EquipmentReservation.Start)
+                            @Html.ValidationMessageFor(model => model.EquipmentReservation.Start, null, new { @class="required" })
                         </div>
                     </div>
                     <div class="control-group">

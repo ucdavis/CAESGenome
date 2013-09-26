@@ -45,9 +45,11 @@ namespace CAESGenome.Controllers
             equipmentReservation.TransferValidationMessagesTo(ModelState);
 
             // check for conflicting reservations
-            if (_repositoryFactory.EquipmentReservationRepository.Queryable.Any(a => a.Start <= equipmentReservation.Start && equipmentReservation.End <= a.End))
+            //if (_repositoryFactory.EquipmentReservationRepository.Queryable.Any(a => a.Start <= equipmentReservation.Start && equipmentReservation.End <= a.End))
+            if (_repositoryFactory.EquipmentReservationRepository.Queryable.Any(a => 
+                (a.Start <= equipmentReservation.End && a.End >= equipmentReservation.Start && !a.Cancelled)))
             {
-                ModelState.AddModelError("EquipmentReservation.Time", "There is a conflict with the requested times.  Please select a new time and try again.");
+                ModelState.AddModelError("EquipmentReservation.Start", "There is a conflict with the requested times.  Please select a new time and try again.");
             }
 
             if (ModelState.IsValid)
