@@ -46,17 +46,26 @@ namespace CAESGenome.Controllers
         [HttpPost]
         public ActionResult Create(int? id, GenotypingPostModel postModel)
         {
+            
             JobType jobType = null;
+
+            // 2012-10-03 by kjt: Added missing logic to create barcodes using sequencing controller as example.
+            // Added 2013-10-03 by kjt
+            Stage stage = null;
+
             if (id.HasValue)
             {
                 jobType = _repositoryFactory.JobTypeRepository.GetNullableById(id.Value);
-
+            
                 // check the job type
                 if (!jobType.Genotyping)
                 {
                     Message = "Invalid job type specified";
                     return RedirectToAction("Create");
                 }
+
+                // Added 2013-10-03 by kjt
+                stage = _repositoryFactory.StageRepository.GetNullableById(StageIds.UgWebSubmittedPlates);
 
                 postModel.JobType = jobType;
             }
@@ -79,7 +88,14 @@ namespace CAESGenome.Controllers
 
                 foreach (var name in postModel.PlateNames)
                 {
-                    userJob.AddUserJobPlates(new UserJobPlate() { Name = name });
+                    var plate = new UserJobPlate() {Name = name};
+
+                    // Added 2013-10-03 by kjt
+                    var barcode = new Barcode() {Stage = stage};
+                    // Added 2013-10-03 by kjt
+                    plate.AddBarcode(barcode);
+
+                    userJob.AddUserJobPlates(plate);
                 }
 
                 _repositoryFactory.UserJobRepository.EnsurePersistent(userJob);
