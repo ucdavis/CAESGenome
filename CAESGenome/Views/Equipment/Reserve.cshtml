@@ -52,7 +52,8 @@
             if (eq.IsReservable)
             {
                 <dt>
-                @Html.ActionLink(eq.Name, "Reserve", new { id = eq.Id }) 
+                    @* @Html.ActionLink(eq.Name, "Reserve", new { id = eq.Id }) *@
+                    <a href='http://phoenix.ucdavis.edu/reservation-calendars/equipment/#@eq.Name.Replace(" ", "_")'>@eq.Name</a>
                 </dt>
             }     
             else
